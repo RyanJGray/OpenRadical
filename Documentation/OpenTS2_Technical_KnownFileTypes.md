@@ -11,8 +11,12 @@ File Name | Description
 `RAWS.PAK` | Unknown
 `SOUNDS.PAK` | Sound Data
 
-## Music Stream Content (MSC) Files
+## Multistream flat Sample bank Concatenated (MSC) Files
 These files are loaded and handled by the _FRD Stream Driver_ (**v1.1** in the OPM 53 demo).
+
+This is based off of a modified early version of SCEE's _MultiStream_ IOP module.
+
+These files contain the _Multistream flat Sample bank Header_ (`.MSH`) and _Multistream flat Sample bank Body_ (`.MSB`) data files concatenated together.
 
 ## Raw Files
 _Free Radical Design_ used a generic `.raw` file extension for regular binary data (animations, skeletons, etc).
