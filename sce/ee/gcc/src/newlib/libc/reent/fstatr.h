@@ -1,0 +1,8 @@
+// STATUS: NOT STARTED
+
+#ifndef SCE_EE_GCC_SRC_NEWLIB_LIBC_REENT_FSTATR_H
+#define SCE_EE_GCC_SRC_NEWLIB_LIBC_REENT_FSTATR_H
+
+int _fstat_r(_reent *ptr, int fd, stat *pstat);
+
+#endif // SCE_EE_GCC_SRC_NEWLIB_LIBC_REENT_FSTATR_H

@@ -1,0 +1,9 @@
+// STATUS: NOT STARTED
+
+#ifndef SCE_EE_GCC_SRC_NEWLIB_LIBM_MATH_E_SQRT_H
+#define SCE_EE_GCC_SRC_NEWLIB_LIBM_MATH_E_SQRT_H
+
+
+double __ieee754_sqrt(double x);
+
+#endif // SCE_EE_GCC_SRC_NEWLIB_LIBM_MATH_E_SQRT_H

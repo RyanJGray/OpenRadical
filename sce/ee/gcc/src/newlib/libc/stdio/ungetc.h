@@ -1,0 +1,9 @@
+// STATUS: NOT STARTED
+
+#ifndef SCE_EE_GCC_SRC_NEWLIB_LIBC_STDIO_UNGETC_H
+#define SCE_EE_GCC_SRC_NEWLIB_LIBC_STDIO_UNGETC_H
+
+int __submore(FILE *fp);
+int ungetc(int c, FILE *fp);
+
+#endif // SCE_EE_GCC_SRC_NEWLIB_LIBC_STDIO_UNGETC_H

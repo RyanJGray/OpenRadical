@@ -1,0 +1,6 @@
+// STATUS: NOT STARTED
+
+#ifndef GAME_OB_OBBOUNDS_H
+#define GAME_OB_OBBOUNDS_H
+
+#endif // GAME_OB_OBBOUNDS_H

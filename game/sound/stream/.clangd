@@ -1,0 +1,2 @@
+CompileFlags:
+  Add: -I/home/artemis/Downloads/ccc_v1.2_linux/OpenTS2/3rdparty/sce/iop/gcc/mipsel-scei-elfl/include

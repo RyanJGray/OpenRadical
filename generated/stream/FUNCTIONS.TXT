@@ -1,0 +1,1166 @@
+@function 0
+
+/* entry.c */
+
+bool start(void)
+
+{
+  int iVar1;
+  ModuleInfo local_28;
+  
+  iVar1 = sceSifCheckInit();
+  if (iVar1 == 0) {
+    sceSifInit();
+  }
+  sceSifInitRpc(0);
+  printf("FRD Stream Driver v%d.%d\n",(uint)((ushort)SHORT_00002d54 >> 8),
+         (ushort)SHORT_00002d54 & 0xff);
+  local_28.name = (char *)0x2000000;
+  local_28.version = 0;
+  iVar1 = CreateThread(&local_28);
+  if (iVar1 >= 1) {
+    StartThread(iVar1,0);
+    printf("Exit stream loader thread\n");
+  }
+  return iVar1 < 1;
+}
+
+
+@function 120
+
+/* command.c */
+
+void BackgroundLoadInitialise(void)
+
+{
+  BackgroundLoad = 0;
+  DAT_00002d98 = 0;
+  DAT_00002d9c = 0;
+  return;
+}
+
+
+@function 158
+
+void StartBackgroundLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4
+                        ,undefined4 param_5,undefined4 param_6)
+
+{
+  int iVar1;
+  int iVar2;
+  
+  printf("Add load %d\n",DAT_00002d9c);
+  iVar1 = DAT_00002d9c + 1;
+  iVar2 = iVar1;
+  if (iVar1 < 0) {
+    iVar2 = DAT_00002d9c + 0x20;
+  }
+  if (iVar1 + (iVar2 >> 5) * -0x20 == DAT_00002d98) {
+    printf("Background load que full\n");
+  }
+  *(undefined4 *)(&DAT_00002db0 + DAT_00002d9c * 0x18) = param_1;
+  *(undefined4 *)(&DAT_00002da0 + DAT_00002d9c * 0x18) = param_2;
+  *(undefined4 *)(&DAT_00002da4 + DAT_00002d9c * 0x18) = param_3;
+  *(undefined4 *)(&DAT_00002da8 + DAT_00002d9c * 0x18) = param_4;
+  *(undefined4 *)(&DAT_00002dac + DAT_00002d9c * 0x18) = param_5;
+  *(undefined4 *)(&DAT_00002db4 + DAT_00002d9c * 0x18) = param_6;
+  DAT_00002d9c = DAT_00002d9c + 1;
+  if (0x1f < DAT_00002d9c) {
+    DAT_00002d9c = 0;
+  }
+  return;
+}
+
+
+@function 334
+
+void BackgroundLoadTick(void)
+
+{
+  int iVar1;
+  size_t __nbytes;
+  size_t sVar2;
+  
+  if (BackgroundLoad == 0) {
+    if (DAT_00002d98 != DAT_00002d9c) {
+      iVar1 = DAT_00002d98 * 0x18;
+      printf("Start load %d\n",DAT_00002d98);
+      BackgroundLoad = 1;
+      DAT_00002d94 = 0;
+      lseek(*(int *)(&DAT_00002da0 + iVar1),*(__off_t *)(&DAT_00002da4 + iVar1),0);
+    }
+  }
+  else if (BackgroundLoad == 1) {
+    iVar1 = DAT_00002d98 * 0x18;
+    if (*(int *)(&DAT_00002dac + iVar1) - DAT_00002d94 < 0x2000) {
+      __nbytes = *(int *)(&DAT_00002dac + iVar1) - DAT_00002d94;
+    }
+    else {
+      __nbytes = 0x2000;
+    }
+    sVar2 = read(*(int *)(&DAT_00002da0 + iVar1),
+                 (void *)(*(int *)(&DAT_00002da8 + iVar1) + DAT_00002d94),__nbytes);
+    DAT_00002d94 = DAT_00002d94 + __nbytes;
+    if ((*(int *)(&DAT_00002dac + iVar1) - DAT_00002d94 < 1) || (sVar2 != __nbytes)) {
+      printf("Finish load %d\n",DAT_00002d98);
+      if (*(int *)(&DAT_00002db4 + iVar1) != 0) {
+        (**(code **)(&DAT_00002db4 + iVar1))
+                  (*(undefined4 *)(&DAT_00002db0 + iVar1),sVar2 == __nbytes);
+      }
+      DAT_00002d98 = DAT_00002d98 + 1;
+      if (0x1f < DAT_00002d98) {
+        DAT_00002d98 = 0;
+      }
+      BackgroundLoad = 0;
+    }
+  }
+  return;
+}
+
+
+@function 5d0
+
+void BackgroundLoadStop(void)
+
+{
+  printf("Doing stop backgroundload\n");
+  while (BackgroundLoad != 0) {
+    BackgroundLoadTick();
+  }
+  DAT_00002d98 = 0;
+  DAT_00002d9c = 0;
+  printf("Done stop backgroundload\n");
+  return;
+}
+
+
+@function 654
+
+void StreamLoadFinishedCallBack(int param_1,int param_2)
+
+{
+  if (param_2 == 0) {
+    DAT_000030dc = 1;
+    printf("StreamRead: read failed [1]\n");
+    StreamSetVolumeDirect(0);
+  }
+  if (DAT_000030d8 == param_1) {
+    DAT_000030d4 = 0;
+  }
+  return;
+}
+
+
+@function 6dc
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void StreamMake(void)
+
+{
+  stream = 0xffffffff;
+  _DAT_000030cc = 0;
+  _DAT_000030d0 = 1;
+  return;
+}
+
+
+@function 72c
+
+int StreamInit(undefined4 param_1)
+
+{
+  undefined4 local_30 [2];
+  undefined4 local_28;
+  undefined4 local_24;
+  undefined4 local_20;
+  undefined4 local_1c;
+  code *local_18;
+  undefined4 local_14;
+  undefined4 local_10;
+  
+  if (stream_sid == 0) {
+    local_28 = 0;
+    local_24 = 1;
+    local_30[0] = 0;
+    stream_sid = CreateSema(local_30);
+  }
+  if (stream_tid == 0) {
+    local_20 = 0x2000000;
+    local_18 = StreamPlay;
+    local_10 = 0x1d;
+    local_14 = 0x800;
+    local_1c = 0;
+    stream_tid = CreateThread(&local_20);
+    StartThread(stream_tid,0);
+  }
+  BackgroundLoadInitialise();
+  sceSdSetTransCallback(0,StreamDmaInt);
+  sceSdSetIRQCallback(StreamSpu2Int);
+  stream_readbuf = AllocSysMemory(0,param_1,0);
+  DAT_000030e4 = AllocSysMemory(0,param_1,0);
+  return stream_tid;
+}
+
+
+@function 874
+
+void StreamQuit(void)
+
+{
+  stream_stopclose = 1;
+  printf("Waiting for stream Idle\n");
+  while (stream_status != 0) {
+    SignalSema(stream_sid);
+  }
+  printf("Stream Idle\n");
+  BackgroundLoadStop();
+  sceSdSetTransCallback(0,0);
+  sceSdSetIRQCallback(0);
+  if (stream_tid != 0) {
+    TerminateThread(stream_tid);
+  }
+  if (stream_sid != 0) {
+    DeleteSema(stream_sid);
+  }
+  if (stream_tid != 0) {
+    DeleteThread(stream_tid);
+  }
+  stream_sid = 0;
+  stream_tid = 0;
+  FreeSysMemory(stream_readbuf);
+  FreeSysMemory(DAT_000030e4);
+  printf("Done stream quit\n");
+  return;
+}
+
+
+@function 9d4
+
+int StreamOpen(char *filename)
+
+{
+  int iVar1;
+  __off_t _Var2;
+  
+  printf("Filename: %s\n",filename);
+  stream = open(filename,1);
+  if (stream < 0) {
+    printf("file open failed. %s \n",filename);
+    iVar1 = -1;
+  }
+  else {
+    printf("fd %d\n",stream);
+    DAT_000030a4 = 0;
+    _Var2 = lseek(stream,0,2);
+    DAT_000030a8 = _Var2 / 2;
+    DAT_000030b8 = 0x60000;
+    DAT_000030b4 = 0x60000;
+    DAT_000030b0 = 0;
+    DAT_000030ac = 0;
+    DAT_000030c0 = 0x60000;
+    DAT_000030bc = 0x60000;
+    DAT_000030c4 = 0x1b8000;
+    DAT_000030c8 = 0x1bc000;
+    DAT_000030d4 = 0;
+    DAT_000030d8 = 0;
+    DAT_000030dc = 0;
+    BackgroundLoadInitialise();
+    iVar1 = DAT_000030a8 << 1;
+  }
+  return iVar1;
+}
+
+
+@function b48
+
+undefined4 StreamRead(void *param_1,void *param_2,int param_3,int param_4)
+
+{
+  size_t __nbytes;
+  size_t sVar1;
+  ssize_t sVar2;
+  void *local_res0;
+  void *local_res4;
+  int local_res8;
+  int local_10;
+  
+  local_10 = 0;
+  DAT_000030d8 = 1000000;
+  printf("Call Read\n");
+  DAT_000030d4 = 1;
+  local_res0 = param_1;
+  local_res4 = param_2;
+  local_res8 = param_3;
+  do {
+    while( true ) {
+      if (local_res8 < 1) {
+        DAT_000030d8 = local_10 + -1;
+        printf("Finish Call Read\n");
+        return 1;
+      }
+      if (0x7fff < (uint)(DAT_000030a8 - DAT_000030a4)) break;
+      __nbytes = DAT_000030a8 - DAT_000030a4;
+      if (0 < (int)__nbytes) {
+        if (param_4 == 0) {
+          sVar1 = read(stream,local_res0,__nbytes);
+          if (sVar1 != __nbytes) {
+            printf("StreamRead: read failed [2]\n");
+            StreamSetVolumeDirect(0);
+            return 0;
+          }
+          sVar1 = read(stream,local_res4,__nbytes);
+          if (sVar1 != __nbytes) {
+            printf("StreamRead: read failed [3]\n");
+            StreamSetVolumeDirect(0);
+            return 0;
+          }
+        }
+        else {
+          StartBackgroundLoad(local_10,stream,DAT_000030a4 << 1,local_res0,__nbytes,0x654);
+          StartBackgroundLoad(local_10 + 1,stream,DAT_000030a4 * 2 + __nbytes,local_res4,__nbytes,
+                              0x654);
+          local_10 = local_10 + 2;
+        }
+        memset((void *)((int)local_res0 + __nbytes),0,0x8000 - __nbytes);
+        memset((void *)((int)local_res4 + __nbytes),0,0x8000 - __nbytes);
+        local_res8 = local_res8 + -0x8000;
+        local_res0 = (void *)((int)local_res0 + 0x8000);
+        local_res4 = (void *)((int)local_res4 + 0x8000);
+      }
+      printf("Loop\n");
+      lseek(stream,0,0);
+      DAT_000030a4 = 0;
+    }
+    if (param_4 == 0) {
+      sVar2 = read(stream,local_res0,0x8000);
+      if (sVar2 != 0x8000) {
+        printf("StreamRead: read failed [4]\n");
+        StreamSetVolumeDirect(0);
+        return 0;
+      }
+      sVar2 = read(stream,local_res4,0x8000);
+      if (sVar2 != 0x8000) {
+        printf("StreamRead: read failed [5]\n");
+        StreamSetVolumeDirect(0);
+        return 0;
+      }
+    }
+    else {
+      StartBackgroundLoad(local_10,stream,DAT_000030a4 << 1,local_res0,0x8000,0x654);
+      StartBackgroundLoad(local_10 + 1,stream,DAT_000030a4 * 2 + 0x8000,local_res4,0x8000,0x654);
+      local_10 = local_10 + 2;
+    }
+    DAT_000030a4 = DAT_000030a4 + 0x8000;
+    local_res8 = local_res8 + -0x8000;
+    local_res0 = (void *)((int)local_res0 + 0x8000);
+    local_res4 = (void *)((int)local_res4 + 0x8000);
+  } while( true );
+}
+
+
+@function 1040
+
+void StreamClose(void)
+
+{
+  printf("Doing stream close %d\n",stream);
+  BackgroundLoadStop();
+  printf("Stream status %d Load status %d\n",stream_status,BackgroundLoad);
+  if (-1 < stream) {
+    printf("Call close\n");
+    close(stream);
+  }
+  stream_status = 0;
+  printf("Done stream close\n");
+  return;
+}
+
+
+@function 10fc
+
+undefined4 StreamPreLoad(int param_1)
+
+{
+  undefined4 uVar1;
+  
+  if (stream_status == 0) {
+    DAT_000030ac = 0;
+    DAT_000030bc = DAT_000030b4;
+    DAT_000030b0 = 0;
+    DAT_000030c0 = DAT_000030b8;
+    DAT_000030a4 = param_1;
+    lseek(stream,param_1 << 1,0);
+    StreamSetVolumeDirect(stream_volume);
+    StreamRead(stream_readbuf,DAT_000030e4,0x60000,0);
+    stream_status = 0x1000;
+    stream_curaddr = stream_readbuf;
+    DAT_000030ec = DAT_000030e4;
+    SignalSema(stream_sid);
+    uVar1 = 0;
+  }
+  else {
+    printf("can\'t preload - status=%d\n",stream_status);
+    uVar1 = 0xffffffff;
+  }
+  return uVar1;
+}
+
+
+@function 1250
+
+undefined4 StreamPreLoadStart(void)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  
+  printf("STATUS=%d\n",stream_status);
+  stream_preloadstart = stream_preloadstart + 1;
+  trans_stat = 0;
+  iVar1 = StreamPreLoad(0);
+  if (iVar1 < 0) {
+    stream_preloadstart = 0;
+    uVar2 = 0xffffffff;
+  }
+  else {
+    uVar2 = 0;
+  }
+  return uVar2;
+}
+
+
+@function 12f0
+
+undefined4 StreamStart(void)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  
+  stream_preloadstart = stream_preloadstart + 1;
+  trans_stat = 0;
+  iVar1 = StreamPreLoad(DAT_000030a4);
+  if (iVar1 < 0) {
+    stream_preloadstart = 0;
+    uVar2 = 0xffffffff;
+  }
+  else {
+    uVar2 = 0;
+  }
+  return uVar2;
+}
+
+
+@function 137c
+
+undefined4 StreamStop(void)
+
+{
+  undefined4 uVar1;
+  
+  if (stream_status == 0x5000) {
+    stream_stop = stream_stop + 1;
+    uVar1 = 0;
+  }
+  else {
+    uVar1 = 0xffffffff;
+  }
+  return uVar1;
+}
+
+
+@function 13e8
+
+undefined4 StreamStopClose(void)
+
+{
+  undefined4 uVar1;
+  
+  if (stream_status == 0x5000) {
+    stream_stopclose = stream_stopclose + 1;
+    uVar1 = 0;
+  }
+  else {
+    uVar1 = 0xffffffff;
+  }
+  return uVar1;
+}
+
+
+@function 1454
+
+void StreamSetVoice(int param_1,uint param_2)
+
+{
+  *(uint *)(&DAT_000030cc + param_1 * 2) = param_2;
+  sceSdSetParam((param_2 & 0x7fff) << 1,0);
+  sceSdSetParam((param_2 & 0x7fff) << 1 | 0x100,0);
+  sceSdSetParam((param_2 & 0x7fff) << 1 | 0x200,0xeb3);
+  sceSdSetParam((param_2 & 0x7fff) << 1 | 0x300,0xf);
+  sceSdSetParam((param_2 & 0x7fff) << 1 | 0x400,0x1fc0);
+  sceSdSetAddr((param_2 & 0x7fff) << 1 | 0x2040,(&DAT_000030c4)[param_1]);
+  return;
+}
+
+
+@function 15ac
+
+void StreamSetVolume(undefined4 param_1,undefined4 param_2)
+
+{
+  stream_volumeset = 1;
+  stream_volume = param_2;
+  return;
+}
+
+
+@function 15f8
+
+void StreamSetVolumeDirect(uint param_1)
+
+{
+  stream_volume = param_1;
+  sceSdSetParam((DAT_000030cc & 0x7fff) << 1,param_1 >> 0x10);
+  sceSdSetParam((DAT_000030cc & 0x7fff) << 1 | 0x100,0);
+  sceSdSetParam((DAT_000030d0 & 0x7fff) << 1,0);
+  sceSdSetParam((DAT_000030d0 & 0x7fff) << 1 | 0x100,param_1 & 0xffff);
+  return;
+}
+
+
+@function 16ec
+
+int StreamGetStatus(void)
+
+{
+  return stream_status;
+}
+
+
+@function 1724
+
+undefined4 StreamDmaInt(void)
+
+{
+  iSignalSema(stream_sid);
+  return 1;
+}
+
+
+@function 176c
+
+undefined4 StreamSpu2Int(void)
+
+{
+  iSignalSema(stream_sid);
+  return 1;
+}
+
+
+@function 17b0
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void StreamPlay(void)
+
+{
+  uint local_10;
+  
+  local_10 = 0;
+  do {
+    while( true ) {
+      BackgroundLoadTick();
+      WaitSema(stream_sid);
+      if (DAT_000030dc != 0) {
+        printf("read failed [6]\n");
+        BackgroundLoadInitialise();
+        stream_status = 0x6000;
+      }
+      if (stream_volumeset != 0) {
+        stream_volumeset = 0;
+        StreamSetVolumeDirect(stream_volume);
+      }
+      if (stream_stopclose != 0) {
+        stream_stopclose = 0;
+        stream_status = 0x7000;
+      }
+      if (stream_status != 0x3000) break;
+      trans_stat = 0;
+      stream_curaddr = stream_curaddr + 0x4000;
+      DAT_000030ec = DAT_000030ec + 0x4000;
+      sceSdSetAddr(0x1f00,DAT_000030c4 + 0x2000);
+      stream_status = 0x4000;
+      if (0 < stream_preloadstart) {
+        stream_preloadstart = 0;
+        stream_start = stream_start + 1;
+      }
+LAB_00002298:
+      if ((stream_start != 0) && (stream_status == 0x4000)) {
+        stream_start = 0;
+        StreamSetVolumeDirect(stream_volume);
+        stream_status = 0x5000;
+        sceSdSetCoreAttr(4,1);
+        sceSdSetSwitch(0x1500,1 << (_DAT_000030cc & 0x1f) | 1 << (_DAT_000030d0 & 0x1f));
+      }
+    }
+    if (stream_status < 0x3001) {
+      if (stream_status == 0x1000) {
+        local_10 = 0;
+        trans_stat = 1;
+        DAT_000030ac = DAT_000030ac + 0x4000;
+        DAT_000030bc = DAT_000030bc - 0x4000;
+        *(undefined *)(stream_readbuf + 1) = 6;
+        *(undefined *)(stream_readbuf + 0x11) = 2;
+        FlushDcache();
+        *(undefined *)(stream_readbuf + 0x3ff1) = 3;
+        FlushDcache();
+        stream_status = 0x2000;
+        sceSdVoiceTrans(0,0,stream_readbuf,DAT_000030c4,0x4000);
+      }
+      else if ((0x1000 < stream_status) && (stream_status == 0x2000)) {
+        trans_stat = 2;
+        DAT_000030b0 = DAT_000030b0 + 0x4000;
+        DAT_000030c0 = DAT_000030c0 + -0x4000;
+        *(undefined *)(DAT_000030e4 + 1) = 6;
+        *(undefined *)(DAT_000030e4 + 0x11) = 2;
+        FlushDcache();
+        *(undefined *)(DAT_000030e4 + 0x3ff1) = 3;
+        FlushDcache();
+        stream_status = 0x3000;
+        sceSdVoiceTrans(0,0,DAT_000030e4,DAT_000030c8,0x4000);
+      }
+      goto LAB_00002298;
+    }
+    if (stream_status == 0x5000) {
+      if (trans_stat == 1) {
+        if (local_10 == 0) {
+          *(undefined *)(DAT_000030ec + 1) = 6;
+          *(undefined *)(DAT_000030ec + 0x11) = 2;
+          *(undefined *)(DAT_000030ec + 0x1ff1) = 2;
+          FlushDcache();
+        }
+        else {
+          *(undefined *)(DAT_000030ec + 1) = 2;
+          *(undefined *)(DAT_000030ec + 0x11) = 2;
+          *(undefined *)(DAT_000030ec + 0x1ff1) = 3;
+          FlushDcache();
+        }
+        trans_stat = 2;
+        DAT_000030b0 = DAT_000030b0 + 0x4000;
+        DAT_000030c0 = DAT_000030c0 + -0x4000;
+        sceSdVoiceTrans(0,0,DAT_000030ec,local_10 * 0x2000 + DAT_000030c8,0x2000);
+      }
+      else if (trans_stat < 2) {
+        if (trans_stat == 0) {
+          sceSdSetCoreAttr(4,0);
+          if (local_10 == 0) {
+            *(undefined *)(stream_curaddr + 1) = 6;
+            *(undefined *)(stream_curaddr + 0x11) = 2;
+            *(undefined *)(stream_curaddr + 0x1ff1) = 2;
+            FlushDcache();
+          }
+          else {
+            *(undefined *)(stream_curaddr + 1) = 2;
+            *(undefined *)(stream_curaddr + 0x11) = 2;
+            *(undefined *)(stream_curaddr + 0x1ff1) = 3;
+            FlushDcache();
+          }
+          trans_stat = 1;
+          DAT_000030ac = DAT_000030ac + 0x2000;
+          DAT_000030bc = DAT_000030bc - 0x2000;
+          sceSdVoiceTrans(0,0,stream_curaddr,local_10 * 0x2000 + DAT_000030c4,0x2000);
+        }
+      }
+      else if (trans_stat == 2) {
+        trans_stat = 0;
+        sceSdSetAddr(0x1f00,local_10 * 0x2000 + DAT_000030c4);
+        stream_curaddr = stream_curaddr + 0x2000;
+        DAT_000030ec = DAT_000030ec + 0x2000;
+        local_10 = (uint)(local_10 == 0);
+        if (DAT_000030ac == DAT_000030b4 >> 1) {
+          StreamRead(stream_readbuf,DAT_000030e4,0x30000,1);
+        }
+        if (DAT_000030ac == DAT_000030b4) {
+          StreamRead(stream_readbuf + 0x30000,DAT_000030e4 + 0x30000,0x30000,1);
+        }
+        if (DAT_000030bc == 0) {
+          DAT_000030ac = 0;
+          DAT_000030bc = DAT_000030b4;
+          DAT_000030b0 = 0;
+          DAT_000030c0 = DAT_000030b8;
+          stream_curaddr = stream_readbuf;
+          DAT_000030ec = DAT_000030e4;
+        }
+        printf("sc=%d\n",stream_stopclose);
+        if (stream_stopclose == 0) {
+          if (stream_stop != 0) {
+            stream_stop = 0;
+            stream_status = 0x6000;
+          }
+        }
+        else {
+          stream_stopclose = 0;
+          stream_status = 0x7000;
+        }
+        sceSdSetCoreAttr(4,1);
+      }
+      goto LAB_00002298;
+    }
+    if (stream_status < 0x5001) goto LAB_00002298;
+    if (stream_status == 0x6000) {
+      sceSdSetCoreAttr(4,0);
+      stream_status = 0;
+      sceSdSetParam((_DAT_000030cc & 0x7fff) << 1,0);
+      sceSdSetParam((_DAT_000030cc & 0x7fff) << 1 | 0x100,0);
+      sceSdSetParam((_DAT_000030d0 & 0x7fff) << 1,0);
+      sceSdSetParam((_DAT_000030d0 & 0x7fff) << 1 | 0x100,0);
+      sceSdSetSwitch(0x1600,1 << (_DAT_000030cc & 0x1f) | 1 << (_DAT_000030d0 & 0x1f));
+    }
+    else {
+      if (stream_status != 0x7000) goto LAB_00002298;
+      printf("doing terminateclose\n");
+      sceSdSetCoreAttr(4,0);
+      stream_status = 0;
+      sceSdSetParam((_DAT_000030cc & 0x7fff) << 1,0);
+      sceSdSetParam((_DAT_000030cc & 0x7fff) << 1 | 0x100,0);
+      sceSdSetParam((_DAT_000030d0 & 0x7fff) << 1,0);
+      sceSdSetParam((_DAT_000030d0 & 0x7fff) << 1 | 0x100,0);
+      sceSdSetSwitch(0x1600,1 << (_DAT_000030cc & 0x1f) | 1 << (_DAT_000030d0 & 0x1f));
+      StreamClose();
+    }
+  } while( true );
+}
+
+
+@function 236c
+
+int * dispatch(uint param_1,undefined4 *param_2)
+
+{
+  uint uVar1;
+  undefined4 uVar2;
+  undefined4 uVar3;
+  uint uVar4;
+  
+  uVar2 = *param_2;
+  uVar3 = *param_2;
+  printf("# dispatch [%04x] %x, %x, %x, %x\n",param_1,*param_2,param_2[1],param_2[2],param_2[3]);
+  uVar4 = param_1 & 0xf;
+  uVar1 = param_1 & 0xfff0;
+  if (uVar1 == 0x8000) {
+    ret = StreamInit(uVar2);
+    goto LAB_00002684;
+  }
+  if (uVar1 < 0x8001) {
+    if (uVar1 == 0x80) {
+      StreamSetVoice(uVar4,uVar2);
+      goto LAB_00002684;
+    }
+    if (uVar1 < 0x81) {
+      if (uVar1 == 0x10) {
+        StreamQuit();
+        goto LAB_00002684;
+      }
+      if (uVar1 == 0x30) {
+        StreamClose();
+        goto LAB_00002684;
+      }
+    }
+    else {
+      if (uVar1 == 0xc0) {
+        StreamSetVolumeDirect(uVar3);
+        goto LAB_00002684;
+      }
+      if (uVar1 < 0xc1) {
+        if (uVar1 == 0xb0) {
+          StreamSetVolume(uVar4,uVar3);
+          goto LAB_00002684;
+        }
+      }
+      else if (uVar1 == 0x7ff0) {
+        StreamMake(uVar4,uVar2);
+        goto LAB_00002684;
+      }
+    }
+  }
+  else {
+    if (uVar1 == 0x8060) {
+      ret = StreamStart();
+      goto LAB_00002684;
+    }
+    if (uVar1 < 0x8061) {
+      if (uVar1 == 0x8020) {
+        ret = StreamOpen((char *)param_2);
+        goto LAB_00002684;
+      }
+      if (uVar1 == 0x8050) {
+        ret = StreamPreLoadStart();
+        goto LAB_00002684;
+      }
+    }
+    else {
+      if (uVar1 == 0x80e0) {
+        ret = StreamGetStatus();
+        goto LAB_00002684;
+      }
+      if (uVar1 < 0x80e1) {
+        if (uVar1 == 0x8070) {
+          ret = StreamStop();
+          goto LAB_00002684;
+        }
+      }
+      else if (uVar1 == 0x80f0) {
+        ret = StreamStopClose();
+        goto LAB_00002684;
+      }
+    }
+  }
+  printf("Stream Driver ERROR: Unknown command %x\n",param_1);
+LAB_00002684:
+  printf("! return value = %x \n",ret);
+  return &ret;
+}
+
+
+@function 26c4
+
+undefined4 stream_loop(void)
+
+{
+  undefined4 uVar1;
+  undefined auStack_68 [24];
+  undefined auStack_50 [72];
+  
+  CpuEnableIntr();
+  EnableIntr(0x24);
+  EnableIntr(0x28);
+  EnableIntr(9);
+  sceSifInitRpc(0);
+  uVar1 = GetThreadId();
+  sceSifSetRpcQueue(auStack_68,uVar1);
+  sceSifRegisterRpc(auStack_50,0x534a4521,dispatch,&rpc_arg,0,0,auStack_68);
+  printf("goto stream cmd loop\n");
+  sceSifRpcLoop(auStack_68);
+  return 0;
+}
+
+
+@function 27b4
+
+void sceSdSetParam(void)
+
+{
+  return;
+}
+
+
+@function 27bc
+
+void sceSdSetSwitch(void)
+
+{
+  return;
+}
+
+
+@function 27c4
+
+void sceSdSetAddr(void)
+
+{
+  return;
+}
+
+
+@function 27cc
+
+void sceSdSetCoreAttr(void)
+
+{
+  return;
+}
+
+
+@function 27d4
+
+void sceSdVoiceTrans(void)
+
+{
+  return;
+}
+
+
+@function 27dc
+
+void sceSdSetTransCallback(void)
+
+{
+  return;
+}
+
+
+@function 27e4
+
+void sceSdSetIRQCallback(void)
+
+{
+  return;
+}
+
+
+@function 2808
+
+void AllocSysMemory(void)
+
+{
+  return;
+}
+
+
+@function 2810
+
+void FreeSysMemory(void)
+
+{
+  return;
+}
+
+
+@function 2834
+
+void EnableIntr(void)
+
+{
+  return;
+}
+
+
+@function 283c
+
+void CpuEnableIntr(void)
+
+{
+  return;
+}
+
+
+@function 2860
+
+int open(char *__file,int __oflag,...)
+
+{
+  int in_v0;
+  
+  return in_v0;
+}
+
+
+@function 2868
+
+int close(int __fd)
+
+{
+  int in_v0;
+  
+  return in_v0;
+}
+
+
+@function 2870
+
+ssize_t read(int __fd,void *__buf,size_t __nbytes)
+
+{
+  ssize_t in_v0;
+  
+  return in_v0;
+}
+
+
+@function 2878
+
+__off_t lseek(int __fd,__off_t __offset,int __whence)
+
+{
+  __off_t in_v0;
+  
+  return in_v0;
+}
+
+
+@function 289c
+
+void FlushDcache(void)
+
+{
+  return;
+}
+
+
+@function 28c0
+
+void sceSifInitRpc(void)
+
+{
+  return;
+}
+
+
+@function 28c8
+
+void sceSifRegisterRpc(void)
+
+{
+  return;
+}
+
+
+@function 28d0
+
+void sceSifSetRpcQueue(void)
+
+{
+  return;
+}
+
+
+@function 28d8
+
+void sceSifRpcLoop(void)
+
+{
+  return;
+}
+
+
+@function 28fc
+
+void sceSifInit(void)
+
+{
+  return;
+}
+
+
+@function 2904
+
+void sceSifCheckInit(void)
+
+{
+  return;
+}
+
+
+@function 2928
+
+int printf(char *__format,...)
+
+{
+  int in_v0;
+  
+  return in_v0;
+}
+
+
+@function 294c
+
+void * memset(void *__s,int __c,size_t __n)
+
+{
+  void *in_v0;
+  
+  return in_v0;
+}
+
+
+@function 2970
+
+void CreateThread(void)
+
+{
+  return;
+}
+
+
+@function 2978
+
+void DeleteThread(void)
+
+{
+  return;
+}
+
+
+@function 2980
+
+void StartThread(void)
+
+{
+  return;
+}
+
+
+@function 2988
+
+void TerminateThread(void)
+
+{
+  return;
+}
+
+
+@function 2990
+
+void GetThreadId(void)
+
+{
+  return;
+}
+
+
+@function 29b4
+
+void CreateSema(void)
+
+{
+  return;
+}
+
+
+@function 29bc
+
+void DeleteSema(void)
+
+{
+  return;
+}
+
+
+@function 29c4
+
+void SignalSema(void)
+
+{
+  return;
+}
+
+
+@function 29cc
+
+void iSignalSema(void)
+
+{
+  return;
+}
+
+
+@function 29d4
+
+void WaitSema(void)
+
+{
+  return;
+}
+
+

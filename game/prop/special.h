@@ -1,0 +1,96 @@
+// STATUS: NOT STARTED
+
+#ifndef GAME_PROP_SPECIAL_H
+#define GAME_PROP_SPECIAL_H
+
+extern char *watertexnames[16];
+extern float waterOffsets;
+extern float waterOffsett;
+extern int electricityOn[12];
+extern float electricityTime[12];
+extern float electricityTextureOffset[12];
+extern float hologramAlpha;
+extern texinfo watertexinfo[16];
+extern float *waterMemory[2];
+extern float waterperiodx;
+extern float waterperiodz;
+extern float waterspeedx;
+extern float waterspeedz;
+extern float wateramplitude;
+extern float waterreduction;
+
+void propPreloadSpecial();
+void propRestartSpecial();
+void propResetSpecial();
+void propEndSpecial();
+void propEvictSpecial(prop *p);
+void propDeleteSpecial(prop *p);
+void vtxlistWaterxyzPre(int gfxtype, prop *p);
+void vtxlistWaterxyz(float *sxyz, float *dxyz, int numvtx, int gfxtype, prop *p);
+void vtxlistWaterst(float *sst, float *dst, int numvtx);
+void propTickWater(prop *p);
+prop* propNewWater(int num, float x, float y, float z, float roty);
+float specialGetLeverage(prop *p, float *hitpos);
+void specialPropSwingNonAxial(prop *p);
+void specialPropSwingAxial(prop *p);
+float specialGetSwingMagnitudeAxial(float *bulletnormal, float *normal);
+void calculateClockTime();
+void gangsterPaperDamage(prop *p, prop *attacker, float amount, int bullettype, float *hitpos, float *bulletnorm, float bulletspeed);
+void gangsterClothesDamage(prop *p, prop *attacker, float amount, int bullettype, float *hitpos, float *bulletnorm, float bulletspeed);
+void pubsignDamage(prop *p, prop *attacker, float amount, int bullettype, float *hitpos, float *bulletnorm, float bulletspeed);
+void boatsignDamage(prop *p, prop *attacker, float amount, int bullettype, float *hitpos, float *bulletnorm, float bulletspeed);
+void gongDamage(prop *p, prop *attacker, float amount, int bullettype, float *hitpos, float *bulletnorm, float bulletspeed);
+void bannerDamage(prop *p, prop *attacker, float amount, int bullettype, float *hitpos, float *bulletnorm, float bulletspeed);
+void lanternDamage(prop *p, prop *attacker, float amount, int bullettype, float *hitpos, float *bulletnorm, float bulletspeed);
+void chandelierDamage(prop *p, prop *attacker, float amount, int bullettype, float *hitpos, float *bulletnorm, float bulletspeed);
+void spaceship2PropTick(prop *p);
+void spaceship3PropTick(prop *p);
+void bigshipPropTick(prop *p);
+void greenthingPropTick(prop *p);
+void hologramPropTick(prop *p);
+void laserPropTick(prop *p);
+void planetspawnPropTick(prop *p);
+void planetspawn2PropTick(prop *p);
+void rotatespawnPropTick(prop *p);
+void blastspawnPropTick(prop *p);
+void ringspawnPropTick(prop *p);
+void splitterdomePropTick(prop *p);
+void tombtorchPropTick(prop *p);
+void cranePropTick(prop *p);
+void neotokyoSign1Tick(prop *p);
+void neotokyoSign2Tick(prop *p);
+void neotokyoSign3Tick(prop *p);
+void neotokyoTrafficLightsTick(prop *p);
+void damRadarPropTick(prop *p);
+void damRadarSwitchPropActivate(prop *p);
+void damTurbineTick(prop *p);
+void damMainTurbineTick(prop *p);
+void damBackupTurbineTick(prop *p);
+void damTurbineSetState(prop *p, int turbineState);
+void damCagePropDamage(prop *p, prop *attacker, float amount, int bullettype, float *hitpos, float *bulletnorm, float bulletspeed);
+void damCageActivate(prop *p);
+void damCagePropTick(prop *p);
+void damComputerDeskTick(prop *p);
+void damComputerSwitched(prop *p);
+void specialSetDamDial(prop *p, int state);
+void damPipeWheelTick(prop *p);
+void damPipeWheelActivate(prop *p, prop *actor);
+boolean specialDamWheelOn(prop *p);
+prop* propNewSpecial(int num, float *pos, float *rot, float *extra, void *ref, void (*callback)(/* parameters unknown */));
+void propSpecialGibWoodenObject(float *CentrePos, float *Direction, int NumOfGibs, float GroundHeight);
+void propSpecialGibMetalObject(float *CentrePos, float *Direction, int NumOfGibs, float GroundHeight);
+void propSpecialGibGlassObject(float *CentrePos, float *Direction, int NumOfGibs, float GroundHeight);
+void propSpecialGibCardObject(float *CentrePos, float *Direction, int NumOfGibs, float GroundHeight);
+void propSpecialGibLeafObject(float *CentrePos, float *Direction, int NumOfGibs, float GroundHeight);
+void propSpecialGibStoneObject(float *CentrePos, float *Direction, int NumOfGibs, float GroundHeight);
+void propSpecialGibFruitObject(float *CentrePos, float *Direction, int NumOfGibs, float GroundHeight);
+void GibPropTick(prop *p);
+void damFireExtDamage(prop *p, prop *attacker, float amount, int bullettype, float *hitpos, float *bulletnorm, float bulletspeed);
+void propSpecialFireExtTick(prop *p);
+void specialFileCabinetActivate(prop *p, prop *actor);
+void specialFileCabinetTick(prop *p);
+void specialFileCabinetBurningTick(prop *p);
+void specialRailSpiderTestTick(prop *p);
+void specialRailPutOnNearestSection(prop *p);
+
+#endif // GAME_PROP_SPECIAL_H

@@ -1,0 +1,9 @@
+// STATUS: NOT STARTED
+
+#ifndef SCE_EE_GCC_SRC_NEWLIB_LIBM_MATH_EF_ATAN2_H
+#define SCE_EE_GCC_SRC_NEWLIB_LIBM_MATH_EF_ATAN2_H
+
+
+float __ieee754_atan2f(float y, float x);
+
+#endif // SCE_EE_GCC_SRC_NEWLIB_LIBM_MATH_EF_ATAN2_H
