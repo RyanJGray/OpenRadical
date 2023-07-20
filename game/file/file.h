@@ -1,8 +1,12 @@
-// STATUS: NOT STARTED
+//
+// The OpenTS2 Project
+// 2023
+//
 
 #ifndef GAME_FILE_FILE_H
 #define GAME_FILE_FILE_H
 
+#include "../../types.h"
 
 void packfileLoad(u8 *filename, boolean loadmem, int loadmemtype);
 u8* fileGetMem(u8 *filename);

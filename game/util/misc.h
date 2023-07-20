@@ -1,7 +1,18 @@
-// STATUS: NOT STARTED
+//
+// The OpenTS2 Project
+// 2023
+//
 
 #ifndef GAME_UTIL_MISC_H
 #define GAME_UTIL_MISC_H
+
+#include "../../types.h"
+
+struct bubblesort_s {
+  int value;
+  u32 data;
+};
+typedef bubblesort_s bubblesort_t;
 
 u8* vafmt(u8 *format);
 int PowerOf2(int value);

@@ -1,7 +1,13 @@
-// STATUS: NOT STARTED
+//
+// The OpenTS2 Project
+// 2023
+//
 
 #ifndef GAME_GAME_GAME_H
 #define GAME_GAME_GAME_H
+
+#include "../../types.h"
+#include "../util/misc.h"
 
 struct gamemodeinfo_s {
 	short int name;
@@ -52,12 +58,6 @@ struct resetgameparms_s {
 
 typedef resetgameparms_s resetgameparms;
 
-struct bubblesort_s {
-	int value;
-	u32 data;
-};
-
-typedef bubblesort_s bubblesort_t;
 extern int demo_completed;
 extern int demo_aborted;
 extern int demo_timeout;
