@@ -1,7 +1,11 @@
 # OpenTS2 - File Formats - PAK (P4CK/P8CK)
 This document mostly details the structure of the `.PAK` file as used in the US OPM 53 demo, supposedly `P4CK` dates back to TimeSplitters 1 and hasn't changed since then.
 
-`P8CK` is odd and is used in a hybrid approach in the Xbox release - some files are `P4CK` and some are `P8CK`, I don't understand why FRD did this.
+`P8CK` is odd and is used in a hybrid approach in the Xbox release - some files are `P4CK` and some are `P8CK`.
+
+The Xbox engine has support for loading both `P4CK` and `P8CK`. I don't know why this is the case.
+
+`P8CK`'s main difference compared to `P4CK` is that, instead of sequentially storing file data offsets and sizes after the file names, it has a table of file names, then a table of file offsets and file sizes.
 
 ## Recommended tools
 * [ImHex](https://github.com/WerWolv/ImHex) - an amazing hex editor that allows you to define patterns using a C-like language.
@@ -54,3 +58,36 @@ It's possible that the assets were not sufficiently large to cause them to run o
 |Offset|Datatype|Name|Purpose|
 |---|---|---|---|
 |`0x0`|`char[4]`|`id`|FourCC magic (`P8CK`).|
+|`0x4`|`s32`|`dirofs`|Offset to the directory table.|
+|`0x8`|`s32`|`filecnt`|Total number of files.|
+|`0xC`|`s32`|`namespos`|Absolute position of the file name table.|
+|`0x10`|`s32`|`nameslen`|Total length of the file name table.|
+
+### Directory Table
+|Offset|Datatype|Name|Purpose|
+|---|---|---|---|
+|`0x0`|`s32`|`nameofs`|Offset to the file name - relative to the start of the file name table.|
+|`0x4`|`s32`|`filelen`|Total length of the file's data.|
+|`0x8`|`s32`|`filepos`|Absolute file position in PAK.|
+
+### Tools
+The following pattern makes it a bit easier to read the structure of `P8CK` files.
+```c
+struct packFileName_s {
+  char name[];
+};
+struct packFile_s {
+  s32 nameofs;
+  s32 filelen;
+  s32 *filepos : s32;
+};
+struct packHeader_s {
+  char id[4];
+  s32 filecnt_temp @ 0x8; // We can't read the value of `filecnt` before it is defined.
+  packFile_s *dirofs[filecnt_temp] : s32;
+  s32 filecnt;
+  packFileName_s *namespos[filecnt]: s32;
+  s32 nameslen;
+};
+packHeader_s PackHeader @ 0x00;
+```
