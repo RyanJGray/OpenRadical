@@ -1,5 +1,5 @@
 [package]
-name = "frdbaf"
+name = "frdpak"
 version = "0.1.0"
 edition = "2021"
 authors = ["Ryan J. Gray <ryan@ryanjgray.com>"]
@@ -8,3 +8,5 @@ description = "Tool to generate and manipulate Free Radical Design PAK files"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+byteorder = "1.4.3"
+clap = { version = "4.3.19", features = ["derive"] }
