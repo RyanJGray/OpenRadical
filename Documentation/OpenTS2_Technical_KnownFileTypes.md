@@ -2,14 +2,14 @@
 Details all known file types in _TimeSplitters 2_.
 
 ## Pack (P4CK/P8CK) Files
-File Name | Description
+File Name|Description
 ---|---
-`ANIM.PAK` | Animation Data
-`CSANIM.PAK` | Cutscene Animation Data
-`FRONTEND.PAK` | Frontend Animation Data
-`OTHERS.PAK` | Unknown
-`RAWS.PAK` | Unknown
-`SOUNDS.PAK` | Sound Data
+`ANIM.PAK`|Animation Data
+`CSANIM.PAK`|Cutscene Animation Data
+`FRONTEND.PAK`|Frontend Animation Data
+`OTHERS.PAK`|Unknown
+`RAWS.PAK`|Unknown
+`SOUNDS.PAK`|Sound Data
 
 ## Multistream flat Sample bank Concatenated (MSC) Files
 These files are loaded and handled by the _FRD Stream Driver_ (**v1.1** in the OPM 53 demo).

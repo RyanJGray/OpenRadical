@@ -1,5 +1,11 @@
 # OpenTS2
 
+## Project Planning
+Project Stage|Areas of focus
+---|---
+Stage 1|Audio system/`STREAM.IRX`, pack file parsing + dumping, pack alignment and manifest generation.
+Stage 2|Work on an initial demo in the form of a game audio player for the PS2, loading sound files from a pack file.
+
 ## Technical Notes
 Source tree was auto-generated from debugging information included with the _US Official PlayStation Magazine Demo 53_ version of _TimeSplitters 2_ (which is from the **5th of October 2001**).
 
