@@ -41,6 +41,9 @@ struct resetgameparms_s {
 	u8 teamnums[5];
 	u8 chrtypes[14];
 	u8 chrteams[14];
+	// u8[14] chrskill
+	// s8[14] chrheads
+	// s16 levelnum
 	int levelnum;
 	int challengenum;
 	int gamemode;

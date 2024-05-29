@@ -3,6 +3,19 @@
 #ifndef GAME_EM_IMAGE_H
 #define GAME_EM_IMAGE_H
 
+#include "boss.h"
+
+typedef enum {
+	IMAGE_UNKNOWN = 0,
+	IMAGE_RGB = 1,
+	IMAGE_P6 = 2,
+	IMAGE_P8 = 3,
+	IMAGE_Q6 = 4,
+	IMAGE_Q8 = 5,
+	IMAGE_M6 = 6,
+	IMAGE_M8 = 7
+} eImageType;
+
 typedef union {
 	struct {
 		u8 r;

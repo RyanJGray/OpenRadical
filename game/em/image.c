@@ -1,17 +1,10 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// A project by Ryan J. Gray - 2024
+// TS2 OPM53 Tree
+//
 
 #include "image.h"
-
-typedef enum {
-	IMAGE_UNKNOWN = 0,
-	IMAGE_RGB = 1,
-	IMAGE_P6 = 2,
-	IMAGE_P8 = 3,
-	IMAGE_Q6 = 4,
-	IMAGE_Q8 = 5,
-	IMAGE_M6 = 6,
-	IMAGE_M8 = 7
-} eImageType;
 
 typedef struct {
 	short unsigned int imagic;
@@ -82,20 +75,123 @@ static void OpenRGB(u8 *fileName, emTexture *desttex) {
 	u8 *data;
 }
 
+/// <summary>
+/// Decodes the magic in an FRD image / texture data file.
+/// The file format appears to be based on the PBM image format?
+/// </summary>
+/// <returns>
+/// eImageType - the type of image data that has been detected.
+/// </returns>
 eImageType GetFormat(char *header) {
-	u16 *sp;
+	u16 *sp = (u16)header;
+
+	// 0x01da is little-endian, second case is big endian (0xda01).
+	if ((*sp == 0x01da) || (*sp == 0xda01)) {
+	  return IMAGE_RGB;
+	}
+
+	if (*sp == 0x3651) {
+	  return IMAGE_Q6;
+	}
+	if (*sp < 0x3652) {
+	  if (*sp == 0x364d) {
+	    return IMAGE_M6;
+	  }
+	  if (*sp == 0x3650) {
+	    return IMAGE_P6;
+	  }
+	}
+	else {
+	  if (*sp == 0x3850) {
+	    return IMAGE_P8;
+	  }
+	  if (*sp < 0x3851) {
+	    if (*sp == 0x384d) {
+	      return IMAGE_M8;
+	    }
+	  }
+	  else if (*sp == 0x3851) {
+	    return IMAGE_Q8;
+	  }
+	}
+
+	return IMAGE_UNKNOWN;
 }
 
-static eImageType ImageGetDetails(char *filename) {}
+static eImageType ImageGetDetails(char *filename) {
+	bigbuffer = scratchbuffer;
+	downloadbuffer = scratchbuffer + 0x10480;
+	int maxsize = fileSize(filename);
+	fileLoadTo(filename, bigbuffer, maxsize);
+	eImageType fileformat = GetFormat(bigbuffer);
+
+	return fileformat;
+}
 
 void ImageLoad(char *fileName, emTexture *desttex) {
 	eImageType fileformat;
+
+	fileformat = ImageGetDetails(fileName);
+	desttex->flags = 0;
+	desttex->miplevels = '\x01';
+
+	switch(fileformat) {
+	case IMAGE_RGB:
+	  OpenRGB(fileName, desttex);
+	  return;
+	case IMAGE_P6:
+	case IMAGE_Q6:
+	case IMAGE_Q8:
+	case IMAGE_M6:
+	case IMAGE_M8:
+	  OpenXPM(fileName, desttex, fileformat);
+	  return;
+	default:
+	  exit(1);
+	}
 }
 
-static eImageType ImageGetDetailsFromMem(u32 addr) {}
+static eImageType ImageGetDetailsFromMem(u32 addr) {
+	downloadbuffer = scratchbuffer + 0x10480;
+	bigbuffer = scratchbuffer;
+	bcopy(addr, scratchbuffer, 0x10480);
+	eImageType fileformat = GetFormat(bigbuffer);
+
+	return fileformat;
+}
 
 void ImageLoadFromMem(u32 addr, emTexture *desttex) {
 	eImageType fileformat;
+
+	fileformat = ImageGetDetailsFromMem(addr);
+	desttex->flags = 0;
+	desttex->miplevels = '\x01';
+
+	switch(fileformat) {
+	case IMAGE_RGB:
+	  OpenRGB("mem", desttex);
+	  return;
+	case IMAGE_P6:
+	case IMAGE_Q6:
+	case IMAGE_Q8:
+	case IMAGE_M6:
+	case IMAGE_M8:
+	  OpenXPM("mem", desttex, fileformat);
+	  return;
+	default:
+	  exit(1);
+	}
 }
 
-void ImageMakePalette(emTexture *texture, u32 *palette) {}
+void ImageMakePalette(emTexture *texture, u32 *palette) {
+	u8* mem = memAlloc(0x480, 1);
+	texture->palette = (rgba_t*)((u32)(mem + 0x7f) & 0xffffff80);
+	memset(texture->palette, 0x3f, 0x400);
+
+	if (palette != nullptr) {
+	  MakeCSM1Palette(palette, texture->palette);
+	  return;
+	}
+
+	return;
+}
