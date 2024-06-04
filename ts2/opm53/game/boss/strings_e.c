@@ -1,9 +1,13 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #include "strings_e.h"
 
 char *english[1386] = {
-	/* [0] = */ NULL,
+	/* [0] = */ "",
 	/* [1] = */ 0x42a090,
 	/* [2] = */ 0x42a080,
 	/* [3] = */ 0x42a070,
