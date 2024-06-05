@@ -176,7 +176,93 @@ void sjeGsSwapDBuff(int buff, boolean FromInterupt) {
   return;
 }
 
-static void bossMake() { SemaParam s; }
+/// <summary>
+/// The main function in all TS Engine games, handles low-level platform
+/// initialisation.
+/// </summary>
+static void bossMake() {
+  SemaParam s;
+
+  sceSifInitRpc(0);
+  sceCdInit(SCECdINIT);
+
+  int mediaType = SCECdDVD;
+  if (dvd == FALSE) {
+    mediaType = SCECdCD;
+  }
+  sceCdMmode(mediaType);
+
+  // Update the IOP with the necessary modules.
+  while (!sceSifRebootIop("cdrom0:\\TS2\\MODULES\\IOP.IMG;1"))
+    ;
+  while (!sceSifSyncIop())
+    ;
+
+  // Re-initialise subsystems.
+  sceSifInitRpc(0);
+  sceCdInit(SCECdINIT);
+  mediatype = SCECdDVD;
+  if (dvd == FALSE) {
+    mediaType = SCECdCD;
+  }
+  sceCdMmode(mediaType);
+  sceFsReset();
+  sceCdDiskReady(0);
+
+  while (sceSifLoadModule("cdrom0:\\TS2\\MODULES\\SIO2MAN.IRX;1", 0, 0) < 0)
+    ;
+  while (sceSifLoadModule("cdrom0:\\TS2\\MODULES\\MTAPMAN.IRX;1", 0, 0) < 0)
+    ;
+  while (sceSifLoadModule("cdrom0:\\TS2\\MODULES\\PADMAN.IRX;1", 0, 0) < 0)
+    ;
+  while (sceSifLoadModule("cdrom0:\\TS2\\MODULES\\MCMAN.IRX;1", 0, 0) < 0)
+    ;
+  while (sceSifLoadModule("cdrom0:\\TS2\\MODULES\\MCSERV.IRX;1", 0, 0) < 0)
+    ;
+  while (sceSifLoadModule("cdrom0:\\TS2\\MODULES\\LIBSD.IRX;1", 0, 0) < 0)
+    ;
+  while (sceSifLoadModule("cdrom0:\\TS2\\MODULES\\SDRDRV.IRX;1", 0, 0) < 0)
+    ;
+  while (sceSifLoadModule("cdrom0:\\TS2\\MODULES\\STREAM.IRX;1", 0, 0) < 0)
+    ; // FRD Stream Driver
+  while (sceSifLoadModule("cdrom0:\\TS2\\MODULES\\USBD.IRX;1", 0, 0) < 0)
+    ;
+  while (sceSifLoadModule("cdrom0:\\TS2\\MODULES\\USBMOUSE.IRX;1", 0, 0) < 0)
+    ;
+
+  sceGsResetPath();
+  sceDmaReset(1);
+
+  dmaVif1 = sceDmaGetChan(1);
+  dmaSpr = sceDmaGetChan(8);
+
+  sceGsResetGraph(0, 1, 2, 1);
+  clearvram('\0', '\0', '\0', '\0');
+  sjeGsSetDefDBuff(0, 512, 448, 2, 48, 0, 0);
+
+  s.maxCount = 1;
+  s.initCount = 0;
+  gsstart_sid = CreateSema(&s);
+
+  s.maxCount = 1;
+  s.initCount = 0;
+  gsdone_sid = CreateSema(&s);
+
+  s.maxCount = 1;
+  s.initCount = 1;
+  gsavail_sid = CreateSema(&s);
+
+  s.initCount = 1;
+  s.maxCount = 1;
+  bufffree_sid = CreateSema(&s);
+
+  while (!AddIntcHandler(3, &vblIntHandler, 0))
+    ;
+  while (!AddIntcHandler(0, &gsIntHandler, 0))
+    ;
+
+  return;
+}
 
 void bossDmaFromSpr(u32 src, u32 dest, u32 len) {
   sceDmaChan *dmaChan;
