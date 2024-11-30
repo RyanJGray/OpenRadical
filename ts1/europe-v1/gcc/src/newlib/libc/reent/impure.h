@@ -1,0 +1,9 @@
+// STATUS: NOT STARTED
+
+#ifndef GCC_SRC_NEWLIB_LIBC_REENT_IMPURE_H
+#define GCC_SRC_NEWLIB_LIBC_REENT_IMPURE_H
+
+extern _reent *_impure_ptr;
+
+
+#endif // GCC_SRC_NEWLIB_LIBC_REENT_IMPURE_H

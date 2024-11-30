@@ -1,0 +1,9 @@
+// STATUS: NOT STARTED
+
+#ifndef GAME_SOUND_STREAMRPC_H
+#define GAME_SOUND_STREAMRPC_H
+
+stream_RPCinit();
+stream_RPC();
+
+#endif // GAME_SOUND_STREAMRPC_H

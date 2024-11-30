@@ -1,0 +1,8 @@
+// STATUS: NOT STARTED
+
+#ifndef GCC_SRC_NEWLIB_LIBM_MATH_S_ISNAN_H
+#define GCC_SRC_NEWLIB_LIBM_MATH_S_ISNAN_H
+
+int isnan(double x);
+
+#endif // GCC_SRC_NEWLIB_LIBM_MATH_S_ISNAN_H

@@ -1,0 +1,6 @@
+// STATUS: NOT STARTED
+
+#ifndef GAME_BG_TILES_H
+#define GAME_BG_TILES_H
+
+#endif // GAME_BG_TILES_H

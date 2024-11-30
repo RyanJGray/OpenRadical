@@ -1,0 +1,8 @@
+// STATUS: NOT STARTED
+
+#ifndef GAME_FILE_INFLATE_H
+#define GAME_FILE_INFLATE_H
+
+fileInflate();
+
+#endif // GAME_FILE_INFLATE_H

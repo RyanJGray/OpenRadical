@@ -1,0 +1,8 @@
+// STATUS: NOT STARTED
+
+#ifndef GCC_SRC_NEWLIB_LIBM_COMMON_S_COPYSIGN_H
+#define GCC_SRC_NEWLIB_LIBM_COMMON_S_COPYSIGN_H
+
+double copysign(double x, double y);
+
+#endif // GCC_SRC_NEWLIB_LIBM_COMMON_S_COPYSIGN_H

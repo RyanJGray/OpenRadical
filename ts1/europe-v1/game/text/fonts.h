@@ -1,0 +1,6 @@
+// STATUS: NOT STARTED
+
+#ifndef GAME_TEXT_FONTS_H
+#define GAME_TEXT_FONTS_H
+
+#endif // GAME_TEXT_FONTS_H

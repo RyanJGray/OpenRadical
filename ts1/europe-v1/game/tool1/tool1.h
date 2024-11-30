@@ -1,0 +1,6 @@
+// STATUS: NOT STARTED
+
+#ifndef GAME_TOOL1_TOOL1_H
+#define GAME_TOOL1_TOOL1_H
+
+#endif // GAME_TOOL1_TOOL1_H

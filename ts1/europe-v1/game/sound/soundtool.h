@@ -1,0 +1,8 @@
+// STATUS: NOT STARTED
+
+#ifndef GAME_SOUND_SOUNDTOOL_H
+#define GAME_SOUND_SOUNDTOOL_H
+
+soundtoolStart();
+
+#endif // GAME_SOUND_SOUNDTOOL_H

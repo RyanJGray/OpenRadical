@@ -1,0 +1,9 @@
+// STATUS: NOT STARTED
+
+#ifndef GCC_SRC_NEWLIB_LIBC_CTYPE_CTYPE__H
+#define GCC_SRC_NEWLIB_LIBC_CTYPE_CTYPE__H
+
+extern char _ctype_[257];
+
+
+#endif // GCC_SRC_NEWLIB_LIBC_CTYPE_CTYPE__H
