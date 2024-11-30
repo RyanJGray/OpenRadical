@@ -2,8 +2,7 @@
 
 #include "roomfx.h"
 
-// warning: multiple differing types with the same name (#121,  not equal)
-enum {
+typedef enum {
 	ROOMFXTYPE_NONE = 0,
 	ROOMFXTYPE_SHOCKWAVE = 1,
 	ROOMFXTYPE_MINIWAVE = 2,

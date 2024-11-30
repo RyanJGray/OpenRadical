@@ -1,0 +1,8 @@
+// STATUS: NOT STARTED
+
+#ifndef GCC_SRC_NEWLIB_LIBM_MATH_WF_ACOS_H
+#define GCC_SRC_NEWLIB_LIBM_MATH_WF_ACOS_H
+
+float acosf(float x);
+
+#endif // GCC_SRC_NEWLIB_LIBM_MATH_WF_ACOS_H

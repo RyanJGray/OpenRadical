@@ -1,10 +1,19 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_FX_CHRFX_H
 #define GAME_FX_CHRFX_H
 
-struct chrfx_s {
-	chrdata_s *chrdata;
+#include "common.h"
+#include "chr/chr.h"
+#include "prop/prop.h"
+#include "particle.h"
+
+typedef struct chrfx_s {
+	chrdata *chrdata;
 	int flags;
 	int spawnType;
 	int spawnSubType;
@@ -18,11 +27,10 @@ struct chrfx_s {
 	float breathTimeDest;
 	float burn;
 	float fadeamount;
-	prop_s *burnAttacker;
-	particlegroup_s *particlefx[1];
-};
+	prop *burnAttacker;
+	particlegroup *particlefx[1];
+} chrfx;
 
-typedef chrfx_s chrfx;
 void chrfxPreload();
 void chrfxReset();
 void chrfxRestart();
@@ -41,7 +49,7 @@ void chrfxCloakingTick(chrfx *cfx);
 void chrfxFadeOutTick(chrfx *cfx);
 void chrfxTick(chrfx *cfx);
 void chrfxGfx(chrfx *cfx);
-void chrfxSetup(chrfx *cfx, chrdata_s *cd);
+void chrfxSetup(chrfx *cfx, chrdata *cd);
 void chrfxUnSetup(chrfx *cfx);
 void chrfxDie(chrfx *cfx);
 void chrfxRespawn(chrfx *cfx);

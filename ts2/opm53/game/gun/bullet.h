@@ -1,21 +1,145 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_GUN_BULLET_H
 #define GAME_GUN_BULLET_H
 
-typedef fireInfo_s fireInfo_t;
+#include "gun/cartridge.h"
+#include "ob/ob.h"
+#include "prop/prop.h"
 
-struct explosionDef_s {
+typedef struct fireInfo_s {
+	int fireFlags;
+	int bulletType;
+	int numShots;
+	int fireDelay;
+	int singleShotTime;
+	int repeatShotTime;
+	float ricochet;
+	float bulletSpeed;
+	float inaccuracy;
+	int singleShotAmmo;
+	int repeatShotAmmo;
+	int fireSoundNum;
+	int repeatFireSoundNum;
+	float repeatFireSoundTime;
+	int cheatFireSoundNum;
+	int cheatRepeatFireSoundNum;
+	float cheatRepeatFireSoundTime;
+	int cartridgeSoundNum;
+	int cartridgeType;
+	float cartridgeVelocityVariance[3];
+	float cartridgeVelocityScale;
+	int damageType;
+	float dualShockPower;
+	float dualShockPowerSlowdown;
+	playerGunAnimationInfo_t plAnimationInfo;
+} fireInfo_t;
+
+typedef struct explosionDef_s {
 	int explosionRenderType1;
 	int explosionRenderType2;
 	float damageFactor;
 	float damageDist;
-};
+} explosionDef;
 
-typedef explosionDef_s explosionDef;
-typedef bullet_s bullet;
+typedef struct laserNode_s {
+	float origin[3];
+	float pos[3];
+	u32 alpha;
+} laserNode;
 
-struct bulletInfo_s {
+typedef struct laserCoil_s {
+	int numNodes;
+	laserNode nodes[16];
+	float angle;
+	float cosangle;
+	float sinangle;
+	float radius;
+	float timedelay;
+	float speed1;
+	float speed2;
+} laserCoil;
+
+typedef struct laserData_s {
+	int numCoils;
+	laserCoil coils[5];
+	float endpos[3];
+	float length;
+} laserData;
+
+typedef struct laserBoltDef_s {
+	float radius;
+	float length;
+	u32 abgr;
+	int repetitions;
+} laserBoltDef;
+
+typedef struct electricData_s {
+	float discardTime;
+	float translate;
+	float endpos[3];
+	float length;
+	u32 randAlpha;
+} electricData;
+
+typedef struct bullet_s {
+	int type;
+	int subType;
+	int damageType;
+	int flags;
+	int next;
+	int prev;
+	boolean ticked;
+	float pos[3];
+	float dir[3];
+	float rotvel[3];
+	float time;
+	prop *hitprop;
+	prop *prop;
+	particlegroup *particlefx[4];
+	int room;
+	float ricochet;
+	int isricochet;
+	int ownertype;
+	chrdata *firedByChr;
+	prop *firedByProp;
+	prop *attackerProp;
+	float RoomHitPos[3];
+	float RoomHitNorm[3];
+	prop *pRoomHitProp;
+	HitInfoDef RoomHitInfo;
+	boolean FirstUpdate;
+	prop *pPropAttachedTo;
+	int MatrixNumAttachedTo;
+	float AttachedPos[3];
+	float AttachedNorm[3];
+	int detonationStage;
+	float normal[3];
+	prop *clip;
+	prop *mine;
+	float basepos;
+	int bounces;
+	prop *target;
+	float targetpos[3];
+	int retargetcount;
+	int voice;
+	int soundsdone;
+	float alpha;
+	int aiming;
+	int shellsfx;
+	int explosionCauseType;
+	laserData laser;
+	electricData electric;
+	float axis1[3];
+	float axis2[3];
+	float angle;
+} bullet;
+
+typedef struct bulletInfo_s {
 	int groupType;
 	float lightCol[3];
 	float dualShockDamage;
@@ -25,9 +149,8 @@ struct bulletInfo_s {
 	int paintballabgr;
 	float paintballScale;
 	int flags;
-};
+} bulletInfo;
 
-typedef bulletInfo_s bulletInfo;
 extern laserBoltDef laserBolts[5];
 extern explosionRender explosionRenders[6];
 extern explosionDef explosionDefs[5];

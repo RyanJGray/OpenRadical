@@ -2,8 +2,7 @@
 
 #include "front_mpg.h"
 
-// warning: multiple differing types with the same name (#74,  not equal)
-enum {
+typedef enum {
 	FEANIM_NULL = 0,
 	FEANIM_GUNTAGGEDALL = 1,
 	FEANIM_GUNTAGGEDACT = 2,
@@ -11,8 +10,7 @@ enum {
 	FEANIM_PROPTAGGEDALL = 4
 };
 
-// warning: multiple differing types with the same name (#74,  not equal)
-enum {
+typedef enum {
 	MODE_INIT = 0,
 	MODE_DEMO = 1,
 	MODE_STORY = 2,
@@ -42,8 +40,7 @@ struct mpg_s {
 
 typedef mpg_s mpg_t;
 
-// warning: multiple differing types with the same name (#74,  not equal)
-enum {
+typedef enum {
 	state_signon_init = 1,
 	state_signon_main = 2,
 	state_signon_re_edit = 3,
@@ -51,8 +48,7 @@ enum {
 	state_signon_ready = 5
 };
 
-// warning: multiple differing types with the same name (#74,  not equal)
-enum {
+typedef enum {
 	state_chrselect_init = 1,
 	state_chrselect_model = 2,
 	state_chrselect_handicap = 3,
@@ -85,15 +81,13 @@ struct msgboxinfo_s {
 
 typedef msgboxinfo_s msgboxinfo_t;
 
-// warning: multiple differing types with the same name (#74,  not equal)
-enum {
+typedef enum {
 	SIGNONLOAD_BUSY = 0,
 	SIGNONLOAD_OK = 1,
 	SIGNONLOAD_CANCELLED = 2
 };
 
-// warning: multiple differing types with the same name (#74,  not equal)
-enum {
+typedef enum {
 	SOUPSTATE_INIT = 0,
 	SOUPSTATE_WAITCARD_NEWSIGNONTOSAVETO = 1,
 	SOUPSTATE_NEWSIGNONTOSAVETO_1 = 2,
@@ -107,15 +101,13 @@ enum {
 	SOUPSTATE_MESSAGE = 10
 };
 
-// warning: multiple differing types with the same name (#74,  not equal)
-enum {
+typedef enum {
 	SIGNONUPDATE_BUSY = 0,
 	SIGNONUPDATE_OK = 1,
 	SIGNONUPDATE_CANCELLED = 2
 };
 
-// warning: multiple differing types with the same name (#74,  not equal)
-enum {
+typedef enum {
 	SOUPSTATE_DELETE_INIT = 0,
 	SOUPSTATE_DELETE_WAITCARD = 1,
 	SOUPSTATE_DELETE_WAITCARD_DELETING = 2,
@@ -123,15 +115,13 @@ enum {
 	SOUPSTATE_DELETE_MESSAGE = 4
 };
 
-// warning: multiple differing types with the same name (#74,  not equal)
-enum {
+typedef enum {
 	SIGNONDELETE_BUSY = 0,
 	SIGNONDELETE_OK = 1,
 	SIGNONDELETE_CANCELLED = 2
 };
 
-// warning: multiple differing types with the same name (#74,  not equal)
-enum {
+typedef enum {
 	we_list = 1,
 	we_weaponset = 2,
 	we_info = 3,
@@ -139,8 +129,7 @@ enum {
 	we_last = 5
 };
 
-// warning: multiple differing types with the same name (#74,  not equal)
-enum {
+typedef enum {
 	COL_CHR = 0,
 	COL_TEAM = 1,
 	COL_SKILL = 2,
@@ -157,8 +146,7 @@ struct chrsel_s {
 
 typedef chrsel_s chrsel_t;
 
-// warning: multiple differing types with the same name (#74,  not equal)
-enum {
+typedef enum {
 	cs_chrset = 1,
 	cs_list = 2,
 	cs_grid = 3,
@@ -167,8 +155,7 @@ enum {
 	cs_last = 6
 };
 
-// warning: multiple differing types with the same name (#74,  not equal)
-enum {
+typedef enum {
 	av_musicon = 1,
 	av_musicvol = 2,
 	av_soundon = 3,
@@ -178,22 +165,19 @@ enum {
 	av_last = 7
 };
 
-// warning: multiple differing types with the same name (#74,  not equal)
-enum {
+typedef enum {
 	chrsel_main_model = 1,
 	chrsel_main_info = 2,
 	chrsel_main_num = 3
 };
 
-// warning: multiple differing types with the same name (#74,  not equal)
-enum {
+typedef enum {
 	chrsel_handicap_gv = 1,
 	chrsel_handicap_back = 2,
 	chrsel_handicap_num = 3
 };
 
-// warning: multiple differing types with the same name (#74,  not equal)
-enum {
+typedef enum {
 	chrsel_team_team = 1,
 	chrsel_team_back = 2,
 	chrsel_team_num = 3
@@ -212,8 +196,7 @@ struct gmoptions_s {
 
 typedef gmoptions_s gmoptions_t;
 
-// warning: multiple differing types with the same name (#74,  not equal)
-enum {
+typedef enum {
 	ao_t1 = 1,
 	ao_option1 = 2,
 	ao_option2 = 3,
@@ -233,15 +216,13 @@ enum {
 	ao_last = 17
 };
 
-// warning: multiple differing types with the same name (#74,  not equal)
-enum {
+typedef enum {
 	cht_list = 1,
 	cht_back = 2,
 	cht_last = 3
 };
 
-// warning: multiple differing types with the same name (#74,  not equal)
-enum {
+typedef enum {
 	mf_init_load_dir = 0,
 	mf_init_load_wait = 1,
 	mf_init_poll_start = 2,
@@ -250,8 +231,7 @@ enum {
 	mf_load_map_wait = 5
 };
 
-// warning: multiple differing types with the same name (#74,  not equal)
-enum {
+typedef enum {
 	ar_tileset = 1,
 	ar_level = 2,
 	ar_gamemode1 = 3,
@@ -273,15 +253,13 @@ struct gmtab_s {
 
 typedef gmtab_s gmtab_t;
 
-// warning: multiple differing types with the same name (#74,  not equal)
-enum {
+typedef enum {
 	storychrsel_main_model = 1,
 	storychrsel_main_ready = 2,
 	storychrsel_main_last = 3
 };
 
-// warning: multiple differing types with the same name (#74,  not equal)
-enum {
+typedef enum {
 	st_level = 1,
 	st_skill1 = 2,
 	st_skill2 = 3,
@@ -292,8 +270,7 @@ enum {
 	st_last = 8
 };
 
-// warning: multiple differing types with the same name (#74,  not equal)
-enum {
+typedef enum {
 	ch_num = 1,
 	ch_desc = 2,
 	ch_back = 3,
@@ -301,15 +278,13 @@ enum {
 	ch_last = 5
 };
 
-// warning: multiple differing types with the same name (#74,  not equal)
-enum {
+typedef enum {
 	il_back = 0,
 	il_more = 1,
 	il_last = 2
 };
 
-// warning: multiple differing types with the same name (#74,  not equal)
-enum {
+typedef enum {
 	sta_player = 1,
 	sta_statgametype = 2,
 	sta_statcat = 3,
@@ -317,8 +292,7 @@ enum {
 	sta_last = 5
 };
 
-// warning: multiple differing types with the same name (#74,  not equal)
-enum {
+typedef enum {
 	gt_story = 1,
 	gt_arcade = 2,
 	gt_challenge = 3,
@@ -332,20 +306,17 @@ enum {
 	gt_last = 11
 };
 
-// warning: multiple differing types with the same name (#74,  not equal)
-enum {
+typedef enum {
 	so_new = 2000,
 	so_load = 2001
 };
 
-// warning: multiple differing types with the same name (#74,  not equal)
-enum {
+typedef enum {
 	MSGID_DELETE = 1,
 	MSGID_DUPLICATE = 2
 };
 
-// warning: multiple differing types with the same name (#74,  not equal)
-enum {
+typedef enum {
 	np_one = 1,
 	np_two = 2,
 	np_three = 3,
@@ -762,7 +733,7 @@ gamevar gv_playmusic = {
 	/* .max = */ 1,
 	/* .flags = */ 0,
 	/* .display = */ disp_onoff,
-	/* .onChange = */ musicvolume_onchange,
+	/* .onChange = */ &musicvolume_onchange,
 	/* .suffix = */ NULL,
 	/* .marginright = */ 352,
 	/* .arrowleftofs = */ -64,
@@ -788,7 +759,7 @@ gamevar gv_musicvolume = {
 	/* .max = */ 16,
 	/* .flags = */ 1,
 	/* .display = */ NULL,
-	/* .onChange = */ musicvolume_onchange,
+	/* .onChange = */ &musicvolume_onchange,
 	/* .suffix = */ NULL,
 	/* .marginright = */ 352,
 	/* .arrowleftofs = */ -64,
@@ -814,7 +785,7 @@ static gamevar gv_dispx = {
 	/* .max = */ 64,
 	/* .flags = */ 1,
 	/* .display = */ NULL,
-	/* .onChange = */ displayoffsetx_onchange,
+	/* .onChange = */ &displayoffsetx_onchange,
 	/* .suffix = */ NULL,
 	/* .marginright = */ 352,
 	/* .arrowleftofs = */ -64,
@@ -1007,8 +978,8 @@ static gamevar gv_chrset = {
 };
 
 static pageinit_t message_page = {
-	/* .tick = */ message_pageTick,
-	/* .draw_before = */ message_pageDraw,
+	/* .tick = */ &message_pageTick,
+	/* .draw_before = */ &message_pageDraw,
 	/* .initfocusid = */ 0,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
@@ -1054,8 +1025,8 @@ static menuitem_t i0600[0] = {
 };
 
 static pageinit_t weapons_page = {
-	/* .tick = */ weapons_pageTick,
-	/* .draw_before = */ weapons_pageDraw,
+	/* .tick = */ &weapons_pageTick,
+	/* .draw_before = */ &weapons_pageDraw,
 	/* .initfocusid = */ 2,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
@@ -1076,8 +1047,8 @@ static menuitem_t i0500[0] = {
 };
 
 static pageinit_t chrsets_page = {
-	/* .tick = */ chrsets_pageTick,
-	/* .draw_before = */ chrsets_pageDraw,
+	/* .tick = */ &chrsets_pageTick,
+	/* .draw_before = */ &chrsets_pageDraw,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
@@ -1098,8 +1069,8 @@ static menuitem_t i04b00[0] = {
 };
 
 static pageinit_t audiovideo_page = {
-	/* .tick = */ audiovideo_pageTick,
-	/* .draw_before = */ audiovideo_pageDraw,
+	/* .tick = */ &audiovideo_pageTick,
+	/* .draw_before = */ &audiovideo_pageDraw,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
@@ -1185,8 +1156,8 @@ static menuitem_t i0904[0] = {
 };
 
 static pageinit_t chrplayer_page = {
-	/* .tick = */ chrplayer_pageTick,
-	/* .draw_before = */ chrplayer_pageDraw,
+	/* .tick = */ &chrplayer_pageTick,
+	/* .draw_before = */ &chrplayer_pageDraw,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
@@ -1194,11 +1165,11 @@ static pageinit_t chrplayer_page = {
 };
 
 static pageinit_t characterselect_page = {
-	/* .tick = */ characterselect_pageTick,
-	/* .draw_before = */ characterselect_pageDraw,
+	/* .tick = */ &characterselect_pageTick,
+	/* .draw_before = */ &characterselect_pageDraw,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
-	/* .draw_after = */ characterselect_pageDrawAfter,
+	/* .draw_after = */ &characterselect_pageDrawAfter,
 	/* .construct = */ NULL
 };
 
@@ -1253,8 +1224,8 @@ static menuitem_t laststand_menuitems[0] = {
 };
 
 static pageinit_t arcadeoptions_page = {
-	/* .tick = */ arcadeoptions_pageTick,
-	/* .draw_before = */ arcadeoptions_pageDraw,
+	/* .tick = */ &arcadeoptions_pageTick,
+	/* .draw_before = */ &arcadeoptions_pageDraw,
 	/* .initfocusid = */ 14,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
@@ -1267,7 +1238,7 @@ static gamevar gv_cheat = {
 	/* .max = */ 1,
 	/* .flags = */ 0,
 	/* .display = */ disp_onoff,
-	/* .onChange = */ cheatOnChange,
+	/* .onChange = */ &cheatOnChange,
 	/* .suffix = */ NULL,
 	/* .marginright = */ 412,
 	/* .arrowleftofs = */ 0,
@@ -1576,8 +1547,8 @@ static menuitem_t i02000[0] = {
 };
 
 static pageinit_t cheats_page = {
-	/* .tick = */ cheats_pageTick,
-	/* .draw_before = */ cheats_pageDraw,
+	/* .tick = */ &cheats_pageTick,
+	/* .draw_before = */ &cheats_pageDraw,
 	/* .initfocusid = */ 1000,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
@@ -1928,8 +1899,8 @@ static menuitem_t mi_dirback = {
 };
 
 static pageinit_t arcade_mmload_page = {
-	/* .tick = */ arcade_mmload_pageTick,
-	/* .draw_before = */ arcade_mmload_pageDraw,
+	/* .tick = */ &arcade_mmload_pageTick,
+	/* .draw_before = */ &arcade_mmload_pageDraw,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
@@ -1991,7 +1962,7 @@ static gamevar gv_tileset = {
 	/* .max = */ 4,
 	/* .flags = */ 0,
 	/* .display = */ disp_tilesets,
-	/* .onChange = */ tileset_onchange,
+	/* .onChange = */ &tileset_onchange,
 	/* .suffix = */ NULL,
 	/* .marginright = */ 0,
 	/* .arrowleftofs = */ -176,
@@ -2012,8 +1983,8 @@ static menuitem_t i0400[0] = {
 };
 
 static pageinit_t arcade_page = {
-	/* .tick = */ arcade_pageTick,
-	/* .draw_before = */ arcade_pageDraw,
+	/* .tick = */ &arcade_pageTick,
+	/* .draw_before = */ &arcade_pageDraw,
 	/* .initfocusid = */ 3,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
@@ -2034,8 +2005,8 @@ static menuitem_t i0450[0] = {
 };
 
 static pageinit_t storychrsel_page = {
-	/* .tick = */ storychrsel_pageTick,
-	/* .draw_before = */ storychrsel_pageDraw,
+	/* .tick = */ &storychrsel_pageTick,
+	/* .draw_before = */ &storychrsel_pageDraw,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
@@ -2043,8 +2014,8 @@ static pageinit_t storychrsel_page = {
 };
 
 static pageinit_t storychr_page = {
-	/* .tick = */ storychr_pageTick,
-	/* .draw_before = */ storychr_pageDraw,
+	/* .tick = */ &storychr_pageTick,
+	/* .draw_before = */ &storychr_pageDraw,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
@@ -2065,8 +2036,8 @@ static menuitem_t i0440[0] = {
 };
 
 static pageinit_t story_page = {
-	/* .tick = */ story_pageTick,
-	/* .draw_before = */ story_pageDraw,
+	/* .tick = */ &story_pageTick,
+	/* .draw_before = */ &story_pageDraw,
 	/* .initfocusid = */ 2,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
@@ -2074,8 +2045,8 @@ static pageinit_t story_page = {
 };
 
 static pageinit_t challengechr_page = {
-	/* .tick = */ challengechr_pageTick,
-	/* .draw_before = */ challengechr_pageDraw,
+	/* .tick = */ &challengechr_pageTick,
+	/* .draw_before = */ &challengechr_pageDraw,
 	/* .initfocusid = */ 0,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
@@ -2096,8 +2067,8 @@ static menuitem_t i0700[0] = {
 };
 
 static pageinit_t challenge_page = {
-	/* .tick = */ challenge_pageTick,
-	/* .draw_before = */ challenge_pageDraw,
+	/* .tick = */ &challenge_pageTick,
+	/* .draw_before = */ &challenge_pageDraw,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
@@ -2118,8 +2089,8 @@ static menuitem_t i0800[0] = {
 };
 
 static pageinit_t ilink_page = {
-	/* .tick = */ ilink_pageTick,
-	/* .draw_before = */ ilink_pageDraw,
+	/* .tick = */ &ilink_pageTick,
+	/* .draw_before = */ &ilink_pageDraw,
 	/* .initfocusid = */ 0,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
@@ -2179,8 +2150,8 @@ static menuitem_t i01000[0] = {
 };
 
 static pageinit_t statistics_page = {
-	/* .tick = */ statistics_pageTick,
-	/* .draw_before = */ statistics_pageDraw,
+	/* .tick = */ &statistics_pageTick,
+	/* .draw_before = */ &statistics_pageDraw,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
@@ -2201,8 +2172,8 @@ static menuitem_t i0300[0] = {
 };
 
 static pageinit_t gametype_page = {
-	/* .tick = */ gametype_pageTick,
-	/* .draw_before = */ gametype_pageDraw,
+	/* .tick = */ &gametype_pageTick,
+	/* .draw_before = */ &gametype_pageDraw,
 	/* .initfocusid = */ 2,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
@@ -4939,8 +4910,8 @@ static menuitem_t i0200[0] = {
 };
 
 static pageinit_t signonplr_page = {
-	/* .tick = */ signonplr_pageTick,
-	/* .draw_before = */ signonplr_pageDraw,
+	/* .tick = */ &signonplr_pageTick,
+	/* .draw_before = */ &signonplr_pageDraw,
 	/* .initfocusid = */ 2001,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
@@ -4948,17 +4919,17 @@ static pageinit_t signonplr_page = {
 };
 
 static pageinit_t signon_page = {
-	/* .tick = */ signon_pageTick,
-	/* .draw_before = */ signon_pageDrawBefore,
+	/* .tick = */ &signon_pageTick,
+	/* .draw_before = */ &signon_pageDrawBefore,
 	/* .initfocusid = */ 2001,
 	/* .pad = */ 0,
-	/* .draw_after = */ signon_pageDrawAfter,
+	/* .draw_after = */ &signon_pageDrawAfter,
 	/* .construct = */ NULL
 };
 
 static pageinit_t demosplash_page = {
-	/* .tick = */ demosplash_pageTick,
-	/* .draw_before = */ demosplash_pageGfx,
+	/* .tick = */ &demosplash_pageTick,
+	/* .draw_before = */ &demosplash_pageGfx,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
@@ -4979,8 +4950,8 @@ static menuitem_t i0100[0] = {
 };
 
 static pageinit_t nplayers_page = {
-	/* .tick = */ nplayers_pageTick,
-	/* .draw_before = */ nplayers_pageGfx,
+	/* .tick = */ &nplayers_pageTick,
+	/* .draw_before = */ &nplayers_pageGfx,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
@@ -4988,8 +4959,8 @@ static pageinit_t nplayers_page = {
 };
 
 static pageinit_t statsupdate_page = {
-	/* .tick = */ statsupdate_pageTick,
-	/* .draw_before = */ statsupdate_pageDraw,
+	/* .tick = */ &statsupdate_pageTick,
+	/* .draw_before = */ &statsupdate_pageDraw,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
@@ -4997,8 +4968,8 @@ static pageinit_t statsupdate_page = {
 };
 
 static pageinit_t goodies_page = {
-	/* .tick = */ goodies_pageTick,
-	/* .draw_before = */ goodies_pageGfx,
+	/* .tick = */ &goodies_pageTick,
+	/* .draw_before = */ &goodies_pageGfx,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,

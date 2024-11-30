@@ -1,0 +1,8 @@
+// STATUS: NOT STARTED
+
+#ifndef GCC_SRC_NEWLIB_LIBM_MATH_SF_TAN_H
+#define GCC_SRC_NEWLIB_LIBM_MATH_SF_TAN_H
+
+float tanf(float x);
+
+#endif // GCC_SRC_NEWLIB_LIBM_MATH_SF_TAN_H

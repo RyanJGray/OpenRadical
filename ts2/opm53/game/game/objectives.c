@@ -2,8 +2,7 @@
 
 #include "objectives.h"
 
-// warning: multiple differing types with the same name (#42,  not equal)
-enum {
+typedef enum {
 	OBJECTIVE_DAM_DESTROY_RADAR = 0,
 	OBJECTIVE_DAM_REACH_SITE = 1,
 	OBJECTIVE_DAM_DESTROY_CONTAINER = 2,
@@ -18,7 +17,7 @@ enum {
 	OBJECTIVE_TOTAL = 11
 };
 
-static objective objectivesInfo[11] = CCC_CANNOT_COMPUTE_ELEMENT_SIZE;
+static objective objectivesInfo[11];
 
 static checkrect dam_tunnelSteamRect = {
 	/* .min = */ {

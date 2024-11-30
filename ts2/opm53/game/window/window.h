@@ -1,9 +1,13 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_WINDOW_WINDOW_H
 #define GAME_WINDOW_WINDOW_H
 
-struct window_s {
+typedef struct window_s {
 	int left;
 	int right;
 	int midx;
@@ -21,9 +25,8 @@ struct window_s {
 	float zbufferrange;
 	float zbufferoffset;
 	float zbufferbias;
-};
+} window_t;
 
-typedef window_s window_t;
 extern int screen_left;
 extern int screen_right;
 extern int screen_midx;
@@ -35,7 +38,7 @@ extern int screen_midy;
 extern int screen_height;
 extern int screen_halfheight;
 extern window_t defaultwindow;
-extern window_s *currentwindow;
+extern struct window_s *currentwindow;
 
 void windowMake();
 void windowRestart();

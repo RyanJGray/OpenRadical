@@ -1,261 +1,33 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_GUN_CARTRIDGE_H
 #define GAME_GUN_CARTRIDGE_H
 
-typedef int s32;
-typedef playerGunAnimationInfo_s playerGunAnimationInfo_t;
+#include "chr/chr.h"
+#include "gun/gun.h"
+#include "gun/bullet.h"
 
-struct fireInfo_s {
-	int fireFlags;
-	int bulletType;
-	int numShots;
-	int fireDelay;
-	int singleShotTime;
-	int repeatShotTime;
-	float ricochet;
-	float bulletSpeed;
-	float inaccuracy;
-	int singleShotAmmo;
-	int repeatShotAmmo;
-	int fireSoundNum;
-	int repeatFireSoundNum;
-	float repeatFireSoundTime;
-	int cheatFireSoundNum;
-	int cheatRepeatFireSoundNum;
-	float cheatRepeatFireSoundTime;
-	int cartridgeSoundNum;
-	int cartridgeType;
-	float cartridgeVelocityVariance[3];
-	float cartridgeVelocityScale;
-	int damageType;
-	float dualShockPower;
-	float dualShockPowerSlowdown;
-	playerGunAnimationInfo_t plAnimationInfo;
-};
-
-typedef gunPropInfo_s gunPropInfo_t;
-typedef gunDofs_s gunDofs_t;
-typedef gunParts_s gunParts_t;
-
-struct gunInfo_s {
-	gunPropInfo_t propInfo;
-	int gunFlags;
-	int animationFlags;
-	int ammoType;
-	int clipCount;
-	int defaultAmmo;
-	int ammoTypeSecondary;
-	int clipCountSecondary;
-	int reloadDelay;
-	int pickupSoundNum;
-	float autoAimFovDot;
-	float offset[3];
-	float rot[3];
-	int hudType;
-	float zoomfovy;
-	float minzoomfovy;
-	float maxzoomfovy;
-	fireInfo_t fireInfo[2];
-	gunDofs_t playerGunDofs;
-	gunDofs_t chrGunDofs;
-	gunParts_t playerGunParts;
-	gunParts_t chrGunParts;
-};
-
-struct chrgun_s {
-	float tpShootPos[4];
-	float tpCartridgePos[4];
-	float tpTrajectoryPos[4];
-	int gunType;
-	int ammo[17];
-	prop_s *chrgunprop;
-	int lastShotFramesPassed;
-	int fireState;
-	float repeatSoundTime;
-	int repeatSoundVoice;
-};
-
-struct playergun_s {
-	float fpShootPos[4];
-	float fpCartridgePos[4];
-	float fpTrajectoryPos[4];
-	int state;
-	float stateTime;
-	int nextGunType;
-	prop_s *playergunprop;
-	int fireMode;
-	int repeat;
-	float recoilRotationX;
-	float extraRotationZ;
-	float recoilVelocity[3];
-	float sliderRecoilVelocityZ;
-	float barrelRotation;
+typedef struct playerGunAnimationInfo_s {
+	float recoilStrength;
+	float recoilStrengthRotX;
+	float strengthRotZ;
+	float unrecoilSpeed;
+	float recoilStrengthSlider;
+	float unrecoilSpeedSlider;
 	float barrelVelocity;
-	float noiseOffset[3];
-	float noiseVelocity[3];
-	float noiseScalar;
-	float sineScalar;
-	int animationStage;
+	float barrelVelocitySlowdown;
+	float sineAmount;
+	float sineSlowdown;
+	float noiseAmount;
+	float noiseSlowdown;
+	float hammerSpeed;
 	float hammerRotation;
-	float cockRotation;
-	prop_s *shotgunCartridge[2];
-	int framesPassedSinceFired;
-	int gunShot;
-	int singleReloadNeeded;
-	int assaultShotgunFlag;
-	prop_s *playerprop;
-	chrgun *cgun;
-	int ownerType;
-	int ownerNum;
-	int visibleAmmoFired;
-	float dualShockPower;
-};
-
-typedef chrbounds_s chrbounds;
-
-struct chrdata_s {
-	int id;
-	s16 chrtype;
-	s16 chrtypeoriginal;
-	int chrsubtype;
-	float armour;
-	float maxArmour;
-	int armourtype;
-	u8 *name;
-	u32 colour;
-	int team;
-	int powers;
-	s16 kills[58];
-	int score;
-	int radiustime;
-	prop *attacker;
-	int guncombo;
-	int oldguncombo;
-	chrgun gunleft;
-	chrgun gunright;
-	prop *bag;
-	inventory inventory;
-	int gunsheld[40];
-	int ammo[17];
-	padInfo p1;
-	pad_s *placementpad;
-	int triggerpad;
-	float fovy;
-	u32 aiflag;
-	u32 shootingflag;
-	float lastxshootpos;
-	int movemode;
-	u32 curstate;
-	u32 laststate;
-	u32 returnstate;
-	s32 statedata;
-	float fstatedata;
-	char statename[30];
-	s32 statelastdata;
-	s32 canseetarget;
-	float angletotarget;
-	float angletodest;
-	prop *target;
-	prop *targetprop;
-	prop *targetpickup;
-	float destpos[3];
-	float lastroompos[3];
-	float strafepos[3];
-	int skill;
-	float animscale;
-	float runspeed;
-	float walkspeed;
-	float fallspeed;
-	float acceleration;
-	float capspeed;
-	float speed;
-	float maxrot;
-	float timer1;
-	float timer2;
-	float intervaltimer;
-	float invunerabletimer;
-	float awaketimer;
-	float onscreentimer;
-	float timelasthit;
-	float timelastfired;
-	int lastbulletfired;
-	float lasthitbulletdir[3];
-	int bulletheardframe;
-	float gunreloadtimer;
-	float lastfloorheight;
-	float inaccuracy;
-	float shootdir[3];
-	float aimpos[3];
-	float lastintervalpos[3];
-	int progress;
-	int repeatfire;
-	float lastneckpos[3];
-	float currneckpos;
-	prop *myprop;
-	prop *hatprop;
-	int limbnum[6];
-	int patrolindex;
-	int checkplayer;
-	int alertpad;
-	int liftindex;
-	int floorgoingto;
-	int backoff;
-	int limbflag;
-	float campingpos[3];
-	float campingtimer;
-	int prevcampingframecheck;
-	setupNPC_s *setup;
-	npcspawninfo_s *spawn;
-	float MinPos[3];
-	float MaxPos[3];
-	chrbounds ChrBounds[50];
-	boolean MoveHitObject;
-	float FloorHeight;
-	floordef_s *pFloor;
-	prop *pStandOnProp;
-	int fadeoutdelaydone;
-	prop *pRemoteGun;
-	boolean MoveHitChr;
-	int MoveLastChrHit;
-	mtx_u localwaistmtx;
-	bullet_s *remotemines[20];
-	int animseqnum;
-	int animseqanimnum;
-	chrfx chrfx;
-	int numclones;
-	float prevlswipepos[3];
-	float prevrswipepos[3];
-	int ignoredoor[3];
-	int scratch;
-	int last_reacted;
-	int reacted_to_burning;
-};
-
-struct setupNPC_s {
-	int createflags;
-	int startpad;
-	int chrtype;
-	int gunsetgun;
-	int startstate;
-	int triggerdata;
-	int triggerpad2;
-	int aiflags;
-	int maxactive;
-	int maxspawns;
-	float timeIntervals;
-	int patrolroutenum;
-	int triggertype;
-	int data1;
-	int sleepgroup;
-};
-
-struct npcspawninfo_s {
-	int numspawned;
-	int numactive;
-	float timerCountDown;
-	boolean triggerset;
-};
+	float hammerBackSpeed;
+} playerGunAnimationInfo_t;
 
 extern int cartridgeProps[5];
 extern cartridgeGroup cartridgeGroups[2];
@@ -264,7 +36,7 @@ void cartridgePreload();
 void cartridgeRestart();
 void cartridgeReset();
 void cartridgeEnd();
-void cartridgeNew(int player, int flags, int type, chrgun_s *gun, playergun_s *pgun, gunInfo_s *gi, fireInfo_s *fi, chrdata_s *cd);
+void cartridgeNew(int player, int flags, int type, chrgun *gun, playergun *pgun, gunInfo_t *gi, fireInfo_t *fi, chrdata *cd);
 void cartridgeTick();
 
 #endif // GAME_GUN_CARTRIDGE_H

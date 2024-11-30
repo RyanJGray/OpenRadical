@@ -5,7 +5,7 @@
 
 typedef unsigned char u8;
 
-// warning: multiple differing types with the same name (#28, fields size not equal)
+// warning: multiple differing types with the same name (fields size not equal)
 struct menuitem_s {
 	u8 *text;
 	u8 xpostype;
@@ -21,7 +21,7 @@ struct menuitem_s {
 
 typedef menuitem_s menuitem;
 
-// warning: multiple differing types with the same name (#28, fields size not equal)
+// warning: multiple differing types with the same name (fields size not equal)
 struct menu_s {
 	u8 *title;
 	u8 numitems;

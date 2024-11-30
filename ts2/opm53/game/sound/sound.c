@@ -1,28 +1,31 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #include "sound.h"
+#include "sounddata.h"
 
-struct soundbuffer_s {
+#include <libsdr.h>
+
+typedef struct soundbuffer_s {
 	int sfxloadpos;
 	int sfxloadsize;
 	int cursfxloadpos;
 	int cursfxloadleft;
-};
+} soundbuffer;
 
-typedef soundbuffer_s soundbuffer;
-
-struct loopsound_s {
+typedef struct loopsound_s {
 	sound *snd;
 	int sfxnum;
 	int voice;
 	int haspos;
 	float pos[3];
 	float range;
-};
+} loopsound;
 
-typedef loopsound_s loopsound;
-
-struct delaysound_s {
+typedef struct delaysound_s {
 	int state;
 	int sfxnum;
 	u16 haspos;
@@ -30,11 +33,8 @@ struct delaysound_s {
 	float pos[3];
 	int delay;
 	int voice;
-};
+} delaysound;
 
-typedef delaysound_s delaysound;
-
-// warning: multiple differing types with the same name (#18,  not equal)
 enum {
 	DS_FREE = 0,
 	DS_WAIT = 1,
@@ -46,6 +46,7 @@ enum {
 	DS_NUM = 7
 };
 
+static soundbuffer soundbuffers[9];
 static soundbuffer *thissoundbuf = soundbuffers;
 static int transinprogress = 0;
 static int lastannounce = -1;
@@ -55,7 +56,6 @@ static int totalMainMem = 0;
 static int sound_core = -1;
 static int sound_voice = -1;
 static int soundbatchlen = 0;
-static soundbuffer soundbuffers[9];
 static int demand_contents[8];
 static int ioploadbuf;
 static int iopcmdbuf;

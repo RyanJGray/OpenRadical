@@ -2,7 +2,7 @@
 
 #include "setup_spacestation.h"
 
-setuplift spacestation_lifts[0] = CCC_CANNOT_COMPUTE_ELEMENT_SIZE;
+setuplift spacestation_lifts[0];
 
 setupprop spacestation_props[0] = {
 };
@@ -13,7 +13,7 @@ setuppickup spacestation_pickups_1up[0] = {
 setupspawn spacestation_spawns_1up[0] = {
 };
 
-setupNPC spacestation_NPCs_1up[0] = CCC_CANNOT_COMPUTE_ELEMENT_SIZE;
+setupNPC spacestation_NPCs_1up[0];
 
 setupPatrolRoutes spacestation_patrolroutes_1up[0] = {
 };
@@ -21,7 +21,7 @@ setupPatrolRoutes spacestation_patrolroutes_1up[0] = {
 aihandler spacestation_AIHandlers_1up[0] = {
 };
 
-setupNPC spacestation_spawninfos_1up[0] = CCC_CANNOT_COMPUTE_ELEMENT_SIZE;
+setupNPC spacestation_spawninfos_1up[0];
 
 setupdoor spacestation_doors_1up[0] = {
 };
@@ -29,21 +29,21 @@ setupdoor spacestation_doors_1up[0] = {
 setupheader setup_spacestation_1up = {
 	/* .setupflags = */ 128,
 	/* .gunset = */ 6,
-	/* .props = */ spacestation_AIHandlers_1up,
+	/* .props = */ spacestation_props,
 	/* .numprops = */ 0,
-	/* .pickups = */ spacestation_AIHandlers_1up,
+	/* .pickups = */ spacestation_props,
 	/* .numpickups = */ 0,
-	/* .doors = */ &setup_spacestation_1up,
+	/* .doors = */ spacestation_spawninfos_1up,
 	/* .numdoors = */ 0,
-	/* .spawnpads = */ spacestation_AIHandlers_1up,
+	/* .spawnpads = */ spacestation_props,
 	/* .numspawnpads = */ 0,
-	/* .NPCsetup = */ spacestation_AIHandlers_1up,
+	/* .NPCsetup = */ spacestation_props,
 	/* .numNPCs = */ 0,
-	/* .setupPatrolRoutes = */ spacestation_AIHandlers_1up,
+	/* .setupPatrolRoutes = */ spacestation_props,
 	/* .numPatrolroutes = */ 0,
-	/* .AIEventHandlers = */ spacestation_AIHandlers_1up,
+	/* .AIEventHandlers = */ spacestation_props,
 	/* .numAIEventHandlers = */ 1,
-	/* .si = */ &setup_spacestation_1up,
+	/* .si = */ spacestation_spawninfos_1up,
 	/* .numNPCspawns = */ 0,
 	/* .cars = */ NULL,
 	/* .numcars = */ 0,
@@ -78,7 +78,7 @@ setupspawn spacestation_spawns_arcade[0] = {
 setupheader setup_spacestation_arcade = {
 	/* .setupflags = */ 4,
 	/* .gunset = */ 18,
-	/* .props = */ spacestation_AIHandlers_1up,
+	/* .props = */ spacestation_props,
 	/* .numprops = */ 0,
 	/* .pickups = */ spacestation_pickups_arcade,
 	/* .numpickups = */ 5,

@@ -14,7 +14,7 @@ setuppickup rfactory_pickups_1up[0] = {
 setupspawn rfactory_spawns_1up[0] = {
 };
 
-setupNPC rfactory_NPCs_1up[0] = CCC_CANNOT_COMPUTE_ELEMENT_SIZE;
+setupNPC rfactory_NPCs_1up[0];
 
 static int rfactory_patrol0_1up[0] = {
 };
@@ -49,7 +49,7 @@ setupPatrolRoutes rfactory_patrolroutes_1up[0] = {
 aihandler rfactory_AIHandlers_1up[0] = {
 };
 
-setupNPC rfactory_spawninfos_1up[0] = CCC_CANNOT_COMPUTE_ELEMENT_SIZE;
+setupNPC rfactory_spawninfos_1up[0];
 
 setupdoor rfactory_doors[0] = {
 };
@@ -69,7 +69,7 @@ laserBeamInfo rfactory_beamInfo_test = {
 		/* [2] = */ 108.6f
 	},
 	/* .starttime = */ 0.f,
-	/* .activate = */ laserBeamTestActivated,
+	/* .activate = */ &laserBeamTestActivated,
 	/* .beams = */ rfactory_beams_test,
 	/* .numBeams = */ 6
 };
@@ -89,7 +89,7 @@ laserBeamInfo rfactory_beamInfo_pipeGrid1 = {
 		/* [2] = */ 91.65f
 	},
 	/* .starttime = */ 0.f,
-	/* .activate = */ laserBeamTestActivated,
+	/* .activate = */ &laserBeamTestActivated,
 	/* .beams = */ rfactory_beams_pipeGrid1,
 	/* .numBeams = */ 3
 };
@@ -109,7 +109,7 @@ laserBeamInfo rfactory_beamInfo_pipeGrid2 = {
 		/* [2] = */ 91.65f
 	},
 	/* .starttime = */ 1.4f,
-	/* .activate = */ laserBeamTestActivated,
+	/* .activate = */ &laserBeamTestActivated,
 	/* .beams = */ rfactory_beams_pipeGrid2,
 	/* .numBeams = */ 3
 };
@@ -129,7 +129,7 @@ laserBeamInfo rfactory_beamInfo_pipeGrid3 = {
 		/* [2] = */ 91.65f
 	},
 	/* .starttime = */ 0.6f,
-	/* .activate = */ laserBeamTestActivated,
+	/* .activate = */ &laserBeamTestActivated,
 	/* .beams = */ rfactory_beams_pipeGrid3,
 	/* .numBeams = */ 3
 };
@@ -153,17 +153,17 @@ setupheader setup_rfactory_1up = {
 	/* .numprops = */ 50,
 	/* .pickups = */ rfactory_pickups_1up,
 	/* .numpickups = */ 5,
-	/* .doors = */ rfactory_doors,
+	/* .doors = */ rfactory_spawninfos_1up,
 	/* .numdoors = */ 14,
 	/* .spawnpads = */ rfactory_spawns_1up,
 	/* .numspawnpads = */ 3,
-	/* .NPCsetup = */ rfactory_patrol0_1up,
+	/* .NPCsetup = */ rfactory_NPCs_1up,
 	/* .numNPCs = */ 0,
 	/* .setupPatrolRoutes = */ rfactory_patrolroutes_1up,
 	/* .numPatrolroutes = */ 9,
 	/* .AIEventHandlers = */ rfactory_AIHandlers_1up,
 	/* .numAIEventHandlers = */ 1,
-	/* .si = */ rfactory_doors,
+	/* .si = */ rfactory_spawninfos_1up,
 	/* .numNPCspawns = */ 0,
 	/* .cars = */ NULL,
 	/* .numcars = */ 0,
@@ -181,7 +181,7 @@ setupheader setup_rfactory_1up = {
 	/* .numalarms = */ 3,
 	/* .lifts = */ NULL,
 	/* .numlifts = */ 0,
-	/* .lvbuttons = */ &setup_rfactory_1up,
+	/* .lvbuttons = */ rfactory_buttons_1up,
 	/* .numlvbuttons = */ 0,
 	/* .lvcameradata = */ NULL,
 	/* .numcamera = */ 0,
@@ -205,7 +205,7 @@ setupheader setup_rfactory_arcade = {
 	/* .numprops = */ 50,
 	/* .pickups = */ rfactory_pickups_arcade,
 	/* .numpickups = */ 9,
-	/* .doors = */ rfactory_doors,
+	/* .doors = */ rfactory_spawninfos_1up,
 	/* .numdoors = */ 14,
 	/* .spawnpads = */ rfactory_spawns_arcade,
 	/* .numspawnpads = */ 11,

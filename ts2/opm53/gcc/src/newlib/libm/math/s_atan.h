@@ -1,0 +1,9 @@
+// STATUS: NOT STARTED
+
+#ifndef GCC_SRC_NEWLIB_LIBM_MATH_S_ATAN_H
+#define GCC_SRC_NEWLIB_LIBM_MATH_S_ATAN_H
+
+
+double atan(double x);
+
+#endif // GCC_SRC_NEWLIB_LIBM_MATH_S_ATAN_H

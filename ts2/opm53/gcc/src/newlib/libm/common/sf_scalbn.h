@@ -1,0 +1,9 @@
+// STATUS: NOT STARTED
+
+#ifndef GCC_SRC_NEWLIB_LIBM_COMMON_SF_SCALBN_H
+#define GCC_SRC_NEWLIB_LIBM_COMMON_SF_SCALBN_H
+
+
+float scalbnf(float x, int n);
+
+#endif // GCC_SRC_NEWLIB_LIBM_COMMON_SF_SCALBN_H

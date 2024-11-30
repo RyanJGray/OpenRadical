@@ -1,7 +1,23 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_UTIL_PROFILE_H
 #define GAME_UTIL_PROFILE_H
+
+#include "common.h"
+
+typedef struct profiledata_s {
+	int active;
+	int timing;
+	float totalframes;
+	float filtmax;
+	int newmaxtime;
+	char *id;
+	u32 col;
+} profiledata;
 
 extern profiledata profdata[20];
 

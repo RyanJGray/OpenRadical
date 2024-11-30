@@ -1,23 +1,13 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #include "lift.h"
 
-// warning: multiple differing types with the same name (#95,  not equal)
-enum {
-	LIFT_NOTCALLED = 0,
-	LIFT_CALLEDUP = 1,
-	LIFT_CALLEDDOWN = 2
-};
-
-// warning: multiple differing types with the same name (#95,  not equal)
-enum {
-	LIFTDIR_UNDECIDED = 0,
-	LIFTDIR_UP = 1,
-	LIFTDIR_DOWN = 2
-};
-
 static int numLifts;
-liftData levellifts[5] = CCC_CANNOT_COMPUTE_ELEMENT_SIZE;
+liftData levellifts[5];
 
 void propRestartLifts() {}
 

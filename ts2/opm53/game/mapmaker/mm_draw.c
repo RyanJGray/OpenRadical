@@ -2,8 +2,7 @@
 
 #include "mm_draw.h"
 
-// warning: multiple differing types with the same name (#79,  not equal)
-enum {
+typedef enum {
 	LIGHT_FIXED = 0,
 	LIGHT_SINE = 1,
 	LIGHT_SQUARE = 2,

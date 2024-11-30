@@ -1,46 +1,14 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_LV_SETUP_DAM_H
 #define GAME_LV_SETUP_DAM_H
 
-struct setupremote_s {
-	int setupref;
-	int createflags;
-	int propnum;
-	int type;
-	int data1;
-	int padextref;
-	float target[3];
-	float innerradius;
-	float outerradius;
-	float minanglex;
-	float maxanglex;
-	float minangley;
-	float maxangley;
-	float sweepspeed;
-	float VerticalFOV;
-	float HorizontalFOV;
-};
+#include "lvsetup.h"
 
-typedef setupremote_s setupremote;
-
-struct setupalarm_s {
-	int setupref;
-	int createflags;
-	float duration;
-	int commlist;
-};
-
-typedef setupalarm_s setupalarm;
-
-struct flycameradata_s {
-	float pos[3];
-	float dir[3];
-	float speed;
-};
-
-typedef flycameradata_s flycameradata;
-typedef cameradata_s cameradata;
 extern flycameradata dam_still1[0];
 extern flycameradata dam_flycamera[0];
 extern cameradata dam_camera[0];

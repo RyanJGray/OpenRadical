@@ -1,9 +1,40 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_OB_CS_OB_H
 #define GAME_OB_CS_OB_H
 
-struct cs_obdef_s {
+#include "common.h"
+#include "anim/cs_anim.h"
+#include "em/em.h"
+#include "util/matrix.h"
+
+typedef struct cs_gfxchunk_s {
+	int texnum;
+	int offset;
+	int numvtx;
+} cs_gfxchunk;
+
+typedef struct cs_partdef_s {
+	cs_gfxchunk *chunklist;
+	int numchunks;
+	int *bindings;
+	int numbindings;
+	int firstbinding;
+} cs_partdef;
+
+typedef struct cs_hierarchyinfo_s {
+	int matrixnum;
+	int parent;
+	int child;
+	int next;
+	int prev;
+} cs_hierarchyinfo;
+
+typedef struct cs_obdef_s {
 	float *xyz;
 	float *st;
 	float *normal;
@@ -13,23 +44,18 @@ struct cs_obdef_s {
 	int nummatrices;
 	int numbindings;
 	texinfo *textures;
-	mtx_u *bindmatrices;
-};
+	mtx *bindmatrices;
+} cs_obdef;
 
-typedef cs_obdef_s cs_obdef;
-
-struct cs_obinst_s {
+typedef struct cs_obinst_s {
 	cs_obdef *ob;
-	mtx_u *realmatrices;
-	mtx_u *gfxmatrices;
-	mtx_u *lightdir;
+	mtx *realmatrices;
+	mtx *gfxmatrices;
+	mtx *lightdir;
 	animinfo anim1;
 	float pos[3];
 	float roty;
-};
-
-typedef cs_obinst_s cs_obinst;
-typedef cs_animheader_s cs_animheader;
+} cs_obinst;
 
 void csPreLoad();
 cs_obdef* cs_obLoad(u8 *filename);

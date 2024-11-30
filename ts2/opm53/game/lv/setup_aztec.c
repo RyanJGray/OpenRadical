@@ -20,9 +20,9 @@ aihandler aztec_AIHandlers_arcade[0] = {
 setupheader setup_aztec_arcade = {
 	/* .setupflags = */ 31,
 	/* .gunset = */ 9,
-	/* .props = */ aztec_pickups_arcade,
+	/* .props = */ aztec_weather,
 	/* .numprops = */ 0,
-	/* .pickups = */ aztec_pickups_arcade,
+	/* .pickups = */ aztec_weather,
 	/* .numpickups = */ 17,
 	/* .doors = */ NULL,
 	/* .numdoors = */ 0,
@@ -42,7 +42,7 @@ setupheader setup_aztec_arcade = {
 	/* .numremotes = */ 0,
 	/* .specialfx = */ NULL,
 	/* .numspecialfx = */ 0,
-	/* .weatherdat = */ aztec_pickups_arcade,
+	/* .weatherdat = */ aztec_weather,
 	/* .numweatherdata = */ 0,
 	/* .lsphases = */ NULL,
 	/* .numlsphases = */ 0,
@@ -66,12 +66,12 @@ setuppickup aztec_pickups_1up[0] = {
 setupspawn aztec_spawns_1up[0] = {
 };
 
-setupNPC aztec_NPCs_1up[0] = CCC_CANNOT_COMPUTE_ELEMENT_SIZE;
+setupNPC aztec_NPCs_1up[0];
 
 setupheader setup_aztec_1up = {
 	/* .setupflags = */ 128,
 	/* .gunset = */ 6,
-	/* .props = */ aztec_pickups_arcade,
+	/* .props = */ aztec_weather,
 	/* .numprops = */ 0,
 	/* .pickups = */ aztec_pickups_1up,
 	/* .numpickups = */ 1,
@@ -93,7 +93,7 @@ setupheader setup_aztec_1up = {
 	/* .numremotes = */ 0,
 	/* .specialfx = */ NULL,
 	/* .numspecialfx = */ 0,
-	/* .weatherdat = */ aztec_pickups_arcade,
+	/* .weatherdat = */ aztec_weather,
 	/* .numweatherdata = */ 0,
 	/* .lsphases = */ NULL,
 	/* .numlsphases = */ 0,

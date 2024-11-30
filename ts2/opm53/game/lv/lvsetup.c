@@ -2,8 +2,7 @@
 
 #include "lvsetup.h"
 
-// warning: multiple differing types with the same name (#44,  not equal)
-enum {
+typedef enum {
 	SKY_NONE = 0,
 	SKY_VILLAGE = 1,
 	SKY_COMPOUND = 2,

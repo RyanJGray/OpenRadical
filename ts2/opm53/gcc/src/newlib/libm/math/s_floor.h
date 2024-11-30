@@ -1,0 +1,9 @@
+// STATUS: NOT STARTED
+
+#ifndef GCC_SRC_NEWLIB_LIBM_MATH_S_FLOOR_H
+#define GCC_SRC_NEWLIB_LIBM_MATH_S_FLOOR_H
+
+
+double floor(double x);
+
+#endif // GCC_SRC_NEWLIB_LIBM_MATH_S_FLOOR_H

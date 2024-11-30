@@ -11,15 +11,15 @@ struct eui64 {
 	sceILsock_addr_t eui64_lo;
 };
 
-struct sceILsock_addr {
+typedef struct {
 	unsigned char sock_len;
 	unsigned char sock_family;
 	sceILsock_port_t sock_port;
 	eui64 sock_addr;
 	char sock_zero[4];
-};
+} sceILsock_addr;
 
-enum SceILsockErrorCode {
+typedef enum {
 	SCEILSOCKERR_OK = 0,
 	SCEILSOCKERR_ERROR = -1,
 	SCEILSOCKERR_NOT_INITIALIZED = -2000,
@@ -32,7 +32,7 @@ enum SceILsockErrorCode {
 	SCEILSOCKERR_INVALID_SIZE = -2007,
 	SCEILSOCKERR_INVALID_ADDRESS = -2008,
 	SCEILSOCKERR_NO_SUCH_NODE = -2021
-};
+} SceILsockErrorCode;
 
 
 SceILsockErrorCode sceILsockInit(int maxsock, int maxsize);

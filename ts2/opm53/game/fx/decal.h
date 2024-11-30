@@ -1,7 +1,30 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_FX_DECAL_H
 #define GAME_FX_DECAL_H
+
+#include "common.h"
+#include "prop/prop.h"
+
+typedef struct DecalDef_s {
+	float Pos[8][4];
+	float UV[8][2];
+	struct DecalDef_s *pNext;
+	struct DecalDef_s *pPrev;
+	int Type;
+	int NumPoints;
+	int TexNum;
+	int Room;
+	int MatrixNum;
+	prop *pProp;
+	float AlphaScale;
+	float AlphaScale1;
+	u32 Col;
+} DecalDef;
 
 typedef void *DecalID;
 

@@ -1,40 +1,30 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_BG_BG_H
 #define GAME_BG_BG_H
 
-struct glassdef_s {
-	float state;
-	int texture;
-	int reflect;
-	DecalID glassdecalID[4];
-	int flags;
-	u32 numpoints;
-	glasspointdef points[0];
-};
+#include "common.h"
+#include "fx/weather.h"
+#include "fx/particle.h"
 
-typedef glassdef_s glassdef;
-typedef specialdef_s specialdef;
-
-struct weatherdef_s {
-	float bb[2][3];
-};
-
-typedef weatherdef_s weatherdef;
 typedef room_s room;
+
+
 typedef portal_s portal;
 
-struct volume_s {
+typedef struct volume_s {
 	int num;
 	int room;
 	float pos[3];
 	float size[3];
 	float angle[3];
-};
+} volume;
 
-typedef volume_s volume;
-
-struct roombbinfo_s {
+typedef struct roombbinfo_s {
 	float floorbb[2][3];
 	float wallbb[2][3];
 	float polybb[2][3];
@@ -46,11 +36,9 @@ struct roombbinfo_s {
 	float totalfloorvolume;
 	float totalweatherfloorvolume;
 	int numfloors;
-};
+} roombbinfo;
 
-typedef roombbinfo_s roombbinfo;
-
-struct leveltile_s {
+typedef struct leveltile_s {
 	int tilenum;
 	float trans[3];
 	int rot;
@@ -58,9 +46,8 @@ struct leveltile_s {
 	u32 lightcolour;
 	int lighttype;
 	int lightphase;
-};
+} leveltile;
 
-typedef leveltile_s leveltile;
 extern roombbinfo *roombb;
 extern int bgNumRooms;
 extern int bgNumPortals;

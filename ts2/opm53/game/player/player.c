@@ -2,8 +2,7 @@
 
 #include "player.h"
 
-// warning: multiple differing types with the same name (#103,  not equal)
-enum {
+typedef enum {
 	AUTOCENTRE_ALLOW = 0,
 	AUTOCENTRE_PROHIBIT = 1,
 	AUTOCENTRE_ACTIVE = 2,

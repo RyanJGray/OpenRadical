@@ -2,8 +2,7 @@
 
 #include "ingame.h"
 
-// warning: multiple differing types with the same name (#29,  not equal)
-enum {
+typedef enum {
 	RANKINGS_SCORES = 0,
 	RANKINGS_KILLS = 1,
 	RANKINGS_LOSSES = 2,
@@ -105,30 +104,26 @@ struct menufxTentacle_s {
 
 typedef menufxTentacle_s menufxTentacle;
 
-// warning: multiple differing types with the same name (#29,  not equal)
-enum {
+typedef enum {
 	PAGEBAR_ON = 0,
 	PAGEBAR_OFF = 1,
 	PAGEBAR_NA = 2
 };
 
-// warning: multiple differing types with the same name (#29,  not equal)
-enum {
+typedef enum {
 	IGM_SETUPCONFIRM_TITLE = 0,
 	IGM_SETUPCONFIRM_YES = 1,
 	IGM_SETUPCONFIRM_NO = 2,
 	IGM_SETUPCONFIRM_NUM = 3
 };
 
-// warning: multiple differing types with the same name (#29,  not equal)
-enum {
+typedef enum {
 	GAME_AXIS_HORIZONTAL = 0,
 	GAME_AXIS_VERTICAL = 1,
 	GAME_AXIS_EITHER = 2
 };
 
-// warning: multiple differing types with the same name (#29,  not equal)
-enum {
+typedef enum {
 	IGM_SETUP_TITLE = 0,
 	IGM_SETUP_CONFIGURATION = 1,
 	IGM_SETUP_VIEW = 2,
@@ -156,16 +151,14 @@ enum {
 	IGM_SETUP_NUM = 24
 };
 
-// warning: multiple differing types with the same name (#29,  not equal)
-enum {
+typedef enum {
 	IGM_PREFSACCEPT_TITLE = 0,
 	IGM_PREFSACCEPT_YES = 1,
 	IGM_PREFSACCEPT_NO = 2,
 	IGM_PREFSACCEPT_NUM = 3
 };
 
-// warning: multiple differing types with the same name (#29,  not equal)
-enum {
+typedef enum {
 	IGM_PREFS_TITLE = 0,
 	IGM_PREFS_AUTOAIM = 1,
 	IGM_PREFS_INVERSELOOK = 2,
@@ -180,44 +173,38 @@ enum {
 	IGM_PREFS_NUM = 11
 };
 
-// warning: multiple differing types with the same name (#29,  not equal)
-enum {
+typedef enum {
 	IGM_CONFIRMEND_TITLE = 0,
 	IGM_CONFIRMEND_YES = 1,
 	IGM_CONFIRMEND_NO = 2,
 	IGM_CONFIRMEND_NUM = 3
 };
 
-// warning: multiple differing types with the same name (#29,  not equal)
-enum {
+typedef enum {
 	IGM_CONFIRMRESTART_TITLE = 0,
 	IGM_CONFIRMRESTART_YES = 1,
 	IGM_CONFIRMRESTART_NO = 2,
 	IGM_CONFIRMRESTART_NUM = 3
 };
 
-// warning: multiple differing types with the same name (#29,  not equal)
-enum {
+typedef enum {
 	IGM_STATS_TITLE = 0,
 	IGM_STATS_NUM = 1
 };
 
-// warning: multiple differing types with the same name (#29,  not equal)
-enum {
+typedef enum {
 	IGM_AWARDS_TITLE = 0,
 	IGM_AWARDS_NUM = 1
 };
 
-// warning: multiple differing types with the same name (#29,  not equal)
-enum {
+typedef enum {
 	IGM_ENDGAME_TITLE = 0,
 	IGM_ENDGAME_CONTINUERESTART = 1,
 	IGM_ENDGAME_QUIT = 2,
 	IGM_ENDGAME_NUM = 3
 };
 
-// warning: multiple differing types with the same name (#29,  not equal)
-enum {
+typedef enum {
 	IGM_OPTIONS_TITLE = 0,
 	IGM_OPTIONS_CONTINUE = 1,
 	IGM_OPTIONS_SETUP = 2,
@@ -227,26 +214,22 @@ enum {
 	IGM_OPTIONS_NUM = 6
 };
 
-// warning: multiple differing types with the same name (#29,  not equal)
-enum {
+typedef enum {
 	IGM_SCORES_TITLE = 0,
 	IGM_SCORES_NUM = 1
 };
 
-// warning: multiple differing types with the same name (#29,  not equal)
-enum {
+typedef enum {
 	IGM_INVENTORY_TITLE = 0,
 	IGM_INVENTORY_NUM = 1
 };
 
-// warning: multiple differing types with the same name (#29,  not equal)
-enum {
+typedef enum {
 	IGM_STATUS_TITLE = 0,
 	IGM_STATUS_NUM = 1
 };
 
-// warning: multiple differing types with the same name (#29,  not equal)
-enum {
+typedef enum {
 	IGM_BRIEFING_TITLE = 0,
 	IGM_BRIEFING_NUM = 1
 };
@@ -581,12 +564,12 @@ static int setup_controlNames[42] = {
 };
 
 static pageinit_t setupconfirm_page = {
-	/* .tick = */ setupconfirm_pageTick,
-	/* .draw_before = */ setupconfirm_pageGfx,
+	/* .tick = */ &setupconfirm_pageTick,
+	/* .draw_before = */ &setupconfirm_pageGfx,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
-	/* .construct = */ setupconfirm_pageConstruct
+	/* .construct = */ &setupconfirm_pageConstruct
 };
 
 static int gameControlsToButtonOption[42] = {
@@ -848,129 +831,129 @@ static int gameControlsToAxisOption[42][3] = {
 };
 
 static pageinit_t setup_page = {
-	/* .tick = */ setup_pageTick,
-	/* .draw_before = */ setup_pageGfx,
+	/* .tick = */ &setup_pageTick,
+	/* .draw_before = */ &setup_pageGfx,
 	/* .initfocusid = */ 0,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
-	/* .construct = */ setup_pageConstruct
+	/* .construct = */ &setup_pageConstruct
 };
 
 static pageinit_t prefsaccept_page = {
-	/* .tick = */ prefsaccept_pageTick,
-	/* .draw_before = */ prefsaccept_pageGfx,
+	/* .tick = */ &prefsaccept_pageTick,
+	/* .draw_before = */ &prefsaccept_pageGfx,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
-	/* .construct = */ prefsaccept_pageConstruct
+	/* .construct = */ &prefsaccept_pageConstruct
 };
 
 static pageinit_t prefs_page = {
-	/* .tick = */ prefs_pageTick,
-	/* .draw_before = */ prefs_pageGfx,
+	/* .tick = */ &prefs_pageTick,
+	/* .draw_before = */ &prefs_pageGfx,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
-	/* .construct = */ prefs_pageConstruct
+	/* .construct = */ &prefs_pageConstruct
 };
 
 static pageinit_t confirmendgame_page = {
-	/* .tick = */ confirmendgame_pageTick,
-	/* .draw_before = */ confirmendgame_pageGfx,
+	/* .tick = */ &confirmendgame_pageTick,
+	/* .draw_before = */ &confirmendgame_pageGfx,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
-	/* .construct = */ confirmendgame_pageConstruct
+	/* .construct = */ &confirmendgame_pageConstruct
 };
 
 static pageinit_t confirmrestartgame_page = {
-	/* .tick = */ confirmrestartgame_pageTick,
-	/* .draw_before = */ confirmrestartgame_pageGfx,
+	/* .tick = */ &confirmrestartgame_pageTick,
+	/* .draw_before = */ &confirmrestartgame_pageGfx,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
-	/* .construct = */ confirmrestartgame_pageConstruct
+	/* .construct = */ &confirmrestartgame_pageConstruct
 };
 
 static pageinit_t stats_page = {
-	/* .tick = */ stats_pageTick,
-	/* .draw_before = */ stats_pageGfx,
+	/* .tick = */ &stats_pageTick,
+	/* .draw_before = */ &stats_pageGfx,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
-	/* .construct = */ stats_pageConstruct
+	/* .construct = */ &stats_pageConstruct
 };
 
 static pageinit_t awards_page = {
-	/* .tick = */ awards_pageTick,
-	/* .draw_before = */ awards_pageGfx,
+	/* .tick = */ &awards_pageTick,
+	/* .draw_before = */ &awards_pageGfx,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
-	/* .construct = */ awards_pageConstruct
+	/* .construct = */ &awards_pageConstruct
 };
 
 static pageinit_t endgame_page = {
-	/* .tick = */ endgame_pageTick,
-	/* .draw_before = */ endgame_pageGfx,
+	/* .tick = */ &endgame_pageTick,
+	/* .draw_before = */ &endgame_pageGfx,
 	/* .initfocusid = */ 0,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
-	/* .construct = */ endgame_pageConstruct
+	/* .construct = */ &endgame_pageConstruct
 };
 
 static pageinit_t options_page = {
-	/* .tick = */ options_pageTick,
-	/* .draw_before = */ options_pageGfx,
+	/* .tick = */ &options_pageTick,
+	/* .draw_before = */ &options_pageGfx,
 	/* .initfocusid = */ 0,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
-	/* .construct = */ options_pageConstruct
+	/* .construct = */ &options_pageConstruct
 };
 
 static pageinit_t pause_page = {
-	/* .tick = */ pause_pageTick,
-	/* .draw_before = */ pause_pageGfx,
+	/* .tick = */ &pause_pageTick,
+	/* .draw_before = */ &pause_pageGfx,
 	/* .initfocusid = */ 0,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
-	/* .construct = */ pause_pageConstruct
+	/* .construct = */ &pause_pageConstruct
 };
 
 static pageinit_t scores_page = {
-	/* .tick = */ scores_pageTick,
-	/* .draw_before = */ scores_pageGfx,
+	/* .tick = */ &scores_pageTick,
+	/* .draw_before = */ &scores_pageGfx,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
-	/* .construct = */ scores_pageConstruct
+	/* .construct = */ &scores_pageConstruct
 };
 
 static pageinit_t inventory_page = {
-	/* .tick = */ inventory_pageTick,
-	/* .draw_before = */ inventory_pageGfx,
+	/* .tick = */ &inventory_pageTick,
+	/* .draw_before = */ &inventory_pageGfx,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
-	/* .construct = */ inventory_pageConstruct
+	/* .construct = */ &inventory_pageConstruct
 };
 
 static pageinit_t status_page = {
-	/* .tick = */ status_pageTick,
-	/* .draw_before = */ status_pageGfx,
+	/* .tick = */ &status_pageTick,
+	/* .draw_before = */ &status_pageGfx,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
-	/* .construct = */ status_pageConstruct
+	/* .construct = */ &status_pageConstruct
 };
 
 static pageinit_t briefing_page = {
-	/* .tick = */ briefing_pageTick,
-	/* .draw_before = */ briefing_pageGfx,
+	/* .tick = */ &briefing_pageTick,
+	/* .draw_before = */ &briefing_pageGfx,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
-	/* .construct = */ briefing_pageConstruct
+	/* .construct = */ &briefing_pageConstruct
 };
 
 static igmparms_t igmparms;

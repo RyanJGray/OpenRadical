@@ -1,7 +1,13 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_LV_SETUP_NEOTOKYO_H
 #define GAME_LV_SETUP_NEOTOKYO_H
+
+#include "lvsetup.h"
 
 extern weatherdata neotokyo_weather[0];
 extern carpath neotokyo_train_route[0];

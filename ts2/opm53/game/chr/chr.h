@@ -1,17 +1,148 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_CHR_CHR_H
 #define GAME_CHR_CHR_H
 
-struct chrsoundgroup_s {
+#include "common.h"
+#include "prop/prop.h"
+#include "fx/chrfx.h"
+
+typedef struct chrbounds_s {
+	char Matrix;
+	char NumOffsets;
+	float Radius;
+	float Offset[2][3];
+} chrbounds;
+
+typedef struct chrsoundgroup_s {
 	short int hitsounds[18];
 	short int deathsounds[6];
 	short int frontsounds[1];
-};
+} chrsoundgroup;
 
-typedef chrsoundgroup_s chrsoundgroup;
+typedef struct chrdata_s {
+	int id;
+	s16 chrtype;
+	s16 chrtypeoriginal;
+	int chrsubtype;
+	float armour;
+	float maxArmour;
+	int armourtype;
+	u8 *name;
+	u32 colour;
+	int team;
+	int powers;
+	s16 kills[58];
+	int score;
+	int radiustime;
+	prop *attacker;
+	int guncombo;
+	int oldguncombo;
+	chrgun gunleft;
+	chrgun gunright;
+	prop *bag;
+	inventory inventory;
+	int gunsheld[40];
+	int ammo[17];
+	padInfo p1;
+	pad_s *placementpad;
+	int triggerpad;
+	float fovy;
+	u32 aiflag;
+	u32 shootingflag;
+	float lastxshootpos;
+	int movemode;
+	u32 curstate;
+	u32 laststate;
+	u32 returnstate;
+	s32 statedata;
+	float fstatedata;
+	char statename[30];
+	s32 statelastdata;
+	s32 canseetarget;
+	float angletotarget;
+	float angletodest;
+	prop *target;
+	prop *targetprop;
+	prop *targetpickup;
+	float destpos[3];
+	float lastroompos[3];
+	float strafepos[3];
+	int skill;
+	float animscale;
+	float runspeed;
+	float walkspeed;
+	float fallspeed;
+	float acceleration;
+	float capspeed;
+	float speed;
+	float maxrot;
+	float timer1;
+	float timer2;
+	float intervaltimer;
+	float invunerabletimer;
+	float awaketimer;
+	float onscreentimer;
+	float timelasthit;
+	float timelastfired;
+	int lastbulletfired;
+	float lasthitbulletdir[3];
+	int bulletheardframe;
+	float gunreloadtimer;
+	float lastfloorheight;
+	float inaccuracy;
+	float shootdir[3];
+	float aimpos[3];
+	float lastintervalpos[3];
+	int progress;
+	int repeatfire;
+	float lastneckpos[3];
+	float currneckpos;
+	prop *myprop;
+	prop *hatprop;
+	int limbnum[6];
+	int patrolindex;
+	int checkplayer;
+	int alertpad;
+	int liftindex;
+	int floorgoingto;
+	int backoff;
+	int limbflag;
+	float campingpos[3];
+	float campingtimer;
+	int prevcampingframecheck;
+	setupNPC *setup;
+	npcspawninfo_s *spawn;
+	float MinPos[3];
+	float MaxPos[3];
+	chrbounds ChrBounds[50];
+	boolean MoveHitObject;
+	float FloorHeight;
+	floordef *pFloor;
+	prop *pStandOnProp;
+	int fadeoutdelaydone;
+	prop *pRemoteGun;
+	boolean MoveHitChr;
+	int MoveLastChrHit;
+	mtx localwaistmtx;
+	bullet *remotemines[20];
+	int animseqnum;
+	int animseqanimnum;
+	chrfx chrfx;
+	int numclones;
+	float prevlswipepos[3];
+	float prevrswipepos[3];
+	int ignoredoor[3];
+	int scratch;
+	int last_reacted;
+	int reacted_to_burning;
+} chrdata;
 
-struct chrdesc_s {
+typedef struct chrdesc_s {
 	short int longname;
 	short int name;
 	chrsoundgroup *sounds;
@@ -30,9 +161,8 @@ struct chrdesc_s {
 	int easyskill;
 	int normalskill;
 	int hardskill;
-};
+} chrdesc;
 
-typedef chrdesc_s chrdesc;
 extern chrsoundgroup soundgroup_F_COP;
 extern chrsoundgroup soundgroup_F_ANGEL;
 extern chrsoundgroup soundgroup_M_MRBIG;

@@ -2,8 +2,7 @@
 
 #include "mcseq.h"
 
-// warning: multiple differing types with the same name (#75,  not equal)
-enum {
+typedef enum {
 	mcseq_state_busy = 0,
 	mcseq_state_idle = 1,
 	mcseq_state_fail = 2,
@@ -31,8 +30,7 @@ enum {
 	mcseq_state_poll_wait = 24
 };
 
-// warning: multiple differing types with the same name (#75,  not equal)
-enum {
+typedef enum {
 	mca_loadfile = 0,
 	mca_savefile = 1
 };
@@ -90,8 +88,8 @@ static menuitem_t mi_card = {
 };
 
 static pageinit_t mcseq_page = {
-	/* .tick = */ mcseq_pageTick,
-	/* .draw_before = */ mcseq_pageDraw,
+	/* .tick = */ &mcseq_pageTick,
+	/* .draw_before = */ &mcseq_pageDraw,
 	/* .initfocusid = */ 0,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,

@@ -1,7 +1,13 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_MEM_MEM_H
 #define GAME_MEM_MEM_H
+
+#include "common.h"
 
 extern u8 *mem_eternal_at;
 extern u8 *mem_eternal_end;
@@ -19,8 +25,8 @@ void memRestart();
 void memReset();
 void memEnd();
 void memTick();
-u8* memAlloc(int length, int period);
-u8* memAllocAlign64(int length, int period);
+u8 *memAlloc(int length, int period);
+u8 *memAllocAlign64(int length, int period);
 void memFree(void *localmem);
 void memLocalFree();
 int memGetFreeLevel();

@@ -1,24 +1,10 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #include "decal.h"
-
-struct DecalDef_s {
-	float Pos[8][4];
-	float UV[8][2];
-	DecalDef_s *pNext;
-	DecalDef_s *pPrev;
-	int Type;
-	int NumPoints;
-	int TexNum;
-	int Room;
-	int MatrixNum;
-	prop *pProp;
-	float AlphaScale;
-	float AlphaScale1;
-	u32 Col;
-};
-
-typedef DecalDef_s DecalDef;
 
 struct FootDecalDef_s {
 	DecalDef Decal;
@@ -53,11 +39,11 @@ typedef struct {
 static int s_DecalCreateListRead = 0;
 static int s_DecalCreateListWrite = 0;
 
-static struct s_DecalTextures[13] {
+static struct {
 	int TexNum;
 	float Size;
 	char *pFileName;
-} = {
+} s_DecalTextures[13] = {
 	/* [0] = */ {
 		/* .TexNum = */ -1,
 		/* .Size = */ 0.12f,

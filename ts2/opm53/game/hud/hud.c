@@ -2,8 +2,7 @@
 
 #include "hud.h"
 
-// warning: multiple differing types with the same name (#124,  not equal)
-enum {
+typedef enum {
 	BAGICON_DEFAULT = 0,
 	BAGICON_NUM = 1
 };

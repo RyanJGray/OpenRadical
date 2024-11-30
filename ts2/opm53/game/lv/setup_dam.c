@@ -14,7 +14,7 @@ cameradata dam_camera[0] = {
 weatherdata dam_weather[0] = {
 };
 
-setuplift dam_lifts[0] = CCC_CANNOT_COMPUTE_ELEMENT_SIZE;
+setuplift dam_lifts[0];
 
 setupprop dam_props[0] = {
 };
@@ -25,7 +25,7 @@ setuppickup dam_pickups_1up[0] = {
 setupspawn dam_spawns_1up[0] = {
 };
 
-setupNPC dam_NPCs_1up[0] = CCC_CANNOT_COMPUTE_ELEMENT_SIZE;
+setupNPC dam_NPCs_1up[0];
 
 static int dam_patrol0_1up[0] = {
 };
@@ -60,7 +60,7 @@ setupPatrolRoutes dam_patrolroutes_1up[0] = {
 aihandler dam_AIHandlers_1up[0] = {
 };
 
-setupNPC dam_spawninfos_1up[0] = CCC_CANNOT_COMPUTE_ELEMENT_SIZE;
+setupNPC dam_spawninfos_1up[0];
 
 setupdoor dam_doors_1up[0] = {
 };
@@ -137,11 +137,11 @@ setupheader setup_dam_arcade = {
 	/* .gunset = */ 0,
 	/* .props = */ dam_props,
 	/* .numprops = */ 140,
-	/* .pickups = */ dam_spawns_arcade,
+	/* .pickups = */ dam_pickups_arcade,
 	/* .numpickups = */ 0,
 	/* .doors = */ NULL,
 	/* .numdoors = */ 0,
-	/* .spawnpads = */ dam_spawns_arcade,
+	/* .spawnpads = */ dam_pickups_arcade,
 	/* .numspawnpads = */ 2,
 	/* .NPCsetup = */ NULL,
 	/* .numNPCs = */ 0,

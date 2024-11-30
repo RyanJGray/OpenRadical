@@ -12,8 +12,7 @@ typedef struct {
 	u_char TimeNotation;
 } sceScfT10kConfig;
 
-// warning: multiple differing types with the same name (#65,  not equal)
-enum {
+typedef enum {
 	STATE_AUTOLANGUAGE = 0,
 	STATE_LANGUAGE = 1,
 	STATE_LOADINGSCREEN = 2

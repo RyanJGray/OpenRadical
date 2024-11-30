@@ -1,7 +1,13 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_LV_SETUP_NOTREDAME_H
 #define GAME_LV_SETUP_NOTREDAME_H
+
+#include "lvsetup.h"
 
 extern setupprop notredame_props[0];
 extern setuppickup notredame_pickups_1up[0];

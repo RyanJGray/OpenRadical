@@ -1,18 +1,19 @@
 //
-// The OpenTS2 Project
-// 2023
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
 //
 
 #ifndef GAME_UTIL_MISC_H
 #define GAME_UTIL_MISC_H
 
-#include "../../types.h"
+#include "common.h"
 
 struct bubblesort_s {
   int value;
   u32 data;
 };
-typedef bubblesort_s bubblesort_t;
+typedef struct bubblesort_s bubblesort_t;
 
 u8* vafmt(u8 *format);
 int PowerOf2(int value);

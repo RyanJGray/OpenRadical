@@ -1,7 +1,13 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_LV_SETUP_NIGHTCLUB_H
 #define GAME_LV_SETUP_NIGHTCLUB_H
+
+#include "lvsetup.h"
 
 extern weatherdata nightclub_weather[0];
 extern setupprop nightclub_props[0];

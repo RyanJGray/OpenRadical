@@ -1,7 +1,13 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_LV_SETUP_ATOMSMASHER_H
 #define GAME_LV_SETUP_ATOMSMASHER_H
+
+#include "lvsetup.h"
 
 extern setupprop atomsmasher_props[0];
 extern setupdoor atomsmasher_doors[0];

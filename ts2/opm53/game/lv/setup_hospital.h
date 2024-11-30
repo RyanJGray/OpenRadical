@@ -1,7 +1,13 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_LV_SETUP_HOSPITAL_H
 #define GAME_LV_SETUP_HOSPITAL_H
+
+#include "lvsetup.h"
 
 extern setupprop hospital_props[0];
 extern setuppickup hospital_pickups_1up[0];

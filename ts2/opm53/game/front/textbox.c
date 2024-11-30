@@ -2,8 +2,7 @@
 
 #include "textbox.h"
 
-// warning: multiple differing types with the same name (#72,  not equal)
-enum {
+typedef enum {
 	MOR = 252,
 	SPC = 253,
 	BAK = 254,

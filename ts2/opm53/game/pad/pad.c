@@ -11,8 +11,7 @@ struct hall_s {
 
 typedef hall_s hall;
 
-// warning: multiple differing types with the same name (#91,  not equal)
-enum {
+typedef enum {
 	PLMODE_ADDPAD = 0,
 	PLMODE_DELETEPAD = 1,
 	PLMODE_SETPADFLAGS = 2,
@@ -25,23 +24,20 @@ enum {
 	PLMODE_NUM = 9
 };
 
-// warning: multiple differing types with the same name (#91,  not equal)
-enum {
+typedef enum {
 	LINKMODE_NORMAL = 0,
 	LINKMODE_ONEWAY = 1,
 	LINKMODE_DOOR = 2,
 	LINKMODE_NUM = 3
 };
 
-// warning: multiple differing types with the same name (#91,  not equal)
-enum {
+typedef enum {
 	PADMODE_NAVIGATION = 0,
 	PADMODE_PLACEMENT = 1,
 	PADMODE_NUM = 2
 };
 
-// warning: multiple differing types with the same name (#91,  not equal)
-enum {
+typedef enum {
 	PADFLAGMODE_ACTIVE = 0,
 	PADFLAGMODE_LEDGE = 1,
 	PADFLAGMODE_CAMPER = 2,

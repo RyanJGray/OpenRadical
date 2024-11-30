@@ -1,9 +1,15 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_SOUND_SOUNDDATA_H
 #define GAME_SOUND_SOUNDDATA_H
 
-struct sound_s {
+#include "common.h"
+
+typedef struct sound_s {
 	char *tooldesc;
 	char *filename;
 	s16 envelope[5];
@@ -13,10 +19,8 @@ struct sound_s {
 	int loadpos;
 	int memloadpos;
 	int size;
-};
+} sound;
 
-typedef sound_s sound;
 extern sound sounds[1381];
-
 
 #endif // GAME_SOUND_SOUNDDATA_H

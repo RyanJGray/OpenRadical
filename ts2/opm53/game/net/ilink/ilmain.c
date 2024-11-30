@@ -38,8 +38,7 @@ typedef struct {
 	unsigned int mode;
 } sceSifDmaData;
 
-// warning: multiple differing types with the same name (#152,  not equal)
-enum {
+typedef enum {
 	PACKET_REQUESTCONNECT = -1,
 	PACKET_ACCEPTCONNECT = -2,
 	PACKET_AREYOUSTILLTHERE = -3,

@@ -1,13 +1,14 @@
 //
-// The OpenTS2 Project
-// 2023
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
 //
 
 #ifndef GAME_GAME_GAME_H
 #define GAME_GAME_GAME_H
 
-#include "../../types.h"
-#include "../util/misc.h"
+#include "common.h"
+#include "util/misc.h"
 
 struct gamemodeinfo_s {
 	short int name;
@@ -15,7 +16,7 @@ struct gamemodeinfo_s {
 	int useteamdrops;
 };
 
-typedef gamemodeinfo_s gamemodeinfo_t;
+typedef struct gamemodeinfo_s gamemodeinfo_t;
 
 struct storyinfo_s {
 	short int title;
@@ -24,14 +25,14 @@ struct storyinfo_s {
 	u16 female;
 };
 
-typedef storyinfo_s storyinfo_t;
+typedef struct storyinfo_s storyinfo_t;
 
 struct teaminfo_s {
 	short int name;
 	u32 colour;
 };
 
-typedef teaminfo_s teaminfo_t;
+typedef struct teaminfo_s teaminfo_t;
 
 struct resetgameparms_s {
 	int numplayers;
@@ -59,7 +60,7 @@ struct resetgameparms_s {
 	int totalbotskill;
 };
 
-typedef resetgameparms_s resetgameparms;
+typedef struct resetgameparms_s resetgameparms;
 
 extern int demo_completed;
 extern int demo_aborted;

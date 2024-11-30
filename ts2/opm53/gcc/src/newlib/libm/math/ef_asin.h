@@ -1,0 +1,9 @@
+// STATUS: NOT STARTED
+
+#ifndef GCC_SRC_NEWLIB_LIBM_MATH_EF_ASIN_H
+#define GCC_SRC_NEWLIB_LIBM_MATH_EF_ASIN_H
+
+
+float __ieee754_asinf(float x);
+
+#endif // GCC_SRC_NEWLIB_LIBM_MATH_EF_ASIN_H

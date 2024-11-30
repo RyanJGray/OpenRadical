@@ -11,13 +11,6 @@ struct item_s {
 };
 
 typedef item_s item_t;
-
-typedef enum {
-	OBJTYPE_UNDEFINED = 0,
-	OBJTYPE_TILE = 1,
-	OBJTYPE_NUM = 2
-} objtype_t;
-
 extern int nummapobjects;
 extern object_t *mapobjects;
 extern object_t *objects;

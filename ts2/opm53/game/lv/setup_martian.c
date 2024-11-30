@@ -11,7 +11,7 @@ setuppickup martian_pickups_1up[0] = {
 setupspawn martian_spawns_1up[0] = {
 };
 
-setupNPC martian_NPCs_1up[0] = CCC_CANNOT_COMPUTE_ELEMENT_SIZE;
+setupNPC martian_NPCs_1up[0];
 
 setupPatrolRoutes martian_patrolroutes_1up[0] = {
 };
@@ -19,7 +19,7 @@ setupPatrolRoutes martian_patrolroutes_1up[0] = {
 aihandler martian_AIHandlers_1up[0] = {
 };
 
-setupNPC martian_spawninfos_1up[0] = CCC_CANNOT_COMPUTE_ELEMENT_SIZE;
+setupNPC martian_spawninfos_1up[0];
 
 setupdoor martian_doors_1up[0] = {
 };
@@ -27,21 +27,21 @@ setupdoor martian_doors_1up[0] = {
 setupheader setup_martian_1up = {
 	/* .setupflags = */ 128,
 	/* .gunset = */ 6,
-	/* .props = */ martian_AIHandlers_1up,
+	/* .props = */ martian_props,
 	/* .numprops = */ 0,
-	/* .pickups = */ martian_AIHandlers_1up,
+	/* .pickups = */ martian_props,
 	/* .numpickups = */ 0,
-	/* .doors = */ &setup_martian_1up,
+	/* .doors = */ martian_spawninfos_1up,
 	/* .numdoors = */ 0,
-	/* .spawnpads = */ martian_AIHandlers_1up,
+	/* .spawnpads = */ martian_props,
 	/* .numspawnpads = */ 0,
-	/* .NPCsetup = */ martian_AIHandlers_1up,
+	/* .NPCsetup = */ martian_props,
 	/* .numNPCs = */ 0,
-	/* .setupPatrolRoutes = */ martian_AIHandlers_1up,
+	/* .setupPatrolRoutes = */ martian_props,
 	/* .numPatrolroutes = */ 0,
-	/* .AIEventHandlers = */ martian_AIHandlers_1up,
+	/* .AIEventHandlers = */ martian_props,
 	/* .numAIEventHandlers = */ 1,
-	/* .si = */ &setup_martian_1up,
+	/* .si = */ martian_spawninfos_1up,
 	/* .numNPCspawns = */ 0,
 	/* .cars = */ NULL,
 	/* .numcars = */ 0,
@@ -76,13 +76,13 @@ setupspawn martian_spawns_arcade[0] = {
 setupheader setup_martian_arcade = {
 	/* .setupflags = */ 4,
 	/* .gunset = */ 12,
-	/* .props = */ martian_AIHandlers_1up,
+	/* .props = */ martian_props,
 	/* .numprops = */ 0,
-	/* .pickups = */ &setup_martian_arcade,
+	/* .pickups = */ martian_pickups_arcade,
 	/* .numpickups = */ 0,
 	/* .doors = */ NULL,
 	/* .numdoors = */ 0,
-	/* .spawnpads = */ &setup_martian_arcade,
+	/* .spawnpads = */ martian_pickups_arcade,
 	/* .numspawnpads = */ 0,
 	/* .NPCsetup = */ NULL,
 	/* .numNPCs = */ 0,

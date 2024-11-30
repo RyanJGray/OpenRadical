@@ -1,9 +1,16 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_GAME_SIGNON_H
 #define GAME_GAME_SIGNON_H
 
-struct playerprefs_s {
+#include "common.h"
+#include "front/front_mpg.h"
+
+typedef struct playerprefs_s {
 	u16 confignum;
 	u16 controlflags;
 	int customcontrols[42];
@@ -11,51 +18,40 @@ struct playerprefs_s {
 	int chrnum;
 	int gunoption;
 	int handicap;
-};
+} playerprefs_t;
 
-typedef playerprefs_s playerprefs_t;
-
-struct gamestatus_s {
+typedef struct gamestatus_s {
 	chrstats_t chrs[50];
 	levelstats_t levels[47];
 	challengestats_t challenges[27];
 	lifestats_t lifestats_story;
 	lifestats_t lifestats_arcade;
 	lifestats_t lifestats_challenge;
-};
+} gamestatus_t;
 
-typedef gamestatus_s gamestatus_t;
-
-struct gamesettings_s {
+typedef struct gamesettings_s {
 	int gv_dispx;
-};
+} gamesettings_t;
 
-typedef gamesettings_s gamesettings_t;
-
-struct signondata_s {
+typedef struct signondata_s {
 	u8 name[31];
 	playerprefs_t playerprefs;
 	gamesettings_t gamesettings;
 	gamestatus_t gamestatus;
-};
+} signondata_t;
 
-typedef signondata_s signondata_t;
-
-struct gamefile1_s {
+typedef struct gamefile1_s {
 	int lastsignon;
 	u32 unique;
 	int reserved[2];
 	signondata_t soentries[16];
-};
+} gamefile1_t;
 
-typedef gamefile1_s gamefile1_t;
-
-struct signoninfo_s {
+typedef struct signoninfo_s {
 	int card;
 	u32 fileid;
-};
+} signoninfo_t;
 
-typedef signoninfo_s signoninfo_t;
 extern gamevar gv_autosave;
 extern signondata_t *signonarray;
 extern signoninfo_t signoninfo[144];

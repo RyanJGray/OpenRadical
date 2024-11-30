@@ -1,252 +1,46 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_LV_LVSETUP_H
 #define GAME_LV_LVSETUP_H
 
-typedef handler_s handler;
+#include "common.h"
+#include "fx/weather.h"
+#include "prop/lift.h"
+#include "prop/prop.h"
 
-struct prop_s {
-	int id;
-	int num;
-	int type;
-	int subtype;
-	int room;
-	int LastTickFrame;
-	u32 flags;
-	u32 lastflags;
-	u32 damageflags;
-	u32 frameflags;
-	u32 drawflags;
-	u32 framedrawflags;
-	obinst *inst;
-	obinst *swapinst;
-	float startpos[3];
-	float pos[3];
-	float vel[3];
-	float rotx;
-	float roty;
-	float newroty;
-	float rotz;
-	float rotaxial;
-	float rotinc;
-	float rotaxis[3];
-	float rotvel[3];
-	float lastpos[3];
-	float moveRate[3];
-	float lastrotx;
-	float lastroty;
-	float lastrotz;
-	int posmode;
-	int rotmode;
-	int rooms[10];
-	int numrooms;
-	float scrmin[2];
-	float scrmax[2];
-	obinst *attachobinst;
-	int attachmtxnum;
-	int attachflag;
-	float hitreacttime;
-	mtx_u tmat1;
-	mtx_u tmat2;
-	int tmatindex1;
-	int tmatindex2;
-	void *data;
-	player_s *player;
-	handler handlers[11];
-	void (*damageHandler)(/* parameters unknown */);
-	int usingdisappearancetimer;
-	int disappearancetimer;
-	float CentrePos[3];
-	float CentrePosAtStart[3];
-	float Radius[3];
-	float health;
-	float maxHealth;
-	float damageLevel;
-	int numTransformedFloors;
-	int numTransformedWalls;
-	int numTransformedGlass;
-	int numTransformedSpecial;
-	floordef_s **transformedFloors;
-	walldef_s **transformedWalls;
-	glassdef **transformedGlass;
-	specialdef **transformedSpecial;
-	prop_s *otherprop;
-	prop_s *MyAttacker;
-	float FloorLevel;
-	float RockingDisp;
-	float RockingVel;
-	float BurnSFXTimer;
-	s16 ClosestLight[9];
-	float attachobworldpos[3];
-	int manualLightIndex;
-	int NetLifeCounter;
-	float activationdistsq;
-	float activationdot;
-	hudHealthArmourData_s *hudHealthArmourPtr;
-	int activationdata;
-	int alarmnumber;
-};
+typedef void (*lvbtnhandlerfn)(/* parameters unknown */);
 
-struct floordef_s {
-	u32 numpoints;
-	u16 switchmask;
-	u16 flags;
-	int fxUsage;
-	float fxProportion;
-	float xzbb[2][2];
-	floorpointdef points[0];
-};
+typedef struct AIHandler_s {
+	void (*function)(/* parameters unknown */);
+} aihandler;
 
-struct walldef_s {
-	u16 switchmask;
-	u16 flags;
-	float x1;
-	float y1;
-	float z1;
-	float x2;
-	float y2;
-	float z2;
-	float xzbb[2][2];
-};
-
-struct player_s {
-	int num;
-	int localnum;
-	ViewDef_s *view;
-	int flags;
-	playerprefs_t *prefs;
-	int controls[42];
-	float height;
-	float crouchheight;
-	float eyedist;
-	float eyeheight;
-	float desteyeheight;
-	float eyeheightoffset;
-	float eyeheightoffsetsteps;
-	float hardrad;
-	float softrad;
-	float feetpos[3];
-	float eyepos[3];
-	float lookdir[3];
-	float up[3];
-	float right[3];
-	float feetdir[3];
-	float strafedir[3];
-	float hitoffset[3];
-	float strafeangle;
-	float dirx;
-	float feetdirx;
-	float diry;
-	int autocentre;
-	int numframes;
-	int movemode;
-	int movementtype;
-	float skateVelocityX;
-	float skateVelocityZ;
-	float pushdir[3];
-	float swayspeedx;
-	float swayspeedy;
-	float swayamount;
-	float swaycountx;
-	float swaycounty;
-	float swayx;
-	float swayy;
-	int lastnumframes;
-	float lastfeetpos[3];
-	float lasteyepos[3];
-	float lastdirx;
-	float lastdiry;
-	float lastmovedist;
-	float lastmovedistxz;
-	prop *playerprop;
-	float gunmovedist;
-	float gunoffset[3];
-	playergun gunleft;
-	playergun gunright;
-	int eyeroom;
-	int sighton;
-	float sightfracx;
-	float sightfracy;
-	float sightfracfiltx;
-	float sightfracfilty;
-	autoaiminfo *autoaim;
-	prop *autoaimprop;
-	floordef *floor;
-	prop *curhitprop;
-	float curhitpos[3];
-	float curhitnorm[3];
-	float velocity[3];
-	float soundalerttimer;
-	float dualshockpower;
-	float dualshockpowerSlowdown;
-	float lastfwaxis;
-	float laststrafeaxis;
-	int DeathViewCounter;
-	float DeathViewCurrentDir[3];
-	boolean FindingNewTarget;
-	prop *pNewTarget;
-	float NewTargetDot;
-	float soundfirehitpos[3];
-	float soundimpactradius;
-	float soundfirefrompos[3];
-	float soundfirefromradius;
-};
-
-struct ViewDef_s {
-	mtx_u pm[2];
-	mtx_u mvm[2];
-	mtx_u mvpm[2];
-	mtx_u imvm[2];
-	int mnum;
-	mtx_u *perspmtx;
-	mtx_u *modelviewmtx;
-	mtx_u *modelviewperspmtx;
-	mtx_u *inv_modelviewmtx;
-	int num;
-	int type;
-	u32 flags;
-	int TexID;
-	window_t window;
-	float particleScale;
-	CamDef *pCam;
-	float pos[3];
-	int room;
-	int lastroom;
-	prop_s *attached;
-	prop_s *follow;
-	float lookat[3];
-	float lookdir[3];
-	float up[3];
-	float right[3];
-	float cam1mfrustrumhalfheight;
-	float cam1mfrustrumhalfwidth;
-	float fovy;
-	float destfovy;
-	float zoomfovy;
-	float minzoomfovy;
-	float maxzoomfovy;
-	float shaketime;
-	float shakeintensity;
-	float recoilTranslateAmount;
-	float recoilTranslateDampening;
-	float recoilRotateAmount;
-	float recoilRotateDampening;
-	roomcalcdata roomdata[201];
-	int maxlevel;
-	u8 roomVisibility[201];
-	prop_s *skyprop;
-	s16 numroomsdrawn;
-	s16 numroomsdrawnactual;
-	s16 roomsdrawn[225];
-};
-
-struct chrset_s {
+typedef struct chrset_s {
 	int chrnums[12];
-};
+} chrset_t;
 
-typedef chrset_s chrset_t;
+typedef struct setupNPC_s {
+	int createflags;
+	int startpad;
+	int chrtype;
+	int gunsetgun;
+	int startstate;
+	int triggerdata;
+	int triggerpad2;
+	int aiflags;
+	int maxactive;
+	int maxspawns;
+	float timeIntervals;
+	int patrolroutenum;
+	int triggertype;
+	int data1;
+	int sleepgroup;
+} setupNPC;
 
-struct setupprop_s {
+typedef struct setupprop_s {
 	int setupref;
 	int createflags;
 	int propnum;
@@ -254,11 +48,35 @@ struct setupprop_s {
 	float rot[3];
 	void *extra;
 	int forcedRoom;
-};
+} setupprop;
 
-typedef setupprop_s setupprop;
+typedef struct setupremote_s {
+	int setupref;
+	int createflags;
+	int propnum;
+	int type;
+	int data1;
+	int padextref;
+	float target[3];
+	float innerradius;
+	float outerradius;
+	float minanglex;
+	float maxanglex;
+	float minangley;
+	float maxangley;
+	float sweepspeed;
+	float VerticalFOV;
+	float HorizontalFOV;
+} setupremote;
 
-struct setupbutton_s {
+typedef struct setupalarm_s {
+	int setupref;
+	int createflags;
+	float duration;
+	int commlist;
+} setupalarm;
+
+typedef struct setupbutton_s {
 	int setupref;
 	int createflags;
 	int propnum;
@@ -271,28 +89,179 @@ struct setupbutton_s {
 	int data1;
 	float fdata1;
 	void *vdata1;
-};
+} setupbutton;
 
-typedef setupbutton_s setupbutton;
-typedef lvbuttondata_s lvbuttondata;
-typedef setupheader_s setupheader;
+typedef struct setupdoor_s {
+	int createflags;
+	int propnum;
+	int volumenum;
+	int id;
+	int extrefpadnum;
+	int key;
+	int doorflags;
+	float pos[3];
+	float roty;
+} setupdoor;
 
-struct setupref_s {
+typedef struct setuplsphase_s {
+	float delay;
+	int numattackloops;
+	struct {
+		int numchrs;
+		int groupnum;
+		int targetbase;
+		float chrdelay;
+		float enddelay;
+	} attack[10];
+	int numattacks;
+	float targettime;
+} setuplsphase;
+
+typedef struct setuplssnipergrp_s {
+	int groupnum;
+	float mininterval;
+	float maxinterval;
+} setuplssnipergrp;
+
+typedef struct carpath_s {
+	int type;
+	float destPos[3];
+	float destAng;
+	float speed;
+	float bankingAngle;
+	float liftingAngle;
+	float turningAngleAdjust;
+	float turnRad;
+	float turningPointAngle;
+	int special;
+	boolean distanceSet;
+	float distance;
+} carpath;
+
+typedef struct setupPatrolRoutes_s {
+	int *patrolrt;
+	int size;
+} setupPatrolRoutes;
+
+typedef struct setupcar_s {
+	int createflags;
+	int propnum;
+	int mode;
+	int carflags;
+	carpath *paths;
+	int numpaths;
+} setupcar;
+
+typedef struct setupspecialfx_s {
+	int createflags;
+	int type;
+	int subtype;
+	float pos[3];
+	float param;
+	void *extra;
+} setupspecialfx;
+
+typedef struct setuppickup_s {
+	int createflags;
+	int propnum;
+	int pickuptype;
+	float data;
+	int data2;
+	int team;
+	int padextref;
+	float rot[3];
+	float dy;
+	int realpadnum;
+} setuppickup;
+
+typedef struct setuppropspawn_s {
+	int setupref;
+	int createflags;
+	int propnum;
+	float pos[3];
+	float rot[3];
+	int triggertype;
+	int triggerdata;
+	int alarmnum;
+} setuppropspawn;
+
+typedef struct setupspawn_s {
+	int createflags;
+	int padextref;
+	int flags;
+	int realpadnum;
+} setupspawn;
+
+typedef struct lvbuttondata_s {
+	int setupref;
+	int chrpadnum;
+	prop *prop;
+	int type;
+	int flags;
+	lvbtnhandlerfn handlerfn;
+	boolean status;
+	prop *activater;
+	float timer1;
+	int data1;
+	float fdata1;
+	void *vdata1;
+} lvbuttondata;
+
+typedef struct setupheader_s {
+	int setupflags;
+	int gunset;
+	setupprop *props;
+	int numprops;
+	setuppickup *pickups;
+	int numpickups;
+	setupdoor *doors;
+	int numdoors;
+	setupspawn *spawnpads;
+	int numspawnpads;
+	setupNPC *NPCsetup;
+	int numNPCs;
+	setupPatrolRoutes *setupPatrolRoutes;
+	int numPatrolroutes;
+	aihandler *AIEventHandlers;
+	int numAIEventHandlers;
+	setupNPC *si;
+	int numNPCspawns;
+	setupcar *cars;
+	int numcars;
+	setupremote *sr;
+	int numremotes;
+	setupspecialfx *specialfx;
+	int numspecialfx;
+	weatherdata *weatherdat;
+	int numweatherdata;
+	setuplsphase *lsphases;
+	int numlsphases;
+	setuplssnipergrp *lssnipergrps;
+	int numlssnipergrps;
+	setupalarm *alarms;
+	int numalarms;
+	setuplift *lifts;
+	int numlifts;
+	setupbutton *lvbuttons;
+	int numlvbuttons;
+	cameradata *lvcameradata;
+	int numcamera;
+	setuppropspawn *lvpropspawn;
+	int numpropspawns;
+} setupheader;
+
+typedef struct setupref_s {
 	int setupref;
 	void *data;
-};
+} setupref;
 
-typedef setupref_s setupref;
-
-struct gunset_s {
+typedef struct gunset_s {
 	short int name;
 	int numguns;
 	int guncombo[15];
-};
+} gunset;
 
-typedef gunset_s gunset;
-
-struct skySettings_s {
+typedef struct skySettings_s {
 	char *name;
 	int skypropnum;
 	u32 bgcol;
@@ -303,11 +272,9 @@ struct skySettings_s {
 	float cloudheightadjust;
 	float skyheightadjust;
 	float skyroty;
-};
+} skySetting;
 
-typedef skySettings_s skySetting;
-
-struct level_info_s {
+typedef struct level_info_s {
 	short int name;
 	int number;
 	int tunenum;
@@ -316,11 +283,9 @@ struct level_info_s {
 	setupheader *setupArcade;
 	void (*objectivesSetup)(/* parameters unknown */);
 	void (*objectivesTick)(/* parameters unknown */);
-};
+} level_info;
 
-typedef level_info_s level_info;
-
-struct remotedata_s {
+typedef struct remotedata_s {
 	prop *prop;
 	int setupref;
 	int type;
@@ -345,7 +310,7 @@ struct remotedata_s {
 	float sweeppt[3];
 	float sweepradius;
 	prop *lockon;
-	chrgun_s *gun;
+	chrgun *gun;
 	int barrelfire;
 	float starty;
 	float startx;
@@ -367,9 +332,8 @@ struct remotedata_s {
 	prop *controller;
 	int section;
 	int ammo[17];
-};
+} remotedata;
 
-typedef remotedata_s remotedata;
 extern int numproprefs;
 extern int numremoterefs;
 extern int story_state1;
@@ -402,7 +366,7 @@ int lvGetRandomPadExtref(int paddata, float *pos);
 int lvGetPseudoRandomPadExtref(int paddata);
 int lvGetPadExtrefFromData(int paddata);
 void lvSetupProp(setupprop *sp);
-prop_s* lvGetPropFromSetupRef(int setupref);
+prop* lvGetPropFromSetupRef(int setupref);
 remotedata* lvGetRemoteFromSetupRef(int setupref);
 boolean lvCheckCreateFlagsCore(int flags);
 boolean lvCheckCreateFlagsRestart(int flags);
@@ -418,7 +382,7 @@ void lvbtnhndEnemyRemote(lvbuttondata *bd);
 void lvButtonChangeStatus(lvbuttondata *bd);
 void lvButtonActivate(prop *button, prop *actor);
 void lvButtonTick(int b);
-prop_s* propNewLvButton(setupbutton *sb);
+prop* propNewLvButton(setupbutton *sb);
 int lvGetOverseerState();
 float lvGetOverseerBackSleepTime();
 void lvInitStoryState();

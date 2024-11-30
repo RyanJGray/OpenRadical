@@ -11,7 +11,7 @@ setuppickup pivotal_pickups_1up[0] = {
 setupspawn pivotal_spawns_1up[0] = {
 };
 
-setupNPC pivotal_NPCs_1up[0] = CCC_CANNOT_COMPUTE_ELEMENT_SIZE;
+setupNPC pivotal_NPCs_1up[0];
 
 setupPatrolRoutes pivotal_patrolroutes_1up[0] = {
 };
@@ -19,7 +19,7 @@ setupPatrolRoutes pivotal_patrolroutes_1up[0] = {
 aihandler pivotal_AIHandlers_1up[0] = {
 };
 
-setupNPC pivotal_spawninfos_1up[0] = CCC_CANNOT_COMPUTE_ELEMENT_SIZE;
+setupNPC pivotal_spawninfos_1up[0];
 
 setupdoor pivotal_doors_1up[0] = {
 };
@@ -27,21 +27,21 @@ setupdoor pivotal_doors_1up[0] = {
 setupheader setup_pivotal_1up = {
 	/* .setupflags = */ 128,
 	/* .gunset = */ 6,
-	/* .props = */ pivotal_AIHandlers_1up,
+	/* .props = */ pivotal_props,
 	/* .numprops = */ 0,
-	/* .pickups = */ pivotal_AIHandlers_1up,
+	/* .pickups = */ pivotal_props,
 	/* .numpickups = */ 0,
-	/* .doors = */ &setup_pivotal_1up,
+	/* .doors = */ pivotal_spawninfos_1up,
 	/* .numdoors = */ 0,
-	/* .spawnpads = */ pivotal_AIHandlers_1up,
+	/* .spawnpads = */ pivotal_props,
 	/* .numspawnpads = */ 0,
-	/* .NPCsetup = */ pivotal_AIHandlers_1up,
+	/* .NPCsetup = */ pivotal_props,
 	/* .numNPCs = */ 0,
-	/* .setupPatrolRoutes = */ pivotal_AIHandlers_1up,
+	/* .setupPatrolRoutes = */ pivotal_props,
 	/* .numPatrolroutes = */ 0,
-	/* .AIEventHandlers = */ pivotal_AIHandlers_1up,
+	/* .AIEventHandlers = */ pivotal_props,
 	/* .numAIEventHandlers = */ 1,
-	/* .si = */ &setup_pivotal_1up,
+	/* .si = */ pivotal_spawninfos_1up,
 	/* .numNPCspawns = */ 0,
 	/* .cars = */ NULL,
 	/* .numcars = */ 0,
@@ -79,7 +79,7 @@ setupremote pivotal_remotes_arcade[0] = {
 setupheader setup_pivotal_arcade = {
 	/* .setupflags = */ 4,
 	/* .gunset = */ 12,
-	/* .props = */ pivotal_AIHandlers_1up,
+	/* .props = */ pivotal_props,
 	/* .numprops = */ 0,
 	/* .pickups = */ pivotal_pickups_arcade,
 	/* .numpickups = */ 18,

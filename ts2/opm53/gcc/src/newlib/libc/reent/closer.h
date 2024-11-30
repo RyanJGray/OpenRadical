@@ -1,0 +1,8 @@
+// STATUS: NOT STARTED
+
+#ifndef GCC_SRC_NEWLIB_LIBC_REENT_CLOSER_H
+#define GCC_SRC_NEWLIB_LIBC_REENT_CLOSER_H
+
+int _close_r(_reent *ptr, int fd);
+
+#endif // GCC_SRC_NEWLIB_LIBC_REENT_CLOSER_H

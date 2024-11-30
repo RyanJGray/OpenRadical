@@ -1,4 +1,8 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_FRONT_FRONT_H
 #define GAME_FRONT_FRONT_H
@@ -57,6 +61,8 @@ void frontTick();
 void frontGfxCore();
 void frontGfx();
 void frontEnd();
+/// Adds a new page to the menu system.
+/// `front->pagetoset` must be NULL or an assertion will occur.
 void frontPageSet(int pagenum, pageinit_t *init);
 pagedef_t* frontPageActivate(pageinit_t *init);
 pagedef_t* frontPageAdd(pageinit_t *init);

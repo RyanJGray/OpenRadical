@@ -1,8 +1,11 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #include "enemySingle.h"
 
-// warning: multiple differing types with the same name (#146,  not equal)
 enum {
 	EMS_START = 0,
 	EMS_STAND = 1,
@@ -12,7 +15,6 @@ enum {
 	EMS_CHECKLOSTTARGET_LS = 5
 };
 
-// warning: multiple differing types with the same name (#146,  not equal)
 enum {
 	EAC_SETUP = 0,
 	EAC_READY = 1,
@@ -24,12 +26,10 @@ enum {
 	EAC_CRATESHOOT = 7
 };
 
-// warning: multiple differing types with the same name (#146,  not equal)
 enum {
 	ZOM_ATK_ADVANCE = 0
 };
 
-// warning: multiple differing types with the same name (#146,  not equal)
 enum {
 	ATTACKOBJECT_FIRSTENTRY = 0,
 	ATTACKOBJECT_GETRANGE = 1,
@@ -41,7 +41,6 @@ enum {
 	ATTACKOBJECT_CHECKRANGE = 7
 };
 
-// warning: multiple differing types with the same name (#146,  not equal)
 enum {
 	SNIPEATTACK_CHOOSESNIPEPAD = 0,
 	SNIPEATTACK_ADVANCETOSNIPEPAD = 1,
@@ -51,7 +50,6 @@ enum {
 	SNIPEATTACK_CHECKLOSTTARGET = 5
 };
 
-// warning: multiple differing types with the same name (#146,  not equal)
 enum {
 	BARRELROBOT_SLEEP = 0,
 	BARRELROBOT_SPINHEAD = 1,
@@ -62,16 +60,13 @@ enum {
 	BARRELROBOT_SITSHOOT = 6
 };
 
-struct ambushDesc_s {
+typedef struct ambushDesc_s {
 	int animstage1;
 	int animstage2;
 	int animstage3;
 	int animstage4;
-};
+} ambushDesc;
 
-typedef ambushDesc_s ambushDesc;
-
-// warning: multiple differing types with the same name (#146,  not equal)
 enum {
 	EA_START = 0,
 	EA_READY = 1,
@@ -80,14 +75,12 @@ enum {
 	EA_BACK = 4
 };
 
-// warning: multiple differing types with the same name (#146,  not equal)
 enum {
 	EPD_SETUP = 0,
 	EPD_WAITFORTRIGGER = 1,
 	EPD_GETUP = 2
 };
 
-// warning: multiple differing types with the same name (#146,  not equal)
 enum {
 	EPB_SETUP = 0,
 	EPB_WAITFORTRIGGER = 1,

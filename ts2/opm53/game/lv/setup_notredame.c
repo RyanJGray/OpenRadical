@@ -11,7 +11,7 @@ setuppickup notredame_pickups_1up[0] = {
 setupspawn notredame_spawns_1up[0] = {
 };
 
-setupNPC notredame_NPCs_1up[0] = CCC_CANNOT_COMPUTE_ELEMENT_SIZE;
+setupNPC notredame_NPCs_1up[0];
 
 setupPatrolRoutes notredame_patrolroutes_1up[0] = {
 };
@@ -19,7 +19,7 @@ setupPatrolRoutes notredame_patrolroutes_1up[0] = {
 aihandler notredame_AIHandlers_1up[0] = {
 };
 
-setupNPC notredame_spawninfos_1up[0] = CCC_CANNOT_COMPUTE_ELEMENT_SIZE;
+setupNPC notredame_spawninfos_1up[0];
 
 setupdoor notredame_doors_1up[0] = {
 };
@@ -27,21 +27,21 @@ setupdoor notredame_doors_1up[0] = {
 setupheader setup_notredame_1up = {
 	/* .setupflags = */ 128,
 	/* .gunset = */ 6,
-	/* .props = */ notredame_AIHandlers_1up,
+	/* .props = */ notredame_props,
 	/* .numprops = */ 0,
-	/* .pickups = */ notredame_AIHandlers_1up,
+	/* .pickups = */ notredame_props,
 	/* .numpickups = */ 0,
-	/* .doors = */ &setup_notredame_1up,
+	/* .doors = */ notredame_spawninfos_1up,
 	/* .numdoors = */ 0,
-	/* .spawnpads = */ notredame_AIHandlers_1up,
+	/* .spawnpads = */ notredame_props,
 	/* .numspawnpads = */ 0,
-	/* .NPCsetup = */ notredame_AIHandlers_1up,
+	/* .NPCsetup = */ notredame_props,
 	/* .numNPCs = */ 0,
-	/* .setupPatrolRoutes = */ notredame_AIHandlers_1up,
+	/* .setupPatrolRoutes = */ notredame_props,
 	/* .numPatrolroutes = */ 0,
-	/* .AIEventHandlers = */ notredame_AIHandlers_1up,
+	/* .AIEventHandlers = */ notredame_props,
 	/* .numAIEventHandlers = */ 1,
-	/* .si = */ &setup_notredame_1up,
+	/* .si = */ notredame_spawninfos_1up,
 	/* .numNPCspawns = */ 0,
 	/* .cars = */ NULL,
 	/* .numcars = */ 0,
@@ -76,7 +76,7 @@ setupspawn notredame_spawns_arcade[0] = {
 setupheader setup_notredame_arcade = {
 	/* .setupflags = */ 4,
 	/* .gunset = */ 9,
-	/* .props = */ notredame_AIHandlers_1up,
+	/* .props = */ notredame_props,
 	/* .numprops = */ 0,
 	/* .pickups = */ notredame_pickups_arcade,
 	/* .numpickups = */ 5,

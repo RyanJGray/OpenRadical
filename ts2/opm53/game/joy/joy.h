@@ -1,7 +1,46 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_JOY_JOY_H
 #define GAME_JOY_JOY_H
+
+#include "common.h"
+
+typedef struct controller_s {
+	u128 dmabuf[16];
+	int port;
+	int slot;
+	int state;
+	int laststate;
+	int phase;
+	int termid;
+	int rtermid;
+	int lastbut;
+	int curbut;
+	int newbut;
+	int releasebut;
+	int axisX1;
+	int axisX2;
+	int axisY1;
+	int axisY2;
+	float centrezone;
+	u8 act_direct[6];
+	u8 act_align[6];
+	int actlefttime;
+	int actrighttime;
+	int clearedbuts;
+	int pad[10];
+} controller;
+
+// warning: multiple differing types with the same name (size not equal)
+typedef struct cheatdef_s {
+	u16 buttons[20];
+	int numbuttons;
+	void (*func)(/* parameters unknown */);
+} cheatdef;
 
 typedef u_long128 u128;
 extern controller controllers[8];

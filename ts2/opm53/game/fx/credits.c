@@ -2,8 +2,7 @@
 
 #include "credits.h"
 
-// warning: multiple differing types with the same name (#119,  not equal)
-enum {
+typedef enum {
 	CREDITS_END = -1,
 	CREDITS_NEWLINE = 0,
 	CREDITS_ALIGN_LEFT = 1,

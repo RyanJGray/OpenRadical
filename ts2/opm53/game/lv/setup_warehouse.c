@@ -44,7 +44,7 @@ setuppickup warehouse_pickups_1up[0] = {
 setupspawn warehouse_spawns_1up[0] = {
 };
 
-setupNPC warehouse_NPCs_1up[0] = CCC_CANNOT_COMPUTE_ELEMENT_SIZE;
+setupNPC warehouse_NPCs_1up[0];
 
 setupPatrolRoutes warehouse_patrolroutes_1up[0] = {
 };
@@ -52,7 +52,7 @@ setupPatrolRoutes warehouse_patrolroutes_1up[0] = {
 aihandler warehouse_AIHandlers_1up[0] = {
 };
 
-setupNPC warehouse_spawninfos_1up[0] = CCC_CANNOT_COMPUTE_ELEMENT_SIZE;
+setupNPC warehouse_spawninfos_1up[0];
 
 setupdoor warehouse_doors_1up[0] = {
 };
@@ -62,25 +62,25 @@ setupheader setup_warehouse_1up = {
 	/* .gunset = */ 6,
 	/* .props = */ warehouse_props,
 	/* .numprops = */ 7,
-	/* .pickups = */ warehouse_AIHandlers_1up,
+	/* .pickups = */ warehouse_pickups_1up,
 	/* .numpickups = */ 0,
-	/* .doors = */ &setup_warehouse_1up,
+	/* .doors = */ warehouse_spawninfos_1up,
 	/* .numdoors = */ 0,
-	/* .spawnpads = */ warehouse_AIHandlers_1up,
+	/* .spawnpads = */ warehouse_pickups_1up,
 	/* .numspawnpads = */ 0,
-	/* .NPCsetup = */ warehouse_AIHandlers_1up,
+	/* .NPCsetup = */ warehouse_pickups_1up,
 	/* .numNPCs = */ 0,
-	/* .setupPatrolRoutes = */ warehouse_AIHandlers_1up,
+	/* .setupPatrolRoutes = */ warehouse_pickups_1up,
 	/* .numPatrolroutes = */ 0,
-	/* .AIEventHandlers = */ warehouse_AIHandlers_1up,
+	/* .AIEventHandlers = */ warehouse_pickups_1up,
 	/* .numAIEventHandlers = */ 1,
-	/* .si = */ &setup_warehouse_1up,
+	/* .si = */ warehouse_spawninfos_1up,
 	/* .numNPCspawns = */ 0,
 	/* .cars = */ warehouse_cars,
 	/* .numcars = */ 8,
 	/* .sr = */ NULL,
 	/* .numremotes = */ 0,
-	/* .specialfx = */ warehouse_car_route,
+	/* .specialfx = */ warehouse_fx,
 	/* .numspecialfx = */ 0,
 	/* .weatherdat = */ NULL,
 	/* .numweatherdata = */ 0,
@@ -127,7 +127,7 @@ setupheader setup_warehouse_arcade = {
 	/* .numNPCspawns = */ 0,
 	/* .cars = */ warehouse_cars,
 	/* .numcars = */ 8,
-	/* .sr = */ warehouse_car_route,
+	/* .sr = */ warehouse_fx,
 	/* .numremotes = */ 0,
 	/* .specialfx = */ NULL,
 	/* .numspecialfx = */ 0,

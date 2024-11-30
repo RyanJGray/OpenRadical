@@ -2,8 +2,7 @@
 
 #include "frontfx.h"
 
-// warning: multiple differing types with the same name (#66,  not equal)
-enum {
+typedef enum {
 	LOGO_TOP = -1,
 	LOGO_GLOW = 0,
 	LOGO_BACK = 1,

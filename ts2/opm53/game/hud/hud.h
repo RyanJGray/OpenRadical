@@ -1,44 +1,43 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_HUD_HUD_H
 #define GAME_HUD_HUD_H
 
-struct hudHealthArmourSegment_s {
+#include "common.h"
+#include "game/objectives.h"
+
+typedef struct hudHealthArmourSegment_s {
 	float healthArmourThreshold;
 	float gfxThreshold;
 	int col[3];
-};
+} hudHealthArmourSegment;
 
-typedef hudHealthArmourSegment_s hudHealthArmourSegment;
-
-struct hudMessage_s {
+typedef struct hudMessage_s {
 	int type;
 	u8 text[256];
-	objective_s *objectiveMessage;
+	objective *objectiveMessage;
 	float time;
 	float waitTime;
 	float moveTime;
 	float lifeTime;
 	float forceOutTime;
-};
+} hudMessage;
 
-typedef hudMessage_s hudMessage;
-typedef hudHealthArmourData_s hudHealthArmourData;
+typedef struct hudHealthArmourData_s {
+	boolean healthSegmentOn[20];
+	boolean armourSegmentOn[20];
+	float healthSegmentFadeTime[20];
+	float armourSegmentFadeTime[20];
+	float hudBarsTime;
+} hudHealthArmourData;
 
-struct hudparms_s {
+typedef struct hudparms_s {
 	hudplrparms_t plr[4];
-};
-
-typedef hudparms_s hudparms_t;
-
-struct objective_s {
-	u8 *text;
-	int flags;
-	int (*handler1)(/* parameters unknown */);
-	int (*handler2)(/* parameters unknown */);
-	int type[3];
-	int state;
-};
+} hudparms_t;
 
 extern hudHealthArmourSegment hudHealth[21];
 extern hudHealthArmourSegment hudArmour[21];
@@ -51,7 +50,7 @@ hudHealthArmourData* hudAllocHealthArmourData();
 void hudResetHealthArmourData(hudHealthArmourData *haData, prop *p);
 void hudRestartMessages();
 void hudAddMessage(int localnum, int type, u8 *message, float delay);
-void hudObjectiveMessage(int localnum, objective_s *obj, float delay);
+void hudObjectiveMessage(int localnum, objective *obj, float delay);
 void hudClearAllMessages(int localplayer);
 void hudClearMessages(int localplayer, int type);
 void hudMainMessageGfx(hudMessage *msg);

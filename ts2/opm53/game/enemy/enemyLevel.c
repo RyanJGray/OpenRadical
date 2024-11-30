@@ -2,8 +2,7 @@
 
 #include "enemyLevel.h"
 
-// warning: multiple differing types with the same name (#144,  not equal)
-enum {
+typedef enum {
 	OBJECTIVE1 = 0,
 	OBJECTIVE2 = 1,
 	OBJECTIVE3 = 2,

@@ -1,24 +1,58 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_GAME_OBJECTIVES_H
 #define GAME_GAME_OBJECTIVES_H
 
-typedef objective_s objective;
+#include "common.h"
+#include "lv/lvsetup.h"
+#include "prop/prop.h"
+#include "fx/specialfx.h"
+#include "gun/bullet.h"
 
-struct checkpoint_s {
+enum {
+	OBJECTIVE_TYPE_NONE = -1,
+	OBJECTIVE_TYPE_MAIN = 0,
+	OBJECTIVE_TYPE_SECONDARY = 1,
+	OBJECTIVE_TYPE_BONUS = 2,
+	OBJECTIVE_NUM_TYPES = 3
+};
+
+enum {
+	OBJECTIVE_STATE_NOTINLEVEL = 0,
+	OBJECTIVE_STATE_UNREVEALED = 1,
+	OBJECTIVE_STATE_INCOMPLETE = 2,
+	OBJECTIVE_STATE_FAILED = 3,
+	OBJECTIVE_STATE_COMPLETE = 4
+};
+
+enum {
+	OBJECTIVE_FLAG_COUNTER = 1
+};
+
+typedef struct objective_s {
+	u8 *text;
+	int flags;
+	int (*handler1)(/* parameters unknown */);
+	int (*handler2)(/* parameters unknown */);
+	int type[3];
+	int state;
+} objective;
+
+typedef struct checkpoint_s {
 	float pos[3];
 	float radiusxz;
 	float radiusy;
-};
+} checkpoint;
 
-typedef checkpoint_s checkpoint;
-
-struct checkrect_s {
+typedef struct checkrect_s {
 	float min[3];
 	float max[3];
-};
+} checkrect;
 
-typedef checkrect_s checkrect;
 extern int numCurrentObjectives;
 extern int numObjectives[3];
 extern int currentObjectives[10];

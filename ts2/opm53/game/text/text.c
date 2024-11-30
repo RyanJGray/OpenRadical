@@ -2,8 +2,7 @@
 
 #include "text.h"
 
-// warning: multiple differing types with the same name (#12,  not equal)
-enum {
+typedef enum {
 	FONTLOADFLAG_DUMMY = 1,
 	FONTLOADFLAG_FRONTEND = 2,
 	FONTLOADFLAG_LEVEL = 4,

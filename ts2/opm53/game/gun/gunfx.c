@@ -2,8 +2,7 @@
 
 #include "gunfx.h"
 
-// warning: multiple differing types with the same name (#109,  not equal)
-enum {
+typedef enum {
 	FLAME_NONE = -1,
 	FLAME_BG = 0,
 	FLAME_PROP = 1,

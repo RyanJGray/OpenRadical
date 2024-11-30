@@ -1,7 +1,13 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_UTIL_QUATERNION_H
 #define GAME_UTIL_QUATERNION_H
+
+#include "util/matrix.h"
 
 struct quaternion_s {
 	float x;
@@ -10,12 +16,15 @@ struct quaternion_s {
 	float w;
 };
 
-typedef quaternion_s quaternion;
+typedef struct quaternion_s quaternion;
+
 void rotx2fquat(float angle, float *quat);
 void roty2fquat(float angle, float *quat);
 void rotz2fquat(float angle, float *quat);
 void rot2fquat(float *angle, float *quat);
-void quaternionToMatrix(mtx_u *m, quaternion *q);
+void matrixToQuaternion(quaternion *q, mtx *matrix);
+void matrixToQuaternionNew(quaternion *q, mtx *matrix);
+void quaternionToMatrix(mtx *m, quaternion *q);
 void quaternionSlerp(quaternion *q1, quaternion *qIn2, float time, quaternion *qOut);
 void quaternionSlerp2(quaternion *q1, quaternion *qIn2, float time, quaternion *qOut);
 void quaternionLerp(quaternion *q1, quaternion *q2, float time, quaternion *qOut);

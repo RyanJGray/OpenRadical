@@ -1,16 +1,21 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_EM_EM_H
 #define GAME_EM_EM_H
 
-struct texinfo_s {
+#include "common.h"
+#include "image.h"
+
+typedef struct texinfo_s {
 	int id;
 	int clampu;
 	int clampv;
 	int flags;
-};
-
-typedef texinfo_s texinfo;
+} texinfo;
 
 typedef struct {
 	u32 width;
@@ -21,7 +26,14 @@ typedef struct {
 	int extents;
 } texsize_t;
 
-struct texbuffer_s {
+typedef struct {
+	u32 blocks;
+	u32 flags;
+	texsize_t *size;
+	s16 texid[32];
+} pageinfo;
+
+typedef struct texbuffer_s {
 	emTexture *textures;
 	pageinfo *pages;
 	u8 *textypes;
@@ -36,9 +48,8 @@ struct texbuffer_s {
 	int CurrentFillTexturePage[31];
 	int CurrentSwapTexturePage[31];
 	int CurrentSwapTextureNum[31];
-};
+} texbuffer;
 
-typedef texbuffer_s texbuffer;
 extern u32 vifdata_notexture[0];
 extern texbuffer *thistexbuf;
 extern texsize_t tsizes[31];

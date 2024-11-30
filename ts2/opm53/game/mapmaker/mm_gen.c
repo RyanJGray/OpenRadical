@@ -2,8 +2,7 @@
 
 #include "mm_gen.h"
 
-// warning: multiple differing types with the same name (#82,  not equal)
-enum {
+typedef enum {
 	D_NORTH = 0,
 	D_EAST = 1,
 	D_SOUTH = 2,
@@ -53,8 +52,7 @@ struct pos_s {
 	u8 score;
 };
 
-// warning: multiple differing types with the same name (#82,  not equal)
-enum {
+typedef enum {
 	NORTH = 1,
 	EAST = 2,
 	SOUTH = 4,

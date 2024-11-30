@@ -11,7 +11,7 @@ setuppickup hospital_pickups_1up[0] = {
 setupspawn hospital_spawns_1up[0] = {
 };
 
-setupNPC hospital_NPCs_1up[0] = CCC_CANNOT_COMPUTE_ELEMENT_SIZE;
+setupNPC hospital_NPCs_1up[0];
 
 setupPatrolRoutes hospital_patrolroutes_1up[0] = {
 };
@@ -19,7 +19,7 @@ setupPatrolRoutes hospital_patrolroutes_1up[0] = {
 aihandler hospital_AIHandlers_1up[0] = {
 };
 
-setupNPC hospital_spawninfos_1up[0] = CCC_CANNOT_COMPUTE_ELEMENT_SIZE;
+setupNPC hospital_spawninfos_1up[0];
 
 setupdoor hospital_doors_1up[0] = {
 };
@@ -27,21 +27,21 @@ setupdoor hospital_doors_1up[0] = {
 setupheader setup_hospital_1up = {
 	/* .setupflags = */ 128,
 	/* .gunset = */ 6,
-	/* .props = */ hospital_AIHandlers_1up,
+	/* .props = */ hospital_props,
 	/* .numprops = */ 0,
-	/* .pickups = */ hospital_AIHandlers_1up,
+	/* .pickups = */ hospital_props,
 	/* .numpickups = */ 0,
-	/* .doors = */ &setup_hospital_1up,
+	/* .doors = */ hospital_spawninfos_1up,
 	/* .numdoors = */ 0,
-	/* .spawnpads = */ hospital_AIHandlers_1up,
+	/* .spawnpads = */ hospital_props,
 	/* .numspawnpads = */ 0,
-	/* .NPCsetup = */ hospital_AIHandlers_1up,
+	/* .NPCsetup = */ hospital_props,
 	/* .numNPCs = */ 0,
-	/* .setupPatrolRoutes = */ hospital_AIHandlers_1up,
+	/* .setupPatrolRoutes = */ hospital_props,
 	/* .numPatrolroutes = */ 0,
-	/* .AIEventHandlers = */ hospital_AIHandlers_1up,
+	/* .AIEventHandlers = */ hospital_props,
 	/* .numAIEventHandlers = */ 1,
-	/* .si = */ &setup_hospital_1up,
+	/* .si = */ hospital_spawninfos_1up,
 	/* .numNPCspawns = */ 0,
 	/* .cars = */ NULL,
 	/* .numcars = */ 0,
@@ -76,7 +76,7 @@ setupspawn hospital_spawns_arcade[0] = {
 setupheader setup_hospital_arcade = {
 	/* .setupflags = */ 4,
 	/* .gunset = */ 9,
-	/* .props = */ hospital_AIHandlers_1up,
+	/* .props = */ hospital_props,
 	/* .numprops = */ 0,
 	/* .pickups = */ hospital_pickups_arcade,
 	/* .numpickups = */ 5,

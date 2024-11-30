@@ -1,17 +1,20 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #include "preload.h"
 
-struct preloadpass2info_s {
+typedef struct preloadpass2info_s {
 	int type;
 	u8 *texname;
 	int texnum;
 	texinfo *inf;
 	int *newtexnum;
-	preloadpass2info_s *next;
-};
+	struct preloadpass2info_s *next;
+} preloadpass2info;
 
-typedef preloadpass2info_s preloadpass2info;
 static int numpreload = 0;
 static preloadinfo preload[500];
 static preloadpass2info preloadpass2[1000];

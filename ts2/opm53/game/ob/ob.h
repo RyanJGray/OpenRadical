@@ -1,11 +1,58 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_OB_OB_H
 #define GAME_OB_OB_H
 
-typedef unsigned int u32;
+#include "common.h"
+#include "em/em.h"
+#include "fx/particle.h"
+#include "move/move.h"
+#include "ob/obbounds.h"
 
-struct bglighttest_s {
+enum {
+	LIGHTTYPE_GLOW = 0,
+	LIGHTTYPE_NOGLOW = 1,
+	LIGHTTYPE_TORCH = 2,
+	LIGHTTYPE_FLARE = 3,
+	LIGHTTYPE_NUM = 4
+};
+
+enum {
+	FLARETYPE_SUN = 0,
+	FLARETYPE_COPTER = 1,
+	FLARETYPE_EVENINGSUN = 2,
+	FLARETYPE_CAR = 3,
+	FLARE_TYPES = 4
+};
+
+enum {
+	GLOWTYPE_NORMAL = 0,
+	GLOWTYPE_VOLGLOW = 1,
+	GLOWTYPE_4STAR = 2,
+	GLOWTYPE_6STAR = 3,
+	GLOWTYPE_RING = 4,
+	GLOW_TYPES = 5
+};
+
+typedef struct bumppointdef_s {
+	float pos[3];
+	float stnorm[3];
+	u32 rgba;
+} bumppointdef;
+
+typedef struct bumppolydef_s {
+	int texture;
+	int flags;
+	int planeid;
+	u32 numpoints;
+	bumppointdef points[0];
+} bumppolydef;
+
+typedef struct bglighttest_s {
 	int Room;
 	int ID;
 	float Col[3];
@@ -13,12 +60,28 @@ struct bglighttest_s {
 	float Dir1[3];
 	float Dist;
 	float Brightness;
-};
+} bglighttest;
 
-typedef bglighttest_s bglighttest;
-typedef light_s light;
+typedef struct light_s {
+	int type;
+	short int subtype;
+	short int directional;
+	float lightpos[5][3];
+	float glowpos[5][3];
+	float normal[3];
+	u32 col;
+	float size;
+	float penumbra;
+	float falloffNear;
+	float falloffFar;
+	u8 intensitycontroller;
+	u8 intensity;
+	char intensityvel;
+	char spare[1];
+	char PrevAlpha[4];
+} light;
 
-struct partdef_s {
+typedef struct partdef_s {
 	char type;
 	char matrixnum;
 	char parent;
@@ -41,18 +104,16 @@ struct partdef_s {
 	u16 numtris;
 	u16 pad;
 	dof *dofs;
-	floordef_s **floors;
-	walldef_s **walls;
+	floordef **floors;
+	walldef **walls;
 	glassdef **glass;
 	specialdef **special;
 	bumppolydef **bumppolys;
 	obbounds *bounds[3];
 	float weight;
-};
+} partdef;
 
-typedef partdef_s partdef;
-
-struct obdef_s {
+typedef struct obdef_s {
 	int numparts;
 	int nummatrices;
 	int lit;
@@ -60,11 +121,81 @@ struct obdef_s {
 	u32 ***dmapointers[2][3];
 	float globalscale;
 	void *bounds;
-};
+} obdef;
 
-typedef obdef_s obdef;
+typedef struct skelmtx_s {
+	int *mindex;
+	int *bindex;
+	float baseheight;
+	int basemtx;
+	int hipmtx;
+	int waistmtx;
+	int neckmtx;
+	int lwristmtx;
+	int rwristmtx;
+	int lelbowmtx;
+	int relbowmtx;
+	int lkneemtx;
+	int rkneemtx;
+	int lheelmtx;
+	int rheelmtx;
+	int headmtx;
+	int *partclosestbead;
+	mtx *bindneckmtx;
+	mtx *bindheadmtx;
+	mtx *bindlarmmtx;
+	mtx *bindrarmmtx;
+	mtx *bindllegmtx;
+	mtx *bindrlegmtx;
+	mtx *bindwaistmtx;
+	mtx *bindmtx;
+} skelmatrices;
 
-struct manualLighting_s {
+typedef struct obinst_s {
+	obdef *ob;
+	mtx *matrices;
+	mtx *rmatrices;
+	mtx *lightdir;
+	mtx *lightcol;
+	int lastlight[2];
+	float lastlightpos[2][3];
+	float lastlightcol[2][3];
+	skeleton *skel;
+	skelmatrices *skelmtx;
+	int overwriteparts;
+	int overwriteanimnum;
+	float overwriteanglex;
+	float overwriteangley;
+	float lastoverwriteanglex;
+	float lastoverwriteangley;
+	float aimingtweentime;
+	float aimingtweencurrtime;
+	int aimingStatus;
+	animinfo anim1;
+	animinfo anim2;
+	int animdelaynum;
+	float animdelayblendtime;
+	float animdelayspeed;
+	float animblendtime;
+	float animblendfrac;
+	float animblendcurrtime;
+	prop *prop;
+	gfxpointers *override;
+	u32 ***overridedma[2][2][3];
+	u32 **overridergb[2][3];
+	int overridetile;
+	int overridebuf;
+	u16 switchflags;
+	u16 overrideflags;
+	s8 overridealphastate;
+	s8 overridezbstate;
+	s8 spare;
+	u8 fixedalpha;
+	float overrideambientscale;
+	u8 overrideambientCol[4];
+} obinst;
+
+typedef struct manualLighting_s {
 	float ambient[3];
 	float col1[3];
 	float col2[3];
@@ -78,9 +209,7 @@ struct manualLighting_s {
 	float dist1;
 	float dist2;
 	float dist3;
-};
-
-typedef manualLighting_s manualLighting;
+} manualLighting;
 
 typedef struct {
 	obinst *pInst;
@@ -90,7 +219,7 @@ typedef struct {
 	int Poly;
 } HitInfoDef;
 
-struct propdef_s {
+typedef struct propdef_s {
 	int type;
 	obdef *ob;
 	u8 *propname;
@@ -99,9 +228,8 @@ struct propdef_s {
 	skelmatrices *skelmtx;
 	int OffScreenTickTime;
 	int Flags;
-};
+} propdef;
 
-typedef propdef_s propdef;
 extern u32 vif_entry_loadlcol[0];
 extern u32 vif_entry_loadm[0];
 extern u32 vif_entry_loadm2[0];
@@ -180,17 +308,17 @@ float obGetScale(obdef *p_ob);
 void obPrecalcGfxData(obdef *ob);
 void obPrecalcDbufGfxData(obinst *inst);
 void obSetTexList(obdef *ob, texinfo *texlist, int offset);
-void obTransform(obdef *ob, mtx_u *transmtx);
+void obTransform(obdef *ob, mtx *transmtx);
 void obColour(obdef *ob, u32 col);
 obinst* obInstNew(prop *p, propdef *pd);
 void obInstResetOverride(obinst *inst);
 void obInstDelete(obinst *inst);
 void obInstSetAnim(obinst *inst, int animnum, float speed);
 boolean obInstIsAnimSoftware(obinst *inst);
-void obProcessGlows(prop *p, int partnum, partdef *part, mtx_u *pMat, mtx_u *worldMtx);
+void obProcessGlows(prop *p, int partnum, partdef *part, mtx *pMat, mtx *worldMtx);
 void obInstGfxAll(obinst *inst, int clipflag);
 void obInstGfx(obinst *inst, int gfxtype, int clipflag);
-void transformLimb(obinst *inst, partdef *part, mtx_u *mat);
+void transformLimb(obinst *inst, partdef *part, mtx *mat);
 void obConfirmLastHitInfo();
 void obSetLastHitInfo(HitInfoDef *pInfo);
 void obGetLastHitInfo(HitInfoDef *pInfo);

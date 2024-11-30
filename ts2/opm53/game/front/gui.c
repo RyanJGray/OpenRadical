@@ -2,8 +2,7 @@
 
 #include "gui.h"
 
-// warning: multiple differing types with the same name (#69,  not equal)
-enum {
+typedef enum {
 	MAPMAKER = 1,
 	FRONTEND = 2,
 	INGAME = 4,

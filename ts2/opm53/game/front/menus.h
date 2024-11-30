@@ -6,7 +6,7 @@
 typedef short int s16;
 typedef hitbox_s hitbox_t;
 
-// warning: multiple differing types with the same name (#68, fields size not equal)
+// warning: multiple differing types with the same name (fields size not equal)
 struct menu_s {
 	int numitems;
 	s16 baseleft;
@@ -16,7 +16,7 @@ struct menu_s {
 
 typedef menu_s menu_t;
 
-// warning: multiple differing types with the same name (#68, fields size not equal)
+// warning: multiple differing types with the same name (fields size not equal)
 struct menuitem_s {
 	char *text;
 	s16 left;
@@ -30,7 +30,7 @@ struct menuitem_s {
 
 typedef menuitem_s menuitem_t;
 
-// warning: multiple differing types with the same name (#68, descriptor not equal)
+// warning: multiple differing types with the same name (descriptor not equal)
 struct menulist_s {
 	u16 numitems;
 	u16 numdisplay;

@@ -2,8 +2,7 @@
 
 #include "propsetup.h"
 
-// warning: multiple differing types with the same name (#100,  not equal)
-enum {
+typedef enum {
 	PEMODE_MOVEXYZPROP = 0,
 	PEMODE_ROTATEPROP = 1,
 	PEMODE_SHOWPADS = 2,

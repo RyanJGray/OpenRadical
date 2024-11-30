@@ -1,9 +1,17 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_ENEMY_ENEMY_H
 #define GAME_ENEMY_ENEMY_H
 
-struct padInfo_s {
+#include "common.h"
+#include "lv/lvsetup.h"
+#include "prop/prop.h"
+
+typedef struct padInfo_s {
 	int padnum;
 	int nextpadnum;
 	int finaldestpadnum;
@@ -11,54 +19,7 @@ struct padInfo_s {
 	int curroutelen;
 	int curhallroute[250];
 	int curhallroutelen;
-};
-
-typedef padInfo_s padInfo;
-typedef setuplsphase_s setuplsphase;
-typedef setuplssnipergrp_s setuplssnipergrp;
-
-struct setupheader_s {
-	int setupflags;
-	int gunset;
-	setupprop *props;
-	int numprops;
-	setuppickup *pickups;
-	int numpickups;
-	setupdoor *doors;
-	int numdoors;
-	setupspawn *spawnpads;
-	int numspawnpads;
-	setupNPC *NPCsetup;
-	int numNPCs;
-	setupPatrolRoutes *setupPatrolRoutes;
-	int numPatrolroutes;
-	aihandler *AIEventHandlers;
-	int numAIEventHandlers;
-	setupNPC *si;
-	int numNPCspawns;
-	setupcar *cars;
-	int numcars;
-	setupremote *sr;
-	int numremotes;
-	setupspecialfx *specialfx;
-	int numspecialfx;
-	weatherdata *weatherdat;
-	int numweatherdata;
-	setuplsphase *lsphases;
-	int numlsphases;
-	setuplssnipergrp *lssnipergrps;
-	int numlssnipergrps;
-	setupalarm *alarms;
-	int numalarms;
-	setuplift_s *lifts;
-	int numlifts;
-	setupbutton_s *lvbuttons;
-	int numlvbuttons;
-	cameradata_s *lvcameradata;
-	int numcamera;
-	setuppropspawn_s *lvpropspawn;
-	int numpropspawns;
-};
+} padInfo;
 
 struct pad_s {
 	int extref;
@@ -70,29 +31,24 @@ struct pad_s {
 	int size;
 };
 
-struct padprop_s {
+typedef struct padprop_s {
 	int pad;
 	prop *prop;
-};
+} padprop;
 
-typedef padprop_s padprop;
-
-struct explosioninfo_s {
+typedef struct explosioninfo_s {
 	float pos[3];
 	int id;
-};
+} explosioninfo;
 
-typedef explosioninfo_s explosioninfo;
-
-struct lookup_s {
+typedef struct lookup_s {
 	int canseechr;
 	int framechecked;
 	int framechanged;
-};
+} lookup;
 
-typedef lookup_s lookup;
 extern lookup *visTable;
-extern setupheader_s *setup;
+extern setupheader *setup;
 extern int numEscorts;
 extern int numBases;
 extern int numlifts;
@@ -110,7 +66,7 @@ extern prop *droppedgunlist[20];
 extern int AI_alertstate;
 extern int activeSleepGrps[10];
 extern int numNPCcreated;
-extern chrdata_s *chractivelist[58];
+extern chrdata *chractivelist[58];
 extern prop *chr[58];
 extern padprop weaponspawn[35];
 extern padprop healthspawn[25];

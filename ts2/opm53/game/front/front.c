@@ -1,6 +1,11 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #include "front.h"
+#include "../util/assert.h"
 
 gvdisp disp_off[0] = {
 };
@@ -16,80 +21,7 @@ gvdisp disp_yesno[0] = {
 
 frontdef_t *front = NULL;
 
-frontdef_t frontdefs[4] = {
-	/* [0] = */ {
-		/* .num = */ 0,
-		/* .pagesArray = */ NULL,
-		/* .pages = */ {
-			/* [0] = */ NULL,
-			/* [1] = */ NULL,
-			/* [2] = */ NULL
-		},
-		/* .boxes = */ NULL,
-		/* .flags = */ 0,
-		/* .buttonhold = */ 0,
-		/* .numpages = */ 0,
-		/* .pagetoset = */ NULL,
-		/* .pagetosetnum = */ 0,
-		/* .mouse_x = */ 0,
-		/* .mouse_y = */ 0,
-		/* .cursor_drawer = */ NULL
-	},
-	/* [1] = */ {
-		/* .num = */ 0,
-		/* .pagesArray = */ NULL,
-		/* .pages = */ {
-			/* [0] = */ NULL,
-			/* [1] = */ NULL,
-			/* [2] = */ NULL
-		},
-		/* .boxes = */ NULL,
-		/* .flags = */ 0,
-		/* .buttonhold = */ 0,
-		/* .numpages = */ 0,
-		/* .pagetoset = */ NULL,
-		/* .pagetosetnum = */ 0,
-		/* .mouse_x = */ 0,
-		/* .mouse_y = */ 0,
-		/* .cursor_drawer = */ NULL
-	},
-	/* [2] = */ {
-		/* .num = */ 0,
-		/* .pagesArray = */ NULL,
-		/* .pages = */ {
-			/* [0] = */ NULL,
-			/* [1] = */ NULL,
-			/* [2] = */ NULL
-		},
-		/* .boxes = */ NULL,
-		/* .flags = */ 0,
-		/* .buttonhold = */ 0,
-		/* .numpages = */ 0,
-		/* .pagetoset = */ NULL,
-		/* .pagetosetnum = */ 0,
-		/* .mouse_x = */ 0,
-		/* .mouse_y = */ 0,
-		/* .cursor_drawer = */ NULL
-	},
-	/* [3] = */ {
-		/* .num = */ 0,
-		/* .pagesArray = */ NULL,
-		/* .pages = */ {
-			/* [0] = */ NULL,
-			/* [1] = */ NULL,
-			/* [2] = */ NULL
-		},
-		/* .boxes = */ NULL,
-		/* .flags = */ 0,
-		/* .buttonhold = */ 0,
-		/* .numpages = */ 0,
-		/* .pagetoset = */ NULL,
-		/* .pagetosetnum = */ 0,
-		/* .mouse_x = */ 0,
-		/* .mouse_y = */ 0,
-		/* .cursor_drawer = */ NULL
-	}
-};
+frontdef_t frontdefs[4] = { 0 };
 
 pagedef_t *currentpage = NULL;
 static hitbox_t boxes[4][128];
@@ -219,7 +151,9 @@ void frontEnd() {
 	int i;
 }
 
-void frontPageSet(int pagenum, pageinit_t *init) {}
+void frontPageSet(int pagenum, pageinit_t *init) {
+	OPENRADICAL_ASSERT_IF(front->pagetoset==NULL)
+}
 
 pagedef_t* frontPageActivate(pageinit_t *init) {
 	pagedef_t *page;

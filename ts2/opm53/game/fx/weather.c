@@ -1,57 +1,12 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #include "weather.h"
+#include "cam/cam.h"
 
-struct fireFlyParticle_s {
-	float pos[3];
-	float velocity[3];
-	float destPos[3];
-	float timeThisWay;
-	float lifetime;
-	float totalLifetime;
-};
-
-typedef fireFlyParticle_s fireFlyParticle;
-
-struct snowParticle_s {
-	float pos[3];
-	float velocity[3];
-	float wind;
-};
-
-typedef snowParticle_s snowParticle;
-
-struct precBlockPrecalc_s {
-	float blockPos[3];
-	boolean autopass;
-};
-
-typedef precBlockPrecalc_s precBlockPrecalc;
-
-struct weatherBoundsData_s {
-	float distsqFromPlayer[4];
-	float precipitationScale[4];
-	fireFlyParticle fireFlies[2];
-	int blocksx;
-	int blocksy;
-	int blocksz;
-	float *clippingx;
-	float *clippingy;
-	float *clippingz;
-	precBlockPrecalc *blocks;
-};
-
-typedef weatherBoundsData_s weatherBoundsData;
-
-struct weatherRoomData_s {
-	float distsqFromPlayer[4];
-	float splashScale[4];
-	int fxUsage;
-	int numBounds;
-	weatherBoundsData *bounds;
-};
-
-typedef weatherRoomData_s weatherRoomData;
 snowParticle *snowBlockParticles = NULL;
 weatherRoomData *weatherRooms = NULL;
 static int snowballtexnum = -1;
@@ -85,19 +40,7 @@ static boolean rainEnabled;
 static boolean snowEnabled;
 static boolean fireFlyEnabled;
 
-weatherinfo weather = {
-	/* .numweatherdata = */ 0,
-	/* .data = */ NULL,
-	/* .currentweather = */ 0,
-	/* .destweather = */ 0,
-	/* .ratio = */ 0.f,
-	/* .windspeed = */ {
-		/* [0] = */ 0.f,
-		/* [1] = */ 0.f,
-		/* [2] = */ 0.f
-	},
-	/* .windtime = */ 0.f
-};
+weatherinfo weather = {0};
 
 weatherdata* weatherGetCurrentWeatherData() {}
 

@@ -2,8 +2,7 @@
 
 #include "enemyArcade.h"
 
-// warning: multiple differing types with the same name (#147,  not equal)
-enum {
+typedef enum {
 	ATTACK_FIRSTSIGHT = 0,
 	ATTACK_ATTACK = 1,
 	ATTACK_CLOSEIN = 2,
@@ -13,8 +12,7 @@ enum {
 	ATTACK_KNEEL = 6
 };
 
-// warning: multiple differing types with the same name (#147,  not equal)
-enum {
+typedef enum {
 	EARM_SELECT_GUN = 0,
 	EARM_ADVANCE_TO_GUN = 1,
 	EARM_WAITFORGUN = 2,

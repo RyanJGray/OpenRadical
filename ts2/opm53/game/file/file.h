@@ -1,19 +1,20 @@
 //
-// The OpenTS2 Project
-// 2023
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
 //
 
 #ifndef GAME_FILE_FILE_H
 #define GAME_FILE_FILE_H
 
-#include "../../types.h"
+#include "common.h"
 
 void packfileLoad(u8 *filename, boolean loadmem, int loadmemtype);
-u8* fileGetMem(u8 *filename);
+u8 *fileGetMem(u8 *filename);
 int fileGetSector(u8 *filename);
 int fileSizeSingleFile(u8 *filename);
 int fileSize(u8 *filename);
-u8* fileLoad(u8 *filename, int memperiod, int *retsize);
+u8 *fileLoad(u8 *filename, int memperiod, int *retsize);
 void addfiletoloadedlist(u8 *filename);
 int fileLoadTo(u8 *filename, u8 *buffer, int maxsize);
 int fileLoadSingleFile(u8 *filename, u8 *buffer, int maxsize);

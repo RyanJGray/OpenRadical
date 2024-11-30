@@ -1,37 +1,144 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_PROP_PROP_H
 #define GAME_PROP_PROP_H
 
-typedef void void;
+#include "common.h"
+#include "hud/hud.h"
+#include "player/player.h"
+#include "util/matrix.h"
+#include "fx/particle.h"
+#include "fx/specialfx.h"
+#include "move/move.h"
 
-struct glassResults_s {
+// Forward-declarations
+struct prop_s;
+
+enum {
+	PROPATTACHFLAG_RIGHTHAND = 1,
+	PROPATTACHFLAG_LEFTHAND = 2
+};
+
+typedef struct glassHit_s {
+	struct prop_s *prop;
+	float hitpos[3];
+	float hitdir[3];
+	float hitnorm[3];
+	int room;
+	glassdef *glass;
+} glassHit;
+
+typedef struct glassResults_s {
 	int numHits;
 	int hitReverse;
 	glassHit hits[5];
-};
+} glassResults;
 
-typedef glassResults_s glassResults;
-
-struct s_PropBoundingBox {
+typedef struct s_PropBoundingBox {
 	boolean calculated;
 	float CentrePos[3];
 	float Radius[3];
-};
+} PropBoundingBox;
 
-typedef s_PropBoundingBox PropBoundingBox;
-
-struct PropBoundingInfo_s {
+typedef struct PropBoundingInfo_s {
 	PropBoundingBox overallBounds;
 	int numExtraBounds;
 	PropBoundingBox *extraBounds;
-};
+} PropBoundingInfo;
 
-typedef PropBoundingInfo_s PropBoundingInfo;
 typedef void (*handlerfunc)(/* parameters unknown */);
-typedef prop_s prop;
 
-struct pickupdata_s {
+typedef struct handler_s {
+	handlerfunc function;
+} handler;
+
+typedef struct prop_s {
+	int id;
+	int num;
+	int type;
+	int subtype;
+	int room;
+	int LastTickFrame;
+	u32 flags;
+	u32 lastflags;
+	u32 damageflags;
+	u32 frameflags;
+	u32 drawflags;
+	u32 framedrawflags;
+	obinst *inst;
+	obinst *swapinst;
+	float startpos[3];
+	float pos[3];
+	float vel[3];
+	float rotx;
+	float roty;
+	float newroty;
+	float rotz;
+	float rotaxial;
+	float rotinc;
+	float rotaxis[3];
+	float rotvel[3];
+	float lastpos[3];
+	float moveRate[3];
+	float lastrotx;
+	float lastroty;
+	float lastrotz;
+	int posmode;
+	int rotmode;
+	int rooms[10];
+	int numrooms;
+	float scrmin[2];
+	float scrmax[2];
+	obinst *attachobinst;
+	int attachmtxnum;
+	int attachflag;
+	float hitreacttime;
+	mtx tmat1;
+	mtx tmat2;
+	int tmatindex1;
+	int tmatindex2;
+	void *data;
+	player *player;
+	handler handlers[11];
+	void (*damageHandler)(/* parameters unknown */);
+	int usingdisappearancetimer;
+	int disappearancetimer;
+	float CentrePos[3];
+	float CentrePosAtStart[3];
+	float Radius[3];
+	float health;
+	float maxHealth;
+	float damageLevel;
+	int numTransformedFloors;
+	int numTransformedWalls;
+	int numTransformedGlass;
+	int numTransformedSpecial;
+	floordef **transformedFloors;
+	walldef **transformedWalls;
+	glassdef **transformedGlass;
+	specialdef **transformedSpecial;
+	struct prop_s *otherprop;
+	struct prop_s *MyAttacker;
+	float FloorLevel;
+	float RockingDisp;
+	float RockingVel;
+	float BurnSFXTimer;
+	s16 ClosestLight[9];
+	float attachobworldpos[3];
+	int manualLightIndex;
+	int NetLifeCounter;
+	float activationdistsq;
+	float activationdot;
+	hudHealthArmourData *hudHealthArmourPtr;
+	int activationdata;
+	int alarmnumber;
+} prop;
+
+typedef struct pickupdata_s {
 	int dataID;
 	int type;
 	int status;
@@ -58,9 +165,8 @@ struct pickupdata_s {
 	float tailRotation;
 	float lefthandRotation;
 	float righthandRotation;
-};
+} pickupdata;
 
-typedef pickupdata_s pickupdata;
 extern propdef proptable[812];
 extern int lastreactionframenum;
 extern prop *p_roomprops[226][100];
@@ -135,8 +241,8 @@ void propTickPlayer();
 void propSetMatrices(prop *p);
 void propGfxRoomPreproc();
 void propGfxRoomClipProps(int room);
-void propDrawLine(mtx_u *pView, float *v1, float *v2, int rgba);
-void propDrawRec(mtx_u *pView, float *v1, float *v2, float *v3, float *v4, int rgba);
+void propDrawLine(mtx *pView, float *v1, float *v2, int rgba);
+void propDrawRec(mtx *pView, float *v1, float *v2, float *v3, float *v4, int rgba);
 void propDrawBounds(prop *p);
 void propDrawWalls(prop *p);
 void propDrawFloors(prop *p);

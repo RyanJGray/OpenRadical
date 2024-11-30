@@ -2,8 +2,7 @@
 
 #include "mcard.h"
 
-// warning: multiple differing types with the same name (#23,  not equal)
-enum {
+typedef enum {
 	MCARD_TYPE_NONE = 0,
 	MCARD_TYPE_PS1 = 1,
 	MCARD_TYPE_PS2 = 2,
@@ -11,8 +10,7 @@ enum {
 	MCARD_TYPE_NUM = 4
 };
 
-// warning: multiple differing types with the same name (#23,  not equal)
-enum {
+typedef enum {
 	MCSTATE_IDLE = 0,
 	MCSTATE_CHECKCARDS_INIT = 1,
 	MCSTATE_CHECKCARDS_FLUSHFUNC = 2,

@@ -45,7 +45,7 @@ menuitem dm1b = {
 	/* .ypos = */ 30,
 	/* .yposref = */ NULL,
 	/* .flags = */ 5,
-	/* .actiondata = */ startgameview,
+	/* .actiondata = */ &startgameview,
 	/* .spare = */ 0
 };
 
@@ -58,7 +58,7 @@ menuitem dm1c = {
 	/* .ypos = */ 1,
 	/* .yposref = */ &dm1b,
 	/* .flags = */ 5,
-	/* .actiondata = */ startthirdpersonview,
+	/* .actiondata = */ &startthirdpersonview,
 	/* .spare = */ 0
 };
 
@@ -71,7 +71,7 @@ menuitem dm1d = {
 	/* .ypos = */ 1,
 	/* .yposref = */ &dm1c,
 	/* .flags = */ 5,
-	/* .actiondata = */ startPropView,
+	/* .actiondata = */ &startPropView,
 	/* .spare = */ 0
 };
 
@@ -97,7 +97,7 @@ menuitem dm1f = {
 	/* .ypos = */ 1,
 	/* .yposref = */ &dm1e,
 	/* .flags = */ 5,
-	/* .actiondata = */ toggledisplaypos,
+	/* .actiondata = */ &toggledisplaypos,
 	/* .spare = */ 0
 };
 
@@ -154,7 +154,7 @@ menuitem dm1j = {
 };
 
 menuitem dm1b2 = {
-	/* .text = */ getgameview,
+	/* .text = */ &getgameview,
 	/* .xpostype = */ 3,
 	/* .xpos = */ 70,
 	/* .xposref = */ &dm1b,
@@ -167,7 +167,7 @@ menuitem dm1b2 = {
 };
 
 menuitem dm1c2 = {
-	/* .text = */ getthirdpersonview,
+	/* .text = */ &getthirdpersonview,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 0,
 	/* .xposref = */ &dm1b2,
@@ -180,7 +180,7 @@ menuitem dm1c2 = {
 };
 
 menuitem dm1d2 = {
-	/* .text = */ getpropview,
+	/* .text = */ &getpropview,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 0,
 	/* .xposref = */ &dm1c2,
@@ -193,7 +193,7 @@ menuitem dm1d2 = {
 };
 
 menuitem dm1f2 = {
-	/* .text = */ getdisplaypos,
+	/* .text = */ &getdisplaypos,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 0,
 	/* .xposref = */ &dm1d2,
@@ -233,7 +233,7 @@ menuitem dm2a = {
 	/* .ypos = */ 60,
 	/* .yposref = */ NULL,
 	/* .flags = */ 5,
-	/* .actiondata = */ toggleinvincible,
+	/* .actiondata = */ &toggleinvincible,
 	/* .spare = */ 0
 };
 
@@ -246,7 +246,7 @@ menuitem dm2b = {
 	/* .ypos = */ 2,
 	/* .yposref = */ &dm2a,
 	/* .flags = */ 5,
-	/* .actiondata = */ toggleinvisible,
+	/* .actiondata = */ &toggleinvisible,
 	/* .spare = */ 0
 };
 
@@ -259,7 +259,7 @@ menuitem dm2c = {
 	/* .ypos = */ 2,
 	/* .yposref = */ &dm2b,
 	/* .flags = */ 5,
-	/* .actiondata = */ togglecollisions,
+	/* .actiondata = */ &togglecollisions,
 	/* .spare = */ 0
 };
 
@@ -272,7 +272,7 @@ menuitem dm2d = {
 	/* .ypos = */ 2,
 	/* .yposref = */ &dm2c,
 	/* .flags = */ 5,
-	/* .actiondata = */ toggleblood,
+	/* .actiondata = */ &toggleblood,
 	/* .spare = */ 0
 };
 
@@ -285,7 +285,7 @@ menuitem dm2e = {
 	/* .ypos = */ 2,
 	/* .yposref = */ &dm2d,
 	/* .flags = */ 5,
-	/* .actiondata = */ togglepausewithtri,
+	/* .actiondata = */ &togglepausewithtri,
 	/* .spare = */ 0
 };
 
@@ -298,7 +298,7 @@ menuitem dm2f = {
 	/* .ypos = */ 2,
 	/* .yposref = */ &dm2e,
 	/* .flags = */ 5,
-	/* .actiondata = */ togglescreendumpwithsquare,
+	/* .actiondata = */ &togglescreendumpwithsquare,
 	/* .spare = */ 0
 };
 
@@ -311,7 +311,7 @@ menuitem dm2g = {
 	/* .ypos = */ 2,
 	/* .yposref = */ &dm2f,
 	/* .flags = */ 5,
-	/* .actiondata = */ togglemovewhenpaused,
+	/* .actiondata = */ &togglemovewhenpaused,
 	/* .spare = */ 0
 };
 
@@ -324,7 +324,7 @@ menuitem dm2h = {
 	/* .ypos = */ 2,
 	/* .yposref = */ &dm2g,
 	/* .flags = */ 5,
-	/* .actiondata = */ toggleunlock,
+	/* .actiondata = */ &toggleunlock,
 	/* .spare = */ 0
 };
 
@@ -337,12 +337,12 @@ menuitem dm2i = {
 	/* .ypos = */ 2,
 	/* .yposref = */ &dm2h,
 	/* .flags = */ 5,
-	/* .actiondata = */ togglenotimer,
+	/* .actiondata = */ &togglenotimer,
 	/* .spare = */ 0
 };
 
 menuitem dm2a2 = {
-	/* .text = */ getinvincible,
+	/* .text = */ &getinvincible,
 	/* .xpostype = */ 3,
 	/* .xpos = */ 200,
 	/* .xposref = */ &dm2a,
@@ -355,7 +355,7 @@ menuitem dm2a2 = {
 };
 
 menuitem dm2b2 = {
-	/* .text = */ getinvisible,
+	/* .text = */ &getinvisible,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 0,
 	/* .xposref = */ &dm2a2,
@@ -368,7 +368,7 @@ menuitem dm2b2 = {
 };
 
 menuitem dm2c2 = {
-	/* .text = */ getcollisions,
+	/* .text = */ &getcollisions,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 0,
 	/* .xposref = */ &dm2b2,
@@ -381,7 +381,7 @@ menuitem dm2c2 = {
 };
 
 menuitem dm2d2 = {
-	/* .text = */ getblood,
+	/* .text = */ &getblood,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 0,
 	/* .xposref = */ &dm2c2,
@@ -394,7 +394,7 @@ menuitem dm2d2 = {
 };
 
 menuitem dm2e2 = {
-	/* .text = */ getpausewithtri,
+	/* .text = */ &getpausewithtri,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 0,
 	/* .xposref = */ &dm2d2,
@@ -407,7 +407,7 @@ menuitem dm2e2 = {
 };
 
 menuitem dm2f2 = {
-	/* .text = */ getscreendumpwithsquare,
+	/* .text = */ &getscreendumpwithsquare,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 0,
 	/* .xposref = */ &dm2e2,
@@ -420,7 +420,7 @@ menuitem dm2f2 = {
 };
 
 menuitem dm2g2 = {
-	/* .text = */ getmovewhenpaused,
+	/* .text = */ &getmovewhenpaused,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 0,
 	/* .xposref = */ &dm2f2,
@@ -433,7 +433,7 @@ menuitem dm2g2 = {
 };
 
 menuitem dm2h2 = {
-	/* .text = */ getunlock,
+	/* .text = */ &getunlock,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 0,
 	/* .xposref = */ &dm2g2,
@@ -446,7 +446,7 @@ menuitem dm2h2 = {
 };
 
 menuitem dm2i2 = {
-	/* .text = */ getnotimer,
+	/* .text = */ &getnotimer,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 0,
 	/* .xposref = */ &dm2h2,
@@ -483,7 +483,7 @@ menuitem dm3a = {
 	/* .ypos = */ 90,
 	/* .yposref = */ NULL,
 	/* .flags = */ 5,
-	/* .actiondata = */ toggledisplayspeed,
+	/* .actiondata = */ &toggledisplayspeed,
 	/* .spare = */ 0
 };
 
@@ -496,7 +496,7 @@ menuitem dm3b = {
 	/* .ypos = */ 2,
 	/* .yposref = */ &dm3a,
 	/* .flags = */ 5,
-	/* .actiondata = */ toggledisplayperfstats,
+	/* .actiondata = */ &toggledisplayperfstats,
 	/* .spare = */ 0
 };
 
@@ -509,7 +509,7 @@ menuitem dm3c = {
 	/* .ypos = */ 2,
 	/* .yposref = */ &dm3b,
 	/* .flags = */ 5,
-	/* .actiondata = */ toggledisplayrooms,
+	/* .actiondata = */ &toggledisplayrooms,
 	/* .spare = */ 0
 };
 
@@ -522,7 +522,7 @@ menuitem dm3d = {
 	/* .ypos = */ 2,
 	/* .yposref = */ &dm3c,
 	/* .flags = */ 5,
-	/* .actiondata = */ memPrintFree,
+	/* .actiondata = */ &memPrintFree,
 	/* .spare = */ 0
 };
 
@@ -535,7 +535,7 @@ menuitem dm3e = {
 	/* .ypos = */ 2,
 	/* .yposref = */ &dm3d,
 	/* .flags = */ 5,
-	/* .actiondata = */ memdbPrintFree,
+	/* .actiondata = */ &memdbPrintFree,
 	/* .spare = */ 0
 };
 
@@ -548,7 +548,7 @@ menuitem dm3f = {
 	/* .ypos = */ 2,
 	/* .yposref = */ &dm3e,
 	/* .flags = */ 5,
-	/* .actiondata = */ notdone,
+	/* .actiondata = */ &notdone,
 	/* .spare = */ 0
 };
 
@@ -561,7 +561,7 @@ menuitem dm3g = {
 	/* .ypos = */ 2,
 	/* .yposref = */ &dm3f,
 	/* .flags = */ 5,
-	/* .actiondata = */ emPrintStats,
+	/* .actiondata = */ &emPrintStats,
 	/* .spare = */ 0
 };
 
@@ -574,7 +574,7 @@ menuitem dm3h = {
 	/* .ypos = */ 2,
 	/* .yposref = */ &dm3g,
 	/* .flags = */ 5,
-	/* .actiondata = */ toggleshowenemystats,
+	/* .actiondata = */ &toggleshowenemystats,
 	/* .spare = */ 0
 };
 
@@ -587,7 +587,7 @@ menuitem dm3i = {
 	/* .ypos = */ 2,
 	/* .yposref = */ &dm3h,
 	/* .flags = */ 5,
-	/* .actiondata = */ toggleshowenemyalertstates,
+	/* .actiondata = */ &toggleshowenemyalertstates,
 	/* .spare = */ 0
 };
 
@@ -600,12 +600,12 @@ menuitem dm3j = {
 	/* .ypos = */ 2,
 	/* .yposref = */ &dm3i,
 	/* .flags = */ 5,
-	/* .actiondata = */ toggleshowrankingstype,
+	/* .actiondata = */ &toggleshowrankingstype,
 	/* .spare = */ 0
 };
 
 menuitem dm3a2 = {
-	/* .text = */ getdisplayspeed,
+	/* .text = */ &getdisplayspeed,
 	/* .xpostype = */ 3,
 	/* .xpos = */ 90,
 	/* .xposref = */ &dm3a,
@@ -618,7 +618,7 @@ menuitem dm3a2 = {
 };
 
 menuitem dm3b2 = {
-	/* .text = */ getdisplayperfstats,
+	/* .text = */ &getdisplayperfstats,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 0,
 	/* .xposref = */ &dm3a2,
@@ -631,7 +631,7 @@ menuitem dm3b2 = {
 };
 
 menuitem dm3c2 = {
-	/* .text = */ getdisplayrooms,
+	/* .text = */ &getdisplayrooms,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 0,
 	/* .xposref = */ &dm3b2,
@@ -644,7 +644,7 @@ menuitem dm3c2 = {
 };
 
 menuitem dm3h2 = {
-	/* .text = */ getshowenemystats,
+	/* .text = */ &getshowenemystats,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 0,
 	/* .xposref = */ &dm3b2,
@@ -657,7 +657,7 @@ menuitem dm3h2 = {
 };
 
 menuitem dm3i2 = {
-	/* .text = */ getshowenemyalertstates,
+	/* .text = */ &getshowenemyalertstates,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 0,
 	/* .xposref = */ &dm3b2,
@@ -670,7 +670,7 @@ menuitem dm3i2 = {
 };
 
 menuitem dm3j2 = {
-	/* .text = */ getshowrankingstype,
+	/* .text = */ &getshowrankingstype,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 0,
 	/* .xposref = */ &dm3b2,
@@ -700,7 +700,7 @@ menuitem dm4a = {
 	/* .ypos = */ 45,
 	/* .yposref = */ NULL,
 	/* .flags = */ 5,
-	/* .actiondata = */ toggleviewportals,
+	/* .actiondata = */ &toggleviewportals,
 	/* .spare = */ 0
 };
 
@@ -713,7 +713,7 @@ menuitem dm4b = {
 	/* .ypos = */ 1,
 	/* .yposref = */ &dm4a,
 	/* .flags = */ 5,
-	/* .actiondata = */ toggleviewportalrects,
+	/* .actiondata = */ &toggleviewportalrects,
 	/* .spare = */ 0
 };
 
@@ -726,7 +726,7 @@ menuitem dm4c = {
 	/* .ypos = */ 1,
 	/* .yposref = */ &dm4b,
 	/* .flags = */ 5,
-	/* .actiondata = */ toggleviewfloors,
+	/* .actiondata = */ &toggleviewfloors,
 	/* .spare = */ 0
 };
 
@@ -739,7 +739,7 @@ menuitem dm4d = {
 	/* .ypos = */ 1,
 	/* .yposref = */ &dm4c,
 	/* .flags = */ 5,
-	/* .actiondata = */ toggleviewwalls,
+	/* .actiondata = */ &toggleviewwalls,
 	/* .spare = */ 0
 };
 
@@ -752,7 +752,7 @@ menuitem dm4e = {
 	/* .ypos = */ 1,
 	/* .yposref = */ &dm4d,
 	/* .flags = */ 5,
-	/* .actiondata = */ toggleviewvolumes,
+	/* .actiondata = */ &toggleviewvolumes,
 	/* .spare = */ 0
 };
 
@@ -765,7 +765,7 @@ menuitem dm4f = {
 	/* .ypos = */ 1,
 	/* .yposref = */ &dm4e,
 	/* .flags = */ 5,
-	/* .actiondata = */ toggleviewguns,
+	/* .actiondata = */ &toggleviewguns,
 	/* .spare = */ 0
 };
 
@@ -778,7 +778,7 @@ menuitem dm4g = {
 	/* .ypos = */ 1,
 	/* .yposref = */ &dm4f,
 	/* .flags = */ 5,
-	/* .actiondata = */ toggleviewbg,
+	/* .actiondata = */ &toggleviewbg,
 	/* .spare = */ 0
 };
 
@@ -791,7 +791,7 @@ menuitem dm4h = {
 	/* .ypos = */ 1,
 	/* .yposref = */ &dm4g,
 	/* .flags = */ 5,
-	/* .actiondata = */ toggleviewroombb,
+	/* .actiondata = */ &toggleviewroombb,
 	/* .spare = */ 0
 };
 
@@ -804,7 +804,7 @@ menuitem dm4i = {
 	/* .ypos = */ 1,
 	/* .yposref = */ &dm4h,
 	/* .flags = */ 5,
-	/* .actiondata = */ toggleviewpropbb,
+	/* .actiondata = */ &toggleviewpropbb,
 	/* .spare = */ 0
 };
 
@@ -817,7 +817,7 @@ menuitem dm4j = {
 	/* .ypos = */ 1,
 	/* .yposref = */ &dm4i,
 	/* .flags = */ 5,
-	/* .actiondata = */ toggleviewfxbb,
+	/* .actiondata = */ &toggleviewfxbb,
 	/* .spare = */ 0
 };
 
@@ -830,7 +830,7 @@ menuitem dm4k = {
 	/* .ypos = */ 1,
 	/* .yposref = */ &dm4j,
 	/* .flags = */ 5,
-	/* .actiondata = */ toggleviewhud,
+	/* .actiondata = */ &toggleviewhud,
 	/* .spare = */ 0
 };
 
@@ -843,7 +843,7 @@ menuitem dm4l = {
 	/* .ypos = */ 1,
 	/* .yposref = */ &dm4k,
 	/* .flags = */ 5,
-	/* .actiondata = */ toggleviewweatherbb,
+	/* .actiondata = */ &toggleviewweatherbb,
 	/* .spare = */ 0
 };
 
@@ -856,7 +856,7 @@ menuitem dm4m = {
 	/* .ypos = */ 1,
 	/* .yposref = */ &dm4l,
 	/* .flags = */ 5,
-	/* .actiondata = */ toggleviewglows,
+	/* .actiondata = */ &toggleviewglows,
 	/* .spare = */ 0
 };
 
@@ -869,7 +869,7 @@ menuitem dm4n = {
 	/* .ypos = */ 1,
 	/* .yposref = */ &dm4m,
 	/* .flags = */ 5,
-	/* .actiondata = */ toggleviewpropfloors,
+	/* .actiondata = */ &toggleviewpropfloors,
 	/* .spare = */ 0
 };
 
@@ -882,7 +882,7 @@ menuitem dm4o = {
 	/* .ypos = */ 1,
 	/* .yposref = */ &dm4n,
 	/* .flags = */ 5,
-	/* .actiondata = */ toggleviewpropwalls,
+	/* .actiondata = */ &toggleviewpropwalls,
 	/* .spare = */ 0
 };
 
@@ -895,12 +895,12 @@ menuitem dm4p = {
 	/* .ypos = */ 1,
 	/* .yposref = */ &dm4o,
 	/* .flags = */ 5,
-	/* .actiondata = */ toggledisableambientlight,
+	/* .actiondata = */ &toggledisableambientlight,
 	/* .spare = */ 0
 };
 
 menuitem dm4a2 = {
-	/* .text = */ getviewportals,
+	/* .text = */ &getviewportals,
 	/* .xpostype = */ 3,
 	/* .xpos = */ 120,
 	/* .xposref = */ &dm4a,
@@ -913,7 +913,7 @@ menuitem dm4a2 = {
 };
 
 menuitem dm4b2 = {
-	/* .text = */ getviewportalrects,
+	/* .text = */ &getviewportalrects,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 0,
 	/* .xposref = */ &dm4a2,
@@ -926,7 +926,7 @@ menuitem dm4b2 = {
 };
 
 menuitem dm4c2 = {
-	/* .text = */ getviewfloors,
+	/* .text = */ &getviewfloors,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 0,
 	/* .xposref = */ &dm4b2,
@@ -939,7 +939,7 @@ menuitem dm4c2 = {
 };
 
 menuitem dm4d2 = {
-	/* .text = */ getviewwalls,
+	/* .text = */ &getviewwalls,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 0,
 	/* .xposref = */ &dm4c2,
@@ -952,7 +952,7 @@ menuitem dm4d2 = {
 };
 
 menuitem dm4e2 = {
-	/* .text = */ getviewvolumes,
+	/* .text = */ &getviewvolumes,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 0,
 	/* .xposref = */ &dm4d2,
@@ -965,7 +965,7 @@ menuitem dm4e2 = {
 };
 
 menuitem dm4f2 = {
-	/* .text = */ getviewguns,
+	/* .text = */ &getviewguns,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 0,
 	/* .xposref = */ &dm4e2,
@@ -978,7 +978,7 @@ menuitem dm4f2 = {
 };
 
 menuitem dm4g2 = {
-	/* .text = */ getviewbg,
+	/* .text = */ &getviewbg,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 0,
 	/* .xposref = */ &dm4f2,
@@ -991,7 +991,7 @@ menuitem dm4g2 = {
 };
 
 menuitem dm4h2 = {
-	/* .text = */ getviewroombb,
+	/* .text = */ &getviewroombb,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 0,
 	/* .xposref = */ &dm4g2,
@@ -1004,7 +1004,7 @@ menuitem dm4h2 = {
 };
 
 menuitem dm4i2 = {
-	/* .text = */ getviewpropbb,
+	/* .text = */ &getviewpropbb,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 0,
 	/* .xposref = */ &dm4h2,
@@ -1017,7 +1017,7 @@ menuitem dm4i2 = {
 };
 
 menuitem dm4j2 = {
-	/* .text = */ getviewfxbb,
+	/* .text = */ &getviewfxbb,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 0,
 	/* .xposref = */ &dm4i2,
@@ -1030,7 +1030,7 @@ menuitem dm4j2 = {
 };
 
 menuitem dm4k2 = {
-	/* .text = */ getviewhud,
+	/* .text = */ &getviewhud,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 0,
 	/* .xposref = */ &dm4j2,
@@ -1043,7 +1043,7 @@ menuitem dm4k2 = {
 };
 
 menuitem dm4l2 = {
-	/* .text = */ getviewweatherbb,
+	/* .text = */ &getviewweatherbb,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 0,
 	/* .xposref = */ &dm4k2,
@@ -1056,7 +1056,7 @@ menuitem dm4l2 = {
 };
 
 menuitem dm4m2 = {
-	/* .text = */ getviewglows,
+	/* .text = */ &getviewglows,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 0,
 	/* .xposref = */ &dm4l2,
@@ -1069,7 +1069,7 @@ menuitem dm4m2 = {
 };
 
 menuitem dm4n2 = {
-	/* .text = */ getviewpropfloors,
+	/* .text = */ &getviewpropfloors,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 0,
 	/* .xposref = */ &dm4m2,
@@ -1082,7 +1082,7 @@ menuitem dm4n2 = {
 };
 
 menuitem dm4o2 = {
-	/* .text = */ getviewpropwalls,
+	/* .text = */ &getviewpropwalls,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 0,
 	/* .xposref = */ &dm4n2,
@@ -1095,7 +1095,7 @@ menuitem dm4o2 = {
 };
 
 menuitem dm4p2 = {
-	/* .text = */ getdisableambientlight,
+	/* .text = */ &getdisableambientlight,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 0,
 	/* .xposref = */ &dm4o2,
@@ -1125,7 +1125,7 @@ menuitem dm5a = {
 	/* .ypos = */ 60,
 	/* .yposref = */ NULL,
 	/* .flags = */ 5,
-	/* .actiondata = */ togglepadlinkedit,
+	/* .actiondata = */ &togglepadlinkedit,
 	/* .spare = */ 0
 };
 
@@ -1138,7 +1138,7 @@ menuitem dm5b = {
 	/* .ypos = */ 1,
 	/* .yposref = */ &dm5a,
 	/* .flags = */ 5,
-	/* .actiondata = */ togglepropedit,
+	/* .actiondata = */ &togglepropedit,
 	/* .spare = */ 0
 };
 
@@ -1151,12 +1151,12 @@ menuitem dm5c = {
 	/* .ypos = */ 1,
 	/* .yposref = */ &dm5b,
 	/* .flags = */ 5,
-	/* .actiondata = */ toggleambientlightedit,
+	/* .actiondata = */ &toggleambientlightedit,
 	/* .spare = */ 0
 };
 
 menuitem dm5a2 = {
-	/* .text = */ getpadlinkedit,
+	/* .text = */ &getpadlinkedit,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 170,
 	/* .xposref = */ &dm5a,
@@ -1169,7 +1169,7 @@ menuitem dm5a2 = {
 };
 
 menuitem dm5b2 = {
-	/* .text = */ getpropedit,
+	/* .text = */ &getpropedit,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 170,
 	/* .xposref = */ &dm5b,
@@ -1182,7 +1182,7 @@ menuitem dm5b2 = {
 };
 
 menuitem dm5c2 = {
-	/* .text = */ getambientlightedit,
+	/* .text = */ &getambientlightedit,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 170,
 	/* .xposref = */ &dm5c,
@@ -1212,7 +1212,7 @@ menuitem dm6a = {
 	/* .ypos = */ 60,
 	/* .yposref = */ NULL,
 	/* .flags = */ 5,
-	/* .actiondata = */ toggleturtlecpu,
+	/* .actiondata = */ &toggleturtlecpu,
 	/* .spare = */ 0
 };
 
@@ -1225,12 +1225,12 @@ menuitem dm6b = {
 	/* .ypos = */ 1,
 	/* .yposref = */ &dm6a,
 	/* .flags = */ 5,
-	/* .actiondata = */ toggleturtlegs,
+	/* .actiondata = */ &toggleturtlegs,
 	/* .spare = */ 0
 };
 
 menuitem dm6a2 = {
-	/* .text = */ getturtlecpu,
+	/* .text = */ &getturtlecpu,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 150,
 	/* .xposref = */ &dm6a,
@@ -1243,7 +1243,7 @@ menuitem dm6a2 = {
 };
 
 menuitem dm6b2 = {
-	/* .text = */ getturtlegs,
+	/* .text = */ &getturtlegs,
 	/* .xpostype = */ 1,
 	/* .xpos = */ 150,
 	/* .xposref = */ &dm6b,

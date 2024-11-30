@@ -1,0 +1,8 @@
+// STATUS: NOT STARTED
+
+#ifndef GCC_SRC_NEWLIB_LIBM_MATH_WF_POW_H
+#define GCC_SRC_NEWLIB_LIBM_MATH_WF_POW_H
+
+float powf(float x, float y);
+
+#endif // GCC_SRC_NEWLIB_LIBM_MATH_WF_POW_H

@@ -1,9 +1,18 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_FRONT_FRONT_MPG_H
 #define GAME_FRONT_FRONT_MPG_H
 
-struct gamevar_s {
+#include "common.h"
+#include "mapmaker/mm_menus.h"
+#include "prop/prop.h"
+#include "window/window.h"
+
+typedef struct gamevar_s {
 	int value;
 	int min;
 	int max;
@@ -14,10 +23,9 @@ struct gamevar_s {
 	int marginright;
 	int arrowleftofs;
 	int arrowrightofs;
-};
+} gamevar;
 
-typedef gamevar_s gamevar;
-// warning: multiple differing types with the same name (#74, type name not equal)
+// warning: multiple differing types with the same name (type name not equal)
 typedef boolean (*msgfunc_t)(/* parameters unknown */);
 extern gamevar gv_playmusic;
 extern gamevar gv_playsound;

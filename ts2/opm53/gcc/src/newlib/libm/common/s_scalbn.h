@@ -1,0 +1,9 @@
+// STATUS: NOT STARTED
+
+#ifndef GCC_SRC_NEWLIB_LIBM_COMMON_S_SCALBN_H
+#define GCC_SRC_NEWLIB_LIBM_COMMON_S_SCALBN_H
+
+
+double scalbn(double x, int n);
+
+#endif // GCC_SRC_NEWLIB_LIBM_COMMON_S_SCALBN_H

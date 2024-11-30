@@ -1,8 +1,13 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_SOUND_SOUND_H
 #define GAME_SOUND_SOUND_H
 
+#include "common.h"
 
 void soundMake();
 void soundSelectBuffer(int num);

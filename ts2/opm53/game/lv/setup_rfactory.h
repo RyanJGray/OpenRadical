@@ -1,34 +1,13 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_LV_SETUP_RFACTORY_H
 #define GAME_LV_SETUP_RFACTORY_H
 
-struct setupdoor_s {
-	int createflags;
-	int propnum;
-	int volumenum;
-	int id;
-	int extrefpadnum;
-	int key;
-	int doorflags;
-	float pos[3];
-	float roty;
-};
-
-typedef setupdoor_s setupdoor;
-
-struct setuppropspawn_s {
-	int setupref;
-	int createflags;
-	int propnum;
-	float pos[3];
-	float rot[3];
-	int triggertype;
-	int triggerdata;
-	int alarmnum;
-};
-
-typedef setuppropspawn_s setuppropspawn;
+#include "lvsetup.h"
 
 struct laserBeam_s {
 	float startpos[3];

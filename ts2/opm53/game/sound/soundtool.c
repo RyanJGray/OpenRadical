@@ -16,8 +16,7 @@ struct rate_s {
 
 typedef rate_s rate_t;
 
-// warning: multiple differing types with the same name (#22,  not equal)
-enum {
+typedef enum {
 	main_sound = 1,
 	main_soundfile = 2,
 	main_msg = 3,
@@ -455,8 +454,8 @@ static menuitem_t soundselect_menuitems[0] = {
 static int first_sound = 0;
 
 static pageinit_t soundselect_page = {
-	/* .tick = */ soundselect_pageTick,
-	/* .draw_before = */ soundselect_pageDraw,
+	/* .tick = */ &soundselect_pageTick,
+	/* .draw_before = */ &soundselect_pageDraw,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
@@ -464,8 +463,8 @@ static pageinit_t soundselect_page = {
 };
 
 static pageinit_t message_page = {
-	/* .tick = */ message_pageTick,
-	/* .draw_before = */ message_pageDraw,
+	/* .tick = */ &message_pageTick,
+	/* .draw_before = */ &message_pageDraw,
 	/* .initfocusid = */ 0,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
@@ -502,8 +501,8 @@ static menuitem_t i0000[0] = {
 };
 
 static pageinit_t main_page = {
-	/* .tick = */ main_pageTick,
-	/* .draw_before = */ main_pageDraw,
+	/* .tick = */ &main_pageTick,
+	/* .draw_before = */ &main_pageDraw,
 	/* .initfocusid = */ 2,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,

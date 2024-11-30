@@ -1,0 +1,8 @@
+// STATUS: NOT STARTED
+
+#ifndef GCC_SRC_NEWLIB_LIBM_MATH_W_SQRT_H
+#define GCC_SRC_NEWLIB_LIBM_MATH_W_SQRT_H
+
+double sqrt(double x);
+
+#endif // GCC_SRC_NEWLIB_LIBM_MATH_W_SQRT_H

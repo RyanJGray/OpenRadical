@@ -2,7 +2,7 @@
 
 #include "mm_menus.h"
 
-// warning: multiple differing types with the same name (#80, descriptor not equal)
+// warning: multiple differing types with the same name (descriptor not equal)
 struct menulist_s {
 	u16 numitems;
 	u16 numdisplay;
@@ -13,8 +13,7 @@ struct menulist_s {
 	int firstdisplay;
 };
 
-// warning: multiple differing types with the same name (#80,  not equal)
-enum {
+typedef enum {
 	mmg_type = 1,
 	mmg_size = 2,
 	mmg_lights = 3,
@@ -23,22 +22,19 @@ enum {
 	mmg_last = 6
 };
 
-// warning: multiple differing types with the same name (#80,  not equal)
-enum {
+typedef enum {
 	mmo_gridintensity = 1,
 	mmo_maze = 2,
 	mmo_back = 3,
 	mmo_last = 4
 };
 
-// warning: multiple differing types with the same name (#80,  not equal)
-enum {
+typedef enum {
 	enterdesc_init = 0,
 	enterdesc_wait = 1
 };
 
-// warning: multiple differing types with the same name (#80,  not equal)
-enum {
+typedef enum {
 	mmmap_tileset = 1,
 	mmmap_wpnset = 2,
 	mmmap_tune = 3,
@@ -47,8 +43,7 @@ enum {
 	mmmap_last = 6
 };
 
-// warning: multiple differing types with the same name (#80,  not equal)
-enum {
+typedef enum {
 	tm_header = 1,
 	tm_gamemode1 = 2,
 	tm_gamemode2 = 3,
@@ -66,8 +61,7 @@ enum {
 	tm_last = 15
 };
 
-// warning: multiple differing types with the same name (#80,  not equal)
-enum {
+typedef enum {
 	mf_init_load_dir = 0,
 	mf_init_load_wait = 1,
 	mf_init_poll_start = 2,
@@ -88,8 +82,7 @@ enum {
 	mf_load_map_wait = 17
 };
 
-// warning: multiple differing types with the same name (#80,  not equal)
-enum {
+typedef enum {
 	mmmain_mapsettings = 1,
 	mmmain_testmap = 2,
 	mmmain_undo = 3,
@@ -104,16 +97,14 @@ enum {
 	mmmain_last = 12
 };
 
-// warning: multiple differing types with the same name (#80,  not equal)
-enum {
+typedef enum {
 	enemyedit_ba = 1,
 	enemyedit_bo = 2,
 	enemyedit_exit = 3,
 	enemyedit_last = 4
 };
 
-// warning: multiple differing types with the same name (#80,  not equal)
-enum {
+typedef enum {
 	mmpadact_clear = 1,
 	mmpadact_start = 2,
 	mmpadact_drop = 3,
@@ -214,8 +205,8 @@ gunset mmgunset = {
 };
 
 static pageinit_t message_page = {
-	/* .tick = */ message_pageTick,
-	/* .draw_before = */ message_pageDraw,
+	/* .tick = */ &message_pageTick,
+	/* .draw_before = */ &message_pageDraw,
 	/* .initfocusid = */ 0,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
@@ -284,11 +275,11 @@ static menuitem_t m0202020[0] = {
 };
 
 static pageinit_t generatemap_page = {
-	/* .tick = */ generatemap_pageTick,
-	/* .draw_before = */ pagebackgroundGfx,
+	/* .tick = */ &generatemap_pageTick,
+	/* .draw_before = */ &pagebackgroundGfx,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
-	/* .draw_after = */ menu_pageDrawAfter,
+	/* .draw_after = */ &menu_pageDrawAfter,
 	/* .construct = */ NULL
 };
 
@@ -306,17 +297,17 @@ static menuitem_t m0200[0] = {
 };
 
 static pageinit_t settings_page = {
-	/* .tick = */ settings_pageTick,
-	/* .draw_before = */ pagebackgroundGfx,
+	/* .tick = */ &settings_pageTick,
+	/* .draw_before = */ &pagebackgroundGfx,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
-	/* .draw_after = */ menu_pageDrawAfter,
+	/* .draw_after = */ &menu_pageDrawAfter,
 	/* .construct = */ NULL
 };
 
 static pageinit_t mmenterdesc_page = {
-	/* .tick = */ mmenterdesc_pageTick,
-	/* .draw_before = */ mmenterdesc_pageDraw,
+	/* .tick = */ &mmenterdesc_pageTick,
+	/* .draw_before = */ &mmenterdesc_pageDraw,
 	/* .initfocusid = */ 0,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
@@ -337,11 +328,11 @@ static menuitem_t m0300[0] = {
 };
 
 static pageinit_t mapsettings_page = {
-	/* .tick = */ mapsettings_pageTick,
-	/* .draw_before = */ pagebackgroundGfx,
+	/* .tick = */ &mapsettings_pageTick,
+	/* .draw_before = */ &pagebackgroundGfx,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
-	/* .draw_after = */ menu_pageDrawAfter,
+	/* .draw_after = */ &menu_pageDrawAfter,
 	/* .construct = */ NULL
 };
 
@@ -362,17 +353,17 @@ static menuitem_t m0400[0] = {
 };
 
 static pageinit_t testmap_page = {
-	/* .tick = */ testmap_pageTick,
-	/* .draw_before = */ testmap_pageDraw,
+	/* .tick = */ &testmap_pageTick,
+	/* .draw_before = */ &testmap_pageDraw,
 	/* .initfocusid = */ 2,
 	/* .pad = */ 0,
-	/* .draw_after = */ menu_pageDrawAfter,
+	/* .draw_after = */ &menu_pageDrawAfter,
 	/* .construct = */ NULL
 };
 
 static pageinit_t mapnameedit_page = {
-	/* .tick = */ mapnameedit_pageTick,
-	/* .draw_before = */ mapnameedit_pageDraw,
+	/* .tick = */ &mapnameedit_pageTick,
+	/* .draw_before = */ &mapnameedit_pageDraw,
 	/* .initfocusid = */ 32000,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
@@ -761,8 +752,8 @@ static menuitem_t mfmi[14] = {
 static int firstmap = 0;
 
 static pageinit_t mapfile_page = {
-	/* .tick = */ mapfile_pageTick,
-	/* .draw_before = */ mapfile_pageDraw,
+	/* .tick = */ &mapfile_pageTick,
+	/* .draw_before = */ &mapfile_pageDraw,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
@@ -783,11 +774,11 @@ static menuitem_t m0100[0] = {
 };
 
 static pageinit_t mmmain_page = {
-	/* .tick = */ mmmain_pageTick,
-	/* .draw_before = */ pagebackgroundGfx,
+	/* .tick = */ &mmmain_pageTick,
+	/* .draw_before = */ &pagebackgroundGfx,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
-	/* .draw_after = */ menu_pageDrawAfter,
+	/* .draw_after = */ &menu_pageDrawAfter,
 	/* .construct = */ NULL
 };
 
@@ -821,8 +812,8 @@ static menuitem_t m0600[0] = {
 };
 
 pageinit_t enemyedit_page = {
-	/* .tick = */ enemyedit_pageTick,
-	/* .draw_before = */ enemyedit_pageDraw,
+	/* .tick = */ &enemyedit_pageTick,
+	/* .draw_before = */ &enemyedit_pageDraw,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
@@ -1030,8 +1021,8 @@ static menuitem_t m0500[0] = {
 u16 padactcuritem = 2;
 
 pageinit_t padact_page = {
-	/* .tick = */ padact_pageTick,
-	/* .draw_before = */ padact_pageDraw,
+	/* .tick = */ &padact_pageTick,
+	/* .draw_before = */ &padact_pageDraw,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,

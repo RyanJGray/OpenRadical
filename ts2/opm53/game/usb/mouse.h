@@ -1,10 +1,13 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_USB_MOUSE_H
 #define GAME_USB_MOUSE_H
 
-typedef unsigned char u_char;
-typedef unsigned int u_int;
+#include "common.h"
 
 int sceUsbMouseInit();
 int sceUsbMouseGetInfo(u_char *info);

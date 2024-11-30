@@ -1,16 +1,24 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_MAPMAKER_MM_MENUS_H
 #define GAME_MAPMAKER_MM_MENUS_H
 
-struct gvdisp_s {
+#include "common.h"
+#include "front/front.h"
+#include "front/front_mpg.h"
+
+typedef struct gvdisp_s {
 	int value;
 	char *text;
-};
+} gvdisp;
 
-typedef gvdisp_s gvdisp;
-// warning: multiple differing types with the same name (#80, type name not equal)
+// warning: multiple differing types with the same name (type name not equal)
 typedef int (*msgfunc_t)(/* parameters unknown */);
+
 extern gamevar gv_gridintensity;
 extern gvdisp disp_tilesets[0];
 extern gvdisp disp_tunes[0];

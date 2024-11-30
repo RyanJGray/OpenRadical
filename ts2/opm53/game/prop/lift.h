@@ -1,9 +1,43 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_PROP_LIFT_H
 #define GAME_PROP_LIFT_H
 
-struct liftNode_s {
+#include "prop/prop.h"
+
+enum {
+	LIFT_NOTCALLED = 0,
+	LIFT_CALLEDUP = 1,
+	LIFT_CALLEDDOWN = 2
+};
+
+enum {
+	LIFTDIR_UNDECIDED = 0,
+	LIFTDIR_UP = 1,
+	LIFTDIR_DOWN = 2
+};
+
+enum {
+	LIFTFLAGS_WAITING = 1,
+	LIFTFLAGS_TIMETOENTER = 2,
+	LIFTFLAGS_AUTOMATIC = 4,
+	LIFTFLAGS_DOORS = 8
+};
+
+enum {
+	LIFTSTATE_NOPOWER = 0,
+	LIFTSTATE_POWERING_UP = 1,
+	LIFTSTATE_POWER = 2
+};
+
+// Forward-declarations
+struct liftData_s;
+
+typedef struct liftNode_s {
 	int valid;
 	float pos[3];
 	int padref;
@@ -28,11 +62,71 @@ struct liftNode_s {
 	prop *doorLeft;
 	prop *doorRight;
 	int floor;
-};
+} liftNode;
 
-typedef liftNode_s liftNode;
-typedef setuplift_s setuplift;
-typedef liftData_s liftData;
+typedef struct setuplift_s {
+	int createflags;
+	int propnum;
+	float roty;
+	int defaultLiftFlags;
+	int padref;
+	float liftSpeed;
+	float liftTimeEvaluate;
+	float liftTimeWaiting;
+	float doorOpenTime;
+	float doorCloseTime;
+	int leftDoorPropnum;
+	float leftDoorPos[3];
+	float leftDoorRoty;
+	float leftDoorMove[3];
+	int rightDoorPropnum;
+	float rightDoorPos[3];
+	float rightDoorRoty;
+	float rightDoorMove[3];
+	int buttonUpPropnum;
+	float buttonUpPos[3];
+	float buttonUpRoty;
+	int buttonDownPropnum;
+	float buttonDownPos[3];
+	float buttonDownRoty;
+	liftNode nodes[6];
+} setuplift;
+
+typedef struct liftObData_s {
+	prop *lift;
+	struct liftData_s *liftData;
+	liftNode *nodeBelongTo;
+	float start[3];
+	float dest[3];
+	float scalar;
+} liftObData;
+
+typedef struct liftData_s {
+	setuplift *setup;
+	liftNode *liftNodes;
+	liftNode *liftStart;
+	liftNode *liftDest;
+	int liftState;
+	float powerTime;
+	int liftFlags;
+	int floor;
+	int pad;
+	int numinlift;
+	float liftTime;
+	int liftCalled;
+	int liftDir;
+	float time;
+	void (*liftButtonResetFunction)(/* parameters unknown */);
+	liftNode *liftQueue[6];
+	prop *liftProp;
+	prop *liftDoorLeft;
+	prop *liftDoorRight;
+	prop *liftButtonUp;
+	prop *liftButtonDown;
+	int numLiftObs;
+	liftObData liftObs[28];
+} liftData;
+
 extern liftData levellifts[5];
 
 void propRestartLifts();

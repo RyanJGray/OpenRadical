@@ -2,8 +2,7 @@
 
 #include "apache.h"
 
-// warning: multiple differing types with the same name (#153,  not equal)
-enum {
+typedef enum {
 	APACHEMODE_FLY_IN = 0,
 	APACHEMODE_ATTACK = 1,
 	APACHEMODE_CIRCLE = 2,

@@ -11,7 +11,7 @@ setuppickup planet2_pickups_1up[0] = {
 setupspawn planet2_spawns_1up[0] = {
 };
 
-setupNPC planet2_NPCs_1up[0] = CCC_CANNOT_COMPUTE_ELEMENT_SIZE;
+setupNPC planet2_NPCs_1up[0];
 
 static int ww_patrol0_1up[0] = {
 };
@@ -22,7 +22,7 @@ setupPatrolRoutes planet2_patrolroutes_1up[0] = {
 aihandler planet2_AIHandlers_1up[0] = {
 };
 
-setupNPC planet2_spawninfos_1up[0] = CCC_CANNOT_COMPUTE_ELEMENT_SIZE;
+setupNPC planet2_spawninfos_1up[0];
 
 setupdoor planet2_doors_1up[0] = {
 };
@@ -30,11 +30,11 @@ setupdoor planet2_doors_1up[0] = {
 setupheader setup_planet2_1up = {
 	/* .setupflags = */ 128,
 	/* .gunset = */ 6,
-	/* .props = */ planet2_pickups_1up,
+	/* .props = */ planet2_props,
 	/* .numprops = */ 0,
-	/* .pickups = */ planet2_pickups_1up,
+	/* .pickups = */ planet2_props,
 	/* .numpickups = */ 1,
-	/* .doors = */ &setup_planet2_1up,
+	/* .doors = */ planet2_spawninfos_1up,
 	/* .numdoors = */ 0,
 	/* .spawnpads = */ planet2_spawns_1up,
 	/* .numspawnpads = */ 1,
@@ -44,7 +44,7 @@ setupheader setup_planet2_1up = {
 	/* .numPatrolroutes = */ 1,
 	/* .AIEventHandlers = */ planet2_AIHandlers_1up,
 	/* .numAIEventHandlers = */ 1,
-	/* .si = */ &setup_planet2_1up,
+	/* .si = */ planet2_spawninfos_1up,
 	/* .numNPCspawns = */ 0,
 	/* .cars = */ NULL,
 	/* .numcars = */ 0,
@@ -79,13 +79,13 @@ setupspawn planet2_spawns_arcade[0] = {
 setupheader setup_planet2_arcade = {
 	/* .setupflags = */ 4,
 	/* .gunset = */ 12,
-	/* .props = */ planet2_pickups_1up,
+	/* .props = */ planet2_props,
 	/* .numprops = */ 0,
-	/* .pickups = */ &setup_planet2_arcade,
+	/* .pickups = */ planet2_pickups_arcade,
 	/* .numpickups = */ 0,
 	/* .doors = */ NULL,
 	/* .numdoors = */ 0,
-	/* .spawnpads = */ &setup_planet2_arcade,
+	/* .spawnpads = */ planet2_pickups_arcade,
 	/* .numspawnpads = */ 0,
 	/* .NPCsetup = */ NULL,
 	/* .numNPCs = */ 0,

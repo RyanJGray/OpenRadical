@@ -1,0 +1,9 @@
+// STATUS: NOT STARTED
+
+#ifndef GCC_SRC_NEWLIB_LIBM_COMMON_S_RINT_H
+#define GCC_SRC_NEWLIB_LIBM_COMMON_S_RINT_H
+
+
+double rint(double x);
+
+#endif // GCC_SRC_NEWLIB_LIBM_COMMON_S_RINT_H

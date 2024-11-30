@@ -124,19 +124,6 @@ struct pagedef_s {
 };
 
 typedef pagedef_s pagedef_t;
-
-struct hitbox_s {
-	u16 x;
-	u16 y;
-	u16 w;
-	u16 h;
-	u16 id;
-	u16 flags;
-	void (*draw)(/* parameters unknown */);
-	void *data;
-	void *data2;
-};
-
 extern float igmDefaultYStart[0][6];
 extern float igmDefaultYEnd[0][6];
 extern float igmDefaultIconX[0][6];

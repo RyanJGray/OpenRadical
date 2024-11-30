@@ -1,17 +1,22 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
+
+#include <sifrpc.h>
 
 #include "mouse.h"
 
-struct mousedata_s {
+typedef struct mousedata_s {
 	char len;
 	char buttons;
 	char x;
 	char y;
 	char wheel;
 	char extra[123];
-};
+} mousedata_t;
 
-typedef mousedata_s mousedata_t;
 static char mousebut = 0;
 static char mouselastbut = 0;
 static char mousenewbut = 0;

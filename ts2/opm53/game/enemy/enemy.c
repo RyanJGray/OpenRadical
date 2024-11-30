@@ -2,8 +2,7 @@
 
 #include "enemy.h"
 
-// warning: multiple differing types with the same name (#143,  not equal)
-enum {
+typedef enum {
 	EHL_CALLLIFT = 0,
 	EHL_WAITFORLIFT = 1,
 	EHL_INLIFT = 2,
@@ -12,14 +11,12 @@ enum {
 	EHL_WAITFORTARGET = 5
 };
 
-// warning: multiple differing types with the same name (#143,  not equal)
-enum {
+typedef enum {
 	ONFIRE_CHOOSEPAD = 0,
 	ONFIRE_GOTOPAD = 1
 };
 
-// warning: multiple differing types with the same name (#143,  not equal)
-enum {
+typedef enum {
 	RAW_NULL = 0,
 	RAW_CHOOSE_DEST = 1,
 	RAW_PROGRESS = 2,
@@ -32,8 +29,7 @@ struct padinf_s {
 	float dot;
 };
 
-// warning: multiple differing types with the same name (#143,  not equal)
-enum {
+typedef enum {
 	ENR_START = 0,
 	ENR_TARGET = 1,
 	ENR_CHOOSENEWTARGET = 2,

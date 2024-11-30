@@ -2,8 +2,7 @@
 
 #include "music.h"
 
-// warning: multiple differing types with the same name (#19,  not equal)
-enum {
+typedef enum {
 	MUSIC_OFF = 0,
 	MUSIC_PAUSED = 1,
 	MUSIC_RUNNING = 2

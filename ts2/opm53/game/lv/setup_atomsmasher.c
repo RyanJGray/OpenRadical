@@ -14,7 +14,7 @@ setuppickup atomsmasher_pickups_1up[0] = {
 setupspawn atomsmasher_spawns_1up[0] = {
 };
 
-setupNPC atomsmasher_NPCs_1up[0] = CCC_CANNOT_COMPUTE_ELEMENT_SIZE;
+setupNPC atomsmasher_NPCs_1up[0];
 
 setupPatrolRoutes atomsmasher_patrolroutes_1up[0] = {
 };
@@ -22,26 +22,26 @@ setupPatrolRoutes atomsmasher_patrolroutes_1up[0] = {
 aihandler atomsmasher_AIHandlers_1up[0] = {
 };
 
-setupNPC atomsmasher_spawninfos_1up[0] = CCC_CANNOT_COMPUTE_ELEMENT_SIZE;
+setupNPC atomsmasher_spawninfos_1up[0];
 
 setupheader setup_atomsmasher_1up = {
 	/* .setupflags = */ 128,
 	/* .gunset = */ 12,
-	/* .props = */ atomsmasher_AIHandlers_1up,
+	/* .props = */ atomsmasher_props,
 	/* .numprops = */ 0,
-	/* .pickups = */ atomsmasher_AIHandlers_1up,
+	/* .pickups = */ atomsmasher_props,
 	/* .numpickups = */ 0,
-	/* .doors = */ atomsmasher_AIHandlers_1up,
+	/* .doors = */ atomsmasher_props,
 	/* .numdoors = */ 0,
-	/* .spawnpads = */ atomsmasher_AIHandlers_1up,
+	/* .spawnpads = */ atomsmasher_props,
 	/* .numspawnpads = */ 0,
-	/* .NPCsetup = */ atomsmasher_AIHandlers_1up,
+	/* .NPCsetup = */ atomsmasher_props,
 	/* .numNPCs = */ 0,
-	/* .setupPatrolRoutes = */ atomsmasher_AIHandlers_1up,
+	/* .setupPatrolRoutes = */ atomsmasher_props,
 	/* .numPatrolroutes = */ 0,
-	/* .AIEventHandlers = */ atomsmasher_AIHandlers_1up,
+	/* .AIEventHandlers = */ atomsmasher_props,
 	/* .numAIEventHandlers = */ 1,
-	/* .si = */ &setup_atomsmasher_1up,
+	/* .si = */ atomsmasher_spawninfos_1up,
 	/* .numNPCspawns = */ 0,
 	/* .cars = */ NULL,
 	/* .numcars = */ 0,
@@ -80,7 +80,7 @@ setupheader setup_atomsmasher_arcade = {
 	/* .numprops = */ 0,
 	/* .pickups = */ atomsmasher_pickups_arcade,
 	/* .numpickups = */ 5,
-	/* .doors = */ atomsmasher_AIHandlers_1up,
+	/* .doors = */ atomsmasher_props,
 	/* .numdoors = */ 0,
 	/* .spawnpads = */ atomsmasher_spawns_arcade,
 	/* .numspawnpads = */ 2,

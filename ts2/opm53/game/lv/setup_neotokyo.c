@@ -20,7 +20,7 @@ setuppickup neotokyo_pickups_1up[0] = {
 setupspawn neotokyo_spawns_1up[0] = {
 };
 
-setupNPC neotokyo_NPCs_1up[0] = CCC_CANNOT_COMPUTE_ELEMENT_SIZE;
+setupNPC neotokyo_NPCs_1up[0];
 
 setupPatrolRoutes neotokyo_patrolroutes_1up[0] = {
 };
@@ -28,7 +28,7 @@ setupPatrolRoutes neotokyo_patrolroutes_1up[0] = {
 aihandler neotokyo_AIHandlers_1up[0] = {
 };
 
-setupNPC neotokyo_spawninfos_1up[0] = CCC_CANNOT_COMPUTE_ELEMENT_SIZE;
+setupNPC neotokyo_spawninfos_1up[0];
 
 setupdoor neotokyo_doors_1up[0] = {
 };
@@ -40,17 +40,17 @@ setupheader setup_neotokyo_1up = {
 	/* .numprops = */ 5,
 	/* .pickups = */ neotokyo_pickups_1up,
 	/* .numpickups = */ 1,
-	/* .doors = */ &setup_neotokyo_1up,
+	/* .doors = */ neotokyo_spawninfos_1up,
 	/* .numdoors = */ 0,
 	/* .spawnpads = */ neotokyo_spawns_1up,
 	/* .numspawnpads = */ 1,
 	/* .NPCsetup = */ neotokyo_NPCs_1up,
 	/* .numNPCs = */ 9,
-	/* .setupPatrolRoutes = */ neotokyo_AIHandlers_1up,
+	/* .setupPatrolRoutes = */ neotokyo_patrolroutes_1up,
 	/* .numPatrolroutes = */ 0,
-	/* .AIEventHandlers = */ neotokyo_AIHandlers_1up,
+	/* .AIEventHandlers = */ neotokyo_patrolroutes_1up,
 	/* .numAIEventHandlers = */ 1,
-	/* .si = */ &setup_neotokyo_1up,
+	/* .si = */ neotokyo_spawninfos_1up,
 	/* .numNPCspawns = */ 0,
 	/* .cars = */ neotokyo_cars,
 	/* .numcars = */ 1,

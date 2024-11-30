@@ -1,7 +1,13 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_LV_SETUP_CIRCUS_H
 #define GAME_LV_SETUP_CIRCUS_H
+
+#include "lvsetup.h"
 
 extern setupprop circus_props[0];
 extern setuppickup circus_pickups_1up[0];

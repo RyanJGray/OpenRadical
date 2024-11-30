@@ -3,7 +3,7 @@
 #ifndef GAME_GAME_CHEATS_H
 #define GAME_GAME_CHEATS_H
 
-// warning: multiple differing types with the same name (#40, size not equal)
+// warning: multiple differing types with the same name (size not equal)
 struct cheatdef_s {
 	short int name;
 	int flags;

@@ -4,7 +4,21 @@
 // TS2 OPM53 Tree
 //
 
+#include <eekernel.h>
+#include <libcdvd.h>
+#include <sifdev.h>
+#include <sifrpc.h>
+#include <string.h>
+
 #include "boss.h"
+#include "file/file.h"
+#include "joy/joy.h"
+#include "mem/mem.h"
+#include "sound/sound.h"
+#include "usb/mouse.h"
+#include "util/profile.h"
+#include "util/trig.h"
+#include "window/window.h"
 
 typedef struct dbufinfo_s {
   boolean gsReadyToSend;
@@ -17,8 +31,9 @@ typedef struct dbufinfo_s {
 static dbufinfo dbinfo[2];
 
 static dlDmaTag *dmalists[2] = {
-    /* [0] = */ 0x100000,
-    /* [1] = */ 0x180000};
+    // Use cached EE virtual memory space.
+    /* [0] = */ (dlDmaTag *)0x00100000,
+    /* [1] = */ (dlDmaTag *)0x00180000};
 
 int curcpudmabuf = 0;
 int curgsdmabuf = 0;
@@ -38,7 +53,7 @@ int gs_tid = -1;
 int gsdone = 1;
 int cpudone = 0;
 
-char **languages[0] = {};
+char **languages[LANG_NUM] = {};
 
 int cur_language = 0;
 int dvd = 0;
@@ -81,7 +96,9 @@ int gsStartFrame[5] = {0};
 
 float gsEndTime[5] = {0.f};
 
-u_long128 base_ptr[10] = {VECTOR(0, 0, 0, 0)};
+u_long128 base_ptr[10] = {0};
+
+static void bossMake();
 
 int bossCheckParm(char *check) {
   int i = 1;
@@ -156,9 +173,9 @@ static void sjeGsSetHalfOffset(int context, int off) {
   sceGsDrawEnv1 *drawEnv;
 
   if (context == 0) {
-    drawEnv = 0x38e250;
+    drawEnv = &db.draw0;
   } else {
-    drawEnv = 0x38e340;
+    drawEnv = &db.draw1;
   }
 
   sceGsSetHalfOffset(drawEnv, 2048, 2048, off);
@@ -171,7 +188,7 @@ void sjeGsSwapDBuff(int buff, boolean FromInterupt) {
     iFlushCache(0);
   }
 
-  sceGsSwapDBuff(0x38e1f0, buff);
+  sceGsSwapDBuff(&db, buff);
 
   return;
 }
@@ -181,7 +198,7 @@ void sjeGsSwapDBuff(int buff, boolean FromInterupt) {
 /// initialisation.
 /// </summary>
 static void bossMake() {
-  SemaParam s;
+  struct SemaParam s;
 
   sceSifInitRpc(0);
   sceCdInit(SCECdINIT);
@@ -392,7 +409,7 @@ static void gsMain() {
 static int vblIntHandler(int cause) {}
 
 static int gsIntHandler(int cause) {
-  REG_GS_CSR = 1;
+  DPUT_GS_CSR(GS_CSR_FINISH_M);
   iSignalSema(gsdone_sid);
   SYNC(0);
   EI();

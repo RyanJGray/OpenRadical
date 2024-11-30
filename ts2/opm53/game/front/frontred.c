@@ -15,7 +15,9 @@ static leveldef levels[0] = {
 static int curselect = 0;
 static int numlevels;
 
-void frontredReset() {}
+void frontredReset() {
+	return;
+}
 
 void frontredEnd() {}
 

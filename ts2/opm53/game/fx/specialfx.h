@@ -1,22 +1,32 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_FX_SPECIALFX_H
 #define GAME_FX_SPECIALFX_H
 
-typedef specialpointdef_s specialpointdef;
+#include "common.h"
+#include "prop/prop.h"
 
-struct specialdef_s {
+typedef struct specialpointdef_s {
+	float pos[3];
+	float norm[3];
+} specialpointdef;
+
+typedef struct specialdef_s {
 	int type;
 	int subtype;
 	int flags;
 	u32 numpoints;
 	specialpointdef points[0];
-};
+} specialdef;
 
-struct specialfx_s {
+typedef struct specialfx_s {
 	float pos[4];
-	specialfx_s *nextUsed;
-	specialfx_s *previousUsed;
+	struct specialfx_s *nextUsed;
+	struct specialfx_s *previousUsed;
 	int type;
 	int subtype;
 	int flags;
@@ -27,7 +37,7 @@ struct specialfx_s {
 	int closestRoom[16];
 	int numRooms;
 	int rooms[10];
-	prop_s *prop[4];
+	struct prop_s *prop[4];
 	particlegroup_s *pg[4];
 	particleClone clone;
 	float onduration;
@@ -36,9 +46,8 @@ struct specialfx_s {
 	float translatey;
 	float intensity;
 	void *extraInfo;
-};
+} specialfx;
 
-typedef specialfx_s specialfx;
 extern specialfx *specialfxUsed;
 extern particleClone *manHoleSmokeClones;
 extern particleClone *flameTorchCindersClones;
@@ -79,7 +88,7 @@ void specialfxFlameTorchGfx(specialfx *spfx);
 void specialfxGfxRoom(int room);
 boolean specialfxDoesTypeExist(int type);
 specialfx* specialfxNew(int type, int subtype, float *pos, float param, void *extraInfo, void *ref, void (*callback)(/* parameters unknown */));
-specialfx* specialfxNewFromDef(specialdef_s *special, int room);
+specialfx* specialfxNewFromDef(specialdef *special, int room);
 void specialfxDrawBird(float *pos, float rotyRad, float wingsClosed, float size);
 
 #endif // GAME_FX_SPECIALFX_H

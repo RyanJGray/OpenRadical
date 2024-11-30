@@ -4,23 +4,6 @@
 #define GAME_FRONT_GUI_H
 
 typedef enum {
-	btn_circle = 0,
-	btn_cross = 1,
-	btn_triangle = 2,
-	btn_square = 3,
-	btn_select = 4,
-	btn_start = 5,
-	numbuttons = 6
-} e_button;
-
-typedef enum {
-	dpad_up = 0,
-	dpad_down = 1,
-	dpad_left = 2,
-	dpad_right = 3
-} dpad_button;
-
-enum e_icon {
 	icon_1 = 0,
 	icon_2 = 1,
 	icon_3 = 2,
@@ -75,7 +58,7 @@ enum e_icon {
 	icon_dir_east = 61,
 	icon_dir_southeast = 62,
 	icon_num = 63
-};
+} e_icon;
 
 extern u8 flashalpha;
 extern u8 quickflash;

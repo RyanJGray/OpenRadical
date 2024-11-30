@@ -1,15 +1,32 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_EM_DL_H
 #define GAME_EM_DL_H
 
-struct dlDmaTag_s {
-	word1_u word1;
-	dlDmaTag_s *next;
-	u_int p[2];
+#include "common.h"
+#include "util/matrix.h"
+
+struct fields_s {
+	u16 qwc;
+	u8 mark;
+	u8 id;
 };
 
-typedef dlDmaTag_s dlDmaTag;
+union word1_u {
+	u32 val;
+	struct fields_s fields;
+};
+
+typedef struct dlDmaTag_s {
+	union word1_u word1;
+	struct dlDmaTag_s *next;
+	u_int p[2];
+} dlDmaTag;
+
 extern dlDmaTag *pushgfxtag;
 extern u32 ucodestart[6][2];
 extern u32 ucode_loadxyzw[6];
@@ -49,6 +66,6 @@ void dlTextureQuadFloatZ(float z, float xTL, float yTL, float xTR, float yTR, fl
 void dlTextureQuad3D(int texturenum, float *pos1, float *pos2, float *pos3, float *pos4, u32 abgr1, u32 abgr2, u32 abgr3, u32 abgr4, float u1, float v1, float u2, float v2);
 void dlPushDmaTag(dlDmaTag *push);
 void dlPopDmaTag();
-void dlSetPerspectiveMatrix(mtx_u *mtx);
+void dlSetPerspectiveMatrix(mtx *mtx);
 
 #endif // GAME_EM_DL_H

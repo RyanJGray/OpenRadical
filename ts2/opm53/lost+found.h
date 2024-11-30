@@ -6,9 +6,97 @@ typedef struct {
 typedef long unsigned int clock_t;
 typedef long int time_t;
 
+struct tm {
+	int tm_sec;
+	int tm_min;
+	int tm_hour;
+	int tm_mday;
+	int tm_mon;
+	int tm_year;
+	int tm_wday;
+	int tm_yday;
+	int tm_isdst;
+};
+
+typedef struct {
+	_Bigint *_next;
+	int _k;
+	int _maxwds;
+	int _sign;
+	int _wds;
+	ULong _x[1];
+} _Bigint;
+
+struct _atexit {
+	_atexit *_next;
+	int _ind;
+	void (*_fns[32])(/* parameters unknown */);
+};
+
 struct __sbuf {
 	unsigned char *_base;
 	int _size;
+};
+
+struct __sFILE {
+	unsigned char *_p;
+	int _r;
+	int _w;
+	short int _flags;
+	short int _file;
+	__sbuf _bf;
+	int _lbfsize;
+	void *_cookie;
+	int (*_read)(/* parameters unknown */);
+	int (*_write)(/* parameters unknown */);
+	_fpos_t (*_seek)(/* parameters unknown */);
+	int (*_close)(/* parameters unknown */);
+	__sbuf _ub;
+	unsigned char *_up;
+	int _ur;
+	unsigned char _ubuf[3];
+	unsigned char _nbuf[1];
+	__sbuf _lb;
+	int _blksize;
+	int _offset;
+	_reent *_data;
+};
+
+struct _reent {
+	int _errno;
+	__sFILE *_stdin;
+	__sFILE *_stdout;
+	__sFILE *_stderr;
+	int _inc;
+	char _emergency[25];
+	int _current_category;
+	char *_current_locale;
+	int __sdidinit;
+	void (*__cleanup)(/* parameters unknown */);
+	_Bigint *_result;
+	int _result_k;
+	_Bigint *_p5s;
+	_Bigint **_freelist;
+	int _cvtlen;
+	char *_cvtbuf;
+	union {
+		struct {
+			unsigned int _rand_next;
+			char *_strtok_last;
+			char _asctime_buf[26];
+			tm _localtime_buf;
+			int _gamma_signgam;
+		} _reent;
+		struct {
+			unsigned char *_nextf[30];
+			unsigned int _nmalloc[30];
+		} _unused;
+	} _new;
+	_atexit *_atexit;
+	_atexit _atexit0;
+	void (**_sig_func)(/* parameters unknown */);
+	_glue __sglue;
+	__sFILE __sf[3];
 };
 
 typedef struct {
@@ -892,10 +980,10 @@ typedef struct {
 } sceGsPrmodecont;
 
 typedef struct {
-	u_int R;
-	u_int G;
-	u_int B;
-	u_int A;
+	u_int R : 8;
+	u_int G : 8;
+	u_int B : 8;
+	u_int A : 8;
 	float Q;
 } sceGsRgbaq;
 
@@ -1340,18 +1428,7 @@ typedef struct {
 	char arg[80];
 } sceSifCmdResetData;
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
-	LANG_ENGLISH = 0,
-	LANG_FRENCH = 1,
-	LANG_GERMAN = 2,
-	LANG_ITALIAN = 3,
-	LANG_SPANISH = 4,
-	LANG_NUM = 5
-};
-
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	STR_NULL = 0,
 	STR_TILES_START_ALL = 1,
 	STR_TILES_START_TEAM_RED = 2,
@@ -2770,8 +2847,7 @@ typedef struct {
 	u_char year;
 } sceCdCLOCK;
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	POS_ABSOLUTE = 0,
 	POS_STARTOFFSTART = 1,
 	POS_STARTOFFMID = 2,
@@ -2785,47 +2861,43 @@ enum {
 	POS_NUM = 10
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	JOYMODE_GAME = 0,
 	JOYMODE_DEBUGMENU = 1,
 	JOYMODE_MOVEVIEW = 2,
 	JOYMODE_MAX = 3
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	MEM_PER_LOCAL = 0,
 	MEM_PER_LEV = 1,
 	MEM_PER_ETER = 2,
 	MEM_PER_MAX = 3
 };
 
-enum memdbstate {
+typedef enum {
 	MEMDB_LOADING = 0,
 	MEMDB_FRONTEND = 1,
 	MEMDB_LEVEL = 2
-};
+} memdbstate;
 
-enum joyaxisnum {
+typedef enum {
 	JOYAXIS_NONE = 0,
 	JOYAXIS_X1 = 1,
 	JOYAXIS_Y1 = 2,
 	JOYAXIS_X2 = 3,
 	JOYAXIS_Y2 = 4,
 	JOYAXIS_NUM = 5
-};
+} joyaxisnum;
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	RM_NONE = 0,
 	RM_REPLAY = 1,
 	RM_RECORD = 2,
 	RM_NUM = 3
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	UCODE_NORMAL = 0,
 	UCODE_REFLECT = 1,
 	UCODE_LIT = 2,
@@ -2833,17 +2905,6 @@ enum {
 	UCODE_LITNEARCLIP = 4,
 	UCODE_CUTSCENE = 5,
 	UCODE_NUM = 6
-};
-
-struct fields_s {
-	u16 qwc;
-	u8 mark;
-	u8 id;
-};
-
-union word1_u {
-	u32 val;
-	fields_s fields;
 };
 
 struct gfxchunk_s {
@@ -2856,16 +2917,14 @@ struct gfxchunk_s {
 
 typedef gfxchunk_s gfxchunk;
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	DMTX_NULL = -1,
 	DMTX_NONE = 0,
 	DMTX_NORMAL = 1,
 	DMTX_OVERLAY = 2
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	BLENDMODE_NULL = -1,
 	BLENDMODE_RGB = 0,
 	BLENDMODE_RGBA = 1,
@@ -2887,13 +2946,6 @@ enum {
 };
 
 typedef struct {
-	u32 blocks;
-	u32 flags;
-	texsize_t *size;
-	s16 texid[32];
-} pageinfo;
-
-typedef struct {
 	u32 *pTags;
 	u8 *pData;
 	int DataSize;
@@ -2904,8 +2956,7 @@ typedef struct {
 	sceIpuDmaEnv Env;
 } MovieData;
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	ZB_NULL = -1,
 	ZB_NOTEST_NOWRITE = 0,
 	ZB_NOTEST_WRITE = 1,
@@ -2929,16 +2980,14 @@ typedef enum {
 	GS_ENDLEVELCOUNT = 8
 } gamestate_t;
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	GAMESKILL_EASY = 0,
 	GAMESKILL_NORMAL = 1,
 	GAMESKILL_HARD = 2,
 	GAMESKILL_NUM = 3
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	BOTSKILL_PATHETIC = 0,
 	BOTSKILL_EASY = 1,
 	BOTSKILL_AVERAGE = 2,
@@ -2960,52 +3009,80 @@ typedef enum {
 	NUM_GAMEMODES = 9
 } gamemode_t;
 
-struct light_s {
+typedef enum {
+	SKELTYPE_NONE = -1,
+	SKELTYPE_HUMAN19 = 0,
+	SKELTYPE_BARRELROBOT = 1,
+	SKELTYPE_RAILSPIDER = 2,
+	SKELTYPE_SPIDER = 3,
+	SKELTYPE_LIMBRELOCATED = 4,
+	SKELTYPE_NUM = 5
+};
+
+typedef enum {
+	CHANNEL_TYPE_NULL = 0,
+	CHANNEL_TYPE_QUATERNION_LINEAR = 1,
+	CHANNEL_TYPE_QUATERNION_SPHERICAL = 2,
+	CHANNEL_TYPE_MATRIX = 3,
+	CHANNEL_TYPE_TRANSFORM_XYZ = 4,
+	CHANNEL_TYPE_TRANSFORM_X = 5,
+	CHANNEL_TYPE_TRANSFORM_Y = 6,
+	CHANNEL_TYPE_TRANSFORM_Z = 7,
+	CHANNEL_TYPE_QUATERNION_SPHERICAL_TRANSFORM_XYZ = 8,
+	CHANNEL_TYPE_NUM = 9
+};
+
+struct channel_s {
+	int id;
 	int type;
-	short int subtype;
-	short int directional;
-	float lightpos[5][3];
-	float glowpos[5][3];
-	float normal[3];
-	u32 col;
-	float size;
-	float penumbra;
-	float falloffNear;
-	float falloffFar;
-	u8 intensitycontroller;
-	u8 intensity;
-	char intensityvel;
-	char spare[1];
-	char PrevAlpha[4];
+	float duration;
+	int numKeyframes;
+	int *keyframeList;
+	float *data;
+	channel *prev;
+	channel *next;
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
-	LIGHTTYPE_GLOW = 0,
-	LIGHTTYPE_NOGLOW = 1,
-	LIGHTTYPE_TORCH = 2,
-	LIGHTTYPE_FLARE = 3,
-	LIGHTTYPE_NUM = 4
+typedef struct {
+	float m[4][4];
+	float m2[4][4];
+} animRawCSCam_t;
+
+typedef struct {
+	float dx;
+	float dy;
+	float dz;
+	float r;
+	float g;
+	float b;
+} animRawCSLight_t;
+
+struct animHeader_s {
+	int totalFrames;
+	int numKeyframes;
+	int numJoints;
+	int fAnimProp;
+	float length;
+	int *pKeyframes;
+	int unused;
+	int numChannels;
+	channel *pChannel;
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
-	FLARETYPE_SUN = 0,
-	FLARETYPE_COPTER = 1,
-	FLARETYPE_EVENINGSUN = 2,
-	FLARETYPE_CAR = 3,
-	FLARE_TYPES = 4
+typedef animHeader_s animHeader;
+
+struct animChannel_s {
+	int id;
+	int type;
+	float duration;
+	int numKeyframes;
+	int *keyframeList;
+	float *data;
+	channel *prev;
+	channel *next;
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
-	GLOWTYPE_NORMAL = 0,
-	GLOWTYPE_VOLGLOW = 1,
-	GLOWTYPE_4STAR = 2,
-	GLOWTYPE_6STAR = 3,
-	GLOWTYPE_RING = 4,
-	GLOW_TYPES = 5
-};
+typedef animChannel_s animChannel;
 
 struct dof_s {
 	float pos[3];
@@ -3023,94 +3100,18 @@ struct gfxpointers_s {
 
 typedef gfxpointers_s gfxpointers;
 
-struct obbounds_s {
-	float mins[3];
-	float maxs[3];
-	int NumPolys;
-	ColPoly *pColPolys;
-};
-
-typedef obbounds_s obbounds;
-
-struct glassHit_s {
-	prop_s *prop;
-	float hitpos[3];
-	float hitdir[3];
-	float hitnorm[3];
-	int room;
-	glassdef *glass;
-};
-
-typedef glassHit_s glassHit;
-
-struct specialpointdef_s {
-	float pos[3];
-	float norm[3];
-};
-
-struct bumppointdef_s {
-	float pos[3];
-	float stnorm[3];
-	u32 rgba;
-};
-
-typedef bumppointdef_s bumppointdef;
-
-struct bumppolydef_s {
-	int texture;
-	int flags;
-	int planeid;
-	u32 numpoints;
-	bumppointdef points[0];
-};
-
-typedef bumppolydef_s bumppolydef;
-
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	GFX_OPA = 0,
 	GFX_XLU = 1,
 	GFX_SEMIOPA = 2,
 	GFX_NUM = 3
 };
 
-struct skelmtx_s {
-	int *mindex;
-	int *bindex;
-	float baseheight;
-	int basemtx;
-	int hipmtx;
-	int waistmtx;
-	int neckmtx;
-	int lwristmtx;
-	int rwristmtx;
-	int lelbowmtx;
-	int relbowmtx;
-	int lkneemtx;
-	int rkneemtx;
-	int lheelmtx;
-	int rheelmtx;
-	int headmtx;
-	int *partclosestbead;
-	mtx_u *bindneckmtx;
-	mtx_u *bindheadmtx;
-	mtx_u *bindlarmmtx;
-	mtx_u *bindrarmmtx;
-	mtx_u *bindllegmtx;
-	mtx_u *bindrlegmtx;
-	mtx_u *bindwaistmtx;
-	mtx_u *bindmtx;
-};
-
-typedef skelmtx_s skelmatrices;
-
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	OVERRIDEFX_FRAMEMASK = 1
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	AIMING_NOTPOINTING = 1,
 	AIMING_SET = 2,
 	AIMING_TWEENUP = 4,
@@ -3118,14 +3119,12 @@ enum {
 	AIMING_OVERWRITEANGLECALCED = 16
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	UCODETYPE_CLIP = 0,
 	UCODETYPE_NOCLIP = 1
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	PARTTYPE_BEAD = 0,
 	PARTTYPE_FILLET = 1,
 	PARTTYPE_DOUBLEFILLET = 2,
@@ -3133,36 +3132,30 @@ enum {
 	PARTTYPE_NULL = 4
 };
 
-typedef mtx_u mtx;
-
 struct vector3_u {
 	float v[3];
 };
 
 typedef vector3_u vector3;
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	DAXIS_X = 0,
 	DAXIS_Y = 1,
 	DAXIS_Z = 2
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	ANIMFLAG_TURNLEFT = 1,
 	ANIMFLAG_TURNRIGHT = 2,
 	ANIMFLAG_HASROTATED = 4
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	ANIM_TYPE_TRAVERSAL = 0,
 	ANIM_TYPE_DEATH = 1
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	ANIMPARTHIT_BODY = 1,
 	ANIMPARTHIT_LARM = 2,
 	ANIMPARTHIT_RARM = 3,
@@ -3171,16 +3164,14 @@ enum {
 	ANIMPARTHIT_RLEG = 6
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	GUNOPTION_ALWAYS_CHANGE_ON_PICKUP = 0,
 	GUNOPTION_KEEP_CURRENT_WEAPON_ON_PICKUP = 1,
 	GUNOPTION_USE_BEST_ON_PICKUP = 2,
 	GUNOPTION_NUM = 3
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	AMMOTYPE_NONE = 0,
 	AMMOTYPE_SMALLBULLET = 1,
 	AMMOTYPE_BIGBULLET = 2,
@@ -3201,8 +3192,7 @@ enum {
 	AMMOTYPE_NUM = 17
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	GUNFLAG_ONEHANDED = 1,
 	GUNFLAG_TWOHANDED = 2,
 	GUNFLAG_TWOHANDONLY = 4,
@@ -3212,89 +3202,34 @@ enum {
 	GUNFLAG_SILENCED = 64
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	GUNANIMFLAG_NONE = 0,
 	GUNANIMFLAG_HAMMER = 1
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	GUNFIREFLAG_NONE = 0,
 	GUNFIREFLAG_AIAIMATFLOOR = 1,
 	GUNFIREFLAG_NOAIMACCURACY = 2
 };
 
-struct playerGunAnimationInfo_s {
-	float recoilStrength;
-	float recoilStrengthRotX;
-	float strengthRotZ;
-	float unrecoilSpeed;
-	float recoilStrengthSlider;
-	float unrecoilSpeedSlider;
-	float barrelVelocity;
-	float barrelVelocitySlowdown;
-	float sineAmount;
-	float sineSlowdown;
-	float noiseAmount;
-	float noiseSlowdown;
-	float hammerSpeed;
-	float hammerRotation;
-	float hammerBackSpeed;
-};
-
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	FIREMODE_NORMAL = 0,
 	FIREMODE_ALT = 1,
 	FIREMODE_NUM = 2
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	RELOAD_AUTOMATIC = 0,
 	RELOAD_MANUAL = 1
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	REPEATMODE_SINGLE = 0,
 	REPEATMODE_REPEAT = 1
 };
 
-struct gunPropInfo_s {
-	int playerPropNum;
-	int chrPropNum;
-	int pickupPropNum;
-	int ammoPropNum;
-	int promoPropNum;
-	float pickupScale;
-	float promoScale;
-	float promoRotY;
-	float promoRotX;
-};
-
-struct gunDofs_s {
-	int shootDof[2];
-	int muzzleDof[2];
-	int leftWristDof;
-	int rightWristDof;
-	int cartridgeDof;
-	int trajectoryDof;
-	int barrelDof;
-	int hammerDof;
-};
-
-struct gunParts_s {
-	int muzzlePartNum[2];
-	int slider1PartNum;
-	int slider2PartNum;
-	int barrelPartNum;
-	int hammerPartNum;
-};
-
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	GUNTYPE_NONE = -1,
 	GUNTYPE_SILENCED_PISTOL = 0,
 	GUNTYPE_FLARE_PISTOL = 1,
@@ -3332,8 +3267,7 @@ enum {
 	GUNTYPE_MAX = 33
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	GUNCOMBO_NONE = 0,
 	GUNCOMBO_SILENCED_PISTOL = 1,
 	GUNCOMBO_SILENCED_PISTOL_X2 = 2,
@@ -3377,8 +3311,7 @@ enum {
 	GUNCOMBO_MAX = 40
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	GUNSTATE_NOGUN = 0,
 	GUNSTATE_NORMAL = 1,
 	GUNSTATE_CHANGELOWER = 2,
@@ -3403,8 +3336,7 @@ enum {
 	GUNSTATE_MAX = 21
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	PROP_TYPE_OB = 1,
 	PROP_TYPE_ROOM = 2,
 	PROP_TYPE_DOOR = 4,
@@ -3426,8 +3358,7 @@ enum {
 	PROP_TYPE_POPUPBOT = 262144
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	PICKUP_TYPE_BAG = 1,
 	PICKUP_TYPE_GUN = 2,
 	PICKUP_TYPE_KEY = 4,
@@ -3440,14 +3371,12 @@ enum {
 	PICKUP_TYPE_ITEM = 512
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	ITEM_COMPUTERDISK = 0,
 	ITEM_NUM = 1
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	PROP_NULL = -1,
 	PROP_CHR01 = 0,
 	PROP_CHR02 = 1,
@@ -4264,15 +4193,13 @@ enum {
 	PROP_NUM = 812
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	POSMODE_ORIGIN = 0,
 	POSMODE_WORLD = 1,
 	POSMODE_CAMERA = 2
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	ROTMODE_NONE = 0,
 	ROTMODE_Y = 1,
 	ROTMODE_ZXY = 2,
@@ -4280,12 +4207,7 @@ enum {
 	ROTMODE_MTXROLL = 4
 };
 
-struct handler_s {
-	handlerfunc function;
-};
-
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	EVENT_PICKUP = 0,
 	EVENT_DROP = 1,
 	EVENT_ACTIVATE = 2,
@@ -4300,14 +4222,7 @@ enum {
 	EVENT_NUM = 11
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
-	PROPATTACHFLAG_RIGHTHAND = 1,
-	PROPATTACHFLAG_LEFTHAND = 2
-};
-
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	DOORTYPE_SINGLE_SLIDE_L = 0,
 	DOORTYPE_SINGLE_SLIDE_R = 1,
 	DOORTYPE_SINGLE_SLIDE_U = 2,
@@ -4319,8 +4234,7 @@ enum {
 	DOORTYPE_NUMBER = 8
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	DOORKEY_NONE = 0,
 	DOORKEY_RED = 1,
 	DOORKEY_BLUE = 2,
@@ -4336,15 +4250,13 @@ struct gundata_s {
 
 typedef gundata_s gundata;
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	PICKUP_READY = 1,
 	PICKUP_DROPPING = 2,
 	PICKUP_CARRIED = 4
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	LIMBSTATE_CHANGEOVER = 0,
 	LIMBSTATE_ATTACHED = 1,
 	LIMBSTATE_HIT = 2,
@@ -4376,15 +4288,13 @@ struct basedata_s {
 
 typedef basedata_s basedata;
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	COLTYPE_CHR_AS_CYLINDER = 1,
 	COLTYPE_CHR_AS_POLYS = 2,
 	COLTYPE_IGNORE_DEAD_CHR = 4
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	OVERRIDE_XYZ = 1,
 	OVERRIDE_ST = 2,
 	OVERRIDE_RGBA = 4,
@@ -4392,8 +4302,7 @@ enum {
 	OVERRIDE_NORM = 16
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	PARTHIT_UNDEFINED = 0,
 	PARTHIT_BODY = 1,
 	PARTHIT_HEAD = 2,
@@ -4404,34 +4313,7 @@ enum {
 	PARTHIT_NUM = 7
 };
 
-struct floorpointdef_s {
-	float pos[3];
-};
-
-typedef floorpointdef_s floorpointdef;
-
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
-	MOVEMODE_NORMAL = 0,
-	MOVEMODE_PUSH = 1,
-	MOVEMODE_FALL = 2,
-	MOVEMODE_JUMP = 3,
-	MOVEMODE_DIE = 4,
-	MOVEMODE_REBORN = 5,
-	MOVEMODE_LINEUPFIXEDGUN = 6,
-	MOVEMODE_FIXEDGUN = 7,
-	MOVEMODE_REMOTEDEVICE = 8,
-	MOVEMODE_MAX = 9
-};
-
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
-	MOVEMENTTYPE_NORMAL = 0,
-	MOVEMENTTYPE_SKATE = 1,
-	MOVEMENTTYPE_NUM = 2
-};
-
-enum gamecontrols {
+typedef enum {
 	GC_FIRE = 0,
 	GC_ALTFIRE = 1,
 	GC_ACTIVATE = 2,
@@ -4475,10 +4357,9 @@ enum gamecontrols {
 	GC_AIMCHANGEWEAPONAXIS = 40,
 	GC_AIMZOOMAXIS = 41,
 	NUM_GAMECONTROLS = 42
-};
+} gamecontrols;
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	PLAYER_CONFIG0 = 0,
 	PLAYER_CONFIG_DEFAULT = 1,
 	PLAYER_CONFIG_DEFAULT_LH = 2,
@@ -4489,8 +4370,7 @@ enum {
 	PLAYER_CONFIG_NUM = 7
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	HANDICAP_ROOKIE = 0,
 	HANDICAP_NOVICE1 = 1,
 	HANDICAP_NOVICE2 = 2,
@@ -4509,8 +4389,7 @@ struct autoaiminfo_s {
 
 typedef autoaiminfo_s autoaiminfo;
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	CHRFX_NONE = 0,
 	CHRFX_SPAWN = 1,
 	CHRFX_FADEOUT = 2,
@@ -4521,8 +4400,7 @@ enum {
 	CHRFX_FOOTDECAL = 128
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	CHRFX_SPAWN_NONE = -1,
 	CHRFX_SPAWN_RING = 0,
 	CHRFX_SPAWN_ENERGY = 1,
@@ -4531,24 +4409,21 @@ enum {
 	NUM_CHRFX_SPAWN = 4
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	CHRFX_SPAWNSUBTYPE_RED = 0,
 	CHRFX_SPAWNSUBTYPE_YELLOW = 1,
 	CHRFX_SPAWNSUBTYPE_BLUE = 2,
 	CHRFX_SPAWNSUBTYPE_GREEN = 3
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	CHRFX_ACTION_NONE = -1,
 	CHRFX_ACTION_TIMESPLITTER_HANDS = 0,
 	CHRFX_ACTION_TIMESPLITTER_RADIUS = 1,
 	NUM_CHRFX_ACTION = 2
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	INVENTORY_CANSELECT = 1,
 	INVENTORY_ROTATEINARCADE = 2
 };
@@ -4562,8 +4437,7 @@ struct inventoryDef_s {
 
 typedef inventoryDef_s inventoryDef;
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	CHRTYPE_1 = 0,
 	CHRTYPE_2 = 1,
 	CHRTYPE_3 = 2,
@@ -4617,16 +4491,14 @@ enum {
 	CHRTYPE_NUM = 50
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	CHRSUBTYPE_HUMAN = 0,
 	CHRSUBTYPE_ZOMBIE = 1,
 	CHRSUBTYPE_TIMESPLITTER = 2,
 	CHRSUBTYPE_ROBOT = 3
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	APPEARANCE_HUMAN = 0,
 	APPEARANCE_ZOMBIE = 1,
 	APPEARANCE_TIMESPLITTER = 2,
@@ -4634,14 +4506,12 @@ enum {
 	APPEARANCE_ALIEN = 4
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	SEX_MALE = 0,
 	SEX_FEMALE = 1
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	CHRMOVEMODE_NORMAL = 1,
 	CHRMOVEMODE_STRAFE = 2,
 	CHRMOVEMODE_CROUCH = 4,
@@ -4658,8 +4528,7 @@ enum {
 	CHRMOVEMODE_MAX = 4097
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	POWER_INVISIBLE = 1,
 	POWER_KEYCARD_1 = 2,
 	POWER_KEYCARD_2 = 4,
@@ -4667,22 +4536,13 @@ enum {
 	POWER_KEYCARD_4 = 16
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	ARMOUR_TYPE_NONE = 0,
 	ARMOUR_TYPE_LOW = 1,
 	ARMOUR_TYPE_HIGH = 2
 };
 
-struct chrbounds_s {
-	char Matrix;
-	char NumOffsets;
-	float Radius;
-	float Offset[2][3];
-};
-
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	LIMB_HEAD = 0,
 	LIMB_LEFTARM = 1,
 	LIMB_RIGHTARM = 2,
@@ -4692,28 +4552,24 @@ enum {
 	NUM_LIMBS = 6
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	SHOOTFLAG_NORMAL = 1,
 	SHOOTFLAG_SPRAY = 2,
 	SHOOTFLAG_SPRAYXPOS = 4,
 	SHOOTFLAG_SPRAYXNEG = 8
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	UTF_DROPPINGBAG = 0,
 	UTF_PICKINGUPBAG = 1
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	BLURMODE_NORMAL = 0,
 	BLURMODE_ADDITIVE = 1
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	SFX_SIBERIA_GUARD_ALERT01 = 0,
 	SFX_SIBERIA_GUARD_ALERT02 = 1,
 	SFX_SIBERIA_GUARD_ALERT03 = 2,
@@ -6098,8 +5954,7 @@ enum {
 	NUM_SOUNDS = 1381
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	TUNE_NONE = 0,
 	TUNE_GOTHIC_TILE = 1,
 	TUNE_INDUSTRIAL_TILE = 2,
@@ -6137,8 +5992,7 @@ enum {
 	TUNE_NUM = 34
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	MCARD_RESULT_BUSY = 0,
 	MCARD_RESULT_SUCCESS = 1,
 	MCARD_RESULT_WRONG_SIZE = 2,
@@ -6152,16 +6006,14 @@ enum {
 	MCARD_RESULT_NUM = 10
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	MCARD_STATE_UNCHANGED = 0,
 	MCARD_STATE_CHANGED_FORMATTED = 1,
 	MCARD_STATE_CHANGED_UNFORMATTED = 2,
 	MCARD_STATE_NO_CARD = 3
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	CHECKCARD_VOID = 0,
 	CHECKCARD_CHECK = 1,
 	CHECKCARD_NOCARD = 2,
@@ -6170,14 +6022,12 @@ enum {
 	CHECKCARD_UNFORMATTED = 5
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	GAMEDIR_1 = 0,
 	GAMEDIR_2 = 1
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	MCSEQ_STATE_BUSY = -1,
 	MCSEQ_STATE_MESSAGE = 0,
 	MCSEQ_STATE_MESSAGE_BUT1 = 1,
@@ -6191,8 +6041,7 @@ enum {
 	MCSEQ_STATE_USER = 9
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	MCMSG_NOCARD = 0,
 	MCMSG_NOCARDINSLOT = 1,
 	MCMSG_UNFORMATTED = 2,
@@ -6209,8 +6058,7 @@ enum {
 	MCMSG_NUM = 13
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	LETTER_FLAT = 0,
 	LETTER_TTOP = 1,
 	LETTER_TBOT = 2,
@@ -6225,8 +6073,7 @@ enum {
 	NUM_LETTER_SHAPES = 11
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	FONTSEL_FUTURE = 0,
 	FONTSEL_CAPS = 1,
 	FONTSEL_BOOK = 2,
@@ -6234,8 +6081,7 @@ enum {
 	FONTSEL_NUM = 4
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	FONT_FUTURE_SMALL = 0,
 	FONT_FUTURE_NARROW = 1,
 	FONT_FUTURE_SUBNORMAL = 2,
@@ -6251,8 +6097,7 @@ enum {
 	FONT_NUM = 12
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	CAMMODE_GAMECAM = 0,
 	CAMMODE_RESETTHIRDPERSONCHEAT = 1,
 	CAMMODE_THIRDPERSONCHEAT = 2,
@@ -6268,8 +6113,7 @@ enum {
 	CAMMODE_MAX = 12
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	CAMTYPE_FIRSTPERSON = 0,
 	CAMTYPE_DEATHVIEW = 1,
 	CAMTYPE_REMOTEGUN = 2,
@@ -6280,8 +6124,7 @@ enum {
 	CAMTYPE_NUM = 7
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	CAMDEF_FIRSTPERSON = 0,
 	CAMDEF_DEATHVIEW = 1,
 	CAMDEF_REMOTEGUN = 2
@@ -6295,15 +6138,13 @@ struct roomcalcdata_s {
 
 typedef roomcalcdata_s roomcalcdata;
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	NETGAME_NONE = 0,
 	NETGAME_SERVER = 1,
 	NETGAME_CLIENT = 2
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	NETGAMETYPE_NONE = 0,
 	NETGAMETYPE_ILINK = 1,
 	NETGAMETYPE_INET = 2
@@ -6336,16 +6177,43 @@ struct menufxItemOption_s {
 
 typedef menufxItemOption_s menufxItemOption;
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	MENUFX_COLORS_IGM_FLOATING = 0,
 	MENUFX_COLORS_IGM_NORMAL = 1,
 	MENUFX_COLORS_IGM_CONTROLS = 2,
 	MENUFX_COLORS_NUM = 3
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+struct hitbox_s {
+	u16 x;
+	u16 y;
+	u16 w;
+	u16 h;
+	u16 id;
+	u16 flags;
+	void (*draw)(/* parameters unknown */);
+	void *data;
+	void *data2;
+};
+
+typedef enum {
+	btn_circle = 0,
+	btn_cross = 1,
+	btn_triangle = 2,
+	btn_square = 3,
+	btn_select = 4,
+	btn_start = 5,
+	numbuttons = 6
+} e_button;
+
+typedef enum {
+	dpad_up = 0,
+	dpad_down = 1,
+	dpad_left = 2,
+	dpad_right = 3
+} dpad_button;
+
+typedef enum {
 	MISCTEX_NONE = -1,
 	MISCTEX_CIRCLE = 0,
 	MISCTEX_PAGEBAR = 1,
@@ -6382,8 +6250,7 @@ enum {
 	MISCTEX_NUM = 32
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	STAT_KILLS = 0,
 	STAT_KILLED = 1,
 	STAT_SUICIDES = 2,
@@ -6456,8 +6323,7 @@ enum {
 	NUM_STAT = 69
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	STAT_GUN_SHOTS = 0,
 	STAT_GUN_KILLS = 1,
 	STAT_GUN_HITS = 2,
@@ -6466,8 +6332,7 @@ enum {
 	NUM_STAT_GUN = 5
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	STAT_CHAR_KILLS = 0,
 	STAT_CHAR_KILLED = 1,
 	STAT_CHAR_HITS = 2,
@@ -6477,8 +6342,7 @@ enum {
 	NUM_STAT_CHAR = 6
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	MEDAL_NONE = -1,
 	MEDAL_LETHAL = 0,
 	MEDAL_KILLED = 1,
@@ -6531,8 +6395,7 @@ enum {
 	MAX_MEDALS = 48
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	COMPLETE_NEVER = 0,
 	COMPLETE_ALWAYS = 1,
 	COMPLETE_STORY = 2,
@@ -6543,16 +6406,14 @@ enum {
 	NUM_CONDITIONTYPES = 7
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	DTYPE_INT_LESSISGOOD = 0,
 	DTYPE_INT_MOREISGOOD = 1,
 	DTYPE_INT_NOTZEROISGOOD = 2,
 	DTYPE_NUM = 3
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	CHEAT_BIGHEADS = 0,
 	CHEAT_SMALLHEADS = 1,
 	CHEAT_BIGGUNS = 2,
@@ -6571,8 +6432,7 @@ enum {
 	CHEAT_NUM = 15
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	GUNSET_DAM = 0,
 	GUNSET_TOMB = 1,
 	GUNSET_VILLAGE = 2,
@@ -6595,8 +6455,7 @@ enum {
 	NUM_GUNSETS = 19
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	CHRSET_TOMB = 0,
 	CHRSET_VILLAGE = 1,
 	CHRSET_MANSION = 2,
@@ -6617,8 +6476,7 @@ enum {
 	NUM_CHRSETS = 17
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	LVBTNTYPE_TOGGLE = 0,
 	LVBTNTYPE_ONEPRESS = 1,
 	LVBTNTYPE_TIMED = 2,
@@ -6626,14 +6484,12 @@ enum {
 	NUM_LVBTNTYPES = 4
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	LVBTNFLAG_NONE = 0,
 	LVBTNFLAG_DISABLED = 1
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	TEAM_NONE = 0,
 	TEAM_A = 1,
 	TEAM_B = 2,
@@ -6642,8 +6498,7 @@ enum {
 	TEAM_BAG = 5
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	DOORFLAG_NONE = 0,
 	DOORFLAG_LOCKED = 1,
 	DOORFLAG_NOFRONTLOCK = 2,
@@ -6653,8 +6508,7 @@ enum {
 	DOORFLAG_HASBUTTON = 32
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	GUNSET_GUN1 = 0,
 	GUNSET_GUN2 = 1,
 	GUNSET_GUN3 = 2,
@@ -6677,30 +6531,17 @@ struct propspawninfo_s {
 };
 
 typedef propspawninfo_s propspawninfo;
+
+struct npcspawninfo_s {
+	int numspawned;
+	int numactive;
+	float timerCountDown;
+	boolean triggerset;
+};
+
 typedef npcspawninfo_s npcspawninfo;
 
-struct setuplsphase_s {
-	float delay;
-	int numattackloops;
-	struct {
-		int numchrs;
-		int groupnum;
-		int targetbase;
-		float chrdelay;
-		float enddelay;
-	} attack[10];
-	int numattacks;
-	float targettime;
-};
-
-struct setuplssnipergrp_s {
-	int groupnum;
-	float mininterval;
-	float maxinterval;
-};
-
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	CHALLENGE1_A = 0,
 	CHALLENGE1_B = 1,
 	CHALLENGE1_C = 2,
@@ -6733,8 +6574,7 @@ enum {
 
 typedef int (*chfunc_t)(/* parameters unknown */);
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	CHATTR_TIME = 0,
 	CHATTR_RANKCHR = 1,
 	CHATTR_RANKTEAM = 2,
@@ -6746,8 +6586,7 @@ enum {
 	CHATTR_FUNCTION = 8
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	STYPE_NONE = 0,
 	STYPE_TIME = 1,
 	STYPE_KILLS = 2,
@@ -6755,8 +6594,7 @@ enum {
 	STYPE_HEADSKNOCKEDOFF = 4
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	CHCOMP_LESS = 0,
 	CHCOMP_LESSEQUAL = 1,
 	CHCOMP_EQUAL = 2,
@@ -6803,60 +6641,6 @@ struct challengestats_s {
 
 typedef challengestats_s challengestats_t;
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
-	PRELOAD_FILE = 0,
-	PRELOAD_OB = 1,
-	PRELOAD_TEXNAME = 2,
-	PRELOAD_TEXNUM = 3,
-	PRELOAD_FILELOCAL = 4,
-	PRELOAD_OB_AFTER = 5,
-	PRELOAD_NUM = 6
-};
-
-struct preloadfileinfo_s {
-	u16 type;
-	u16 flags;
-	preloadinfo_u *next;
-	int cdsector;
-	char *filename;
-	u8 *loadpos;
-	int size;
-};
-
-typedef preloadfileinfo_s preloadfileinfo;
-
-struct preloadtexnameinfo_s {
-	u16 type;
-	u16 flags;
-	preloadinfo_u *next;
-	int cdsector;
-	char *filename;
-	texinfo *inf;
-	int texnum;
-};
-
-typedef preloadtexnameinfo_s preloadtexnameinfo;
-
-struct preloadtexnuminfo_s {
-	u16 type;
-	u16 flags;
-	preloadinfo_u *next;
-	int cdsector;
-	int texfilenum;
-	texinfo *inf;
-	int texnum;
-};
-
-typedef preloadtexnuminfo_s preloadtexnuminfo;
-
-union preloadinfo_u {
-	preloadfileinfo file;
-	preloadfileinfo ob;
-	preloadtexnameinfo texname;
-	preloadtexnuminfo texnum;
-};
-
 struct room_s {
 	obdef *ob;
 	int *portals;
@@ -6873,15 +6657,13 @@ struct portal_s {
 	float points[0][3];
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	MEMDYNAMIC_FREE = 0,
 	MEMDYNAMIC_SHORTSTAY = 1,
 	MEMDYNAMIC_RESIDENT = 2
 };
 
-// warning: multiple differing types with the same name (#1,  not equal)
-enum {
+typedef enum {
 	LOADBAR_PRELOAD_STAGE = 0,
 	LOADBAR_SOUND_STAGE = 1,
 	LOADBAR_STAGE_NUM = 2
@@ -6896,8 +6678,7 @@ typedef enum {
 	SCE_DEMO_ENDREASON_PLAYABLE_QUIT = 5
 } sceDemoEndReason;
 
-// warning: multiple differing types with the same name (#7,  not equal)
-enum {
+typedef enum {
 	PARTORDER_BASE = 0,
 	PARTORDER_HIPS = 1,
 	PARTORDER_WAIST = 2,
@@ -6918,6 +6699,234 @@ enum {
 	PARTORDER_LKNEE = 17,
 	PARTORDER_LHEEL = 18,
 	PARTORDER_NUM = 19
+};
+
+struct jointanimframe_s {
+	float trans[3];
+	float rot[3];
+};
+
+typedef jointanimframe_s jointanimframe;
+
+struct jointanimframequat_s {
+	float trans[3];
+	quaternion q;
+};
+
+typedef jointanimframequat_s jointanimframequat;
+
+struct keyframe_s {
+	float time;
+	keyframe_s *next;
+	jointanimframe data[0];
+};
+
+typedef keyframe_s keyframe;
+
+struct anim_s {
+	int numjoints;
+	int numkeyframes;
+	float length;
+	keyframe *firstkeyframe;
+	float rootTrans[3];
+};
+
+typedef anim_s anim;
+
+typedef enum {
+	ANIM_NONE = 0,
+	ANIM_SOFTWARE = 1,
+	ANIM_BIND_POSE = 2,
+	ANIM_STAND = 3,
+	ANIM_RUN = 4,
+	ANIM_RUNBACK = 5,
+	ANIM_RUNLEFT = 6,
+	ANIM_RUNRIGHT = 7,
+	ANIM_WALK = 8,
+	ANIM_WALKBACK = 9,
+	ANIM_WALKLEFT = 10,
+	ANIM_WALKRIGHT = 11,
+	ANIM_PATROL = 12,
+	ANIM_PATROL2 = 13,
+	ANIM_PATROL3 = 14,
+	ANIM_PATROL4 = 15,
+	ANIM_SEARCHINGPATROL = 16,
+	ANIM_SEARCHINGPATROL2 = 17,
+	ANIM_SEARCHINGPATROL3 = 18,
+	ANIM_SEARCHINGPATROL4 = 19,
+	ANIM_ACTINGPATROL = 20,
+	ANIM_PATROLREACTION = 21,
+	ANIM_PATROLREACTSHORT = 22,
+	ANIM_PATROLWALKTOSTAND = 23,
+	ANIM_PATROLIDLE1 = 24,
+	ANIM_PATROLIDLE2 = 25,
+	ANIM_PATROLIDLE3 = 26,
+	ANIM_PATROLSTANDTOWALKLEFT = 27,
+	ANIM_PATROLSTANDTOWALKRIGHT = 28,
+	ANIM_PATROLSTANDTOWALK180 = 29,
+	ANIM_PATROLSTANDTOWALK = 30,
+	ANIM_PATROLTURN90LEFT = 31,
+	ANIM_PATROLTURN90LEFT2 = 32,
+	ANIM_PATROLTURN90RIGHT = 33,
+	ANIM_PATROLTURN90RIGHT2 = 34,
+	ANIM_PATROLTURN90RIGHT3 = 35,
+	ANIM_PATROLTURN90RIGHT4 = 36,
+	ANIM_DIVE = 37,
+	ANIM_SHUFFLE_LEFT = 38,
+	ANIM_SHUFFLE = 39,
+	ANIM_SIDESTEP_RIGHT = 40,
+	ANIM_SIDESTEP_RIGHTLITTLE = 41,
+	ANIM_SLIDE = 42,
+	ANIM_SUMMERSAULT = 43,
+	ANIM_LOWLEFT = 44,
+	ANIM_BACKFLIP = 45,
+	ANIM_CARTWHEEL = 46,
+	ANIM_DIAGBACKRIGHT2 = 47,
+	ANIM_DIAGFORLEFT = 48,
+	ANIM_DIAGLEFTRIGHT = 49,
+	ANIM_DOUBLEDODGE = 50,
+	ANIM_DOUBLEDODGE_FLIPPED = 51,
+	ANIM_ROLLRIGHT = 52,
+	ANIM_ROLLLEFT_FLIPPED = 53,
+	ANIM_STEPRIGHT = 54,
+	ANIM_SMALLSTEP10 = 55,
+	ANIM_SMALLSTEP9 = 56,
+	ANIM_STEPBACK5 = 57,
+	ANIM_SMALLSTEPBACK = 58,
+	ANIM_FAINTLEFT = 59,
+	ANIM_FAINTRIGHT_FLIPPED = 60,
+	ANIM_STRAFEFARRIGHT = 61,
+	ANIM_DODGELEFTRIGHT = 62,
+	ANIM_STRAFEFARLEFT = 63,
+	ANIM_TURNANDRUN = 64,
+	ANIM_RETREAT = 65,
+	ANIM_MOVEFORWARD = 66,
+	ANIM_MOVELEFT = 67,
+	ANIM_MOVERIGHT = 68,
+	ANIM_STANDFEINTLEFT = 69,
+	ANIM_STANDFEINTRIGHT = 70,
+	ANIM_DROPTOKNEE = 71,
+	ANIM_ONKNEE = 72,
+	ANIM_STANDFROMKNEE = 73,
+	ANIM_AMBUSH_SAL = 74,
+	ANIM_AMBUSH_SALB = 75,
+	ANIM_AMBUSH_STANDPOSE_FLIP = 76,
+	ANIM_AMBUSH_STANDPOSE = 77,
+	ANIM_AMBUSH_CRATE_TOSTAND = 78,
+	ANIM_AMBUSH_CRATE_TOCROUCH = 79,
+	ANIM_AMBUSH_CRATE_STAND = 80,
+	ANIM_AMBUSH_CRATE_CROUCH = 81,
+	ANIM_AMBUSH_CRATE_GRENADE = 82,
+	ANIM_AMBUSH_CRATE_SHOOTOVER = 83,
+	ANIM_AMBUSH_CROUCHATTACK_BACK_FLIP = 84,
+	ANIM_AMBUSH_CROUCHATTACK_BACK = 85,
+	ANIM_AMBUSH_CROUCHATTACK_FLIP = 86,
+	ANIM_AMBUSH_CROUCHATTACK = 87,
+	ANIM_AMBUSH_ROLLATTACK_BACK_FLIP = 88,
+	ANIM_AMBUSH_ROLLATTACK_BACK = 89,
+	ANIM_AMBUSH_ROLLATTACK_FLIP = 90,
+	ANIM_AMBUSH_ROLLATTACK = 91,
+	ANIM_AMBUSH_SPRAYATTACK_BACK_FLIP = 92,
+	ANIM_AMBUSH_SPRAYATTACK_BACK = 93,
+	ANIM_AMBUSH_SPRAYATTACK_FLIP = 94,
+	ANIM_AMBUSH_SPRAYATTACK = 95,
+	ANIM_AMBUSH_WALL1_BACK_FLIP = 96,
+	ANIM_AMBUSH_WALL1_BACK = 97,
+	ANIM_AMBUSH_WALL1_FLIP = 98,
+	ANIM_AMBUSH_WALL1 = 99,
+	ANIM_AMBUSH_WALL2_BACK = 100,
+	ANIM_AMBUSH_WALL2_FLIP = 101,
+	ANIM_AMBUSH_WALL2 = 102,
+	ANIM_AMBUSH_WALL3_BACK_FLIP = 103,
+	ANIM_AMBUSH_WALL3_BACK = 104,
+	ANIM_AMBUSH_WALL3_FLIP = 105,
+	ANIM_AMBUSH_WALL3 = 106,
+	ANIM_HR_LEFTSHOULDER = 107,
+	ANIM_HR_LEFTSTOMACH = 108,
+	ANIM_HR_RIGHTLEG = 109,
+	ANIM_HR_RIGHTSHOULDER = 110,
+	ANIM_HR_RIGHTSTOMACH = 111,
+	ANIM_SHOTHEAD = 112,
+	ANIM_SHOTHEAD2 = 113,
+	ANIM_SHOTHEAD3 = 114,
+	ANIM_SHOTSHOULDER = 115,
+	ANIM_CHESTSHOT1 = 116,
+	ANIM_CHESTSHOT2 = 117,
+	ANIM_HEARTSHOT = 118,
+	ANIM_RIGHTFRONT = 119,
+	ANIM_SHOTSHOULDER2 = 120,
+	ANIM_OVERWRITE = 121,
+	ANIM_OVERWRITE2 = 122,
+	ANIM_BARRELOVERWRITE = 123,
+	ANIM_PUNCH = 124,
+	ANIM_CUTSCENE = 125,
+	ANIM_CS_INTRO_DAM_1 = 126,
+	ANIM_CS_INTRO_DAM_2 = 127,
+	ANIM_CS_INTRO_DAM_3 = 128,
+	ANIM_CS_INTRO_DAM_4 = 129,
+	ANIM_CS_INTRO_DAM_5 = 130,
+	ANIM_CS_INTRO_DAM_6 = 131,
+	ANIM_CS_INTRO_DAM_7 = 132,
+	ANIM_CS_INTRO_DAM_8 = 133,
+	ANIM_CS_INTRO_DAM_9 = 134,
+	ANIM_CS_INTRO_DAM_10 = 135,
+	ANIM_CS_INTRO_DAM_11 = 136,
+	ANIM_CS_INTRO_DAM_12 = 137,
+	ANIM_CS_INTRO_DAM_13 = 138,
+	ANIM_CS_INTRO_DAM_14 = 139,
+	ANIM_CS_INTRO_DAM_15 = 140,
+	ANIM_CS_INTRO_DAM_16 = 141,
+	ANIM_CS_INTRO_DAM_17 = 142,
+	ANIM_CS_INTRO_DAM_18 = 143,
+	ANIM_BARRELWALK = 144,
+	ANIM_BARRELTOTURRET = 145,
+	ANIM_BARRELDROPTOTURN = 146,
+	ANIM_BARRELENDTURN = 147,
+	ANIM_BARRELSTANDTOWALK = 148,
+	ANIM_BARRELSTARTTURN = 149,
+	ANIM_BARRELTURNTOSTAND = 150,
+	ANIM_BARRELTURRETTOSTAND = 151,
+	ANIM_ZOMBIESTAND = 152,
+	ANIM_ZOMBIESTAND2 = 153,
+	ANIM_ZOMBIEGETUP1 = 154,
+	ANIM_ZOMBIEGETUP2 = 155,
+	ANIM_ZOMBIESWIPE1 = 156,
+	ANIM_ZOMBIESWIPE2 = 157,
+	ANIM_ZOMBIESWIPE3 = 158,
+	ANIM_ZOMBIESWIPE4 = 159,
+	ANIM_ZOMBIEWALK1 = 160,
+	ANIM_ZOMBIEWALK2 = 161,
+	ANIM_ZOMBIEWALK3 = 162,
+	ANIM_NUM = 163
+};
+
+typedef enum {
+	ANIM_FE_NONE = 163,
+	ANIM_FE_SOFTWARE = 164,
+	ANIM_FE_BIND_POSE = 165,
+	ANIM_FE_STAND = 166,
+	ANIM_FE_FSTAND = 167,
+	ANIM_FE_NUM = 168,
+	ANIM_ALL_NUM = 168
+};
+
+typedef enum {
+	ANIMPROP_NULL = 0,
+	ANIMPROP_LOOPING = 1,
+	ANIMPROP_ROOT_TRANSLATE = 2,
+	ANIMPROP_NOTAG = 4,
+	ANIMPROP_NOINTERRUPT = 8,
+	ANIMPROP_NOTWEENFROM = 16,
+	ANIMPROP_DEATH = 32,
+	ANIMPROP_POINTING = 256,
+	ANIMPROP_TRAVERSAL = 512,
+	ANIMPROP_ANGLE_L90 = 1024,
+	ANIMPROP_ANGLE_R90 = 2048,
+	ANIMPROP_ANGLE_180 = 4096,
+	ANIMPROP_PATROLCANROTATE = 8192,
+	ANIMPROP_NOROTATE = 16384,
+	ANIMPROP_TAGAIMING = 32768,
+	ANIMPROP_NUM = 32769
 };
 
 struct bulletSparkData_s {
@@ -6977,8 +6986,7 @@ struct pulseData_s {
 
 typedef pulseData_s pulseData;
 
-// warning: multiple differing types with the same name (#7,  not equal)
-enum {
+typedef enum {
 	TRACER_YELLOW = 0,
 	TRACER_NUM = 1
 };
@@ -7083,122 +7091,7 @@ struct glowData_t {
 
 typedef glowData_t glowData;
 
-struct particlegroup_s {
-	int type;
-	int particleID;
-	int flags;
-	float time;
-	float endTime;
-	void *ref;
-	u8 *data;
-	int numPoints;
-	float pos[3];
-	float groundHeight;
-	float ratePerSecond;
-	int viewMask;
-	float delay;
-	float velocity[3];
-	float velocityRandom[3];
-	float velocityBias[3];
-	particlegroup_s *previous;
-	particlegroup_s *next;
-	float bbRelative[2][3];
-	float bbAbsolute[2][3];
-	int numRooms;
-	int rooms[20];
-	particleClone *clones;
-};
-
-// warning: multiple differing types with the same name (#7,  not equal)
-enum {
-	PARTICLEID_ROCKETSMOKETRAIL = 0,
-	PARTICLEID_TNTSMOKETRAIL = 1,
-	PARTICLEID_TNTSPARKTRAIL = 2,
-	PARTICLEID_CLUSTER_GRENADESMOKETRAIL = 3,
-	PARTICLEID_EMP_GRENADESMOKETRAIL = 4,
-	PARTICLEID_GAS_GRENADESMOKETRAIL = 5,
-	PARTICLEID_TIMED_GRENADESMOKETRAIL = 6,
-	PARTICLEID_ROCKETSMOKESTREAM = 7,
-	PARTICLEID_PLANETSPAWN = 8,
-	PARTICLEID_SPHEREROTATESPAWN = 9,
-	PARTICLEID_RINGSPAWN1 = 10,
-	PARTICLEID_RINGSPAWN2 = 11,
-	PARTICLEID_EXPLOSIONSMOKE = 12,
-	PARTICLEID_EXPLOSIONSMOKETHICK = 13,
-	PARTICLEID_BLASTSHARDORANGE = 14,
-	PARTICLEID_CRATESMOKE = 15,
-	PARTICLEID_CRATESMOKEQUICK = 16,
-	PARTICLEID_PICKUPSPAWN = 17,
-	PARTICLEID_TOXIC = 18,
-	PARTICLEID_CRYSTAL = 19,
-	PARTICLEID_TIMESPLITTER_HANDS = 20,
-	PARTICLEID_TIMESPLITTER_RADIUS = 21,
-	PARTICLEID_CRANESPARKS = 22,
-	PARTICLEID_THICKCHIMNEYSMOKESTREAM = 23,
-	PARTICLEID_MANHOLESMOKESTREAM = 24,
-	PARTICLEID_DAMTUNNEL_THICKSTEAMSTREAM = 25,
-	PARTICLEID_DAMSTAIRCASE_THICKSTEAMSTREAM = 26,
-	PARTICLEID_FIREEXT_THICKFOAMSTREAM = 27,
-	PARTICLEID_FLAMETORCHCINDERS = 28,
-	PARTICLEID_TRAINSPARKS = 29,
-	PARTICLEID_REDBLOOD = 30,
-	PARTICLEID_GREENBLOOD = 31,
-	PARTICLEID_SPLITTERBLOOD = 32,
-	PARTICLEID_ROBOTBLOOD = 33,
-	PARTICLEID_REDBLOODTHICK = 34,
-	PARTICLEID_GREENBLOODTHICK = 35,
-	PARTICLEID_SPLITTERBLOODTHICK = 36,
-	PARTICLEID_ROBOTBLOODTHICK = 37,
-	PARTICLEID_ELECTRICHIT = 38,
-	PARTICLEID_BLUEGLOW = 39,
-	PARTICLEID_REDHIT = 40,
-	PARTICLEID_CHARHIT = 41,
-	PARTICLEID_LASERSPARKS_GREEN = 42,
-	PARTICLEID_LASERSPARKS_BLUE = 43,
-	PARTICLEID_LASERSPARKS_PURPLE = 44,
-	PARTICLEID_LASERSPARKS_ORANGE = 45,
-	PARTICLEID_LASERSPARKS_RED = 46,
-	PARTICLEID_GUIDEDROCKETSTRIPTRAIL = 47,
-	PARTICLEID_FIXEDROCKETSTRIPTRAIL = 48,
-	PARTICLEID_COPTERROCKETSTRIPTRAIL = 49,
-	PARTICLEID_BULLETTRAIL = 50,
-	PARTICLEID_ARCLASERTRAIL = 51,
-	PARTICLEID_ARCLASERHIT_SPRITE = 52,
-	PARTICLEID_WALLHUGGERTRAIL = 53,
-	PARTICLEID_BREATH = 54,
-	PARTICLEID_DAMAGESPARKS_PINK = 55,
-	PARTICLEID_DAMAGESPARKS_YELLOW = 56,
-	PARTICLEID_DAMAGESMOKE = 57,
-	PARTICLEID_SHOWER = 58,
-	PARTICLEID_INVSHOWER = 59,
-	NUM_PARTICLE_ID = 60
-};
-
-// warning: multiple differing types with the same name (#7,  not equal)
-enum {
-	PARTICLE_SMOKE_TEXTURE = 0,
-	PARTICLE_THICKSMOKE_TEXTURE = 1,
-	PARTICLE_SPARK_TEXTURE = 2,
-	PARTICLE_EXPLOSION_TEXTURE1 = 3,
-	PARTICLE_EXPLOSION_TEXTURE2 = 4,
-	PARTICLE_STAR_TEXTURE = 5,
-	PARTICLE_GLOW_TEXTURE = 6,
-	PARTICLE_BLAST_TEXTURE = 7,
-	PARTICLE_LASER_TEXTURE = 8,
-	PARTICLE_ELECTRIC_TEXTURE = 9,
-	PARTICLE_ELECTRICHIT_TEXTURE = 10,
-	PARTICLE_TRACER_TEXTURE = 11,
-	PARTICLE_LASERHIT_TEXTURE = 12,
-	PARTICLE_SPARKGREY_TEXTURE = 13,
-	PARTICLE_CHARHIT_TEXTURE = 14,
-	PARTICLE_MUZZLE_TEXTURE = 15,
-	PARTICLE_LASERFOG_TEXTURE = 16,
-	PARTICLE_LASERSTATIC_TEXTURE = 17,
-	NUM_PARTICLE_TEXTURES = 18
-};
-
-// warning: multiple differing types with the same name (#7,  not equal)
-enum {
+typedef enum {
 	OWNER_PLAYER = 1,
 	OWNER_CHARACTER = 2,
 	OWNER_REMOTE = 3,
@@ -7207,8 +7100,7 @@ enum {
 	OWNER_PROP = 6
 };
 
-// warning: multiple differing types with the same name (#7,  not equal)
-enum {
+typedef enum {
 	BULLETTYPE_NONE = -1,
 	BULLETTYPE_PUNCH = 0,
 	BULLETTYPE_SMALLBULLET = 1,
@@ -7248,8 +7140,7 @@ enum {
 	BULLETTYPE_NUM = 35
 };
 
-// warning: multiple differing types with the same name (#7,  not equal)
-enum {
+typedef enum {
 	EXPLOSION_ROCKET = 0,
 	EXPLOSION_NORMAL = 1,
 	EXPLOSION_MUSHROOM = 2,
@@ -7258,8 +7149,7 @@ enum {
 	NUM_EXPLOSION_TYPES = 5
 };
 
-// warning: multiple differing types with the same name (#7,  not equal)
-enum {
+typedef enum {
 	BULLETFLAG_SILENCED = 1,
 	BULLETFLAG_EXPLOSIVE = 2,
 	BULLETFLAG_DESTROYGLASS = 4,
@@ -7267,108 +7157,12 @@ enum {
 	BULLETFLAG_EXCLUDENOHITSPROP = 16
 };
 
-// warning: multiple differing types with the same name (#7,  not equal)
-enum {
+typedef enum {
 	BLOOD_NORMAL = 0,
 	BLOOD_THICK = 1
 };
 
-struct laserNode_s {
-	float origin[3];
-	float pos[3];
-	u32 alpha;
-};
-
-typedef laserNode_s laserNode;
-
-struct laserCoil_s {
-	int numNodes;
-	laserNode nodes[16];
-	float angle;
-	float cosangle;
-	float sinangle;
-	float radius;
-	float timedelay;
-	float speed1;
-	float speed2;
-};
-
-typedef laserCoil_s laserCoil;
-
-struct laserData_s {
-	int numCoils;
-	laserCoil coils[5];
-	float endpos[3];
-	float length;
-};
-
-typedef laserData_s laserData;
-
-struct electricData_s {
-	float discardTime;
-	float translate;
-	float endpos[3];
-	float length;
-	u32 randAlpha;
-};
-
-typedef electricData_s electricData;
-
-struct bullet_s {
-	int type;
-	int subType;
-	int damageType;
-	int flags;
-	int next;
-	int prev;
-	boolean ticked;
-	float pos[3];
-	float dir[3];
-	float rotvel[3];
-	float time;
-	prop *hitprop;
-	prop_s *prop;
-	particlegroup_s *particlefx[4];
-	int room;
-	float ricochet;
-	int isricochet;
-	int ownertype;
-	chrdata_s *firedByChr;
-	prop *firedByProp;
-	prop *attackerProp;
-	float RoomHitPos[3];
-	float RoomHitNorm[3];
-	prop *pRoomHitProp;
-	HitInfoDef RoomHitInfo;
-	boolean FirstUpdate;
-	prop *pPropAttachedTo;
-	int MatrixNumAttachedTo;
-	float AttachedPos[3];
-	float AttachedNorm[3];
-	int detonationStage;
-	float normal[3];
-	prop_s *clip;
-	prop_s *mine;
-	float basepos;
-	int bounces;
-	prop *target;
-	float targetpos[3];
-	int retargetcount;
-	int voice;
-	int soundsdone;
-	float alpha;
-	int aiming;
-	int shellsfx;
-	int explosionCauseType;
-	laserData laser;
-	electricData electric;
-	float axis1[3];
-	float axis2[3];
-	float angle;
-};
-
-// warning: multiple differing types with the same name (#7,  not equal)
-enum {
+typedef enum {
 	DEATHFLAG_NONE = 0,
 	DEATHFLAG_EXPLOSION = 1,
 	DEATHFLAG_ALWAYSKILL = 2
@@ -7430,13 +7224,11 @@ typedef enum {
 	STATE_MAX = 1073741825
 } enemyState;
 
-// warning: multiple differing types with the same name (#7,  not equal)
-enum {
+typedef enum {
 	canSeePlayer = 1
 };
 
-// warning: multiple differing types with the same name (#7,  not equal)
-enum {
+typedef enum {
 	AIFLAG_NULL = 0,
 	AIFLAG_NOPROGRESS = 1,
 	AIFLAG_SHOOTING = 2,
@@ -7472,8 +7264,7 @@ enum {
 	AIFLAG_PICKEDUPARMOUR = -2147483648
 };
 
-// warning: multiple differing types with the same name (#7,  not equal)
-enum {
+typedef enum {
 	TEAMFLAG_NULL = 0,
 	TEAMFLAG_GOTOPPONENTSBAG = 1,
 	TEAMFLAG_GOTOURBAG = 2,
@@ -7483,8 +7274,7 @@ enum {
 	TEAMFLAG_ASSASSIN = 32
 };
 
-// warning: multiple differing types with the same name (#7,  not equal)
-enum {
+typedef enum {
 	ST_NULL = 0,
 	ST_BYSIGHT = 1,
 	ST_BYCOLLISION = 2,
@@ -7492,15 +7282,13 @@ enum {
 	ST_BYTRIGGER = 4
 };
 
-// warning: multiple differing types with the same name (#7,  not equal)
-enum {
+typedef enum {
 	EPA_PILLAR = 0,
 	EPA_AWAKENING = 1,
 	EPA_AWOKEN = 2
 };
 
-// warning: multiple differing types with the same name (#7,  not equal)
-enum {
+typedef enum {
 	AOT_UNAWARE = 0,
 	AOT_SIGHTACTIVATED = 1,
 	AOT_SOUNDACTIVATED = 2,
@@ -7521,20 +7309,17 @@ struct communicationList_s {
 
 typedef communicationList_s communicationList;
 
-// warning: multiple differing types with the same name (#7,  not equal)
-enum {
+typedef enum {
 	ALARMSTATE_OFF = 0,
 	ALARMSTATE_ON = 1
 };
 
-// warning: multiple differing types with the same name (#7,  not equal)
-enum {
+typedef enum {
 	INFTYPE_CHR = 0,
 	INFTYPE_ALARM = 1
 };
 
-// warning: multiple differing types with the same name (#7,  not equal)
-enum {
+typedef enum {
 	EP_SETUPPATROL = 0,
 	EP_UNAWARE = 1,
 	EP_CURIOUS = 2,
@@ -7544,8 +7329,7 @@ enum {
 	EP_RUNTOPATROL = 6
 };
 
-// warning: multiple differing types with the same name (#7,  not equal)
-enum {
+typedef enum {
 	FOLLOW_USEPADS = 0,
 	FOLLOW_USELOS = 1,
 	FOLLOW_STOPPED = 2,
@@ -7556,14 +7340,12 @@ enum {
 	FOLLOW_COWER = 64
 };
 
-// warning: multiple differing types with the same name (#7,  not equal)
-enum {
+typedef enum {
 	AI_SFX_INFORMALERT = 0,
 	AI_SFX_REACT = 1
 };
 
-// warning: multiple differing types with the same name (#7,  not equal)
-enum {
+typedef enum {
 	WEATHER_NORMAL = 0,
 	WEATHER_RAIN = 1,
 	WEATHER_STORM = 2,
@@ -7595,8 +7377,7 @@ typedef struct {
 	int feedback;
 } sceSdEffectAttr;
 
-// warning: multiple differing types with the same name (#28,  not equal)
-enum {
+typedef enum {
 	ROOMLIGHT_FIXED = 0,
 	ROOMLIGHT_SINE = 1,
 	ROOMLIGHT_SQUARE = 2,
@@ -7604,8 +7385,7 @@ enum {
 	ROOMLIGHT_NUM = 4
 };
 
-// warning: multiple differing types with the same name (#29,  not equal)
-enum {
+typedef enum {
 	HUDMESSAGE_NONE = 0,
 	HUDMESSAGE_FADE = 1,
 	HUDMESSAGE_SMALLFADE = 2,
@@ -7615,8 +7395,7 @@ enum {
 	HUDMESSAGE_TYPES = 6
 };
 
-// warning: multiple differing types with the same name (#29,  not equal)
-enum {
+typedef enum {
 	HUDTYPE_NONE = -1,
 	HUDTYPE_NORMAL = 0,
 	HUDTYPE_CONVENTIONAL = 1,
@@ -7626,14 +7405,6 @@ enum {
 	HUDTYPE_FIXED = 5,
 	HUDTYPE_REMOTEDEVICE = 6,
 	HUDTYPE_NUM = 7
-};
-
-struct hudHealthArmourData_s {
-	boolean healthSegmentOn[20];
-	boolean armourSegmentOn[20];
-	float healthSegmentFadeTime[20];
-	float armourSegmentFadeTime[20];
-	float hudBarsTime;
 };
 
 struct hudplrparms_s {
@@ -7658,8 +7429,7 @@ typedef hudplrparms_s hudplrparms_t;
 typedef void devguiresponder_t(/* parameters unknown */);
 typedef char* devguigetstr_t(/* parameters unknown */);
 
-// warning: multiple differing types with the same name (#29,  not equal)
-enum {
+typedef enum {
 	DEVGUIMSGTYPE_MENUCLICK = 1,
 	DEVGUIMSGTYPE_LEFTCLICK = 2,
 	DEVGUIMSGTYPE_MIDDLECLICK = 3,
@@ -7680,8 +7450,7 @@ struct devguimsg_s {
 
 typedef devguimsg_s devguimsg_t;
 
-// warning: multiple differing types with the same name (#29,  not equal)
-enum {
+typedef enum {
 	DEVGUIBTNTYPE_LABEL = 0,
 	DEVGUIBTNTYPE_BUTTON = 1,
 	DEVGUIBTNTYPE_CHECKBOX = 2,
@@ -7694,8 +7463,7 @@ enum {
 	DEVGUIBTNTYPE_NUM = 9
 };
 
-// warning: multiple differing types with the same name (#29,  not equal)
-enum {
+typedef enum {
 	ID_USER = 2000
 };
 
@@ -7757,36 +7525,11 @@ struct devguiwin_s {
 
 typedef devguiwin_s devguiwin_t;
 
-// warning: multiple differing types with the same name (#29,  not equal)
-enum {
-	OBJECTIVE_TYPE_NONE = -1,
-	OBJECTIVE_TYPE_MAIN = 0,
-	OBJECTIVE_TYPE_SECONDARY = 1,
-	OBJECTIVE_TYPE_BONUS = 2,
-	OBJECTIVE_NUM_TYPES = 3
-};
-
-// warning: multiple differing types with the same name (#29,  not equal)
-enum {
-	OBJECTIVE_STATE_NOTINLEVEL = 0,
-	OBJECTIVE_STATE_UNREVEALED = 1,
-	OBJECTIVE_STATE_INCOMPLETE = 2,
-	OBJECTIVE_STATE_FAILED = 3,
-	OBJECTIVE_STATE_COMPLETE = 4
-};
-
-// warning: multiple differing types with the same name (#29,  not equal)
-enum {
-	OBJECTIVE_FLAG_COUNTER = 1
-};
-
-// warning: multiple differing types with the same name (#30,  not equal)
-enum {
+typedef enum {
 	ANIMINFO_RIGHTFOOT_IMPORTED = -2147483648
 };
 
-// warning: multiple differing types with the same name (#30,  not equal)
-enum {
+typedef enum {
 	KEYFRAMETAG_LEFTFOOT = 1,
 	KEYFRAMETAG_RIGHTFOOT = 2,
 	KEYFRAMETAG_NOSHOOT = 4,
@@ -7815,47 +7558,7 @@ struct corpsedata_s {
 
 typedef corpsedata_s corpsedata;
 
-struct cs_gfxchunk_s {
-	int texnum;
-	int offset;
-	int numvtx;
-};
-
-typedef cs_gfxchunk_s cs_gfxchunk;
-
-struct cs_partdef_s {
-	cs_gfxchunk *chunklist;
-	int numchunks;
-	int *bindings;
-	int numbindings;
-	int firstbinding;
-};
-
-typedef cs_partdef_s cs_partdef;
-
-struct cs_hierarchyinfo_s {
-	int matrixnum;
-	int parent;
-	int child;
-	int next;
-	int prev;
-};
-
-typedef cs_hierarchyinfo_s cs_hierarchyinfo;
-
-struct cs_animslot_s {
-	int animnum;
-	int framestart;
-	int frameend;
-	int chrtype;
-	int sfx;
-	animRawHeader_t *animheader;
-	prop_s *prop;
-	cs_obinst *cs_inst;
-};
-
-// warning: multiple differing types with the same name (#37,  not equal)
-enum {
+typedef enum {
 	TILESET_VIRTUAL = 0,
 	TILESET_INDUSTRIAL = 1,
 	TILESET_GOTHIC = 2,
@@ -7864,8 +7567,7 @@ enum {
 	TILESET_NUM = 5
 };
 
-// warning: multiple differing types with the same name (#37,  not equal)
-enum {
+typedef enum {
 	TILE_CORRIDOR_2 = 0,
 	TILE_CORNER = 1,
 	TILE_CORRIDOR_1 = 2,
@@ -7906,16 +7608,14 @@ struct tilelighttype_s {
 
 typedef tilelighttype_s tilelighttype_t;
 
-// warning: multiple differing types with the same name (#37,  not equal)
-enum {
+typedef enum {
 	LT_SLOW = 0,
 	LT_MEDIUM = 1,
 	LT_FAST = 2,
 	LT_SPEED_NUM = 3
 };
 
-// warning: multiple differing types with the same name (#37,  not equal)
-enum {
+typedef enum {
 	LT_FIXED = 0,
 	LT_FLICKERING = 4,
 	LT_SWITCHING = 8,
@@ -7923,8 +7623,7 @@ enum {
 	LT_TYPE_NUM = 4
 };
 
-// warning: multiple differing types with the same name (#37,  not equal)
-enum {
+typedef enum {
 	ITEM_NONE = -1,
 	ITEM_START_FIRST = 0,
 	ITEM_START_ALL = 0,
@@ -7988,8 +7687,7 @@ enum {
 	NUM_ITEMS = 53
 };
 
-// warning: multiple differing types with the same name (#37,  not equal)
-enum {
+typedef enum {
 	ITEMGROUP_START = 0,
 	ITEMGROUP_BASE1 = 1,
 	ITEMGROUP_BASE2 = 2,
@@ -8013,8 +7711,19 @@ enum {
 	ITEMGROUP_NUM = 20
 };
 
-// warning: multiple differing types with the same name (#37,  not equal)
-enum {
+typedef enum {
+	ITEMANGLE_SOUTH = 0,
+	ITEMANGLE_SOUTHWEST = 1,
+	ITEMANGLE_WEST = 2,
+	ITEMANGLE_NORTHWEST = 3,
+	ITEMANGLE_NORTH = 4,
+	ITEMANGLE_NORTHEAST = 5,
+	ITEMANGLE_EAST = 6,
+	ITEMANGLE_SOUTHEAST = 7,
+	ITEMANGLE_NUM = 8
+} itemangle_t;
+
+typedef enum {
 	PF_NORTH = 1,
 	PF_EAST = 2,
 	PF_SOUTH = 3,
@@ -8029,8 +7738,7 @@ typedef struct {
 	u8 length;
 } plugdef;
 
-// warning: multiple differing types with the same name (#37,  not equal)
-enum {
+typedef enum {
 	TILEROT_0 = 0,
 	TILEROT_90 = 1,
 	TILEROT_180 = 2,
@@ -8038,27 +7746,23 @@ enum {
 	TILEROT_NUM = 4
 };
 
-// warning: multiple differing types with the same name (#42,  not equal)
-enum {
+typedef enum {
 	TIMERTYPE_COUNTDOWN = 0,
 	TIMERTYPE_REPEAT = 1,
 	TIMERTYPE_COMPLETED = 2
 };
 
-// warning: multiple differing types with the same name (#42,  not equal)
-enum {
+typedef enum {
 	CARMODE_ABSOLUTE_SINE = 0,
 	CARMODE_RELATIVE_SINE = 1,
 	CARMODE_SPLINE = 2
 };
 
-// warning: multiple differing types with the same name (#42,  not equal)
-enum {
+typedef enum {
 	CARFLAGS_USESTARTANGLE = 1
 };
 
-// warning: multiple differing types with the same name (#42,  not equal)
-enum {
+typedef enum {
 	CARPATH_START = 0,
 	CARPATH_STOP = 1,
 	CARPATH_LOOP = 2,
@@ -8139,28 +7843,24 @@ struct specialdata_s {
 
 typedef specialdata_s specialdata;
 
-// warning: multiple differing types with the same name (#42,  not equal)
-enum {
+typedef enum {
 	SWITCH_OFF = 0,
 	SWITCH_ON = 1
 };
 
-// warning: multiple differing types with the same name (#42,  not equal)
-enum {
+typedef enum {
 	DAM_TURBINE_OFF = 0,
 	DAM_TURBINE_ON = 1,
 	DAM_TURBINE_BROKEN = 2
 };
 
-// warning: multiple differing types with the same name (#42,  not equal)
-enum {
+typedef enum {
 	DAM_RADAR_OFF = 0,
 	DAM_RADAR_ON = 1,
 	DAM_RADAR_BROKEN = 2
 };
 
-// warning: multiple differing types with the same name (#42,  not equal)
-enum {
+typedef enum {
 	SPECIALFX_NONE = -1,
 	SPECIALFX_PICKUPSPAWN = 0,
 	SPECIALFX_FLAMETORCH = 1,
@@ -8178,100 +7878,17 @@ enum {
 	NUM_SPECIALFX = 13
 };
 
-// warning: multiple differing types with the same name (#42,  not equal)
-enum {
+typedef enum {
 	SPECIALFXFLAGS_UPDATEONLYIFVISIBLE = 65536,
 	SPECIALFXFLAGS_DISABLED = 131072
 };
 
-// warning: multiple differing types with the same name (#42,  not equal)
-enum {
+typedef enum {
 	LASERBEAM_TRIGGER = 0,
 	LASERBEAM_FORCEFIELD = 1
 };
 
-// warning: multiple differing types with the same name (#42,  not equal)
-enum {
-	LIFTFLAGS_WAITING = 1,
-	LIFTFLAGS_TIMETOENTER = 2,
-	LIFTFLAGS_AUTOMATIC = 4,
-	LIFTFLAGS_DOORS = 8
-};
-
-// warning: multiple differing types with the same name (#42,  not equal)
-enum {
-	LIFTSTATE_NOPOWER = 0,
-	LIFTSTATE_POWERING_UP = 1,
-	LIFTSTATE_POWER = 2
-};
-
-struct setuplift_s {
-	int createflags;
-	int propnum;
-	float roty;
-	int defaultLiftFlags;
-	int padref;
-	float liftSpeed;
-	float liftTimeEvaluate;
-	float liftTimeWaiting;
-	float doorOpenTime;
-	float doorCloseTime;
-	int leftDoorPropnum;
-	float leftDoorPos[3];
-	float leftDoorRoty;
-	float leftDoorMove[3];
-	int rightDoorPropnum;
-	float rightDoorPos[3];
-	float rightDoorRoty;
-	float rightDoorMove[3];
-	int buttonUpPropnum;
-	float buttonUpPos[3];
-	float buttonUpRoty;
-	int buttonDownPropnum;
-	float buttonDownPos[3];
-	float buttonDownRoty;
-	liftNode nodes[6];
-};
-
-struct liftObData_s {
-	prop *lift;
-	liftData_s *liftData;
-	liftNode *nodeBelongTo;
-	float start[3];
-	float dest[3];
-	float scalar;
-};
-
-typedef liftObData_s liftObData;
-
-struct liftData_s {
-	setuplift *setup;
-	liftNode *liftNodes;
-	liftNode *liftStart;
-	liftNode *liftDest;
-	int liftState;
-	float powerTime;
-	int liftFlags;
-	int floor;
-	int pad;
-	int numinlift;
-	float liftTime;
-	int liftCalled;
-	int liftDir;
-	float time;
-	void (*liftButtonResetFunction)(/* parameters unknown */);
-	liftNode *liftQueue[6];
-	prop *liftProp;
-	prop *liftDoorLeft;
-	prop *liftDoorRight;
-	prop *liftButtonUp;
-	prop *liftButtonDown;
-	int numLiftObs;
-	liftObData liftObs[28];
-};
-
-// warning: multiple differing types with the same name (#42,  not equal)
-enum {
+typedef enum {
 	DAMAGETYPE_NONE = -1,
 	DAMAGETYPE_SMALLBULLET = 0,
 	DAMAGETYPE_BIGBULLET = 1,
@@ -8291,16 +7908,14 @@ enum {
 	DAMAGE_TYPES = 15
 };
 
-// warning: multiple differing types with the same name (#42,  not equal)
-enum {
+typedef enum {
 	DAMAGEPARTGROUP_HEAD = 0,
 	DAMAGEPARTGROUP_BODY = 1,
 	DAMAGEPARTGROUP_ARMSLEGS = 2,
 	NUM_DAMAGEPARTGROUPS = 3
 };
 
-// warning: multiple differing types with the same name (#43,  not equal)
-enum {
+typedef enum {
 	MMFILE_VERSION = 20071974,
 	MMFILE_INFO = 20071975,
 	MMFILE_TILES = 20071976,
@@ -8382,8 +7997,7 @@ struct mmfilepatrol_s {
 
 typedef mmfilepatrol_s mmfilepatrol;
 
-// warning: multiple differing types with the same name (#43,  not equal)
-enum {
+typedef enum {
 	ECM_NULL = 0,
 	ECM_ATTACK_DROP = 1,
 	ECM_DEFEND_DROP = 2,
@@ -8392,14 +8006,12 @@ enum {
 	ECM_CANCEL = 16
 };
 
-// warning: multiple differing types with the same name (#43,  not equal)
-enum {
+typedef enum {
 	CARTRIDGEFLAGS_FIRSTPERSON = 1,
 	CARTRIDGEFLAGS_THIRDPERSON = 2
 };
 
-// warning: multiple differing types with the same name (#43,  not equal)
-enum {
+typedef enum {
 	CARTRIDGETYPE_NONE = -1,
 	CARTRIDGETYPE_LARGE = 0,
 	CARTRIDGETYPE_SMALL = 1,
@@ -8409,8 +8021,7 @@ enum {
 	NUM_CARTRIDGETYPE = 5
 };
 
-// warning: multiple differing types with the same name (#43,  not equal)
-enum {
+typedef enum {
 	DECAL_BULLETTYPE_NONE = 0,
 	DECAL_BULLETTYPE_BULLET = 1,
 	DECAL_BULLETTYPE_SCIFI = 2,
@@ -8418,15 +8029,13 @@ enum {
 	DECAL_BULLETTYPE_PETROL = 4
 };
 
-// warning: multiple differing types with the same name (#43,  not equal)
-enum {
+typedef enum {
 	SPRAYTYPE_NONE = 0,
 	SPRAYTYPE_FLOOR = 1,
 	SPRAYTYPE_CHAR = 2
 };
 
-// warning: multiple differing types with the same name (#43,  not equal)
-enum {
+typedef enum {
 	CLOUD_DENSITY_NONE = 0,
 	CLOUD_DENSITY_LIGHT = 1,
 	CLOUD_DENSITY_MEDIUM = 2,
@@ -8435,15 +8044,13 @@ enum {
 	CLOUD_DENSITY_TYPES = 5
 };
 
-// warning: multiple differing types with the same name (#43,  not equal)
-enum {
+typedef enum {
 	GUNFX_FIRE = 0,
 	GUNFX_EXTINGUISH = 1,
 	GUNFX_NUM = 2
 };
 
-// warning: multiple differing types with the same name (#44,  not equal)
-enum {
+typedef enum {
 	REMOTEDEVICE_PLAYERCONTROLLED = 1,
 	REMOTEDEVICE_CAMERA = 2,
 	REMOTEDEVICE_GUN = 4,
@@ -8454,8 +8061,7 @@ enum {
 	REMOTEDEVICE_HAS_BUTTON = 128
 };
 
-// warning: multiple differing types with the same name (#44,  not equal)
-enum {
+typedef enum {
 	REMOTESTATE_SLEEP = 0,
 	REMOTESTATE_SWEEP = 1,
 	REMOTESTATE_LOCKON = 2,
@@ -8467,13 +8073,11 @@ enum {
 	REMOTESTATE_BROKEN = 8
 };
 
-// warning: multiple differing types with the same name (#44,  not equal)
-enum {
+typedef enum {
 	REMOTETEAM_ANYPLAYER = 0
 };
 
-// warning: multiple differing types with the same name (#66,  not equal)
-enum {
+typedef enum {
 	FRONTFX_NORMAL = 0,
 	FRONTFX_STARTPAGE = 1,
 	FRONTFX_CHRPAGE = 2,
@@ -8482,39 +8086,50 @@ enum {
 	FRONTFX_STATSPAGE = 5
 };
 
-// warning: multiple differing types with the same name (#74,  not equal)
-enum {
+typedef enum {
 	MSGBOX_STATE_BUSY = 0,
 	MSGBOX_STATE_YES = 1,
 	MSGBOX_STATE_NO = 2
 };
 
-// warning: multiple differing types with the same name (#76,  not equal)
-enum {
+typedef enum {
 	MAPGEN_TYPE_DEATHMATCH = 0,
 	MAPGEN_TYPE_STORY = 1,
 	MAPGEN_TYPE_LABYRINTH = 2,
 	MAPGEN_TYPE_NUM = 3
 };
 
-// warning: multiple differing types with the same name (#76,  not equal)
-enum {
+typedef enum {
 	MAPGEN_SIZE_SMALL = 0,
 	MAPGEN_SIZE_MEDIUM = 1,
 	MAPGEN_SIZE_LARGE = 2,
 	MAPGEN_SIZE_NUM = 3
 };
 
-// warning: multiple differing types with the same name (#76,  not equal)
-enum {
+typedef enum {
 	MAPGEN_LIGHTS_DARK = 0,
 	MAPGEN_LIGHTS_BRIGHT = 1,
 	MAPGEN_LIGHTS_DISCO = 2,
 	MAPGEN_LIGHTS_NUM = 3
 };
 
-// warning: multiple differing types with the same name (#76,  not equal)
-enum {
+typedef enum {
+	OBJTYPE_UNDEFINED = 0,
+	OBJTYPE_TILE = 1,
+	OBJTYPE_NUM = 2
+} objtype_t;
+
+typedef enum {
+	TILE_DRMD_FOCUSED = 1,
+	TILE_DRMD_INSERTOK = 2,
+	TILE_DRMD_REDERROR = 3,
+	TILE_DRMD_MARKED = 4,
+	TILE_DRMD_FOCUSEDMARKED = 5,
+	TILE_DRMD_GHOSTVIEW = 6,
+	TILE_DRMD_OUTLINETILE = 7
+} tiledrmd_t;
+
+typedef enum {
 	ICON_O = 0,
 	ICON_X = 1,
 	ICON_GUN = 2,
@@ -8539,8 +8154,7 @@ enum {
 	ICON_NUM = 21
 };
 
-// warning: multiple differing types with the same name (#76,  not equal)
-enum {
+typedef enum {
 	POINTER_MAPVIEW = 0,
 	POINTER_TILEPAGE = 1,
 	POINTER_ZOOMTILE = 2,
@@ -8548,8 +8162,7 @@ enum {
 	POINTER_NUM = 4
 };
 
-// warning: multiple differing types with the same name (#76,  not equal)
-enum {
+typedef enum {
 	EDITMODE_TILE = 0,
 	EDITMODE_ITEM = 1,
 	EDITMODE_LIGHT = 2,
@@ -8557,8 +8170,7 @@ enum {
 	EDITMODE_NUM = 4
 };
 
-// warning: multiple differing types with the same name (#104,  not equal)
-enum {
+typedef enum {
 	ANIMPERS_NORMAL = 0,
 	ANIMPERS_BULKY = 1,
 	ANIMPERS_ACROBATIC = 2,
@@ -8572,8 +8184,7 @@ enum {
 	ANIMPERS_NUM = 10
 };
 
-// warning: multiple differing types with the same name (#104,  not equal)
-enum {
+typedef enum {
 	ATTACK_PHASE_FIRSTSIGHT = 0,
 	ATTACK_PHASE_ATTACK = 1,
 	ATTACK_PHASE_CLOSEIN = 2,
@@ -8591,8 +8202,7 @@ struct attackaniminfo_s {
 
 typedef attackaniminfo_s attackaniminfo;
 
-// warning: multiple differing types with the same name (#104,  not equal)
-enum {
+typedef enum {
 	ANIMSEQ_NONE = -1,
 	ANIMSEQ_DIVE = 0,
 	ANIMSEQ_SHUFFLE_LEFT = 1,
@@ -8667,8 +8277,7 @@ enum {
 	ANIMSEQ_NUM = 70
 };
 
-// warning: multiple differing types with the same name (#129,  not equal)
-enum {
+typedef enum {
 	__no_type_class = -1,
 	__void_type_class = 0,
 	__integer_type_class = 1,
@@ -8691,7 +8300,7 @@ enum {
 	__lang_type_class = 18
 };
 
-enum Sce1394ErrorCode {
+typedef enum {
 	SCE1394ERR_OK = 0,
 	SCE1394ERR_ERROR = -1,
 	SCE1394ERR_NOT_INITIALIZED = -1000,
@@ -8722,14 +8331,14 @@ enum Sce1394ErrorCode {
 	SCE1394ERR_UNKNOWN_TCODE = -1062,
 	SCE1394ERR_CYCLE_TOO_LONG = -1063,
 	SCE1394ERR_NO_MANAGER = -1081
-};
+} Sce1394ErrorCode;
 
 typedef int (*sce1394TrDataIndProc)(/* parameters unknown */);
 
-struct sce1394Iov {
+typedef struct {
 	int iov_len;
 	void *iov_base;
-};
+} sce1394Iov;
 
 typedef unsigned int sceILsock_addr_t;
 
@@ -8746,23 +8355,23 @@ typedef union {
 	__uint32_t word;
 } ieee_float_shape_type;
 
-enum cmp_type {
+typedef enum {
 	CMP_SI = 0,
 	CMP_DI = 1,
 	CMP_SF = 2,
 	CMP_DF = 3,
 	CMP_MAX = 4
-};
+} cmp_type;
 
-enum delay_type {
+typedef enum {
 	DELAY_NONE = 0,
 	DELAY_LOAD = 1,
 	DELAY_HILO = 2,
 	DELAY_HILO1 = 3,
 	DELAY_FCMP = 4
-};
+} delay_type;
 
-enum processor_type {
+typedef enum {
 	PROCESSOR_DEFAULT = 0,
 	PROCESSOR_R3000 = 1,
 	PROCESSOR_R3900 = 2,
@@ -8776,20 +8385,20 @@ enum processor_type {
 	PROCESSOR_R5400 = 10,
 	PROCESSOR_R5900 = 11,
 	PROCESSOR_R8000 = 12
-};
+} processor_type;
 
-enum mips_abicalls_type {
+typedef enum {
 	MIPS_ABICALLS_NO = 0,
 	MIPS_ABICALLS_YES = 1
-};
+} mips_abicalls_type;
 
-enum block_move_type {
+typedef enum {
 	BLOCK_MOVE_NORMAL = 0,
 	BLOCK_MOVE_NOT_LAST = 1,
 	BLOCK_MOVE_LAST = 2
-};
+} block_move_type;
 
-enum reg_class {
+typedef enum {
 	NO_REGS = 0,
 	M16_NA_REGS = 1,
 	M16_REGS = 2,
@@ -8821,7 +8430,7 @@ enum reg_class {
 	ST_REGS = 28,
 	ALL_REGS = 29,
 	LIM_REG_CLASSES = 30
-};
+} reg_class;
 
 struct mips_frame_info {
 	long int total_size;
@@ -8855,7 +8464,7 @@ struct mips_args {
 
 typedef mips_args CUMULATIVE_ARGS;
 
-enum machine_mode {
+typedef enum {
 	VOIDmode = 0,
 	PQImode = 1,
 	QImode = 2,
@@ -8889,9 +8498,9 @@ enum machine_mode {
 	BLKmode = 30,
 	CCmode = 31,
 	MAX_MACHINE_MODE = 32
-};
+} machine_mode;
 
-enum mode_class {
+typedef enum {
 	MODE_RANDOM = 0,
 	MODE_INT = 1,
 	MODE_FLOAT = 2,
@@ -8900,7 +8509,7 @@ enum mode_class {
 	MODE_COMPLEX_INT = 5,
 	MODE_COMPLEX_FLOAT = 6,
 	MAX_MODE_CLASS = 7
-};
+} mode_class;
 
 typedef int ptrdiff_t;
 typedef unsigned int wint_t;
@@ -8918,6 +8527,15 @@ typedef union {
 } DIunion;
 
 typedef short int HItype;
+
+typedef enum {
+	CLASS_SNAN = 0,
+	CLASS_QNAN = 1,
+	CLASS_ZERO = 2,
+	CLASS_NUMBER = 3,
+	CLASS_INFINITY = 4
+} fp_class_type;
+
 typedef short unsigned int ushort;
 typedef unsigned int uint;
 typedef long int daddr_t;
@@ -8933,9 +8551,9 @@ typedef unsigned int mode_t;
 typedef short unsigned int nlink_t;
 typedef long int fd_mask;
 
-struct _types_fd_set {
+typedef struct {
 	fd_mask fds_bits[1];
-};
+} _types_fd_set;
 
 typedef malloc_chunk *mchunkptr;
 
@@ -8959,7 +8577,7 @@ struct stat {
 	long int st_spare4[2];
 };
 
-// warning: multiple differing types with the same name (#297, type name not equal)
+// warning: multiple differing types with the same name (type name not equal)
 typedef unsigned int ULong;
 
 typedef union {
@@ -9011,8 +8629,7 @@ union double_union {
 	__uint32_t i[2];
 };
 
-// warning: multiple differing types with the same name (#298,  not equal)
-enum {
+typedef enum {
 	OCT = 0,
 	DEC = 1,
 	HEX = 2
@@ -9027,3 +8644,4 @@ struct sigaction {
 };
 
 typedef int sig_atomic_t;
+struct rtx_def;

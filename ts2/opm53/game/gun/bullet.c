@@ -1,17 +1,11 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #include "bullet.h"
 
-struct laserBoltDef_s {
-	float radius;
-	float length;
-	u32 abgr;
-	int repetitions;
-};
-
-typedef laserBoltDef_s laserBoltDef;
-
-// warning: multiple differing types with the same name (#106,  not equal)
 enum {
 	LASERBOLT_GREEN = 0,
 	LASERBOLT_BLUE = 1,
@@ -21,7 +15,6 @@ enum {
 	NUM_LASERBOLT_TYPES = 5
 };
 
-// warning: multiple differing types with the same name (#106,  not equal)
 enum {
 	EXPLOSIONRENDER_NONE = -1,
 	EXPLOSIONRENDER_NORMAL_IMPACT = 0,
@@ -33,15 +26,12 @@ enum {
 	NUM_EXPLOSION_RENDERS = 6
 };
 
-struct explosionRender_s {
+typedef struct explosionRender_s {
 	boolean blast;
 	u32 colour;
 	float size;
-};
+} explosionRender;
 
-typedef explosionRender_s explosionRender;
-
-// warning: multiple differing types with the same name (#106,  not equal)
 enum {
 	BULLET_GROUP_NONE = -1,
 	BULLET_GROUP_TYPE_BULLETS = 0,
@@ -50,7 +40,6 @@ enum {
 	NUM_BULLET_GROUP_TYPES = 3
 };
 
-// warning: multiple differing types with the same name (#106,  not equal)
 enum {
 	PROXIMITY_STAGE_NOT_ARMED = 0,
 	PROXIMITY_STAGE_ARMED = 1,

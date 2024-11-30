@@ -3,18 +3,6 @@
 #ifndef GAME_MAPMAKER_MM_MAIN_H
 #define GAME_MAPMAKER_MM_MAIN_H
 
-typedef enum {
-	ITEMANGLE_SOUTH = 0,
-	ITEMANGLE_SOUTHWEST = 1,
-	ITEMANGLE_WEST = 2,
-	ITEMANGLE_NORTHWEST = 3,
-	ITEMANGLE_NORTH = 4,
-	ITEMANGLE_NORTHEAST = 5,
-	ITEMANGLE_EAST = 6,
-	ITEMANGLE_SOUTHEAST = 7,
-	ITEMANGLE_NUM = 8
-} itemangle_t;
-
 struct object_s {
 	objtype_t type;
 	fix_t x;

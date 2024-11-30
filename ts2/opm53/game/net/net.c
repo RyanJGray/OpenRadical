@@ -2,8 +2,7 @@
 
 #include "net.h"
 
-// warning: multiple differing types with the same name (#150,  not equal)
-enum {
+typedef enum {
 	PACKET_I_AM_DISCONNECTING = 0,
 	PACKET_REQUEST_JOIN_GAME_DATA = 1,
 	PACKET_ACCEPT_JOIN_GAME_DATA = 2,
@@ -35,8 +34,7 @@ enum {
 	PACKET_AICHR_DATA = 28
 };
 
-// warning: multiple differing types with the same name (#150,  not equal)
-enum {
+typedef enum {
 	NET_STATE_NONE = 0,
 	NET_STATE_WAITINGCONNECTION = 1,
 	NET_STATE_WAITINGINITDATA = 2,

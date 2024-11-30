@@ -1,7 +1,13 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_LV_SETUP_MEXICAN_H
 #define GAME_LV_SETUP_MEXICAN_H
+
+#include "lvsetup.h"
 
 extern setupprop mexican_props[0];
 extern setuppickup mexican_pickups_1up[0];

@@ -1,9 +1,64 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_FILE_PRELOAD_H
 #define GAME_FILE_PRELOAD_H
 
-typedef preloadinfo_u preloadinfo;
+#include "common.h"
+#include "em/em.h"
+
+enum {
+	PRELOAD_FILE = 0,
+	PRELOAD_OB = 1,
+	PRELOAD_TEXNAME = 2,
+	PRELOAD_TEXNUM = 3,
+	PRELOAD_FILELOCAL = 4,
+	PRELOAD_OB_AFTER = 5,
+	PRELOAD_NUM = 6
+};
+
+// Forward-declare
+typedef union preloadinfo_u preloadinfo;
+
+typedef struct preloadfileinfo_s {
+	u16 type;
+	u16 flags;
+	preloadinfo *next;
+	int cdsector;
+	char *filename;
+	u8 *loadpos;
+	int size;
+} preloadfileinfo;
+
+typedef struct preloadtexnameinfo_s {
+	u16 type;
+	u16 flags;
+	preloadinfo *next;
+	int cdsector;
+	char *filename;
+	texinfo *inf;
+	int texnum;
+} preloadtexnameinfo;
+
+typedef struct preloadtexnuminfo_s {
+	u16 type;
+	u16 flags;
+	preloadinfo *next;
+	int cdsector;
+	int texfilenum;
+	texinfo *inf;
+	int texnum;
+} preloadtexnuminfo;
+
+typedef union preloadinfo_u {
+	preloadfileinfo file;
+	preloadfileinfo ob;
+	preloadtexnameinfo texname;
+	preloadtexnuminfo texnum;
+} preloadinfo;
 
 void preloadReset();
 void preloadAddFile(u8 *filename, u8 *loadpos);

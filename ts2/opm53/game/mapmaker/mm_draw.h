@@ -5,16 +5,6 @@
 
 typedef int fix_t;
 
-typedef enum {
-	TILE_DRMD_FOCUSED = 1,
-	TILE_DRMD_INSERTOK = 2,
-	TILE_DRMD_REDERROR = 3,
-	TILE_DRMD_MARKED = 4,
-	TILE_DRMD_FOCUSEDMARKED = 5,
-	TILE_DRMD_GHOSTVIEW = 6,
-	TILE_DRMD_OUTLINETILE = 7
-} tiledrmd_t;
-
 typedef struct {
 	s8 x;
 	s8 y;

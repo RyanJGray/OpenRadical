@@ -7,6 +7,12 @@
 #ifndef GAME_ANIM_ANIM_H
 #define GAME_ANIM_ANIM_H
 
+#include "common.h"
+#include "anim/cs_anim.h"
+#include "ob/ob.h"
+#include "util/matrix.h"
+#include "util/quaternion.h"
+
 typedef struct animData_s {
 	float x;
 	float y;
@@ -100,15 +106,6 @@ typedef struct {
 	channel *pChannel;
 } animInfoProp;
 
-typedef struct {
-	char id[4];
-	int animHeaderOfs;
-	int animRawCSCamOfs;
-	int animRawCSCamLen;
-	int animRawCSLightOfs[3];
-	int animRawCSLightLen[3];
-} animRawHeader_t;
-
 typedef struct animinfo_s {
 	int num;
 	float time;
@@ -123,7 +120,7 @@ typedef struct animinfo_s {
 } animinfo;
 
 typedef struct skeleton_s {
-	mtx_u *matrices;
+	mtx *matrices;
 	animData *ad;
 	int id;
 	int type;
@@ -142,7 +139,7 @@ typedef struct jointanimframequat_s {
 
 typedef struct keyframe_s {
 	float time;
-	keyframe_s *next;
+	struct keyframe_s *next;
 	jointanimframe data[0];
 } keyframe;
 
@@ -351,51 +348,6 @@ enum {
 	ANIMPROP_NUM = 32769
 };
 
-
-typedef struct obinst_s {
-	obdef *ob;
-	mtx_u *matrices;
-	mtx_u *rmatrices;
-	mtx_u *lightdir;
-	mtx_u *lightcol;
-	int lastlight[2];
-	float lastlightpos[2][3];
-	float lastlightcol[2][3];
-	skeleton_s *skel;
-	skelmatrices *skelmtx;
-	int overwriteparts;
-	int overwriteanimnum;
-	float overwriteanglex;
-	float overwriteangley;
-	float lastoverwriteanglex;
-	float lastoverwriteangley;
-	float aimingtweentime;
-	float aimingtweencurrtime;
-	int aimingStatus;
-	animinfo anim1;
-	animinfo anim2;
-	int animdelaynum;
-	float animdelayblendtime;
-	float animdelayspeed;
-	float animblendtime;
-	float animblendfrac;
-	float animblendcurrtime;
-	prop_s *prop;
-	gfxpointers *override;
-	u32 ***overridedma[2][2][3];
-	u32 **overridergb[2][3];
-	int overridetile;
-	int overridebuf;
-	u16 switchflags;
-	u16 overrideflags;
-	s8 overridealphastate;
-	s8 overridezbstate;
-	s8 spare;
-	u8 fixedalpha;
-	float overrideambientscale;
-	u8 overrideambientCol[4];
-} obinst;
-
 typedef struct {
 	u16 keyframenum;
 	u16 tags;
@@ -426,8 +378,8 @@ void loadAnimationRawEx(char *filename, int tabEntry, u8 *bufferloaddynamic);
 void setAnimProp(int tabEntry, int fProp);
 int getAnimProp(int tabEntry);
 animInfoProp* getAnimation(int tabEntry);
-void calGlobalMatrices(obinst *inst, mtx_u *m, int partnum, int parent);
-void calGlobalFilletMatrices(obinst *inst, mtx_u *m, int partnum, int parent);
+void calGlobalMatrices(obinst *inst, mtx *m, int partnum, int parent);
+void calGlobalFilletMatrices(obinst *inst, mtx *m, int partnum, int parent);
 void calDoubleFillets(obinst *inst, int partnum, int relocating);
 void getKeyFrames(animinfo *ai, float animLength, int *key1, int *key2);
 boolean animIsPaused(obinst *inst);
@@ -447,10 +399,10 @@ void extractAnimData(animInfoProp *pAnimCycle, int channelnum, int key, animData
 void extractAnimRoot(prop *p, float *t1, float *t2, float *frames, int daxis);
 void extractAnimRootData(prop *p, int animnum, float *t1, float *t2, float *frames, int daxis);
 void anim_LoadMatrix(int num);
-void anim_SetMatrixArray(mtx_u *m);
-void anim_SetModelview(mtx_u *m, int multpush);
+void anim_SetMatrixArray(mtx *m);
+void anim_SetModelview(mtx *m, int multpush);
 void anim_PopModelview();
-mtx_u* anim_GetModelview();
+mtx* anim_GetModelview();
 int curAnim(prop *p, int anim);
 int curAnimType(prop *p);
 int curAnimSlot1(prop *p, int anim);

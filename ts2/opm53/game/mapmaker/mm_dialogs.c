@@ -2,8 +2,7 @@
 
 #include "mm_dialogs.h"
 
-// warning: multiple differing types with the same name (#81,  not equal)
-enum {
+typedef enum {
 	ID_EDITMODE_0 = 1,
 	ID_EDITMODE_LAST = 4,
 	ID_TILES_0 = 5,
@@ -293,8 +292,8 @@ static neattext_t nt_nextpage = {
 prop *itemprop = NULL;
 
 static pageinit_t mapmakercolour_page = {
-	/* .tick = */ mapmakercolour_pageTick,
-	/* .draw_before = */ mapmakercolour_pageDraw,
+	/* .tick = */ &mapmakercolour_pageTick,
+	/* .draw_before = */ &mapmakercolour_pageDraw,
 	/* .initfocusid = */ 0,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
@@ -302,17 +301,17 @@ static pageinit_t mapmakercolour_page = {
 };
 
 static pageinit_t mapmakermain_page = {
-	/* .tick = */ mapmakermain_pageTick,
-	/* .draw_before = */ mapmakermain_pageDraw,
+	/* .tick = */ &mapmakermain_pageTick,
+	/* .draw_before = */ &mapmakermain_pageDraw,
 	/* .initfocusid = */ 0,
 	/* .pad = */ 0,
-	/* .draw_after = */ mapmakermain_pageDrawAfter,
+	/* .draw_after = */ &mapmakermain_pageDrawAfter,
 	/* .construct = */ NULL
 };
 
 pageinit_t zoomtile_page = {
-	/* .tick = */ zoomtile_pageTick,
-	/* .draw_before = */ zoomtile_pageDraw,
+	/* .tick = */ &zoomtile_pageTick,
+	/* .draw_before = */ &zoomtile_pageDraw,
 	/* .initfocusid = */ 1,
 	/* .pad = */ 0,
 	/* .draw_after = */ NULL,
@@ -493,10 +492,10 @@ static tilepadinfo_t padinfo[64];
 static int numpadinfo;
 static float tilerotyinc;
 static float lastrotydir;
-static struct editcolour {
+static struct {
 	int lock;
 	float fRGB[3];
-};
+} editcolour;
 
 char* getLightDesc(int mask) {
 	static char s_lightdesc[32];

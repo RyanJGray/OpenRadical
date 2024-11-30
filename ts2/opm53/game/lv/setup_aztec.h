@@ -1,31 +1,14 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_LV_SETUP_AZTEC_H
 #define GAME_LV_SETUP_AZTEC_H
 
-struct setuppickup_s {
-	int createflags;
-	int propnum;
-	int pickuptype;
-	float data;
-	int data2;
-	int team;
-	int padextref;
-	float rot[3];
-	float dy;
-	int realpadnum;
-};
+#include "lvsetup.h"
 
-typedef setuppickup_s setuppickup;
-
-struct setupspawn_s {
-	int createflags;
-	int padextref;
-	int flags;
-	int realpadnum;
-};
-
-typedef setupspawn_s setupspawn;
 extern weatherdata aztec_weather[0];
 extern setupprop aztec_props[0];
 extern setuppickup aztec_pickups_arcade[0];

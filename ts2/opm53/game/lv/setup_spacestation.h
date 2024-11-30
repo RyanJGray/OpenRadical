@@ -1,7 +1,13 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_LV_SETUP_SPACESTATION_H
 #define GAME_LV_SETUP_SPACESTATION_H
+
+#include "lvsetup.h"
 
 extern setuplift spacestation_lifts[0];
 extern setupprop spacestation_props[0];

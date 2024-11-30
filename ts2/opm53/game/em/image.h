@@ -3,17 +3,17 @@
 #ifndef GAME_EM_IMAGE_H
 #define GAME_EM_IMAGE_H
 
-#include "boss.h"
+#include "common.h"
 
-typedef enum {
-	IMAGE_UNKNOWN = 0,
-	IMAGE_RGB = 1,
-	IMAGE_P6 = 2,
-	IMAGE_P8 = 3,
-	IMAGE_Q6 = 4,
-	IMAGE_Q8 = 5,
-	IMAGE_M6 = 6,
-	IMAGE_M8 = 7
+typedef enum eImageType {
+    IMAGE_UNKNOWN=0,
+    IMAGE_RGB=1,
+    IMAGE_P6=2,
+    IMAGE_P8=3,
+    IMAGE_Q6=4,
+    IMAGE_Q8=5,
+    IMAGE_M6=6,
+    IMAGE_M8=7
 } eImageType;
 
 typedef union {
@@ -26,7 +26,7 @@ typedef union {
 	u32 rgba;
 } rgba_t;
 
-struct emTexture_s {
+typedef struct emTexture_s {
 	int flags;
 	int TexNum;
 	u32 *vifdata;
@@ -47,9 +47,7 @@ struct emTexture_s {
 	u8 SwapFlags;
 	u8 texformat;
 	u8 miplevels;
-};
-
-typedef emTexture_s emTexture;
+} emTexture;
 
 u32 tobw(u32 col);
 void MakeCSM1Palette(rgba_t *src, rgba_t *dest);

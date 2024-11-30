@@ -8,7 +8,7 @@ setuppickup wildwest_pickups_1up[0] = {
 setupspawn wildwest_spawns_1up[0] = {
 };
 
-setupNPC ww_NPCs_1up[0] = CCC_CANNOT_COMPUTE_ELEMENT_SIZE;
+setupNPC ww_NPCs_1up[0];
 
 static int ww_patrol0_1up[0] = {
 };
@@ -25,7 +25,7 @@ setupPatrolRoutes ww_patrolroutes_1up[0] = {
 aihandler ww_AIHandlers_1up[0] = {
 };
 
-setupNPC ww_spawninfos_1up[0] = CCC_CANNOT_COMPUTE_ELEMENT_SIZE;
+setupNPC ww_spawninfos_1up[0];
 
 setupheader setup_wildwest_1up = {
 	/* .setupflags = */ 128,
@@ -42,9 +42,9 @@ setupheader setup_wildwest_1up = {
 	/* .numNPCs = */ 5,
 	/* .setupPatrolRoutes = */ ww_patrolroutes_1up,
 	/* .numPatrolroutes = */ 3,
-	/* .AIEventHandlers = */ &setup_wildwest_1up,
+	/* .AIEventHandlers = */ ww_AIHandlers_1up,
 	/* .numAIEventHandlers = */ 0,
-	/* .si = */ &setup_wildwest_1up,
+	/* .si = */ ww_AIHandlers_1up,
 	/* .numNPCspawns = */ 0,
 	/* .cars = */ NULL,
 	/* .numcars = */ 0,

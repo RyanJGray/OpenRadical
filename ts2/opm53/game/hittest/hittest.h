@@ -1,7 +1,14 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_HITTEST_HITTEST_H
 #define GAME_HITTEST_HITTEST_H
+
+#include "common.h"
+#include "fx/particle.h"
 
 typedef u8 vindex;
 

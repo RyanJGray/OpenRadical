@@ -1,8 +1,0 @@
-// STATUS: NOT STARTED
-
-#ifndef SCE_EE_GCC_SRC_NEWLIB_LIBC_STRING_BCOPY_H
-#define SCE_EE_GCC_SRC_NEWLIB_LIBC_STRING_BCOPY_H
-
-void bcopy(char *b1, char *b2, size_t length);
-
-#endif // SCE_EE_GCC_SRC_NEWLIB_LIBC_STRING_BCOPY_H

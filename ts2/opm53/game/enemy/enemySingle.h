@@ -1,34 +1,22 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_ENEMY_ENEMYSINGLE_H
 #define GAME_ENEMY_ENEMYSINGLE_H
 
-typedef void (*lvbtnhandlerfn)(/* parameters unknown */);
+#include "common.h"
+#include "lv/lvsetup.h"
 
-struct lvbuttondata_s {
-	int setupref;
-	int chrpadnum;
-	prop_s *prop;
-	int type;
-	int flags;
-	lvbtnhandlerfn handlerfn;
-	boolean status;
-	prop_s *activater;
-	float timer1;
-	int data1;
-	float fdata1;
-	void *vdata1;
-};
-
-struct aifireinfo_s {
+typedef struct aifireinfo_s {
 	float minrange;
 	float maxrange;
 	int repeatfire;
-};
+} aifireinfo;
 
-typedef aifireinfo_s aifireinfo;
-
-struct alarmdata_s {
+typedef struct alarmdata_s {
 	int setupref;
 	int commlist;
 	float duration;
@@ -36,13 +24,11 @@ struct alarmdata_s {
 	int state;
 	float timer1;
 	float timer2;
-};
+} alarmdata;
 
-typedef alarmdata_s alarmdata;
 extern aifireinfo firerange[33];
 extern int numLvButtons;
 extern int debugwokenupstat;
-extern ambushDesc ambushdesc[10];
 extern lvbuttondata levelbuttons[10];
 
 void enemySingleRestart();
@@ -83,7 +69,7 @@ void enemyPressButton(prop *p);
 boolean enemyAlarmIsOn(int i);
 int enemyGetNumAlarms();
 alarmdata* enemyGetAlarm(int i);
-lvbuttondata_s* enemyGetButton(int i);
+lvbuttondata* enemyGetButton(int i);
 int enemyGetNumButtons();
 
 #endif // GAME_ENEMY_ENEMYSINGLE_H
