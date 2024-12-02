@@ -17,7 +17,7 @@ LIBS        = $(LIBDIR)/libkernl.a \
 
 PREFIX      = $(TOP)/gcc/bin/ee
 AS          = $(PREFIX)-gcc
-CC          = $(PREFIX)-gcc 
+CC          = $(PREFIX)-gcc
 LD          = $(PREFIX)-gcc
 DVPASM      = $(PREFIX)-dvp-as
 OBJDUMP     = $(PREFIX)-objdump
@@ -26,7 +26,7 @@ RM          = /bin/rm -f
 
 CFLAGS      = -O2 -Wall -Werror -Wa,-al -fno-common -fno-strict-aliasing
 CXXFLAGS    = -O2 -Wall -Werror -Wa,-al -fno-exceptions -fno-common -fno-strict-aliasing
-ASFLAGS     = -c -xassembler-with-cpp -Wa,-al
+ASFLAGS     = -gstabs -mdebug -c -xassembler-with-cpp -Wa,-al
 DVPASMFLAGS =
 LDFLAGS     = -Wl,-Map,$(OUTPUT).map -mno-crt0 -L$(LIBDIR) -lsdr -lpad -lm 
 TMPFLAGS    = -I../../../../common/include

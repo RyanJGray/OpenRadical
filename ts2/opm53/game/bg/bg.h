@@ -11,10 +11,21 @@
 #include "fx/weather.h"
 #include "fx/particle.h"
 
-typedef room_s room;
+typedef struct room_s {
+	obdef *ob;
+	int *portals;
+	weatherdef **weather;
+	float bb[2][3];
+} room;
 
-
-typedef portal_s portal;
+typedef struct portal_s {
+	int room1;
+	int room2;
+	float normal[3];
+	short int numpoints;
+	short int flags;
+	float points[0][3];
+} portal;
 
 typedef struct volume_s {
 	int num;
@@ -47,6 +58,24 @@ typedef struct leveltile_s {
 	int lighttype;
 	int lightphase;
 } leveltile;
+
+typedef struct tileloadinfo_s {
+	room *rooms;
+	portal **portals;
+	texinfo *textures;
+	volume *volumes;
+	int numrooms;
+	int numportals;
+	int numtextures;
+	int numvolumes;
+	int roomstart;
+	int portalstart;
+	int texturestart;
+	int lighttype;
+	int lightphase;
+	u16 seals;
+	u32 col;
+} tileloadinfo;
 
 extern roombbinfo *roombb;
 extern int bgNumRooms;

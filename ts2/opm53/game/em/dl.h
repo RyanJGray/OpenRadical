@@ -24,7 +24,7 @@ union word1_u {
 typedef struct dlDmaTag_s {
 	union word1_u word1;
 	struct dlDmaTag_s *next;
-	u_int p[2];
+	u_int p[2]; // Padding for 128-bit alignment as per the official reference manuals.
 } dlDmaTag;
 
 extern dlDmaTag *pushgfxtag;

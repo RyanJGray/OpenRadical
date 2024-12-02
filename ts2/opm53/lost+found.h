@@ -6098,47 +6098,6 @@ typedef enum {
 };
 
 typedef enum {
-	CAMMODE_GAMECAM = 0,
-	CAMMODE_RESETTHIRDPERSONCHEAT = 1,
-	CAMMODE_THIRDPERSONCHEAT = 2,
-	CAMMODE_MOVEVIEW = 3,
-	CAMMODE_RESETVIEWPROP = 4,
-	CAMMODE_VIEWPROP = 5,
-	CAMMODE_SHOWPROPBACK = 6,
-	CAMMODE_FLEXIBLE = 7,
-	CAMMODE_MATRIX1 = 8,
-	CAMMODE_CUTSCENE = 9,
-	CAMMODE_RESETFLYINTRO = 10,
-	CAMMODE_FLYINTRO = 11,
-	CAMMODE_MAX = 12
-};
-
-typedef enum {
-	CAMTYPE_FIRSTPERSON = 0,
-	CAMTYPE_DEATHVIEW = 1,
-	CAMTYPE_REMOTEGUN = 2,
-	CAMTYPE_FIXED = 3,
-	CAMTYPE_FIXEDFOLLOW = 4,
-	CAMTYPE_MOVEFOLLOW = 5,
-	CAMTYPE_FLY = 6,
-	CAMTYPE_NUM = 7
-};
-
-typedef enum {
-	CAMDEF_FIRSTPERSON = 0,
-	CAMDEF_DEATHVIEW = 1,
-	CAMDEF_REMOTEGUN = 2
-};
-
-struct roomcalcdata_s {
-	int level;
-	s16 scrmin[2];
-	s16 scrmax[2];
-};
-
-typedef roomcalcdata_s roomcalcdata;
-
-typedef enum {
 	NETGAME_NONE = 0,
 	NETGAME_SERVER = 1,
 	NETGAME_CLIENT = 2
@@ -6640,22 +6599,6 @@ struct challengestats_s {
 };
 
 typedef challengestats_s challengestats_t;
-
-struct room_s {
-	obdef *ob;
-	int *portals;
-	weatherdef_s **weather;
-	float bb[2][3];
-};
-
-struct portal_s {
-	int room1;
-	int room2;
-	float normal[3];
-	short int numpoints;
-	short int flags;
-	float points[0][3];
-};
 
 typedef enum {
 	MEMDYNAMIC_FREE = 0,
@@ -7385,47 +7328,6 @@ typedef enum {
 	ROOMLIGHT_NUM = 4
 };
 
-typedef enum {
-	HUDMESSAGE_NONE = 0,
-	HUDMESSAGE_FADE = 1,
-	HUDMESSAGE_SMALLFADE = 2,
-	HUDMESSAGE_SCROLL = 3,
-	HUDMESSAGE_MAIN = 4,
-	HUDMESSAGE_OBJECTIVE = 5,
-	HUDMESSAGE_TYPES = 6
-};
-
-typedef enum {
-	HUDTYPE_NONE = -1,
-	HUDTYPE_NORMAL = 0,
-	HUDTYPE_CONVENTIONAL = 1,
-	HUDTYPE_SCIFI = 2,
-	HUDTYPE_SNIPER = 3,
-	HUDTYPE_SNIPERZOOM = 4,
-	HUDTYPE_FIXED = 5,
-	HUDTYPE_REMOTEDEVICE = 6,
-	HUDTYPE_NUM = 7
-};
-
-struct hudplrparms_s {
-	int type;
-	float lasthealth;
-	float lastarmour;
-	float lasthealthtime;
-	float lastarmourtime;
-	int lastdtime;
-	int damagetime;
-	int ranktimer;
-	int ranktimertime;
-	float radartime;
-	int currentMessage;
-	int numMessages;
-	hudMessage messages[8];
-	float oldMeter[2];
-	float meter[2];
-};
-
-typedef hudplrparms_s hudplrparms_t;
 typedef void devguiresponder_t(/* parameters unknown */);
 typedef char* devguigetstr_t(/* parameters unknown */);
 

@@ -9,6 +9,6 @@
 
 void _game_assert_fail(char *assertion, char *file, unsigned int line, char *function) {
 #if 1
-    scePrintf("[OpenRadical] Assertion failure - %s, %s, %u, %s!", assertion, file, line, function);
+    scePrintf("[OpenRadical] ASSERT FAILED: %s\n\t%s\n\t%u\n\t%s", assertion, file, line, function);
 #endif
 }

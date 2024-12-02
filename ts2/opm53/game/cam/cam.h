@@ -8,7 +8,47 @@
 #define GAME_CAM_CAM_H
 
 #include "util/matrix.h"
+#include "window/window.h"
 #include "prop/prop.h"
+
+enum {
+	CAMMODE_GAMECAM = 0,
+	CAMMODE_RESETTHIRDPERSONCHEAT = 1,
+	CAMMODE_THIRDPERSONCHEAT = 2,
+	CAMMODE_MOVEVIEW = 3,
+	CAMMODE_RESETVIEWPROP = 4,
+	CAMMODE_VIEWPROP = 5,
+	CAMMODE_SHOWPROPBACK = 6,
+	CAMMODE_FLEXIBLE = 7,
+	CAMMODE_MATRIX1 = 8,
+	CAMMODE_CUTSCENE = 9,
+	CAMMODE_RESETFLYINTRO = 10,
+	CAMMODE_FLYINTRO = 11,
+	CAMMODE_MAX = 12
+};
+
+enum {
+	CAMTYPE_FIRSTPERSON = 0,
+	CAMTYPE_DEATHVIEW = 1,
+	CAMTYPE_REMOTEGUN = 2,
+	CAMTYPE_FIXED = 3,
+	CAMTYPE_FIXEDFOLLOW = 4,
+	CAMTYPE_MOVEFOLLOW = 5,
+	CAMTYPE_FLY = 6,
+	CAMTYPE_NUM = 7
+};
+
+enum {
+	CAMDEF_FIRSTPERSON = 0,
+	CAMDEF_DEATHVIEW = 1,
+	CAMDEF_REMOTEGUN = 2
+};
+
+typedef struct roomcalcdata_s {
+	int level;
+	s16 scrmin[2];
+	s16 scrmax[2];
+} roomcalcdata;
 
 typedef struct CamDef_s {
 	int Type;
@@ -37,8 +77,8 @@ typedef struct ViewDef_s {
 	float pos[3];
 	int room;
 	int lastroom;
-	prop_s *attached;
-	prop_s *follow;
+	prop *attached;
+	prop *follow;
 	float lookat[3];
 	float lookdir[3];
 	float up[3];
@@ -59,7 +99,7 @@ typedef struct ViewDef_s {
 	roomcalcdata roomdata[201];
 	int maxlevel;
 	u8 roomVisibility[201];
-	prop_s *skyprop;
+	prop *skyprop;
 	s16 numroomsdrawn;
 	s16 numroomsdrawnactual;
 	s16 roomsdrawn[225];

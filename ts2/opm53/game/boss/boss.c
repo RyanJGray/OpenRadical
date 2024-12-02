@@ -5,6 +5,7 @@
 //
 
 #include <eekernel.h>
+#include <eeregs.h>
 #include <libcdvd.h>
 #include <sifdev.h>
 #include <sifrpc.h>
@@ -33,7 +34,8 @@ static dbufinfo dbinfo[2];
 static dlDmaTag *dmalists[2] = {
     // Use cached EE virtual memory space.
     /* [0] = */ (dlDmaTag *)0x00100000,
-    /* [1] = */ (dlDmaTag *)0x00180000};
+    /* [1] = */ (dlDmaTag *)0x00180000,
+};
 
 int curcpudmabuf = 0;
 int curgsdmabuf = 0;
@@ -97,6 +99,9 @@ int gsStartFrame[5] = {0};
 float gsEndTime[5] = {0.f};
 
 u_long128 base_ptr[10] = {0};
+
+static int vblIntHandler(int cause);
+static int gsIntHandler(int cause);
 
 static void bossMake();
 
@@ -218,7 +223,7 @@ static void bossMake() {
   // Re-initialise subsystems.
   sceSifInitRpc(0);
   sceCdInit(SCECdINIT);
-  mediatype = SCECdDVD;
+  mediaType = SCECdDVD;
   if (dvd == FALSE) {
     mediaType = SCECdCD;
   }
@@ -392,11 +397,12 @@ static void cpuMain() {
   } while (true);
 }
 
+/// Callback for SetAlarm in gsMain (if DMA takes longer than 3144 HSYNCs),
+/// this releases the GS semaphore and safely exits the interrupt handler.
 static void lockupalarm(int id, u16 time, void *arg) {
-  alarm_activated = (uint)arg;
-  iSignalSema(gsdone_sid, time);
-  SYNC(0);
-  EI();
+  alarm_activated = (u32)arg;
+  iSignalSema(gsdone_sid);
+  ExitHandler();
   return;
 }
 
@@ -404,15 +410,20 @@ static void gsMain() {
   int id;
   int i;
   static int LastFrameSent = -1;
+
+  while (TRUE) do {
+
+  }
 }
 
-static int vblIntHandler(int cause) {}
+static int vblIntHandler(int cause) {
+  
+}
 
 static int gsIntHandler(int cause) {
   DPUT_GS_CSR(GS_CSR_FINISH_M);
   iSignalSema(gsdone_sid);
-  SYNC(0);
-  EI();
+  ExitHandler();
   return;
 }
 

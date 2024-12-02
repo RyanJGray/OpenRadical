@@ -10,6 +10,28 @@
 #include "common.h"
 #include "game/objectives.h"
 
+enum {
+	HUDMESSAGE_NONE = 0,
+	HUDMESSAGE_FADE = 1,
+	HUDMESSAGE_SMALLFADE = 2,
+	HUDMESSAGE_SCROLL = 3,
+	HUDMESSAGE_MAIN = 4,
+	HUDMESSAGE_OBJECTIVE = 5,
+	HUDMESSAGE_TYPES = 6
+};
+
+enum {
+	HUDTYPE_NONE = -1,
+	HUDTYPE_NORMAL = 0,
+	HUDTYPE_CONVENTIONAL = 1,
+	HUDTYPE_SCIFI = 2,
+	HUDTYPE_SNIPER = 3,
+	HUDTYPE_SNIPERZOOM = 4,
+	HUDTYPE_FIXED = 5,
+	HUDTYPE_REMOTEDEVICE = 6,
+	HUDTYPE_NUM = 7
+};
+
 typedef struct hudHealthArmourSegment_s {
 	float healthArmourThreshold;
 	float gfxThreshold;
@@ -34,6 +56,24 @@ typedef struct hudHealthArmourData_s {
 	float armourSegmentFadeTime[20];
 	float hudBarsTime;
 } hudHealthArmourData;
+
+typedef struct hudplrparms_s {
+	int type;
+	float lasthealth;
+	float lastarmour;
+	float lasthealthtime;
+	float lastarmourtime;
+	int lastdtime;
+	int damagetime;
+	int ranktimer;
+	int ranktimertime;
+	float radartime;
+	int currentMessage;
+	int numMessages;
+	hudMessage messages[8];
+	float oldMeter[2];
+	float meter[2];
+} hudplrparms_t;
 
 typedef struct hudparms_s {
 	hudplrparms_t plr[4];

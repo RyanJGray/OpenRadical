@@ -1,18 +1,21 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_TIMER_TIMERS_H
 #define GAME_TIMER_TIMERS_H
 
-struct timer_s {
+typedef struct timer_s {
 	int type;
 	int time;
 	int lasttime;
 	float duration;
 	void *data;
 	void (*function)(/* parameters unknown */);
-};
+} timer;
 
-typedef timer_s timer;
 extern timer timers[75];
 
 void timerRestart();

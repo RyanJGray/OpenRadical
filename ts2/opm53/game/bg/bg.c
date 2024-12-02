@@ -2,49 +2,24 @@
 
 #include "bg.h"
 
-struct portalcalcdata_s {
+typedef struct portalcalcdata_s {
 	float bb[2][3];
 	int scrmin[2];
 	int scrmax[2];
 	int backfacing;
 	int culled;
-};
+} portalcalcdata;
 
-typedef portalcalcdata_s portalcalcdata;
-
-struct tileloadinfo_s {
-	room *rooms;
-	portal **portals;
-	texinfo *textures;
-	volume *volumes;
-	int numrooms;
-	int numportals;
-	int numtextures;
-	int numvolumes;
-	int roomstart;
-	int portalstart;
-	int texturestart;
-	int lighttype;
-	int lightphase;
-	u16 seals;
-	u32 col;
-};
-
-typedef tileloadinfo_s tileloadinfo;
-
-struct tmppointdata_s {
+typedef struct tmppointdata_s {
 	float proj[4];
 	int out;
-};
+} tmppointdata;
 
-typedef tmppointdata_s tmppointdata;
-
-struct tmppointarray_s {
+typedef struct tmppointarray_s {
 	tmppointdata *points[20];
 	int numpoints;
-};
+} tmppointarray;
 
-typedef tmppointarray_s tmppointarray;
 static portalcalcdata *portaldata = NULL;
 roombbinfo *roombb = NULL;
 static int bgGetRoomsFirstTick = 0;
