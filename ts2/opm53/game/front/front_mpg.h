@@ -8,21 +8,24 @@
 #define GAME_FRONT_FRONT_MPG_H
 
 #include "common.h"
-#include "mapmaker/mm_menus.h"
 #include "prop/prop.h"
 #include "window/window.h"
 
+// Forward-declarations.
+struct gvdisp_s;
+struct lifestats_s;
+
 typedef struct gamevar_s {
-	int value;
-	int min;
-	int max;
-	int flags;
-	gvdisp *display;
-	void (*onChange)(/* parameters unknown */);
-	u8 *suffix;
-	int marginright;
-	int arrowleftofs;
-	int arrowrightofs;
+  int value;
+  int min;
+  int max;
+  int flags;
+  struct gvdisp_s *display;
+  void (*onChange)(/* parameters unknown */);
+  u8 *suffix;
+  int marginright;
+  int arrowleftofs;
+  int arrowrightofs;
 } gamevar;
 
 // warning: multiple differing types with the same name (type name not equal)
@@ -35,7 +38,9 @@ extern window_t frontendWindow;
 
 int frontmpgGetGunComboNum(int levelgun);
 void tlhAdjustChrPosition(prop *p);
-void statistics_pageDrawInfo(int left, int right, int col, lifestats_t *lifestats, int gametype, int page, int player);
+void statistics_pageDrawInfo(int left, int right, int col,
+                             struct lifestats_s *lifestats, int gametype,
+                             int page, int player);
 void frontmpgMake();
 void frontmpgPreload();
 void frontmpgReset();

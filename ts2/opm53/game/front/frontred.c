@@ -2,12 +2,10 @@
 
 #include "frontred.h"
 
-struct leveldef_s {
+typedef struct leveldef_s {
 	char *name;
 	int levelnum;
-};
-
-typedef leveldef_s leveldef;
+} leveldef;
 
 static leveldef levels[0] = {
 };

@@ -10,6 +10,10 @@
 #include "common.h"
 #include "game/objectives.h"
 
+// Forward-declarations.
+struct chrdata_s;
+struct player_s;
+
 enum {
 	HUDMESSAGE_NONE = 0,
 	HUDMESSAGE_FADE = 1,
@@ -101,7 +105,7 @@ void hudObjectiveMessageGfx(hudMessage *msg);
 void hudScrollMessageGfx(hudMessage *msg);
 void hudMessagesTick();
 void hudMessagesGfx();
-void hudKillMessage(chrdata *attackerchr);
+void hudKillMessage(struct chrdata_s *attackerchr);
 void hudTick();
 void hudShowScore(int playernum, int time);
 void hudAmmoIcon(int ammoType, int x, int y);
@@ -118,7 +122,7 @@ void hudGfx();
 void hudEnd();
 void hudSetDamage(int localplayer, float damage);
 void hudAddDamage(int localplayer, float damage);
-void hudPlayerSpawn(player *pl);
+void hudPlayerSpawn(struct player_s *pl);
 void hudHealthArmourTick(hudHealthArmourData *haData, prop *p);
 void hudPropHealthBarGfx(prop *p, u8 *s, int x1, int y1, int x2, int y2, u32 barOnAlpha, u32 barOffAlpha);
 void hudPlayerHealthBarGfx();

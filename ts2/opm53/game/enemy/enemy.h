@@ -7,34 +7,13 @@
 #ifndef GAME_ENEMY_ENEMY_H
 #define GAME_ENEMY_ENEMY_H
 
+#include "chr/chr.h"
 #include "common.h"
 #include "lv/lvsetup.h"
 #include "prop/prop.h"
 
-typedef struct padInfo_s {
-	int padnum;
-	int nextpadnum;
-	int finaldestpadnum;
-	int curroute[250];
-	int curroutelen;
-	int curhallroute[250];
-	int curhallroutelen;
-} padInfo;
-
-struct pad_s {
-	int extref;
-	u32 flags;
-	short int hallnum;
-	short int room;
-	float pos[3];
-	float roty;
-	int size;
-};
-
-typedef struct padprop_s {
-	int pad;
-	prop *prop;
-} padprop;
+// Forward-declarations.
+struct pad_s;
 
 typedef struct explosioninfo_s {
 	float pos[3];
@@ -123,7 +102,7 @@ int awareOfTarget(prop *p, int canchangetarget);
 int checkInFrontOfPos(float *pos1, float *pos1dir, float *pos2, float dotcomp);
 int checkInFront(prop *p, float *pos, float dotcomp);
 int checkSeeFOV(prop *p, float *pos, float dotcomp);
-int checkInFrontOfPadPtr(pad_s *padptr, float *pos, float dotcomp);
+int checkInFrontOfPadPtr(struct pad_s *padptr, float *pos, float dotcomp);
 float checkInFrontOfDir(float *dir1, float *dir2, float dotcomp);
 int checkAimingFront(prop *p1, prop *p2, float dotcomp);
 int checkSide(prop *p, float *pos, float dotcomp);
@@ -173,7 +152,7 @@ padprop* enemyGetDrop(int d);
 int enemyGetDropNumFromProp(prop *p);
 int enemyGetDropNumFromPad(int pad);
 void setDisableLinks(int enable);
-pad_s* enemyGetNPCsPad(chrdata *cd);
+struct pad_s* enemyGetNPCsPad(chrdata *cd);
 boolean enemyChrIsOnPad(chrdata *cd, int padnum);
 void enemyHandleLift(prop *p);
 void enemyGameOver(prop *p);

@@ -1,15 +1,32 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_MAPMAKER_MM_DRAW_H
 #define GAME_MAPMAKER_MM_DRAW_H
 
+#include "common.h"
+#include "mapmaker/mm_tiles.h"
+
+// Forward-declarations.
+struct object_s;
+
 typedef int fix_t;
 
+typedef struct rect_s {
+	int x1;
+	int y1;
+	int x2;
+	int y2;
+} rect_t;
+
 typedef struct {
-	s8 x;
-	s8 y;
-	s8 z;
-	u8 orientation;
+  s8 x;
+  s8 y;
+  s8 z;
+  u8 orientation;
 } drawdoor_t;
 
 extern drawdoor_t *drawdoors;
@@ -47,7 +64,8 @@ void MM_CenterMap();
 void MM_InitView();
 void MM_PanWindow(fix_t x, fix_t y);
 u32 MM_WYSIWYGTileColour(int lighttype, int lightphase, u32 col);
-void MM_DrawTile(fix_t mx, fix_t my, tiledef *tile, tiledrmd_t drawmode, object_t *mapobj);
+void MM_DrawTile(fix_t mx, fix_t my, tiledef *tile, tiledrmd_t drawmode,
+                 struct object_s *mapobj);
 void MM_DrawGrid();
 void MM_DrawButtonHelp(int x, int y);
 void MM_DrawLasso();

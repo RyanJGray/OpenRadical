@@ -7,9 +7,15 @@
 #ifndef GAME_CHR_CHR_H
 #define GAME_CHR_CHR_H
 
+#include "chr/inventory.h"
 #include "common.h"
-#include "prop/prop.h"
 #include "fx/chrfx.h"
+#include "gun/gun.h"
+#include "pad/pad.h"
+
+// Forward-declarations.
+struct prop_s;
+struct setupNPC_s;
 
 typedef struct chrbounds_s {
 	char Matrix;
@@ -39,17 +45,17 @@ typedef struct chrdata_s {
 	s16 kills[58];
 	int score;
 	int radiustime;
-	prop *attacker;
+	struct prop_s *attacker;
 	int guncombo;
 	int oldguncombo;
 	chrgun gunleft;
 	chrgun gunright;
-	prop *bag;
+	struct prop_s *bag;
 	inventory inventory;
 	int gunsheld[40];
 	int ammo[17];
 	padInfo p1;
-	pad_s *placementpad;
+	struct pad_s *placementpad;
 	int triggerpad;
 	float fovy;
 	u32 aiflag;
@@ -66,9 +72,9 @@ typedef struct chrdata_s {
 	s32 canseetarget;
 	float angletotarget;
 	float angletodest;
-	prop *target;
-	prop *targetprop;
-	prop *targetpickup;
+	struct prop_s *target;
+	struct prop_s *targetprop;
+	struct prop_s *targetpickup;
 	float destpos[3];
 	float lastroompos[3];
 	float strafepos[3];
@@ -102,8 +108,8 @@ typedef struct chrdata_s {
 	int repeatfire;
 	float lastneckpos[3];
 	float currneckpos;
-	prop *myprop;
-	prop *hatprop;
+	struct prop_s *myprop;
+	struct prop_s *hatprop;
 	int limbnum[6];
 	int patrolindex;
 	int checkplayer;
@@ -115,17 +121,17 @@ typedef struct chrdata_s {
 	float campingpos[3];
 	float campingtimer;
 	int prevcampingframecheck;
-	setupNPC *setup;
-	npcspawninfo_s *spawn;
+	struct setupNPC_s *setup;
+	struct npcspawninfo_s *spawn;
 	float MinPos[3];
 	float MaxPos[3];
 	chrbounds ChrBounds[50];
 	boolean MoveHitObject;
 	float FloorHeight;
 	floordef *pFloor;
-	prop *pStandOnProp;
+	struct prop_s *pStandOnProp;
 	int fadeoutdelaydone;
-	prop *pRemoteGun;
+	struct prop_s *pRemoteGun;
 	boolean MoveHitChr;
 	int MoveLastChrHit;
 	mtx localwaistmtx;
@@ -281,10 +287,10 @@ void chrConfirmLastHitPart();
 int chrGetLastHitPart();
 void chrSetLastHitPart(int Part);
 void chrAddFloorMoveToPos(int Chr, float *Pos, float *pDir);
-boolean chrLineTestChr(prop *pProp, float *StartPosOrig, float *DirOrig, float *EndPos, boolean Infinite, float *HitPos, float *HitNorm, int CollisionTypeFlag);
-boolean chrSwipeTestChr(prop *pProp, float *SwipePosCentreO, float *SwipePosStartO, float *SwipePosEndO, float *HitPos, float *HitNorm);
+boolean chrLineTestChr(struct prop_s *pProp, float *StartPosOrig, float *DirOrig, float *EndPos, boolean Infinite, float *HitPos, float *HitNorm, int CollisionTypeFlag);
+boolean chrSwipeTestChr(struct prop_s *pProp, float *SwipePosCentreO, float *SwipePosStartO, float *SwipePosEndO, float *HitPos, float *HitNorm);
 boolean chrTypeIsZombie(int chrtype);
-prop* chrNew(int chrnumuse, int chrnumoriginal, int frontend, int id, float x, float y, float z, float roty, int padextref, boolean InitBounds);
+struct prop_s* chrNew(int chrnumuse, int chrnumoriginal, int frontend, int id, float x, float y, float z, float roty, int padextref, boolean InitBounds);
 void chrPlaceOnPad(chrdata *chr, int padnum);
 int chrGetChrLimbProp(int chrtypeuse, int chrtypeoriginal, int limb);
 void chrRelocateLimbs(int chrnumuse, int chrnumoriginal);
@@ -294,8 +300,8 @@ void chrSelectTeam(chrdata *cd);
 void chrPreload(int chrnumuse, int chrnumoriginal);
 void chrResetGunsAndAmmo(chrdata *chr);
 void chrClearGuns(chrdata *chr);
-void chrSelectDeathAnim(prop *p, int bullettype, float *bulletpos, float *bulletdir, int parthit, int deathflag);
-void updateTeamFlags(prop *p, prop *bag, int flag);
+void chrSelectDeathAnim(struct prop_s *p, int bullettype, float *bulletpos, float *bulletdir, int parthit, int deathflag);
+void updateTeamFlags(struct prop_s *p, struct prop_s *bag, int flag);
 int chrCountKills(chrdata *chr);
 void chrAddKills(chrdata *cd, int victimid, int addpts);
 int chrCountLosses(chrdata *chr);

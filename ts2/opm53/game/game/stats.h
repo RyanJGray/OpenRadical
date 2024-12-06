@@ -1,17 +1,41 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_GAME_STATS_H
 #define GAME_GAME_STATS_H
 
-struct stats_s {
+#include "common.h"
+
+// Forward-declarations.
+struct chrdata_s;
+
+typedef struct stats_s {
 	float stat[69];
 	float statgun[40][5];
 	float statchar[14][6];
-};
+} stats;
 
-typedef stats_s stats;
+typedef struct chrstats_s {
+	u32 count;
+} chrstats_t;
 
-struct lifestats_s {
+typedef struct levelstats_s {
+	u32 countstory;
+	u32 totaltime;
+	u32 besttime[3];
+	u32 besttime2P[3];
+	u32 countarcade;
+} levelstats_t;
+
+typedef struct challengestats_s {
+	u32 count;
+	int bestscore;
+} challengestats_t;
+
+typedef struct lifestats_s {
 	int totalgames;
 	int totalframesplayed;
 	int totalkills;
@@ -34,19 +58,20 @@ struct lifestats_s {
 	int itemsrecovered;
 	float disttravelled;
 	char medalcollected[48];
-};
+} lifestats_t;
 
-typedef lifestats_s lifestats_t;
-extern internalstats matchstats[26];
+// TODO! Not sure these are even supposed to be defined as extern here? Not accessed by any other functions outside of this file.
+/*extern struct internalstats_s matchstats[26];
 extern char *awards[16][3];
 extern int medals[16][3];
+*/
 
 void StatsReset();
 void StatsResetStruct(stats *target);
 void StatsRestart();
 void StatsTick();
-void StatsKillMade(chrdata *killer, chrdata *killed);
-void StatsBodyPartHit(chrdata *attacker, chrdata *target, int bodypart);
+void StatsKillMade(struct chrdata_s *killer, struct chrdata_s *killed);
+void StatsBodyPartHit(struct chrdata_s *attacker, struct chrdata_s *target, int bodypart);
 int StatsGetMax(int statsentry, int players);
 int StatsGetMin(int statsentry, int players);
 float StatsGetAverage(int statsentry, int players);

@@ -9,47 +9,48 @@
 
 #include "common.h"
 #include "front/front_mpg.h"
+#include "game/stats.h"
 
 typedef struct playerprefs_s {
-	u16 confignum;
-	u16 controlflags;
-	int customcontrols[42];
-	int colourid;
-	int chrnum;
-	int gunoption;
-	int handicap;
+  u16 confignum;
+  u16 controlflags;
+  int customcontrols[42];
+  int colourid;
+  int chrnum;
+  int gunoption;
+  int handicap;
 } playerprefs_t;
 
 typedef struct gamestatus_s {
-	chrstats_t chrs[50];
-	levelstats_t levels[47];
-	challengestats_t challenges[27];
-	lifestats_t lifestats_story;
-	lifestats_t lifestats_arcade;
-	lifestats_t lifestats_challenge;
+  chrstats_t chrs[50];
+  levelstats_t levels[47];
+  challengestats_t challenges[27];
+  lifestats_t lifestats_story;
+  lifestats_t lifestats_arcade;
+  lifestats_t lifestats_challenge;
 } gamestatus_t;
 
 typedef struct gamesettings_s {
-	int gv_dispx;
+  int gv_dispx;
 } gamesettings_t;
 
 typedef struct signondata_s {
-	u8 name[31];
-	playerprefs_t playerprefs;
-	gamesettings_t gamesettings;
-	gamestatus_t gamestatus;
+  u8 name[31];
+  playerprefs_t playerprefs;
+  gamesettings_t gamesettings;
+  gamestatus_t gamestatus;
 } signondata_t;
 
 typedef struct gamefile1_s {
-	int lastsignon;
-	u32 unique;
-	int reserved[2];
-	signondata_t soentries[16];
+  int lastsignon;
+  u32 unique;
+  int reserved[2];
+  signondata_t soentries[16];
 } gamefile1_t;
 
 typedef struct signoninfo_s {
-	int card;
-	u32 fileid;
+  int card;
+  u32 fileid;
 } signoninfo_t;
 
 extern gamevar gv_autosave;
@@ -58,10 +59,10 @@ extern signoninfo_t signoninfo[144];
 
 void playerprefsNew(playerprefs_t *pprefs);
 void statsCombine(int numplayers);
-gamestatus_t* statsGet();
-gamestatus_t* statsGetPlayer(int playernum);
+gamestatus_t *statsGet();
+gamestatus_t *statsGetPlayer(int playernum);
 void statsDebug(gamestatus_t *status);
-gamesettings_t* settingsGet();
+gamesettings_t *settingsGet();
 int signonFileGetFree(signondata_t *array);
 int signonGetFree();
 u32 signonMakeFileId();

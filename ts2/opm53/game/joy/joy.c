@@ -6,6 +6,13 @@
 
 #include "joy.h"
 
+// warning: multiple differing types with the same name (size not equal)
+typedef struct cheatdef_s {
+	u16 buttons[20];
+	int numbuttons;
+	void (*func)(/* parameters unknown */);
+} cheatdef;
+
 controller controllers[8] = {0};
 
 controller NetControllers[16] = {0};

@@ -1,14 +1,18 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_MCARD_MCARD_H
 #define GAME_MCARD_MCARD_H
 
-struct memcarddata_s {
+#include "common.h"
+
+typedef struct memcarddata_s {
 	u32 id;
 	u8 data[0];
-};
-
-typedef memcarddata_s memcarddata_t;
+} memcarddata_t;
 
 int mcardIconClusters(int gamedir);
 void mcardMake();

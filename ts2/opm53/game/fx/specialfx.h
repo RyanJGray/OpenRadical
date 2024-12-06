@@ -8,7 +8,12 @@
 #define GAME_FX_SPECIALFX_H
 
 #include "common.h"
-#include "prop/prop.h"
+#include "fx/particle.h"
+
+// Forward-declarations.
+struct prop_s;
+struct particlegroup_s;
+struct particleClone_s;
 
 typedef struct specialpointdef_s {
 	float pos[3];
@@ -38,8 +43,8 @@ typedef struct specialfx_s {
 	int numRooms;
 	int rooms[10];
 	struct prop_s *prop[4];
-	particlegroup_s *pg[4];
-	particleClone clone;
+	struct particlegroup_s *pg[4];
+	struct particleClone_s clone;
 	float onduration;
 	float offduration;
 	float translatex;
@@ -49,8 +54,8 @@ typedef struct specialfx_s {
 } specialfx;
 
 extern specialfx *specialfxUsed;
-extern particleClone *manHoleSmokeClones;
-extern particleClone *flameTorchCindersClones;
+extern struct particleClone_s *manHoleSmokeClones;
+extern struct particleClone_s *flameTorchCindersClones;
 extern specialfx specialfxGroups[30];
 extern int specialfxNumInRoom[226];
 extern specialfx *specialfxRooms[226][5];

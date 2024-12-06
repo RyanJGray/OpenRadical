@@ -1,16 +1,22 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_GAME_CHEATS_H
 #define GAME_GAME_CHEATS_H
 
+#include "common.h"
+#include "unlock.h"
+
 // warning: multiple differing types with the same name (size not equal)
-struct cheatdef_s {
+typedef struct cheatdef_s {
 	short int name;
 	int flags;
 	unlockconditionset_t *unlockset;
-};
+} cheatdef_t;
 
-typedef cheatdef_s cheatdef_t;
 extern cheatdef_t cheatdefs[15];
 extern u32 unlockedcheats;
 extern u32 selectedcheats;

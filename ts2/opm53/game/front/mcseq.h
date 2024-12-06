@@ -1,7 +1,13 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_FRONT_MCSEQ_H
 #define GAME_FRONT_MCSEQ_H
+
+#include "common.h"
 
 extern u32 mcseq_slotcolours[9];
 extern u32 mcseq_flags;

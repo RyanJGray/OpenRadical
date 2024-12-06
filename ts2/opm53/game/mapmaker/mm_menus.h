@@ -11,10 +11,8 @@
 #include "front/front.h"
 #include "front/front_mpg.h"
 
-typedef struct gvdisp_s {
-	int value;
-	char *text;
-} gvdisp;
+// Forward-declarations.
+struct gunset_s;
 
 // warning: multiple differing types with the same name (type name not equal)
 typedef int (*msgfunc_t)(/* parameters unknown */);
@@ -25,7 +23,7 @@ extern gvdisp disp_tunes[0];
 extern gamevar gv_tileset;
 extern gamevar gv_tune;
 extern gamevar gv_wpnset;
-extern gunset mmgunset;
+extern struct gunset_s mmgunset;
 extern gvdisp disp_npcstate[0];
 extern pageinit_t enemyedit_page;
 extern int rolloffset;
@@ -37,7 +35,8 @@ extern menu_t padact_menu;
 extern u16 padactcuritem;
 extern pageinit_t padact_page;
 
-void M_MakeBox(hitbox_t *box, s16 x, s16 y, s16 w, s16 h, u16 id, u16 flags, void (*draw)(/* parameters unknown */));
+void M_MakeBox(hitbox_t *box, s16 x, s16 y, s16 w, s16 h, u16 id, u16 flags,
+               void (*draw)(/* parameters unknown */));
 int MM_GetTuneNum();
 void MM_SetTuneNum(int tunenum);
 int MM_GetWeaponSetNum();

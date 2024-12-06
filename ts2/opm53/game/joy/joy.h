@@ -35,20 +35,12 @@ typedef struct controller_s {
 	int pad[10];
 } controller;
 
-// warning: multiple differing types with the same name (size not equal)
-typedef struct cheatdef_s {
-	u16 buttons[20];
-	int numbuttons;
-	void (*func)(/* parameters unknown */);
-} cheatdef;
-
-typedef u_long128 u128;
-extern controller controllers[8];
+/*extern controller controllers[8];
 extern controller NetControllers[16];
 extern int joy_justdisconnected;
 extern int val1;
 extern char pcarray[10];
-extern cheatdef cheats[0];
+extern cheatdef cheats[0];*/
 
 void replayReset(int mode, int numplayers, u8 *buffer, int buflen);
 void replayTick();

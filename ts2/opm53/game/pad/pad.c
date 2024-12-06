@@ -1,17 +1,19 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #include "pad.h"
 
-struct hall_s {
+typedef struct hall_s {
 	int numpads;
 	int numhalllinks;
 	int numintlinks;
 	int data[0];
-};
+} hall;
 
-typedef hall_s hall;
-
-typedef enum {
+enum {
 	PLMODE_ADDPAD = 0,
 	PLMODE_DELETEPAD = 1,
 	PLMODE_SETPADFLAGS = 2,
@@ -24,20 +26,20 @@ typedef enum {
 	PLMODE_NUM = 9
 };
 
-typedef enum {
+enum {
 	LINKMODE_NORMAL = 0,
 	LINKMODE_ONEWAY = 1,
 	LINKMODE_DOOR = 2,
 	LINKMODE_NUM = 3
 };
 
-typedef enum {
+enum {
 	PADMODE_NAVIGATION = 0,
 	PADMODE_PLACEMENT = 1,
 	PADMODE_NUM = 2
 };
 
-typedef enum {
+enum {
 	PADFLAGMODE_ACTIVE = 0,
 	PADFLAGMODE_LEDGE = 1,
 	PADFLAGMODE_CAMPER = 2,
@@ -57,22 +59,18 @@ typedef enum {
 	PADFLAGMODE_NUM = 16
 };
 
-struct route_s {
+typedef struct routelist_s {
+	int head;
+} routelist;
+
+typedef struct route_s {
 	short int next;
 	short int parent;
 	short int padnum;
 	short int linknum;
 	float cost;
 	float esttotal;
-};
-
-typedef route_s route;
-
-struct routelist_s {
-	int head;
-};
-
-typedef routelist_s routelist;
+} route;
 
 float padsizes[8] = {
 	/* [0] = */ 0.25f,

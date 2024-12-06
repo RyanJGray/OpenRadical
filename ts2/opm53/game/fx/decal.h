@@ -8,7 +8,10 @@
 #define GAME_FX_DECAL_H
 
 #include "common.h"
-#include "prop/prop.h"
+
+// Forward-declarations.
+struct prop_s;
+struct glasspointdef_s;
 
 typedef struct DecalDef_s {
 	float Pos[8][4];
@@ -20,7 +23,7 @@ typedef struct DecalDef_s {
 	int TexNum;
 	int Room;
 	int MatrixNum;
-	prop *pProp;
+	struct prop_s *pProp;
 	float AlphaScale;
 	float AlphaScale1;
 	u32 Col;
@@ -32,11 +35,11 @@ void decalPreload();
 void decalRestart();
 void decalReset();
 void decalEnd();
-void decalNewDecal(int BulletType, int Room, prop *pHitProp, float *Pos, float *Norm);
+void decalNewDecal(int BulletType, int Room, struct prop_s *pHitProp, float *Pos, float *Norm);
 void decalNewFootDecal(int Chr, float *Pos, float Dir, boolean Left);
-DecalID decalNewGlassDecal(int BulletType, prop *pHitProp, int MatrixNum, float *Pos, float *Norm, glasspointdef *glassPoints, int NumClipPolyVertices);
+DecalID decalNewGlassDecal(int BulletType, struct prop_s *pHitProp, int MatrixNum, float *Pos, float *Norm, struct glasspointdef_s *glassPoints, int NumClipPolyVertices);
 void decalRemoveDecal(DecalID Decal);
-void decalRemoveDecalsFromProp(prop *pProp);
+void decalRemoveDecalsFromProp(struct prop_s *pProp);
 void decalSetAlphaScale(DecalID Decal, float Scale);
 void decalTick();
 void decalDraw(DecalDef *pDecal, float AlphaScale);

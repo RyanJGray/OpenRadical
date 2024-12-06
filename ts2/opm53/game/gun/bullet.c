@@ -26,12 +26,6 @@ enum {
 	NUM_EXPLOSION_RENDERS = 6
 };
 
-typedef struct explosionRender_s {
-	boolean blast;
-	u32 colour;
-	float size;
-} explosionRender;
-
 enum {
 	BULLET_GROUP_NONE = -1,
 	BULLET_GROUP_TYPE_BULLETS = 0,
@@ -48,6 +42,12 @@ enum {
 	PROXIMITY_STAGE_EJECT_MINE = 4,
 	PROXIMITY_STAGE_DONE = 5
 };
+
+typedef struct explosionRender_s {
+	boolean blast;
+	u32 colour;
+	float size;
+} explosionRender;
 
 laserBoltDef laserBolts[5] = {
 	/* [0] = */ {

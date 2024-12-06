@@ -2,107 +2,12 @@
 
 #include "ingame.h"
 
-typedef enum {
+enum {
 	RANKINGS_SCORES = 0,
 	RANKINGS_KILLS = 1,
 	RANKINGS_LOSSES = 2,
 	RANKINGS_NUMTYPES = 3
 };
-
-struct rankData_s {
-	bubblesort_t table[58];
-	bubblesort_t *rank[18];
-	int numRank;
-	int playerRank;
-};
-
-typedef rankData_s rankData;
-
-struct igmplayer_s {
-	mtx_u scrollMatrixDl;
-	mtx_u tentacleMatrixDl;
-	mtx_u scrollMatrixUcodeBuffer[2];
-	mtx_u tentacleMatrixUcodeBuffer[2];
-	mtx_u *scrollMatrixUcode;
-	mtx_u *tentacleMatrixUcode;
-	mtx_u barsMatrix;
-	mtx_u perspectiveMatrix;
-	int mnum;
-	float frustrumHalfWidth;
-	float frustrumHalfHeight;
-	window_t window;
-	int level;
-	int oldLevel;
-	int flags;
-	float time;
-	float worldpos[3];
-	float startworldpos[3];
-	float destworldpos[3];
-	textSettings3D textSettings;
-	float exitTime;
-	float tentacleRotateTimeVertical;
-	float tentacleRotateTimeHorizontal;
-	float tentacleRotateAngleVertical;
-	float tentacleRotateAngleHorizontal;
-	float tentacleDirectionHorizontal;
-	rankData rankings[3];
-	pagedef_t *scrollPageIn;
-	pagedef_t *scrollPageOut;
-	float scrollTime;
-	float scrollDurationX;
-	float scrollDurationY;
-	prop *inventoryProp;
-	int inventoryPropItemID;
-	int inventoryItemID;
-	float inventoryItemTime;
-	float inventoryScale;
-	int numInventoryItems;
-	int inventoryIDs[20];
-	s8 *inventoryItemNames[20];
-	boolean inventoryItemSelectable[20];
-	int inventoryItemAmmo[20];
-	int inventoryItemAmmoType[20];
-	int inventoryItemAmmoSecondary[20];
-	int inventoryItemAmmoTypeSecondary[20];
-	int inventoryItemClipCount[20];
-	playerprefs_t newprefs;
-	int newcontrols[42];
-	int tmpcontrols[42];
-};
-
-typedef igmplayer_s igmplayer_t;
-
-struct igmparms_s {
-	igmplayer_t plr[4];
-};
-
-typedef igmparms_s igmparms_t;
-
-struct menufxTentacleNode_s {
-	float pos[4];
-	float points[8][4];
-	float stq[8][3];
-	float radius;
-	float circlex[8];
-	float circley[8];
-	float axis1[3];
-	float axis2[3];
-};
-
-typedef menufxTentacleNode_s menufxTentacleNode;
-
-struct menufxTentacle_s {
-	menufxTentacleNode nodes[10];
-	float startpos[3];
-	float endpos[3];
-	float time;
-	float noiseval0;
-	float noiseval1;
-	float noiseSpeed;
-	float noiseOffset;
-};
-
-typedef menufxTentacle_s menufxTentacle;
 
 typedef enum {
 	PAGEBAR_ON = 0,

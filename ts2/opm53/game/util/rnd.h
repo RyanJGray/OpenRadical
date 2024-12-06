@@ -1,9 +1,14 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_UTIL_RND_H
 #define GAME_UTIL_RND_H
 
-typedef long long unsigned int u64;
+#include "common.h"
+
 extern u64 newrndseedval;
 extern int rndcount;
 

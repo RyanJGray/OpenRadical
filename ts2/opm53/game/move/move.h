@@ -9,6 +9,9 @@
 
 #include "common.h"
 
+// Forward-declarations.
+struct prop_s;
+
 enum {
 	MOVEMODE_NORMAL = 0,
 	MOVEMODE_PUSH = 1,
@@ -58,7 +61,7 @@ extern float lastfloorheight;
 
 float moveFindFloorHeight(int numfloors, floordef **floors, int switchflags, float *pos, floordef **floorret);
 int moveFindRoom(float *pos, float height, float rad);
-float moveFindFloor(float *pos, float height, float rad, floordef **floorret, prop **ppPropRet);
+float moveFindFloor(float *pos, float height, float rad, floordef **floorret, struct prop_s **ppPropRet);
 float DistFromWallSq(float *Pos, float Height, walldef *pWall, float *HitNorm, float MaxDistSq);
 void MoveTestWall(int numwalls, walldef **walls, int switchflags, float *bb[3], float *StartPos, float Radius, float Height, float *MoveDirXZ, float *pHitFrac, float *HitNormFrac, float *pHitDist, float *HitNormDist);
 int moveTest(int chr, float *startpos, float *endpos, float height, float rad, float *suggestpos, floordef **floorret, boolean GoingToMove, int ExcludeFlag);

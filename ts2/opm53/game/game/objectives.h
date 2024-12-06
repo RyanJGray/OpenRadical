@@ -11,7 +11,9 @@
 #include "lv/lvsetup.h"
 #include "prop/prop.h"
 #include "fx/specialfx.h"
-#include "gun/bullet.h"
+
+// Forward-declarations.
+struct bullet_s;
 
 enum {
 	OBJECTIVE_TYPE_NONE = -1,
@@ -86,7 +88,7 @@ void objectivesRestart();
 void objectivesTick();
 void objectivesProcessDeath(prop *p);
 void objectivesProcessLift(prop *p);
-void objectivesMineExplosion(bullet *b);
+void objectivesMineExplosion(struct bullet_s *b);
 void damObjectivesSetup();
 void damObjectivesApache(prop *p);
 void damObjectivesSteam(specialfx *spfx);

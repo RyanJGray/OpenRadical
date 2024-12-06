@@ -2,25 +2,6 @@
 
 #include "cartridge.h"
 
-struct cartridge_s {
-	mtx_u rotationmatrix;
-	prop_s *prop;
-	float rotvel[3];
-	int time;
-	float baseHeightWhenFired;
-	int drawflags;
-};
-
-typedef cartridge_s cartridge;
-
-struct cartridgeGroup_s {
-	cartridge cartridges[10];
-	int startCartridge;
-	int numCartridges;
-};
-
-typedef cartridgeGroup_s cartridgeGroup;
-
 int cartridgeProps[5] = {
 	/* [0] = */ 219,
 	/* [1] = */ 220,

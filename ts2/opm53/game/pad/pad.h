@@ -1,37 +1,68 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_PAD_PAD_H
 #define GAME_PAD_PAD_H
 
-typedef pad_s pad;
+#include "common.h"
 
-struct padextrainfo_s {
-	prop_s *closesthealth;
-	prop_s *closestarmour;
+// Forward-declarations.
+union mtx_u;
+struct hall_s;
+struct leveltile_s;
+struct prop_s;
+struct routelist_s;
+
+typedef struct padInfo_s {
+	int padnum;
+	int nextpadnum;
+	int finaldestpadnum;
+	int curroute[250];
+	int curroutelen;
+	int curhallroute[250];
+	int curhallroutelen;
+} padInfo;
+
+typedef struct padprop_s {
+	int pad;
+	struct prop_s *prop;
+} padprop;
+
+typedef struct pad_s {
+	int extref;
+	u32 flags;
+	short int hallnum;
+	short int room;
+	float pos[3];
+	float roty;
+	int size;
+} pad;
+
+typedef struct padextrainfo_s {
+	struct prop_s *closesthealth;
+	struct prop_s *closestarmour;
 	float closesthealthdist;
 	float closestarmourdist;
-	prop_s *closestdrop[4];
-	prop_s *closestgun[5];
-};
+	struct prop_s *closestdrop[4];
+	struct prop_s *closestgun[5];
+} padextrainfo;
 
-typedef padextrainfo_s padextrainfo;
-
-struct link_s {
+typedef struct link_s {
 	u32 flags;
 	int pad1num;
 	int pad2num;
 	float multiplier;
 	float cost;
-};
+} link;
 
-typedef link_s link;
-
-struct roomhalllinks_s {
+typedef struct roomhalllinks_s {
 	int numlinks;
 	link *links;
-};
+} roomhalllinks;
 
-typedef roomhalllinks_s roomhalllinks;
 extern float padsizes[8];
 extern int pad_rev;
 extern int draw_oldstyle_pads;
@@ -60,7 +91,7 @@ extern int numPadsDisabled;
 extern int numLinksDisabled;
 extern int padsDisabled[30];
 extern int linksDisabled[60];
-extern hall **halls;
+extern struct hall_s **halls;
 extern int numhalls;
 
 u8* padFileInName();
@@ -92,16 +123,16 @@ pad* padPtrFromNum(int padnum);
 int padExtrefFromNum(int padnum);
 void linkEnable(int linknum);
 void linkDisable(int linknum);
-void padAddTilePads(u8 *buffer, mtx_u *transmtx, leveltile *lt);
+void padAddTilePads(u8 *buffer, union mtx_u *transmtx, struct leveltile_s *lt);
 void padCheckLinks();
 void padSave();
 void editTranslate(float *pos);
 void editRotate(float *rot);
 void editPadSize(pad *p);
-int hr_findroute(routelist *list, int linknum);
-int hr_findroutetohall(routelist *list, int hallnum);
+int hr_findroute(struct routelist_s *list, int linknum);
+int hr_findroutetohall(struct routelist_s *list, int hallnum);
 int hallrouteCalc(int startpadnum, int destpadnum, int *links, int maxlinks);
-int r_findroute(routelist *list, int linknum);
+int r_findroute(struct routelist_s *list, int linknum);
 int routeCalc(int startpadnum, int destpadnum, int *links, int maxlinks);
 int closestpad(float *pos, float distgreaterthan);
 int closestpadInRoom(float *pos, int room, float distgreaterthan);

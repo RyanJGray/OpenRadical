@@ -9,9 +9,12 @@
 
 #include "common.h"
 #include "anim/cs_anim.h"
-#include "ob/ob.h"
 #include "util/matrix.h"
 #include "util/quaternion.h"
+
+// Forward-declarations.
+struct prop_s;
+struct obinst_s;
 
 typedef struct animData_s {
 	float x;
@@ -367,50 +370,50 @@ extern skeleton skeletons[5];
 extern animInfoProp *pAnimations[168];
 extern animinfoheader_t *pAnimInfo[168];
 
-void animUpdate(obinst *inst);
-void calPropMatrices(cs_animheader *cs, int slotnum, obinst *inst, float scale);
+void animUpdate(struct obinst_s *inst);
+void calPropMatrices(cs_animheader *cs, int slotnum, struct obinst_s *inst, float scale);
 void animUpdateTime(animinfo *ai, float scale);
-void calOverwriteKeyFrame(prop *p, animData *ad, int part);
-void animSetOverwriteAngles(prop *p);
-int animTestDestPos(prop *p, int anim, float *destpos);
+void calOverwriteKeyFrame(struct prop_s *p, animData *ad, int part);
+void animSetOverwriteAngles(struct prop_s *p);
+int animTestDestPos(struct prop_s *p, int anim, float *destpos);
 void loadAnimation(char *filename, int tabEntry);
 void loadAnimationRawEx(char *filename, int tabEntry, u8 *bufferloaddynamic);
 void setAnimProp(int tabEntry, int fProp);
 int getAnimProp(int tabEntry);
 animInfoProp* getAnimation(int tabEntry);
-void calGlobalMatrices(obinst *inst, mtx *m, int partnum, int parent);
-void calGlobalFilletMatrices(obinst *inst, mtx *m, int partnum, int parent);
-void calDoubleFillets(obinst *inst, int partnum, int relocating);
+void calGlobalMatrices(struct obinst_s *inst, mtx *m, int partnum, int parent);
+void calGlobalFilletMatrices(struct obinst_s *inst, mtx *m, int partnum, int parent);
+void calDoubleFillets(struct obinst_s *inst, int partnum, int relocating);
 void getKeyFrames(animinfo *ai, float animLength, int *key1, int *key2);
-boolean animIsPaused(obinst *inst);
-boolean animIsEnded(obinst *inst);
-boolean animIsBlended(obinst *inst);
-void animPause(obinst *inst);
-void animContinue(obinst *inst, float speed);
-void animRewind(obinst *inst);
-void animSetKeyframe(obinst *inst, int keyframenum);
-int animGetKeyframe(obinst *inst);
+boolean animIsPaused(struct obinst_s *inst);
+boolean animIsEnded(struct obinst_s *inst);
+boolean animIsBlended(struct obinst_s *inst);
+void animPause(struct obinst_s *inst);
+void animContinue(struct obinst_s *inst, float speed);
+void animRewind(struct obinst_s *inst);
+void animSetKeyframe(struct obinst_s *inst, int keyframenum);
+int animGetKeyframe(struct obinst_s *inst);
 int animGetTag(int animnum, u16 keyframetag, int nth);
-int animGetCurKeyframeTags(obinst *inst);
-void setAnim(prop *p, int anim, float blendtime, float speed);
-void animSetAiming(obinst *inst, int status, float tweentime);
-void setAnimOverwrite(obinst *inst, int overwriteparts, int animnum);
+int animGetCurKeyframeTags(struct obinst_s *inst);
+void setAnim(struct prop_s *p, int anim, float blendtime, float speed);
+void animSetAiming(struct obinst_s *inst, int status, float tweentime);
+void setAnimOverwrite(struct obinst_s *inst, int overwriteparts, int animnum);
 void extractAnimData(animInfoProp *pAnimCycle, int channelnum, int key, animData *ad, float scale);
-void extractAnimRoot(prop *p, float *t1, float *t2, float *frames, int daxis);
-void extractAnimRootData(prop *p, int animnum, float *t1, float *t2, float *frames, int daxis);
+void extractAnimRoot(struct prop_s *p, float *t1, float *t2, float *frames, int daxis);
+void extractAnimRootData(struct prop_s *p, int animnum, float *t1, float *t2, float *frames, int daxis);
 void anim_LoadMatrix(int num);
 void anim_SetMatrixArray(mtx *m);
 void anim_SetModelview(mtx *m, int multpush);
 void anim_PopModelview();
 mtx* anim_GetModelview();
-int curAnim(prop *p, int anim);
-int curAnimType(prop *p);
-int curAnimSlot1(prop *p, int anim);
-int curAnimSlot2(prop *p, int anim);
-int curAnimComplete(obinst *ob);
-int curAnimLeadingOut(obinst *inst, float leadout);
-void curAnimSpeed(obinst *ob, float speed);
-void animHitReact(prop *p, int parthit);
+int curAnim(struct prop_s *p, int anim);
+int curAnimType(struct prop_s *p);
+int curAnimSlot1(struct prop_s *p, int anim);
+int curAnimSlot2(struct prop_s *p, int anim);
+int curAnimComplete(struct obinst_s *ob);
+int curAnimLeadingOut(struct obinst_s *inst, float leadout);
+void curAnimSpeed(struct obinst_s *ob, float speed);
+void animHitReact(struct prop_s *p, int parthit);
 void animRestart();
 void animReset(int cutscene);
 void animMake(int makeCutscene);

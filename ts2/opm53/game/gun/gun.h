@@ -8,9 +8,12 @@
 #define GAME_GUN_GUN_H
 
 #include "common.h"
-#include "chr/chr.h"
-#include "gun/bullet.h"
-#include "prop/prop.h"
+#include "bullet.h"
+
+// Forward-declarations.
+struct chrdata_s;
+struct prop_s;
+struct player_s;
 
 typedef struct ammoInfo_s {
 	int maxAmmo;
@@ -89,7 +92,7 @@ typedef struct chrgun_s {
 	float tpTrajectoryPos[4];
 	int gunType;
 	int ammo[17];
-	prop *chrgunprop;
+	struct prop_s *chrgunprop;
 	int lastShotFramesPassed;
 	int fireState;
 	float repeatSoundTime;
@@ -103,7 +106,7 @@ typedef struct playergun_s {
 	int state;
 	float stateTime;
 	int nextGunType;
-	prop *playergunprop;
+	struct prop_s *playergunprop;
 	int fireMode;
 	int repeat;
 	float recoilRotationX;
@@ -119,12 +122,12 @@ typedef struct playergun_s {
 	int animationStage;
 	float hammerRotation;
 	float cockRotation;
-	prop *shotgunCartridge[2];
+	struct prop_s *shotgunCartridge[2];
 	int framesPassedSinceFired;
 	int gunShot;
 	int singleReloadNeeded;
 	int assaultShotgunFlag;
-	prop *playerprop;
+	struct prop_s *playerprop;
 	chrgun *cgun;
 	int ownerType;
 	int ownerNum;
@@ -148,47 +151,47 @@ extern short int fixedgunname;
 extern guncombo guncombos[40];
 extern int gunsinventory[40];
 
-void gunSetAmmoToMax(chrdata *cd, int gunComboIndex);
+void gunSetAmmoToMax(struct chrdata_s *cd, int gunComboIndex);
 void gunPreload();
 void gunRestart();
 void gunReset();
-void gunAddAmmo(chrdata *cd, int ammoType, int ammo);
-int gunGetGunAmmo(chrdata *cd, int ammoType);
-boolean gunShouldSwitchTo(chrdata *cd, int desiredGunCombo);
-void gunPickedUpAmmo(chrdata *cd, int ammoType, int oldAmmo);
-boolean gunShouldSwitchToOnPickup(chrdata *cd, int guncombo);
-boolean gunShouldKeepWithNoAmmo(chrdata *cd, int guncombo);
-boolean gunCanDetonateMines(chrdata *cd);
-boolean gunHandAble(chrdata *cd, int hand);
-boolean gunHandActive(chrdata *cd, int hand);
-boolean gunBothHandsActive(chrdata *cd);
-boolean gunIsPunching(chrdata *cd);
-boolean gunDoesAutoAim(chrdata *cd);
-void gunChangeToComboWithAmmo(chrdata *chrdat);
+void gunAddAmmo(struct chrdata_s *cd, int ammoType, int ammo);
+int gunGetGunAmmo(struct chrdata_s *cd, int ammoType);
+boolean gunShouldSwitchTo(struct chrdata_s *cd, int desiredGunCombo);
+void gunPickedUpAmmo(struct chrdata_s *cd, int ammoType, int oldAmmo);
+boolean gunShouldSwitchToOnPickup(struct chrdata_s *cd, int guncombo);
+boolean gunShouldKeepWithNoAmmo(struct chrdata_s *cd, int guncombo);
+boolean gunCanDetonateMines(struct chrdata_s *cd);
+boolean gunHandAble(struct chrdata_s *cd, int hand);
+boolean gunHandActive(struct chrdata_s *cd, int hand);
+boolean gunBothHandsActive(struct chrdata_s *cd);
+boolean gunIsPunching(struct chrdata_s *cd);
+boolean gunDoesAutoAim(struct chrdata_s *cd);
+void gunChangeToComboWithAmmo(struct chrdata_s *chrdat);
 boolean gunIsLeftGunVisible(playergun *plgun, chrgun *cgun);
-boolean gunHasChrAmmoForFire(chrdata *cd, chrgun *cgun, int fireMode, int repeatMode);
-boolean gunHasChrAmmoForAnyFire(chrdata *cd, chrgun *cgun, int repeatMode);
+boolean gunHasChrAmmoForFire(struct chrdata_s *cd, chrgun *cgun, int fireMode, int repeatMode);
+boolean gunHasChrAmmoForAnyFire(struct chrdata_s *cd, chrgun *cgun, int repeatMode);
 void gunFireCartridges(playergun *plgun, chrgun *cgun, gunInfo_t *gi, fireInfo_t *fi);
 void gunCalculateTPShootPos(chrgun *cgun, int fireMode);
-void gunCalculateFPShootPos(player *player, playergun *plgun, int fireMode);
+void gunCalculateFPShootPos(struct player_s *player, playergun *plgun, int fireMode);
 void gunPlayerFireShots(playergun *plgun);
 void gunDebugPrintStats();
-void gunEnemyFire(prop *p, int hand, int fireMode, int repeatMode);
-void gunRemoteFire(prop *p, chrgun *gun, int fireMode, int repeatMode, int ownertype, chrdata *cd);
-void gunNPCThrowGrenade(prop *p, float *dir, prop *target);
+void gunEnemyFire(struct prop_s *p, int hand, int fireMode, int repeatMode);
+void gunRemoteFire(struct prop_s *p, chrgun *gun, int fireMode, int repeatMode, int ownertype, struct chrdata_s *cd);
+void gunNPCThrowGrenade(struct prop_s *p, float *dir, struct prop_s *target);
 int gunGetBulletType(playergun *pGun);
-void gunCreateBullet(prop *p, chrgun *gun, playergun *pgun, int fireMode, float *dir, int ownerType, chrdata *cd, int shellsfx);
+void gunCreateBullet(struct prop_s *p, chrgun *gun, playergun *pgun, int fireMode, float *dir, int ownerType, struct chrdata_s *cd, int shellsfx);
 void gunResetChrGun(chrgun *cgun);
 void gunResetPlayerGun(playergun *plgun);
 void gunClearPlayerGun(playergun *plgun);
 void gunResetPlayerReload(playergun *plgun, chrgun *cgun);
 void gunResetPlayerChange(playergun *plgun, chrgun *cgun);
 void gunUpdateTNTFuse(playergun *plgun, chrgun *cgun, float frac);
-void gunSetPlayerZoom(player *pPlayer, int GunType);
+void gunSetPlayerZoom(struct player_s *pPlayer, int GunType);
 void gunDoPunch(playergun *plgun);
-void gunDetonateRemoteMines(chrdata *cd);
-void gunEnemyUpdate(prop *p, int hand);
-boolean gunEnemyReload(chrdata *cd);
+void gunDetonateRemoteMines(struct chrdata_s *cd);
+void gunEnemyUpdate(struct prop_s *p, int hand);
+boolean gunEnemyReload(struct chrdata_s *cd);
 void gunPlayerTick();
 void gunEnemyTick();
 void gunPlayerGfx();
@@ -196,8 +199,8 @@ void gunEnd();
 int gunGetPickupSfx(int gunComboIndex);
 boolean gunIsPlayergunFiring(playergun *plgun);
 boolean gunShouldAIAimAtFloor(int gunType, int fireMode);
-void gunGetChrFireChoices(int flags, chrdata *cd, gunChrFireChoiceTable *table);
-void gunReturnAmmoToChr(chrdata *cd, chrgun *cgun);
+void gunGetChrFireChoices(int flags, struct chrdata_s *cd, gunChrFireChoiceTable *table);
+void gunReturnAmmoToChr(struct chrdata_s *cd, chrgun *cgun);
 void gunPlayerTickNotLocal();
 int gunGetChrLeftWristDofID(int gunType);
 int gunGetChrRightWristDofID(int gunType);

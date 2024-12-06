@@ -1,9 +1,18 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_NET_NET_H
 #define GAME_NET_NET_H
 
-typedef unsigned int boolean;
+#include "chr/chr.h"
+#include "common.h"
+#include "game/game.h"
+#include "player/player.h"
+#include "prop/prop.h"
+
 extern boolean UseNetPads;
 extern resetgameparms NetGameParms;
 

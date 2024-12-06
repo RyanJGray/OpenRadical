@@ -10,6 +10,9 @@
 #include "common.h"
 #include "image.h"
 
+// Forward-declarations.
+struct ViewDef_s;
+
 typedef struct texinfo_s {
 	int id;
 	int clampu;
@@ -63,7 +66,7 @@ void emReset();
 void emPrintStats();
 void emSetupVifLoadPacket(emTexture *texture);
 void emLoadTextureMovie(char *filename, texinfo *t, int *idpos);
-void emCreateRenderTexture(int Width, int Height, ViewDef *pView, int *pTexNum);
+void emCreateRenderTexture(int Width, int Height, struct ViewDef_s *pView, int *pTexNum);
 void emProcessRenderTexture(int TexID);
 void emLoadTextureAddr(u32 addr, texinfo *t, int *idpos);
 void emLoadTextureMem(u8 *pData, texinfo *t, int *idpos);

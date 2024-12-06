@@ -7,7 +7,10 @@
 #ifndef GAME_PROP_LIFT_H
 #define GAME_PROP_LIFT_H
 
-#include "prop/prop.h"
+#include "common.h"
+
+// Forward-declarations.
+struct prop_s;
 
 enum {
 	LIFT_NOTCALLED = 0,
@@ -57,10 +60,10 @@ typedef struct liftNode_s {
 	float buttonDownRoty;
 	int liftCalled;
 	float durationCalled;
-	prop *buttonUp;
-	prop *buttonDown;
-	prop *doorLeft;
-	prop *doorRight;
+	struct prop_s *buttonUp;
+	struct prop_s *buttonDown;
+	struct prop_s *doorLeft;
+	struct prop_s *doorRight;
 	int floor;
 } liftNode;
 
@@ -93,7 +96,7 @@ typedef struct setuplift_s {
 } setuplift;
 
 typedef struct liftObData_s {
-	prop *lift;
+	struct prop_s *lift;
 	struct liftData_s *liftData;
 	liftNode *nodeBelongTo;
 	float start[3];
@@ -118,11 +121,11 @@ typedef struct liftData_s {
 	float time;
 	void (*liftButtonResetFunction)(/* parameters unknown */);
 	liftNode *liftQueue[6];
-	prop *liftProp;
-	prop *liftDoorLeft;
-	prop *liftDoorRight;
-	prop *liftButtonUp;
-	prop *liftButtonDown;
+	struct prop_s *liftProp;
+	struct prop_s *liftDoorLeft;
+	struct prop_s *liftDoorRight;
+	struct prop_s *liftButtonUp;
+	struct prop_s *liftButtonDown;
 	int numLiftObs;
 	liftObData liftObs[28];
 } liftData;
@@ -133,32 +136,32 @@ void propRestartLifts();
 void propResetLifts();
 void propEndLifts();
 void propPreloadLift(setuplift *sl);
-void liftButtonReset(prop *p);
-void liftButtonOn(prop *p);
-void liftButtonPowerOff(prop *p);
-boolean liftCanActivateButton(prop *button);
-boolean liftIsReadyToEnter(prop *lift, liftNode *currentNode, liftNode *targetNode);
-liftNode* liftGetFromQueue(prop *lift);
-liftNode* liftTakeFromQueue(prop *lift);
-void liftRemoveNodeFromQueue(prop *lift, liftNode *node);
-void liftAddToQueue(prop *lift, liftNode *node);
-boolean liftIsInQueue(prop *lift, liftNode *node);
+void liftButtonReset(struct prop_s *p);
+void liftButtonOn(struct prop_s *p);
+void liftButtonPowerOff(struct prop_s *p);
+boolean liftCanActivateButton(struct prop_s *button);
+boolean liftIsReadyToEnter(struct prop_s *lift, liftNode *currentNode, liftNode *targetNode);
+liftNode* liftGetFromQueue(struct prop_s *lift);
+liftNode* liftTakeFromQueue(struct prop_s *lift);
+void liftRemoveNodeFromQueue(struct prop_s *lift, liftNode *node);
+void liftAddToQueue(struct prop_s *lift, liftNode *node);
+boolean liftIsInQueue(struct prop_s *lift, liftNode *node);
 boolean liftIsPreviousFloorValid(liftNode *node);
 boolean liftIsNextFloorValid(liftNode *node);
-void liftDecideAutomaticDirection(prop *p);
-void liftDoorMove(prop *door, float scalar);
-void liftChooseDestination(prop *p);
-void liftStartMovingToDestination(prop *p);
-void liftWaitingProcessDoors(prop *p);
-void liftPropTick(prop *p);
-void liftNodeCall(prop *lift, liftNode *node, int called);
-void liftCall(prop *lift, int called);
-void liftNoPowerMessage(prop *p, prop *actor);
-void liftButtonUpActivate(prop *button, prop *actor);
-void liftButtonDownActivate(prop *button, prop *actor);
+void liftDecideAutomaticDirection(struct prop_s *p);
+void liftDoorMove(struct prop_s *door, float scalar);
+void liftChooseDestination(struct prop_s *p);
+void liftStartMovingToDestination(struct prop_s *p);
+void liftWaitingProcessDoors(struct prop_s *p);
+void liftPropTick(struct prop_s *p);
+void liftNodeCall(struct prop_s *lift, liftNode *node, int called);
+void liftCall(struct prop_s *lift, int called);
+void liftNoPowerMessage(struct prop_s *p, struct prop_s *actor);
+void liftButtonUpActivate(struct prop_s *button, struct prop_s *actor);
+void liftButtonDownActivate(struct prop_s *button, struct prop_s *actor);
 void propNewLift(setuplift *sl);
-void liftSetState(prop *p, int state);
-liftData* liftFindNearestLift(prop *chr);
-int liftFindFloor(prop *chr, int pad);
+void liftSetState(struct prop_s *p, int state);
+liftData* liftFindNearestLift(struct prop_s *chr);
+int liftFindFloor(struct prop_s *chr, int pad);
 
 #endif // GAME_PROP_LIFT_H

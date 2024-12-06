@@ -1,28 +1,15 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_MAPMAKER_MM_MAIN_H
 #define GAME_MAPMAKER_MM_MAIN_H
 
-struct object_s {
-	objtype_t type;
-	fix_t x;
-	fix_t y;
-	fix_t z;
-	int angle;
-	int cost;
-	u16 flags;
-	u8 lighttype;
-	u8 lightphase;
-	u32 lightcolour;
-	u16 doors;
-	u16 drawndoors;
-	u8 doortype[8];
-	tiledef *tile[4];
-	item_t *items;
-	object_s *next;
-};
-
-typedef object_s object_t;
+#include "common.h"
+#include "mapmaker/mm_draw.h"
+#include "mapmaker/mm_objs.h"
 
 typedef struct {
 	object_t *pObj;
@@ -35,12 +22,11 @@ typedef struct {
 	routenode_t nodes[8];
 } patrolroute_t;
 
-struct editmodeinfo_s {
+typedef struct editmodeinfo_s {
 	char *desc;
 	int icon;
-};
+} editmodeinfo_t;
 
-typedef editmodeinfo_s editmodeinfo_t;
 extern editmodeinfo_t editmodeinfo[4];
 extern u8 *mmtempbuffer;
 extern int numpatrols;

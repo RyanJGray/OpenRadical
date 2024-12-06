@@ -1,23 +1,25 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_GAME_UNLOCK_H
 #define GAME_GAME_UNLOCK_H
 
-struct unlockcondition_s {
+#include "common.h"
+
+typedef struct unlockcondition_s {
 	int type;
 	int data1;
 	int data2type;
 	int data2;
-};
+} unlockcondition_t;
 
-typedef unlockcondition_s unlockcondition_t;
-
-struct unlockconditionset_s {
+typedef struct unlockconditionset_s {
 	int numconditions;
 	unlockcondition_t conditions[0];
-};
-
-typedef unlockconditionset_s unlockconditionset_t;
+} unlockconditionset_t;
 
 boolean chrPlayable(int chrnum);
 boolean chrAvail(int chrnum);

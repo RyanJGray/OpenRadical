@@ -8,27 +8,29 @@
 #define GAME_FX_CHRFX_H
 
 #include "common.h"
-#include "chr/chr.h"
-#include "prop/prop.h"
 #include "particle.h"
 
+// Forward-declarations;
+struct prop_s;
+struct chrdata_s;
+
 typedef struct chrfx_s {
-	chrdata *chrdata;
-	int flags;
-	int spawnType;
-	int spawnSubType;
-	int actionType;
-	float spawnTime;
-	float actionTime;
-	boolean xray;
-	int footdecalkeyframe;
-	boolean breathOn;
-	float breathTimer;
-	float breathTimeDest;
-	float burn;
-	float fadeamount;
-	prop *burnAttacker;
-	particlegroup *particlefx[1];
+  struct chrdata_s *chrdata;
+  int flags;
+  int spawnType;
+  int spawnSubType;
+  int actionType;
+  float spawnTime;
+  float actionTime;
+  boolean xray;
+  int footdecalkeyframe;
+  boolean breathOn;
+  float breathTimer;
+  float breathTimeDest;
+  float burn;
+  float fadeamount;
+  struct prop_s *burnAttacker;
+  particlegroup *particlefx[1];
 } chrfx;
 
 void chrfxPreload();
@@ -40,7 +42,7 @@ void chrfxTickPlayer(chrfx *cfx);
 void chrfxGfxPlayer(chrfx *cfx);
 void chrfxBreathingTick(chrfx *cfx);
 void chrfxDouse(chrfx *cfx);
-void chrfxBurn(chrfx *cfx, float amount, prop *burnAttacker);
+void chrfxBurn(chrfx *cfx, float amount, struct prop_s *burnAttacker);
 float chrfxGetBurn(chrfx *cfx);
 void chrfxFadeOut(chrfx *cfx, float amount);
 void chrfxBurningTick(chrfx *cfx);
@@ -49,7 +51,7 @@ void chrfxCloakingTick(chrfx *cfx);
 void chrfxFadeOutTick(chrfx *cfx);
 void chrfxTick(chrfx *cfx);
 void chrfxGfx(chrfx *cfx);
-void chrfxSetup(chrfx *cfx, chrdata *cd);
+void chrfxSetup(chrfx *cfx, struct chrdata_s *cd);
 void chrfxUnSetup(chrfx *cfx);
 void chrfxDie(chrfx *cfx);
 void chrfxRespawn(chrfx *cfx);

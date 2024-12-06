@@ -13,8 +13,16 @@
 
 #include "boss.h"
 #include "file/file.h"
+#include "front/mcseq.h"
+#include "fx/zbtest.h"
+#include "game/cheats.h"
 #include "joy/joy.h"
+#include "mapmaker/mm_main.h"
+#include "mcard/mcard.h"
 #include "mem/mem.h"
+#include "net/net.h"
+#include "player/player.h"
+#include "sound/music.h"
 #include "sound/sound.h"
 #include "usb/mouse.h"
 #include "util/profile.h"
@@ -104,6 +112,7 @@ static int vblIntHandler(int cause);
 static int gsIntHandler(int cause);
 
 static void bossMake();
+static void clearvram(u8 r, u8 g, u8 b, u8 a);
 
 int bossCheckParm(char *check) {
   int i = 1;
@@ -150,7 +159,7 @@ char *bossGetNextParm() {
 static void bossMakeAll() {
   bossMake();
   trigMake();
-  memMake(membuffer, (int)(membuffer + 0x163de00));
+  memMake(membuffer, 0x1a9c800);
   packfileMake();
   profileMake();
   windowMake();
@@ -291,7 +300,7 @@ void bossDmaFromSpr(u32 src, u32 dest, u32 len) {
 
   dmaChan = dmaSpr;
   dmaSpr->sadr = (void *)(src & 0xfffffff);
-  sceDmaSendN(dmaChan, dest, len >> 4);
+  sceDmaSendN(dmaChan, (void *)dest, len >> 4);
 
   return;
 }
@@ -411,14 +420,13 @@ static void gsMain() {
   int i;
   static int LastFrameSent = -1;
 
-  while (TRUE) do {
-
-  }
+  while (TRUE)
+    do {
+      scePrintf("t");
+    }
 }
 
-static int vblIntHandler(int cause) {
-  
-}
+static int vblIntHandler(int cause) {}
 
 static int gsIntHandler(int cause) {
   DPUT_GS_CSR(GS_CSR_FINISH_M);

@@ -11,6 +11,10 @@
 #include "util/matrix.h"
 #include "decal.h"
 
+// Forward-declarations.
+struct obinst_s;
+struct bglighttest_s;
+
 enum {
 	PARTICLEID_ROCKETSMOKETRAIL = 0,
 	PARTICLEID_TNTSMOKETRAIL = 1,
@@ -161,7 +165,7 @@ typedef struct glassData_s {
 } glassData;
 
 typedef struct particleClone_s {
-	mtx matrix;
+	union mtx_u matrix;
 	struct particleClone_s *next;
 	int flags;
 	int numRooms;
@@ -321,14 +325,14 @@ void particleSparkBurstTick(particlegroup *pg);
 void particleSparkStreamTick(particlegroup *pg);
 void particleGlassTick(particlegroup *pg);
 void particleTick();
-void particleSparkBurstGfx(particlegroup *pg, mtx *matrix);
-void particleSparkStreamGfx(particlegroup *pg, mtx *matrix);
+void particleSparkBurstGfx(particlegroup *pg, union mtx_u *matrix);
+void particleSparkStreamGfx(particlegroup *pg, union mtx_u *matrix);
 void particleDraw(int texwidth, int texheight, u32 abgr, float *scrpos1, float *scrpos2, float *scrpos3, float *scrpos4);
 void particleRender(int texture, float *passpos, float size, float rot, u32 abgr);
 void particleSpriteGfx(particlegroup *pg);
 void particleBeamGfx(float *startpos, float *normal, float *axis1, float *axis2, float length, float radius, float angle, u32 abgr, float *fadeScalarArray);
 void particleGfx();
-void particleGetClosestLight(obinst *inst, int InstID, float *pos, int PosRoom, bglighttest **Lights);
+void particleGetClosestLight(struct obinst_s *inst, int InstID, float *pos, int PosRoom, struct bglighttest_s **Lights);
 void fxBBGfx(float *pos, float *bb[3]);
 
 #endif // GAME_FX_PARTICLE_H

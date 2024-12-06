@@ -9,7 +9,9 @@
 
 #include "util/matrix.h"
 #include "window/window.h"
-#include "prop/prop.h"
+
+// Forward-declarations.
+struct prop_s;
 
 enum {
 	CAMMODE_GAMECAM = 0,
@@ -77,8 +79,8 @@ typedef struct ViewDef_s {
 	float pos[3];
 	int room;
 	int lastroom;
-	prop *attached;
-	prop *follow;
+	struct prop_s *attached;
+	struct prop_s *follow;
 	float lookat[3];
 	float lookdir[3];
 	float up[3];
@@ -99,7 +101,7 @@ typedef struct ViewDef_s {
 	roomcalcdata roomdata[201];
 	int maxlevel;
 	u8 roomVisibility[201];
-	prop *skyprop;
+	struct prop_s *skyprop;
 	s16 numroomsdrawn;
 	s16 numroomsdrawnactual;
 	s16 roomsdrawn[225];
@@ -144,8 +146,8 @@ void camEnd();
 void camSetMode(int cm);
 int camGetMode();
 void camSetType(ViewDef *pView, int Type);
-void camSetCamDefPtr(ViewDef *pView, CamDef *pCam, prop *pProp);
-void camSetCamDef(ViewDef *pView, int Cam, prop *pProp);
+void camSetCamDefPtr(ViewDef *pView, CamDef *pCam, struct prop_s *pProp);
+void camSetCamDef(ViewDef *pView, int Cam, struct prop_s *pProp);
 void camTick();
 void camSetPerspectiveMatrix(float near, float far, float aspect, float fov);
 void camNewShake(ViewDef *pView, float time, float amount);
