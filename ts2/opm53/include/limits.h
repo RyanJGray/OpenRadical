@@ -12,5 +12,11 @@
 // Defined in an anonymous enum in hud.c.
 //#define BAGICON_NUM 1
 
+/**
+ * @brief Maximum size of one network packet.
+ * 
+ */
+#define MAX_PACKET_BYTES 256
+
 
 #endif // LIMITS_H

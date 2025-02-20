@@ -1,9 +1,13 @@
-// STATUS: NOT STARTED
+//
+// The OpenRadical Project
+// 2024 - A project by Ryan J. Gray
+// TS2 OPM53 Tree
+//
 
 #ifndef GAME_NET_ILINK_ILMAIN_H
 #define GAME_NET_ILINK_ILMAIN_H
 
-typedef long unsigned int u_long;
+#include "common.h"
 
 void th_Receiver();
 boolean ilinkIsConnected(int ID);

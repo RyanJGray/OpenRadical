@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['rankdata_5fs_0',['rankData_s',['../structrankData__s.html',1,'']]],
+  ['rate_5fs_1',['rate_s',['../structrate__s.html',1,'']]],
+  ['rect_5fs_2',['rect_s',['../structrect__s.html',1,'']]],
+  ['remotedata_5fs_3',['remotedata_s',['../structremotedata__s.html',1,'']]],
+  ['resetgameparms_5fs_4',['resetgameparms_s',['../structresetgameparms__s.html',1,'']]],
+  ['rgb_5fheader_5',['RGB_header',['../structRGB__header.html',1,'']]],
+  ['rgba_5ft_6',['rgba_t',['../unionrgba__t.html',1,'']]],
+  ['ringfx_5fs_7',['ringfx_s',['../structringfx__s.html',1,'']]],
+  ['room_5fs_8',['room_s',['../structroom__s.html',1,'']]],
+  ['roombbinfo_5fs_9',['roombbinfo_s',['../structroombbinfo__s.html',1,'']]],
+  ['roomcalcdata_5fs_10',['roomcalcdata_s',['../structroomcalcdata__s.html',1,'']]],
+  ['roomfx_5fs_11',['roomfx_s',['../structroomfx__s.html',1,'']]],
+  ['roomhalllinks_5fs_12',['roomhalllinks_s',['../structroomhalllinks__s.html',1,'']]],
+  ['roomlight_5fs_13',['roomlight_s',['../structroomlight__s.html',1,'']]],
+  ['roomlightinit_5fs_14',['roomlightinit_s',['../structroomlightinit__s.html',1,'']]],
+  ['route_5fs_15',['route_s',['../structroute__s.html',1,'']]],
+  ['routelist_5fs_16',['routelist_s',['../structroutelist__s.html',1,'']]],
+  ['routenode_5ft_17',['routenode_t',['../structroutenode__t.html',1,'']]]
+];

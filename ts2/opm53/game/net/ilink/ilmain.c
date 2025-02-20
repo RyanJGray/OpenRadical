@@ -38,7 +38,7 @@ typedef struct {
 	unsigned int mode;
 } sceSifDmaData;
 
-typedef enum {
+enum {
 	PACKET_REQUESTCONNECT = -1,
 	PACKET_ACCEPTCONNECT = -2,
 	PACKET_AREYOUSTILLTHERE = -3,

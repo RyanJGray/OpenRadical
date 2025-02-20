@@ -10,31 +10,25 @@
 #include "common.h"
 #include "util/misc.h"
 
-struct gamemodeinfo_s {
+typedef struct gamemodeinfo_s {
 	short int name;
 	int useteamspawns;
 	int useteamdrops;
-};
+} gamemodeinfo_t;
 
-typedef struct gamemodeinfo_s gamemodeinfo_t;
-
-struct storyinfo_s {
+typedef struct storyinfo_s {
 	short int title;
 	short int levelnum;
 	u16 male;
 	u16 female;
-};
+} storyinfo_t;
 
-typedef struct storyinfo_s storyinfo_t;
-
-struct teaminfo_s {
+typedef struct teaminfo_s {
 	short int name;
 	u32 colour;
-};
+} teaminfo_t;
 
-typedef struct teaminfo_s teaminfo_t;
-
-struct resetgameparms_s {
+typedef struct resetgameparms_s {
 	int numplayers;
 	int numlocalplayers;
 	int numbots;
@@ -58,9 +52,7 @@ struct resetgameparms_s {
 	int demonum;
 	u8 teamactive[5];
 	int totalbotskill;
-};
-
-typedef struct resetgameparms_s resetgameparms;
+} resetgameparms;
 
 extern int demo_completed;
 extern int demo_aborted;

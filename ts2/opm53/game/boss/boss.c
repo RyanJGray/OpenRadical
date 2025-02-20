@@ -299,8 +299,9 @@ void bossDmaFromSpr(u32 src, u32 dest, u32 len) {
   sceDmaChan *dmaChan;
 
   dmaChan = dmaSpr;
-  dmaSpr->sadr = (void *)(src & 0xfffffff);
-  sceDmaSendN(dmaChan, (void *)dest, len >> 4);
+  // Double-cast to size_t to tell Clang this upcast is intentional.
+  dmaSpr->sadr = (void *)(size_t)(src & 0xfffffff);
+  sceDmaSendN(dmaChan, (void *)(size_t)(dest), len >> 4);
 
   return;
 }

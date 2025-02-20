@@ -37,14 +37,19 @@ void netNonLocalEnemyFire(prop *p);
 boolean netIsAIChrLocal(prop *p);
 boolean netSendEnemyFire(prop *p, int hand, int fireMode, int repeatMode);
 void netSendPlayerPrefsData(int Player);
-boolean netSendPropDamage(prop *target, prop *attacker, float amount, int bullettype, float *hitpos, float *bulletnorm, float bulletspeed, bullet *b, int deathflag);
-boolean netSendPropKillChr(prop *target, prop *attacker, int bullettype, float *hitpos, float *bulletnorm, float bulletspeed, int parthit, int deathflag);
+boolean netSendPropDamage(prop *target, prop *attacker, float amount,
+                          int bullettype, float *hitpos, float *bulletnorm,
+                          float bulletspeed, bullet *b, int deathflag);
+boolean netSendPropKillChr(prop *target, prop *attacker, int bullettype,
+                           float *hitpos, float *bulletnorm, float bulletspeed,
+                           int parthit, int deathflag);
 boolean netShouldProcessRespawn(player *p);
 boolean netSendRespawn(player *p);
 boolean netSendEnemyRespawn(chrdata *chr);
 boolean netShouldProcessPickup(prop *pPickup, prop *pChrProp);
 boolean netSendPropPickup(prop *pPickup, prop *pChrProp);
-void netSendPropDrop(prop *pProp, prop *pAttach, int AttachMatrix, chrdata *cd, chrgun *cgun, prop *droppedProp, int destpad);
+void netSendPropDrop(prop *pProp, prop *pAttach, int AttachMatrix, chrdata *cd,
+                     chrgun *cgun, prop *droppedProp, int destpad);
 void netSendMakePropVisible(prop *pProp);
 void netSendSpawnKnockOutBag(int ghostbagnum, int padnum, prop *p);
 void netServerStartGame();
@@ -64,9 +69,12 @@ int netGetFreeClientID();
 boolean netIsClientIDUsed(int ID);
 void netClaimClientID(int ID);
 void netReleaseClientID(int ID);
-int netSendPacketTo(int ToID, int PacketType, char *pBufferSend, int Size, boolean Guarantee);
-void netSendPacket(int FromID, int PacketType, char *pBuffer, int Size, boolean Guarantee);
-boolean netSendIfLocal(prop *pProp, int PacketTypeServer, int PacketTypeClient, char *pBuffer, int Size, boolean Guarantee);
+int netSendPacketTo(int ToID, int PacketType, char *pBufferSend, int Size,
+                    boolean Guarantee);
+void netSendPacket(int FromID, int PacketType, char *pBuffer, int Size,
+                   boolean Guarantee);
+boolean netSendIfLocal(prop *pProp, int PacketTypeServer, int PacketTypeClient,
+                       char *pBuffer, int Size, boolean Guarantee);
 void netPlayerTick();
 
 #endif // GAME_NET_NET_H

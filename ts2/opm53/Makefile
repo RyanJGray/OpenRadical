@@ -8,7 +8,7 @@ INCOPT      = -I$(SDKROOT)/common/include -I$(TOP)/include -Iinclude -Igame
 OUTPUT      = SLUS_999.99
 OBJS        = crt0.o \
               game/boss/boss.o \
-			  game/util/assert.o
+              game/util/assert.o
 
 LCFILE      = $(LIBDIR)/app.cmd
 LIBS        = $(LIBDIR)/libkernl.a \

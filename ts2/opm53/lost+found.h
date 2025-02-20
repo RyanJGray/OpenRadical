@@ -5211,18 +5211,6 @@ typedef enum {
 };
 
 typedef enum {
-	NETGAME_NONE = 0,
-	NETGAME_SERVER = 1,
-	NETGAME_CLIENT = 2
-};
-
-typedef enum {
-	NETGAMETYPE_NONE = 0,
-	NETGAMETYPE_ILINK = 1,
-	NETGAMETYPE_INET = 2
-};
-
-typedef enum {
 	btn_circle = 0,
 	btn_cross = 1,
 	btn_triangle = 2,

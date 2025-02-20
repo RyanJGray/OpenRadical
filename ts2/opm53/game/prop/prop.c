@@ -33772,7 +33772,21 @@ boolean DrawBoundsRoom[225] = {
 	/* [224] = */ 0
 };
 
-int propGetPropIndex(prop *p) {}
+/**
+ * @brief Return the index for the specified prop object.
+ * 
+ * @param p the prop object to fetch the index of
+ * @return int the prop's index
+ */
+int propGetPropIndex(prop *p) {
+	int id = -1;
+
+	if (p != NULL) {
+		id = p->id;
+	}
+
+	return id;
+}
 
 prop* propGetPropPtr(int p) {
 	int i;
